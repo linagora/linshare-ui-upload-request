@@ -1,0 +1,26 @@
+{
+  "TITLE": "Upload proposition",
+  "PARAGRAPH": {
+    "DESCRIPTION": "This application form create an upload proposition to your recipient. An email will be send to you after analyse of your proposition. In case of positive response, information relative to your upload will be send"
+  },
+  "LANGUAGE": {
+    "ENGLISH": "English",
+    "FRENCH": "French"
+  },
+  "LEGEND_USER": "Coordinates",
+  "LEGEND_PROPOSAL": "Proposal",
+  "LEGEND_VALIDATE": "Validation",
+  "FORM": {
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name",
+    "SENDER_EMAIL": "Your email",
+    "TARGET_EMAIL": "Proposition's recipient",
+    "SUBJECT": "Proposition's subject",
+    "CONTENT": "Proposition's content",
+    "CAPTCHA": "Captcha"
+  },
+  "FORM_ACTIONS": {
+    "RESET": "Reset",
+    "SUBMIT": "Submit"
+  }
+}

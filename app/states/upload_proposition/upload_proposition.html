@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-primary"
+            x-ng-click="upload_proposition.changeLanguage('en')">
+      {{'LANGUAGE.ENGLISH' | translate}}
+    </button>
+    <button type="button" class="btn btn-primary"
+            x-ng-click="upload_proposition.changeLanguage('fr')">
+      {{'LANGUAGE.FRENCH' | translate}}
+    </button>
+  </div>
+    <p>{{'PARAGRAPH.DESCRIPTION' | translate}}</p>
+    <form name="uploadPropositionForm" novalidate
+          x-ng-submit="upload_proposition.submit()">
+      <fieldset>
+        <legend>
+          {{'LEGEND_USER' | translate}}
+        </legend>
+        <div class="col-md-7 col-md-offset-2">
+          <div class="form-group">
+            <div class="form-inline">
+              <div class="form-group"
+                x-ng-class="{'has-error': uploadPropositionForm.firstName.$invalid &&
+                (uploadPropositionForm.firstName.$dirty || ls.uploadPropositionForm.attempted)}">
+                <input type="text" class="form-control" name="firstName"
+                       placeholder="{{'FORM.FIRSTNAME' | translate}}"
+                       x-ng-model="upload_proposition.form.firstName" />
+              </div>
+              <div class="form-group"
+                x-ng-class="{'has-error': uploadPropositionForm.lastName.$invalid &&
+                (uploadPropositionForm.lastName.$dirty || ls.uploadPropositionForm.attempted)}">
+                <input type="text" class="form-control" name="lastName"
+                       placeholder="{{'FORM.LASTNAME' | translate}}"
+                       x-ng-model="upload_proposition.form.lastName" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group"
+            x-ng-class="{'has-error': uploadPropositionForm.senderEmail.$invalid &&
+            (uploadPropositionForm.senderEmail.$dirty || ls.uploadPropositionForm.attempted)}">
+            <input type="email" class="form-control" name="senderEmail"
+                   placeholder="{{'FORM.SENDER_EMAIL' | translate}}"
+                   x-ng-model="upload_proposition.form.senderEmail" />
+          </div>
+          <div class="form-group"
+            x-ng-class="{'has-error': uploadPropositionForm.targetEmail.$invalid &&
+            (uploadPropositionForm.targetEmail.$dirty || ls.uploadPropositionForm.attempted)}">
+            <input type="email" class="form-control" name="targetEmail"
+                   placeholder="{{'FORM.TARGET_EMAIL' | translate}}"
+                   x-ng-model="upload_proposition.form.targetEmail" />
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>
+          {{'LEGEND_PROPOSAL' | translate}}
+        </legend>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="form-group"
+            x-ng-class="{'has-error': uploadPropositionForm.subject.$invalid &&
+            (uploadPropositionForm.subject.$dirty || ls.uploadPropositionForm.attempted)}">
+            <input type="text" class="form-control" name="subject"
+                   placeholder="{{'FORM.SUBJECT' | translate}}"
+                   x-ng-model="upload_proposition.form.subject" />
+          </div>
+          <div class="form-group"
+            x-ng-class="{'has-error': uploadPropositionForm.content.$invalid &&
+            (uploadPropositionForm.content.$dirty || ls.uploadPropositionForm.attempted)}">
+            <textarea class="form-control" name="content"
+                   placeholder="{{'FORM.CONTENT' | translate}}"
+                   x-ng-model="upload_proposition.form.content">
+            </textarea>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>
+          {{'LEGEND_VALIDATE' | translate}}
+        </legend>
+        <div class="col-md-8 col-md-offset-2">
+          <div class="form-group"
+            x-ng-class="{'has-error': uploadPropositionForm.captcha.$invalid &&
+            (uploadPropositionForm.captcha.$dirty || ls.uploadPropositionForm.attempted)}">
+            <input type="text" class="form-control" name="captcha"
+                   placeholder="{{'FORM.CAPTCHA' | translate}}"
+                   x-ng-model="upload_proposition.form.captcha" />
+          </div>
+          <div class="form-group">
+            <div class="controls">
+              <button type="button" class="btn btn-warning" id="reset"
+                      x-ng-click="upload_proposition.reset()">
+                {{'FORM_ACTIONS.RESET' | translate}}
+              </button>
+              <button type="submit" class="btn btn-success" id="submit">
+                {{'FORM_ACTIONS.SUBMIT' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

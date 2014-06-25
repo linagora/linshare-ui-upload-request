@@ -1,0 +1,143 @@
+{
+  "name": "linshare-didd",
+  "version": "0.0.0",
+  "description": "Linshare upload invitation request",
+  "license": "http://www.linshare.org/licenses/LinShare-License_AfferoGPL-v3_en.pdf",
+  "homepage": "http://www.linshare.org",
+  "authors": [
+    {
+      "name": "Linagora",
+      "homepage": "http://linagora.com/"
+    },
+    {
+      "name": "Camille TJHOA",
+      "email": "ctjhoa@linagora.com"
+    },
+    {
+      "name": "Frederic MARTIN",
+      "email": "fmartin@linagora.com"
+    },
+    {
+      "name": "Nicolas BERTRAND",
+      "email": "nbertrand@linagora.com"
+    }
+  ],
+  "dependencies": {
+    "closure-compiler": "http://dl.google.com/closure-compiler/compiler-latest.zip",
+    "closure-compiler-github": "https://github.com/google/closure-compiler.git",
+    "closure-library-github": "https://github.com/google/closure-library.git",
+    "lodash": "~2.4.1",
+    "messageformat": "~0.1.8",
+    "angular": "~1.2.17",
+    "angular-cookies": "~1.2.17",
+    "angular-resource": "~1.2.17",
+    "angular-sanitize": "~1.2.17",
+    "angular-translate": "~2.2.0",
+    "angular-translate-loader-static-files": "~2.2.0",
+    "angular-translate-interpolation-messageformat": "~2.1.0",
+    "angular-translate-handler-log": "~2.0.0",
+    "angular-translate-storage-cookie": "~2.2.0",
+    "angular-dynamic-locale": "~0.1.12",
+    "angular-ui-router": "~0.2.10",
+    "angular-bootstrap": "~0.11.0",
+    "angular-loading-bar": "~0.4.3"
+  },
+  "overrides": {
+    "closure-compiler": {
+      "ignore": true
+    },
+    "closure-compiler-github": {
+      "ignore": true
+    },
+    "closure-library-github": {
+      "ignore": true
+    },
+    "lodash": {
+      "main": {
+        "development": "dist/lodash.js",
+        "production": "dist/lodash.min.js"
+      }
+    },
+    "angular": {
+      "main": {
+        "development": "angular.js",
+        "production": "angular.min.js"
+      }
+    },
+    "angular-cookies": {
+      "main": {
+        "development": "angular-cookies.js",
+        "production": "angular-cookies.min.js"
+      }
+    },
+    "angular-resource": {
+      "main": {
+        "development": "angular-resource.js",
+        "production": "angular-resource.min.js"
+      }
+    },
+    "angular-sanitize": {
+      "main": {
+        "development": "angular-sanitize.js",
+        "production": "angular-sanitize.min.js"
+      }
+    },
+    "angular-translate": {
+      "main": {
+        "development": "angular-translate.js",
+        "production": "angular-translate.min.js"
+      }
+    },
+    "angular-translate-loader-static-files": {
+      "main": {
+        "development": "angular-translate-loader-static-files.js",
+        "production": "angular-translate-loader-static-files.min.js"
+      }
+    },
+    "angular-translate-interpolation-messageformat": {
+      "main": {
+        "development": "angular-translate-interpolation-messageformat.js",
+        "production": "angular-translate-interpolation-messageformat.min.js"
+      }
+    },
+    "angular-translate-handler-log": {
+      "main": {
+        "development": "angular-translate-handler-log.js",
+        "production": "angular-translate-handler-log.min.js"
+      }
+    },
+    "angular-translate-storage-cookie": {
+      "main": {
+        "development": "angular-translate-storage-cookie.js",
+        "production": "angular-translate-storage-cookie.min.js"
+      }
+    },
+    "angular-bootstrap": {
+      "main": {
+        "development": [
+          "ui-bootstrap.js",
+          "ui-bootstrap.tpls.js"
+        ],
+        "production": [
+          "ui-bootstrap.min.js",
+          "ui-bootstrap.tpls.min.js"
+        ]
+      }
+    },
+    "angular-ui-router": {
+      "main": {
+        "development": "release/angular-ui-router.js",
+        "production": "release/angular-ui-router.min.js"
+      }
+    },
+    "angular-loading-bar": {
+      "main": {
+        "development": "build/loading-bar.js",
+        "production": "build/loading-bar.min.js"
+      }
+    }
+  },
+  "resolutions": {
+    "angular-translate": "~2.2.0"
+  }
+}

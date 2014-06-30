@@ -4,10 +4,10 @@
  * Create Page Object for protractor e2e tests.
  */
 
-var UploadProposition = function() {
+var UploadRequest = function() {
 
   this.navigate = function() {
-    browser.get('index.html#/upload_proposition');
+    browser.get('index.html#/upload_request');
   };
 
   // single dom element selector
@@ -17,8 +17,8 @@ var UploadProposition = function() {
   this.list = $$('ul');
 
   // ng-repeat
-  this.animals = element.all(by.repeater('animal in upload_proposition.animals'));
+  this.animals = element.all(by.repeater('animal in upload_request.animals'));
 
 };
 
-module.exports = new UploadProposition();
+module.exports = new UploadRequest();

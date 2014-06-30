@@ -1,7 +1,7 @@
 {
-  "name": "linshare-didd",
+  "name": "linshare-ui-upload-request",
   "version": "0.0.0",
-  "description": "Linshare upload invitation request",
+  "description": "Linshare upload request UI",
   "license": "http://www.linshare.org/licenses/LinShare-License_AfferoGPL-v3_en.pdf",
   "homepage": "http://www.linshare.org",
   "authors": [
@@ -28,6 +28,7 @@
     "closure-library-github": "https://github.com/google/closure-library.git",
     "lodash": "~2.4.1",
     "messageformat": "~0.1.8",
+    "node-uuid": "~1.4.1",
     "angular": "~1.2.17",
     "angular-cookies": "~1.2.17",
     "angular-resource": "~1.2.17",
@@ -40,7 +41,8 @@
     "angular-dynamic-locale": "~0.1.12",
     "angular-ui-router": "~0.2.10",
     "angular-bootstrap": "~0.11.0",
-    "angular-loading-bar": "~0.4.3"
+    "angular-loading-bar": "~0.4.3",
+    "ng-flow": "~2.4.0"
   },
   "overrides": {
     "closure-compiler": {
@@ -56,6 +58,18 @@
       "main": {
         "development": "dist/lodash.js",
         "production": "dist/lodash.min.js"
+      }
+    },
+    "messageformat": {
+      "main": {
+        "development": "messageformat.js",
+        "production": "messageformat.js"
+      }
+    },
+    "node-uuid": {
+      "main": {
+        "development": "uuid.js",
+        "production": "uuid.js"
       }
     },
     "angular": {
@@ -134,6 +148,12 @@
       "main": {
         "development": "build/loading-bar.js",
         "production": "build/loading-bar.min.js"
+      }
+    },
+    "ng-flow": {
+      "main": {
+        "development": "dist/ng-flow-standalone.js",
+        "production": "dist/ng-flow-standalone.min.js"
       }
     }
   },

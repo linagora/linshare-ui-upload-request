@@ -54,7 +54,11 @@ gulp.task('compile', ['clean', 'sass', 'lint'], function() {
       compilerFlags: {
         compilation_level: 'SIMPLE_OPTIMIZATIONS',
         language_in: 'ECMASCRIPT5_STRICT',
-        externs: [paths.bowerComponents + '/closure-compiler-github/contrib/externs/angular-1.2.js'],
+        externs: [
+          paths.bowerComponents + '/closure-compiler-github/contrib/externs/angular-1.2.js',
+          paths.bowerComponents + '/closure-compiler-github/contrib/externs/underscore-1.5.2.js',
+          paths.src + '/closure-externs/node-uuid-1.4.1.js'
+        ],
         manage_closure_dependencies: true,
         generate_exports: true,
         angular_pass: true

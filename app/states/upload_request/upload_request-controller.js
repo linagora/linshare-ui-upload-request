@@ -1,9 +1,9 @@
 'use strict';
 
-goog.provide('my.upload_proposition.Ctrl');
+goog.provide('my.upload_request.Ctrl');
 
 /**
- * UploadProposition controller.
+ * UploadRequest controller.
  *
  * @param {!angular.$http} $http The angular http service
  * @param {!pascalprecht.translate} $translate The translation service
@@ -12,7 +12,7 @@ goog.provide('my.upload_proposition.Ctrl');
  * @ngInject
  * @export
  */
-my.upload_proposition.Ctrl = function($http, $translate, lsAppConfig) {
+my.upload_request.Ctrl = function($http, $translate, lsAppConfig) {
 
   /**
    * @type {!angular.http}
@@ -41,13 +41,13 @@ my.upload_proposition.Ctrl = function($http, $translate, lsAppConfig) {
  *
  * @export
  */
-my.upload_proposition.Ctrl.prototype.submit = function() {
+my.upload_request.Ctrl.prototype.submit = function() {
   var http = this.http_;
   var lsAppConfig = this.lsAppConfig_;
   var form = this.form;
 
   console.debug('SUBMIT');
-  http.post(lsAppConfig.backendURL + '/upload_proposition', form);
+  http.post(lsAppConfig.backendURL + '/upload_request', form);
 };
 
 /**
@@ -55,7 +55,7 @@ my.upload_proposition.Ctrl.prototype.submit = function() {
  *
  * @export
  */
-my.upload_proposition.Ctrl.prototype.reset = function() {
+my.upload_request.Ctrl.prototype.reset = function() {
   var form = this.form;
 
   console.debug('RESET');
@@ -68,7 +68,7 @@ my.upload_proposition.Ctrl.prototype.reset = function() {
  * @param {String} key The language (eg. 'en')
  * @export
  */
-my.upload_proposition.Ctrl.prototype.changeLanguage = function(key) {
+my.upload_request.Ctrl.prototype.changeLanguage = function(key) {
   var translate = this.translate_;
 
   translate.use(key);

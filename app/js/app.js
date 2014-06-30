@@ -1,6 +1,6 @@
 'use strict';
 
-goog.require('my.upload_proposition.module');
+goog.require('my.upload_request.module');
 
 /**
  * Main app.
@@ -15,7 +15,8 @@ angular.module('app', [
   'pascalprecht.translate',
   'tmh.dynamicLocale',
   'chieffancypants.loadingBar',
-  my.upload_proposition.module.name
+  'flow',
+  my.upload_request.module.name
 ])
 .config(config);
 
@@ -28,15 +29,16 @@ angular.module('app', [
  * @param {pascalprecht.translate.$translateProvider} $translateProvider
  * @param {tmh.dynamicLocale.tmhDynamicLocaleProvider} tmhDynamicLocaleProvider
  * @param {chieffancypants.loadingBar.cfpLoadingBarProvider} cfpLoadingBarProvider
+ * @param {flow.flowFactoryProvider} flowFactoryProvider
  * @param {app.lsAppConfig} lsAppConfig
  * @ngInject
  */
-function config($logProvider, $stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, cfpLoadingBarProvider, lsAppConfig) {
+function config($logProvider, $stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, cfpLoadingBarProvider, flowFactoryProvider, lsAppConfig) {
 
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
 
-  $urlRouterProvider.otherwise('/upload_proposition');
+  $urlRouterProvider.otherwise('/upload_request');
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'i18n/locale-',
@@ -51,4 +53,12 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
 
   cfpLoadingBarProvider.includeSpinner = false;
 
+  flowFactoryProvider.defaults = {
+    simultaneousUploads: 1,
+    generateUniqueIdentifier: function() {
+      return uuid.v4();
+    },
+    target: '/linshare/flow/upload',
+    permanentErrors:[401, 404, 500, 501]
+  };
 }

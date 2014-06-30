@@ -1,6 +1,7 @@
 'use strict';
 
 goog.require('my.upload_request.module');
+goog.require('my.locale.Service');
 
 /**
  * Main app.
@@ -18,7 +19,8 @@ angular.module('app', [
   'flow',
   my.upload_request.module.name
 ])
-.config(config);
+.config(config)
+.service(my.locale.Service);
 
 /**
  * Configuration function.

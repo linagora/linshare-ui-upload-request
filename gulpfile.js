@@ -76,7 +76,7 @@ gulp.task('sass', ['clean'], function() {
 
 // Javascript linter
 gulp.task('lint', function() {
-  return gulp.src([paths.src + '/**/*.js', '!' + paths.src + '/styles/**/*'])
+  return gulp.src([paths.src + '/**/*.js', '!' + paths.src + '/styles/**/*', '!' + paths.src + '/i18n/**/*'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
@@ -95,7 +95,8 @@ gulp.task('inject', ['clean', 'compile', 'concat'], function() {
     .pipe(inject(gulp.src([
         paths.dest + '/vendor.js',
         paths.dest + '/app.js',
-        paths.dest + '/config.js'
+        paths.dest + '/config.js',
+        paths.dest + '/i18n/messageformat/**/*'
       ], {read: false}),
       {
         ignorePath: paths.dest,

@@ -11,84 +11,78 @@
     </button>
   </div>
     <p>{{'PARAGRAPH.DESCRIPTION' | translate}}</p>
-    <form name="uploadPropositionForm" novalidate
+    <form class="form-horizontal" name="uploadRequestForm" novalidate
           x-ng-submit="upload_request.submit()">
       <fieldset>
         <legend>
-          {{'LEGEND_USER' | translate}}
+          {{'LEGEND_MESSAGE'}}
         </legend>
-        <div class="col-md-7 col-md-offset-2">
-          <div class="form-group">
-            <div class="form-inline">
-              <div class="form-group"
-                x-ng-class="{'has-error': uploadPropositionForm.firstName.$invalid &&
-                (uploadPropositionForm.firstName.$dirty || ls.uploadPropositionForm.attempted)}">
-                <input type="text" class="form-control" name="firstName"
-                       placeholder="{{'FORM.FIRSTNAME' | translate}}"
-                       x-ng-model="upload_request.form.firstName" />
-              </div>
-              <div class="form-group"
-                x-ng-class="{'has-error': uploadPropositionForm.lastName.$invalid &&
-                (uploadPropositionForm.lastName.$dirty || ls.uploadPropositionForm.attempted)}">
-                <input type="text" class="form-control" name="lastName"
-                       placeholder="{{'FORM.LASTNAME' | translate}}"
-                       x-ng-model="upload_request.form.lastName" />
-              </div>
-            </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">
+            {{'LABEL_SUBJECT' | translate}}
+          </label>
+          <div class="col-md-10">
+            <p class="form-control-static">
+              {{upload_request.request.subject}}
+            </p>
           </div>
-          <div class="form-group"
-            x-ng-class="{'has-error': uploadPropositionForm.senderEmail.$invalid &&
-            (uploadPropositionForm.senderEmail.$dirty || ls.uploadPropositionForm.attempted)}">
-            <input type="email" class="form-control" name="senderEmail"
-                   placeholder="{{'FORM.SENDER_EMAIL' | translate}}"
-                   x-ng-model="upload_request.form.senderEmail" />
-          </div>
-          <div class="form-group"
-            x-ng-class="{'has-error': uploadPropositionForm.targetEmail.$invalid &&
-            (uploadPropositionForm.targetEmail.$dirty || ls.uploadPropositionForm.attempted)}">
-            <input type="email" class="form-control" name="targetEmail"
-                   placeholder="{{'FORM.TARGET_EMAIL' | translate}}"
-                   x-ng-model="upload_request.form.targetEmail" />
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">
+            {{'LABEL_BODY' | translate}}
+          </label>
+          <div class="col-md-10">
+            <p class="form-control-static">
+              {{upload_request.request.body}}
+            </p>
           </div>
         </div>
       </fieldset>
       <fieldset>
         <legend>
-          {{'LEGEND_PROPOSAL' | translate}}
+          {{'LEGEND_STATUS' | translate}}
         </legend>
-        <div class="col-md-8 col-md-offset-2">
-          <div class="form-group"
-            x-ng-class="{'has-error': uploadPropositionForm.subject.$invalid &&
-            (uploadPropositionForm.subject.$dirty || ls.uploadPropositionForm.attempted)}">
-            <input type="text" class="form-control" name="subject"
-                   placeholder="{{'FORM.SUBJECT' | translate}}"
-                   x-ng-model="upload_request.form.subject" />
+        <div class="form-group">
+          <label class="control-label col-md-2">
+            {{'LABEL_ACTIVATION_DATE' | translate}}
+          </label>
+          <div class="col-md-10">
+            <p class="form-control-static">
+              {{upload_request.request.activationDate | date:medium}}
+            </p>
           </div>
-          <div class="form-group"
-            x-ng-class="{'has-error': uploadPropositionForm.content.$invalid &&
-            (uploadPropositionForm.content.$dirty || ls.uploadPropositionForm.attempted)}">
-            <textarea class="form-control" name="content"
-                   placeholder="{{'FORM.CONTENT' | translate}}"
-                   x-ng-model="upload_request.form.content">
-            </textarea>
+        </div>
+        <div class="form-group"
+             x-ng-show="upload_request.request.expiryDate">
+          <label class="control-label col-md-2">
+            {{'LABEL_EXPIRY_DATE' | translate}}
+          </label>
+          <div class="col-md-10">
+            <p class="form-control-static">
+              {{upload_request.request.expiryDate | date:medium}}
+            </p>
+            <p class="help-block">
+              {{'DATE_HELP_BLOCK' | translate}}
+            </p>
           </div>
         </div>
       </fieldset>
       <fieldset>
         <legend>
-          {{'LEGEND_VALIDATE' | translate}}
+          {{'LEGEND_UPLOAD' | translate}}
         </legend>
         <div class="col-md-8 col-md-offset-2">
-          <div class="form-group"
-            x-ng-class="{'has-error': uploadPropositionForm.captcha.$invalid &&
-            (uploadPropositionForm.captcha.$dirty || ls.uploadPropositionForm.attempted)}">
-            <input type="text" class="form-control" name="captcha"
-                   placeholder="{{'FORM.CAPTCHA' | translate}}"
-                   x-ng-model="upload_request.form.captcha" />
-          </div>
           <div x-flow-init
+               x-flow-files-added="upload_request.validateFiles($files)"
                x-flow-files-submitted="$flow.upload()">
 
+            <span class="label label-info">
+              <!-- {{'FLOW.FILE_COUNT' | translate $flow.getSize()}} -->
+            </span>
+            <span class="label label-info">
+              {{'FLOW.MAX_FILE_SIZE' | translate}}
+            </span>
+            {{upload_request.humanFileSize($flow.sizeUploaded())}} / {{upload_request.humanFileSize(upload_request.request.maxDepositSize)}}
             <div class="drop"
                  x-flow-drop
                  x-flow-drag-enter="style={border: '2px #4cae4c dashed'}"
@@ -101,31 +95,25 @@
               </span>
             </div>
             <br>
-            <div class="well">
-              <table>
-                <tr x-ng-repeat="file in $flow.files">
-                    <td>{{$index+1}}</td>
-                    <td>{{file.name}}</td>
-                    <td>{{file.msg}}</td>
-                </tr>
-              </table>
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-success"
-                        x-ng-click="$flow.resume()">
-                  {{'FLOW.BTN_RESUME_ALL' | translate}}
-                </button>
-                <button type="button" class="btn btn-sm btn-danger"
-                        x-ng-click="$flow.pause()">
-                  {{'FLOW.BTN_PAUSE_ALL' | translate}}
-                </button>
-                <button type="button" class="btn btn-sm btn-warning"
-                        x-ng-click="$flow.cancel()">
-                  {{'FLOW.BTN_CANCEL_ALL' | translate}}
-                </button>
-              </div>
-              <span class="label label-info ng-binding">
-                Total Size: 0bytes
-              </span>
+            <div x-ng-repeat="file in $flow.files">
+              <span>{{file.name}} ({{file.size}} )</span>
+              <button class="btn btn-warning btn-xs"
+                      x-ng-click="file.pause()"
+                      x-ng-show="!file.paused">
+                <i class="fa fa-pause"></i>
+              </button>
+              <button class="btn btn-success btn-xs"
+                      x-ng-click="file.resume()"
+                      x-ng-show="file.paused">
+                <i class="fa fa-play"></i>
+              </button>
+              <button class="btn btn-danger btn-xs"
+                      x-ng-click="file.cancel()">
+                <i class="fa fa-stop"></i>
+              </button>
+              <progressbar class="progress-striped active" min="0" max="100" value="file.progress()*100" style="width:100%">
+                {{(file.progress() * 100).toFixed(2)}}%
+              </progressbar>
             </div>
           </div>
           <div class="form-group">

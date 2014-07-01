@@ -38,7 +38,7 @@
     "angular-translate-interpolation-messageformat": "~2.1.0",
     "angular-translate-handler-log": "~2.0.0",
     "angular-translate-storage-cookie": "~2.2.0",
-    "angular-dynamic-locale": "~0.1.12",
+    "angular-dynamic-locale": "~0.1.17",
     "angular-ui-router": "~0.2.10",
     "angular-bootstrap": "~0.11.0",
     "angular-loading-bar": "~0.4.3",
@@ -58,12 +58,6 @@
       "main": {
         "development": "dist/lodash.js",
         "production": "dist/lodash.min.js"
-      }
-    },
-    "messageformat": {
-      "main": {
-        "development": "messageformat.js",
-        "production": "messageformat.js"
       }
     },
     "node-uuid": {
@@ -130,11 +124,11 @@
       "main": {
         "development": [
           "ui-bootstrap.js",
-          "ui-bootstrap.tpls.js"
+          "ui-bootstrap-tpls.js"
         ],
         "production": [
           "ui-bootstrap.min.js",
-          "ui-bootstrap.tpls.min.js"
+          "ui-bootstrap-tpls.min.js"
         ]
       }
     },

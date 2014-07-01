@@ -3,9 +3,10 @@
 goog.provide('my.locale.Service');
 
 /**
- * Binding between angular-translate and angular-dynamic-locale
+ * FIXME: Never executed
+ * Binding between angular-translate and angular-dynamic-locale.
  *
- * @param {angular.$rootScope} $rootScope
+ * @param {angular.Scope} $rootScope
  * @param {angular.$log} $log
  * @param {pascalprecht.translate.$translate} $translate
  * @param {tmh.dynamicLocale.tmhDynamicLocale} tmhDynamicLocale
@@ -14,9 +15,11 @@ goog.provide('my.locale.Service');
  */
 my.locale.Service = function($rootScope, $log, $translate, tmhDynamicLocale) {
   
-  $rootScope.on('$translateChangeSuccess', function() {
+  this.$rootScope = $rootScope;
+
+  $rootScope.$on('$translateChangeSuccess', function() {
     var lang = $translate.use();
-    $log.debug('Language: switched to ' + lang);
+    $log.error('Language: switched to ' + lang);
     tmhDynamicLocale.set(lang);
   });
 };

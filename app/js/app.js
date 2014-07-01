@@ -20,7 +20,7 @@ angular.module('app', [
   my.upload_request.module.name
 ])
 .config(config)
-.service(my.locale.Service);
+.service('locale', my.locale.Service);
 
 /**
  * Configuration function.
@@ -40,7 +40,7 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
 
-  $urlRouterProvider.otherwise('/upload_request');
+  $urlRouterProvider.otherwise('/uploadrequest');
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'i18n/locale-',

@@ -85,7 +85,19 @@ gulp.task('lint', function() {
 gulp.task('inject', ['clean', 'compile', 'concat'], function() {
   return gulp.src(paths.src + '/index.html')
     // Ordered css
-    .pipe(inject(gulp.src([paths.dest + '/**/normalize.css', paths.dest + '/**/*.css'], {read: false}),
+    .pipe(inject(
+      gulp.src(
+        [
+          paths.dest + '/**/normalize.css',
+          paths.dest + '/**/bootstrap.css',
+          paths.dest + '/**/font-awesome.css',
+          paths.dest + '/**/AdminLTE.css',
+          paths.dest + '/**/main.css'
+        ],
+        {
+          read: false
+        }
+      ),
       {
         ignorePath: paths.dest,
         addRootSlash: false
@@ -123,12 +135,11 @@ gulp.task('copy', ['clean'], function() {
     .pipe(gulp.dest(paths.dest + '/styles/linshare/'));
   gulp.src([
     paths.bowerComponents + '/normalize-css/normalize.css',
-    paths.src + '/styles/AdminLTE/css/bootstrap.css',
-    paths.src + '/styles/AdminLTE/css/font-awesome.css',
-    paths.src + '/styles/AdminLTE/css/AdminLTE.css',
     paths.bowerComponents + '/angular-loading-bar/build/loading-bar.min.css'
   ])
     .pipe(gulp.dest(paths.dest + '/styles/'));
+  gulp.src(paths.src + '/styles/AdminLTE/**/*')
+    .pipe(gulp.dest(paths.dest + '/styles/AdminLTE'));
   gulp.src(paths.src + '/i18n/**/*')
     .pipe(gulp.dest(paths.dest + '/i18n/'));
   gulp.src(paths.config)

@@ -40,7 +40,7 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
 
-  $urlRouterProvider.otherwise('/uploadrequest');
+  $urlRouterProvider.otherwise('/404');
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'i18n/locale-',

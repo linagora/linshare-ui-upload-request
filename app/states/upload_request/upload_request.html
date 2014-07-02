@@ -72,7 +72,7 @@
           {{'LEGEND_UPLOAD' | translate}}
         </legend>
         <div class="col-md-8 col-md-offset-2">
-          <div x-flow-init
+          <div x-flow-init="{query: {'requestUrlUuid': upload_request.urlUuid}}"
                x-flow-files-added="upload_request.validateFiles($files)"
                x-flow-files-submitted="$flow.upload()">
 

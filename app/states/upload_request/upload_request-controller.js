@@ -42,11 +42,17 @@ my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLoc
    */
   this.request = {};
 
+  /**
+   * @type {String}
+   * @expose
+   */
+  this.urlUuid = $stateParams.uuid;
+
   tmhDynamicLocale.set($translate.use());
 
   var self = this;
 
-  $http.get(lsAppConfig.backendURL + '/upload_requests/' + $stateParams.uuid,
+  $http.get(lsAppConfig.backendURL + '/requests/' + $stateParams.uuid,
     {
       headers: {'linshare-uploadrequest-password': 'fred'}
     }).
@@ -71,7 +77,7 @@ my.upload_request.Ctrl.prototype.close = function() {
   var request = this.request;
 
   console.debug('CLOSE');
-  http.put(lsAppConfig.backendURL + '/upload_request', request);
+  http.put(lsAppConfig.backendURL + '/requests', request);
 };
 
 /**
@@ -88,7 +94,6 @@ my.upload_request.Ctrl.prototype.changeLanguage = function(key) {
   tmhDynamicLocale.set(key);
 };
 
-
 /**
  * Return human readable file size
  *
@@ -98,16 +103,15 @@ my.upload_request.Ctrl.prototype.changeLanguage = function(key) {
  */
 my.upload_request.Ctrl.prototype.humanFileSize = function(bytes, si) {
   var thresh = si ? 1000 : 1024;
-  if(bytes < thresh) return bytes + ' B';
+  if (bytes < thresh) return bytes + ' B';
   var units = si ? ['kB','MB','GB','TB','PB','EB','ZB','YB'] : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
   var u = -1;
   do {
     bytes /= thresh;
     ++u;
-  } while(bytes >= thresh);
-  return bytes.toFixed(1)+' '+units[u];
+  } while (bytes >= thresh);
+  return bytes.toFixed(1) + ' ' + units[u];
 };
-
 
 /**
  * Validation 
@@ -118,4 +122,10 @@ my.upload_request.Ctrl.prototype.humanFileSize = function(bytes, si) {
 my.upload_request.Ctrl.prototype.validateFiles = function(files) {
   var request = this.request;
   console.log(files);
+
+  angular.forEach(files, function(f) {
+
+  });
+  //if (request.maxFileSize < request.maxFileSize) {
+  //}
 };

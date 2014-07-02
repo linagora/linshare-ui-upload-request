@@ -34,7 +34,7 @@ my.upload_request.module = angular.module('upload_request', [
 my.upload_request.module.configuration = function($stateProvider) {
 
   $stateProvider.state('upload_request', {
-    url: '/upload_request/:uuid',
+    url: '/:uuid',
     templateUrl: 'states/upload_request/upload_request.html',
     controller: 'UploadRequestCtrl as upload_request'
   });

@@ -135,6 +135,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
 
   if (request.maxFileCount < len) {
     console.error('Files count exceeded');
+    console.error(files);
     growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_COUNT');
     return false;
   }
@@ -143,6 +144,12 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
       console.error('File too big:');
       console.error(files[i]);
       growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_SIZE');
+      return false;
+    }
+    if (!request.extensions.indexOf(files[i].getExtension())) {
+      console.error('Invalid extension');
+      console.error(files[i]);
+      growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION');
       return false;
     }
   }

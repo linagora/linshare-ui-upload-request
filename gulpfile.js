@@ -31,7 +31,7 @@ gulp.task('clean', function(){
 });
 
 // Sync package.json & bower.json
-gulp.task('sync', ['clean'], function(){
+gulp.task('sync', ['clean'], function() {
   sync({
     include: ['name', 'version', 'description', 'license', 'homepage'],
     exclude: ['main']
@@ -41,8 +41,8 @@ gulp.task('sync', ['clean'], function(){
 });
 
 // Compile all angular js files with google closure compiler
-gulp.task('compile', ['clean', 'sass', 'lint'], function() {
-  return gulp.src([].concat.apply([], [
+gulp.task('compile', ['clean', 'lint'], function() {
+  gulp.src([].concat.apply([], [
       paths.ngComponents,
       paths.states,
       paths.main,
@@ -69,21 +69,21 @@ gulp.task('compile', ['clean', 'sass', 'lint'], function() {
 
 // Compile Sass
 gulp.task('sass', ['clean'], function() {
-  return gulp.src(paths.src + '/styles/main.scss')
+  gulp.src(paths.src + '/styles/main.scss')
     .pipe(sass())
     .pipe(gulp.dest(paths.dest + '/styles/'));
 });
 
 // Javascript linter
 gulp.task('lint', function() {
-  return gulp.src([paths.src + '/**/*.js', '!' + paths.src + '/styles/**/*', '!' + paths.src + '/i18n/**/*'])
+  gulp.src([paths.src + '/**/*.js', '!' + paths.src + '/styles/**/*', '!' + paths.src + '/i18n/**/*'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 // Inject sources in index.html
-gulp.task('inject', ['clean', 'compile', 'concat'], function() {
-  return gulp.src(paths.src + '/index.html')
+gulp.task('inject', ['clean', 'sass', 'compile', 'bower-concat', 'copy'], function() {
+  gulp.src(paths.src + '/index.html')
     // Ordered css
     .pipe(inject(
       gulp.src(
@@ -119,8 +119,8 @@ gulp.task('inject', ['clean', 'compile', 'concat'], function() {
 });
 
 // Concatenate bower js files
-gulp.task('concat', ['clean'], function() {
-  return bowerFiles({
+gulp.task('bower-concat', ['clean'], function() {
+  bowerFiles({
     env: process.env.NODE_ENV || 'development'
   })
     .pipe(concat('vendor.js'))
@@ -167,8 +167,8 @@ gulp.task('bs-reload', ['build'], function () {
     browserSync.reload();
 });
 
-gulp.task('build', ['sync', 'copy', 'concat', 'inject']);
-gulp.task('serve', ['build', /*'connect',*/ 'watch']);
+gulp.task('build', ['clean', 'sync', 'inject']);
+gulp.task('serve', ['build', 'watch']);
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['build']);

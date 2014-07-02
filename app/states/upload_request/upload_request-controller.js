@@ -9,12 +9,13 @@ goog.provide('my.upload_request.Ctrl');
  * @param {!angular.ui.$stateParams} $stateParams The angular ui router service
  * @param {pascalprecht.translate.$translate} $translate
  * @param {tmh.dynamicLocale.tmhDynamicLocale} tmhDynamicLocale
+ * @param {!angular-growl.growl} growl
  * @param {!my.app.lsAppConfig} lsAppConfig The linshare configuration
  * @constructor
  * @ngInject
  * @export
  */
-my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLocale, lsAppConfig) {
+my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLocale, growl, lsAppConfig) {
 
   /**
    * @type {!angular.http}
@@ -35,6 +36,11 @@ my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLoc
    * @type {!my.app.lsAppConfig}
    */
   this.lsAppConfig_ = lsAppConfig;
+
+  /**
+   * @type {!angular-growl.growl}
+   */
+  this.growl_ = growl;
 
   /**
    * @type {Object}
@@ -121,11 +127,28 @@ my.upload_request.Ctrl.prototype.humanFileSize = function(bytes, si) {
  */
 my.upload_request.Ctrl.prototype.validateFiles = function(files) {
   var request = this.request;
+  var growl = this.growl_;
+
+  var currentDepositFile = 0;
+  var len = files.length;
   console.log(files);
 
-  angular.forEach(files, function(f) {
-
-  });
-  //if (request.maxFileSize < request.maxFileSize) {
-  //}
+  if (request.maxFileCount < len) {
+    console.error('Files count exceeded');
+    growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_COUNT');
+    return false;
+  }
+  for (var i = 0; i < len; i++) {
+    if (request.maxFileSize < files[i].size) {
+      console.error('File too big:');
+      console.error(files[i]);
+      growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_SIZE');
+      return false;
+    }
+  }
+  if (request.maxDepositSize < (currentDepositFile + request.usedSpace)) {
+    console.error('Deposit too big');
+    growl.addErrorMessage('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
+    return false;
+  }
 };

@@ -92,7 +92,9 @@ gulp.task('inject', ['clean', 'sass', 'compile', 'bower-concat', 'copy'], functi
           paths.dest + '/**/bootstrap.css',
           paths.dest + '/**/font-awesome.css',
           paths.dest + '/**/AdminLTE.css',
-          paths.dest + '/**/main.css'
+          paths.dest + '/**/main.css',
+          paths.dest + '/**/loading-bar.min.css',
+          paths.dest + '/**/angular-growl.min.css'
         ],
         {
           read: false
@@ -135,7 +137,8 @@ gulp.task('copy', ['clean'], function() {
     .pipe(gulp.dest(paths.dest + '/styles/linshare/fonts'));
   gulp.src([
     paths.bowerComponents + '/normalize-css/normalize.css',
-    paths.bowerComponents + '/angular-loading-bar/build/loading-bar.min.css'
+    paths.bowerComponents + '/angular-loading-bar/build/loading-bar.min.css',
+    paths.bowerComponents + '/angular-growl/build/angular-growl.min.css'
   ])
     .pipe(gulp.dest(paths.dest + '/styles/'));
   gulp.src(paths.src + '/styles/AdminLTE/**/*')

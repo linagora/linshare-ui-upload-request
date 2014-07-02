@@ -17,6 +17,7 @@ angular.module('app', [
   'tmh.dynamicLocale',
   'chieffancypants.loadingBar',
   'flow',
+  'angular-growl',
   my.upload_request.module.name
 ])
 .config(config)

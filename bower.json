@@ -150,6 +150,12 @@
         "development": "dist/ng-flow-standalone.js",
         "production": "dist/ng-flow-standalone.min.js"
       }
+    },
+    "angular-growl": {
+      "main": {
+        "development": "build/angular-growl.js",
+        "production": "build/angullar-growl.min.js"
+      }
     }
   },
   "resolutions": {

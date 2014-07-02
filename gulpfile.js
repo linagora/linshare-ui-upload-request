@@ -42,7 +42,7 @@ gulp.task('sync', ['clean'], function() {
 
 // Compile all angular js files with google closure compiler
 gulp.task('compile', ['clean', 'lint'], function() {
-  gulp.src([].concat.apply([], [
+  return gulp.src([].concat.apply([], [
       paths.ngComponents,
       paths.states,
       paths.main,
@@ -83,7 +83,7 @@ gulp.task('lint', function() {
 
 // Inject sources in index.html
 gulp.task('inject', ['clean', 'sass', 'compile', 'bower-concat', 'copy'], function() {
-  gulp.src(paths.src + '/index.html')
+  return gulp.src(paths.src + '/index.html')
     // Ordered css
     .pipe(inject(
       gulp.src(
@@ -132,7 +132,7 @@ gulp.task('copy', ['clean'], function() {
   gulp.src(paths.src + '/states/**/*.html')
     .pipe(gulp.dest(paths.dest + '/states/'));
   gulp.src(paths.src + '/styles/linshare/fonts/**/*')
-    .pipe(gulp.dest(paths.dest + '/styles/linshare/'));
+    .pipe(gulp.dest(paths.dest + '/styles/linshare/fonts'));
   gulp.src([
     paths.bowerComponents + '/normalize-css/normalize.css',
     paths.bowerComponents + '/angular-loading-bar/build/loading-bar.min.css'
@@ -167,7 +167,7 @@ gulp.task('bs-reload', ['build'], function () {
     browserSync.reload();
 });
 
-gulp.task('build', ['clean', 'sync', 'inject']);
+gulp.task('build', ['sync', 'inject']);
 gulp.task('serve', ['build', 'watch']);
 
 // The default task (called when you run `gulp` from cli)

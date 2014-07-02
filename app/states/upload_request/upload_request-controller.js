@@ -54,7 +54,7 @@ my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLoc
 
   $http.get(lsAppConfig.backendURL + '/requests/' + $stateParams.uuid,
     {
-      headers: {'linshare-uploadrequest-password': 'fred'}
+      headers: {'linshare-uploadrequest-password': '1qm6xtpyu93qp'}
     }).
     success(function(data) {
       self.request = data;

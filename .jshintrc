@@ -18,7 +18,8 @@
     "by": false,
     "$": false,
     "$$": false,
-    "inject": false
+    "inject": false,
+    "uuid": false
   },
   "expr": true
 }

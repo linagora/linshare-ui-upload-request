@@ -40,7 +40,6 @@
     "browser-sync": "^1.1.0",
     "gulp": "^3.8.0",
     "gulp-bower-files": "^0.2.5",
-    "gulp-clean": "^0.3.0",
     "gulp-closure-compiler": "^0.2.1",
     "gulp-concat": "^2.2.0",
     "gulp-filter": "^0.4.1",

@@ -18,6 +18,7 @@ angular.module('app', [
   'chieffancypants.loadingBar',
   'flow',
   'angular-growl',
+  'ngTable',
   my.upload_request.module.name
 ])
 .config(config)

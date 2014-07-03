@@ -43,7 +43,9 @@
     "angular-bootstrap": "~0.11.0",
     "angular-loading-bar": "~0.4.3",
     "ng-flow": "~2.4.0",
-    "angular-growl": "~0.4.0"
+    "angular-growl": "~0.4.0",
+    "ng-table": "~0.3.3",
+    "normalize-css": "~3.0.1"
   },
   "overrides": {
     "closure-compiler": {
@@ -150,6 +152,21 @@
         "development": "dist/ng-flow-standalone.js",
         "production": "dist/ng-flow-standalone.min.js"
       }
+    },
+    "angular-growl": {
+      "main": {
+        "development": "build/angular-growl.js",
+        "production": "build/angullar-growl.min.js"
+      }
+    },
+    "ng-table": {
+      "main": {
+        "development": "ng-table.js",
+        "production": "ng-table.min.js"
+      }
+    },
+    "normalize-css": {
+      "ignore": true
     }
   },
   "resolutions": {

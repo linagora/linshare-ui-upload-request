@@ -89,12 +89,13 @@ gulp.task('inject', ['clean', 'sass', 'compile', 'bower-concat', 'copy'], functi
       gulp.src(
         [
           paths.dest + '/**/normalize.css',
-          paths.dest + '/**/bootstrap.css',
-          paths.dest + '/**/font-awesome.css',
-          paths.dest + '/**/AdminLTE.css',
-          paths.dest + '/**/main.css',
-          paths.dest + '/**/loading-bar.min.css',
-          paths.dest + '/**/angular-growl.min.css'
+          paths.dest + '/styles/AdminLTE/css/bootstrap.css',
+          paths.dest + '/styles/AdminLTE/css/font-awesome.css',
+          paths.dest + '/styles/AdminLTE/css/AdminLTE.css',
+          paths.dest + '/styles/main.css',
+          paths.dest + '/styles/loading-bar.min.css',
+          paths.dest + '/styles/angular-growl.min.css',
+          paths.dest + '/styles/ng-table.min.css'
         ],
         {
           read: false
@@ -138,7 +139,8 @@ gulp.task('copy', ['clean'], function() {
   gulp.src([
     paths.bowerComponents + '/normalize-css/normalize.css',
     paths.bowerComponents + '/angular-loading-bar/build/loading-bar.min.css',
-    paths.bowerComponents + '/angular-growl/build/angular-growl.min.css'
+    paths.bowerComponents + '/angular-growl/build/angular-growl.min.css',
+    paths.bowerComponents + '/ng-table/ng-table.min.css'
   ])
     .pipe(gulp.dest(paths.dest + '/styles/'));
   gulp.src(paths.src + '/styles/AdminLTE/**/*')

@@ -5,42 +5,29 @@ goog.provide('my.upload_request.Ctrl');
 /**
  * UploadRequest controller.
  *
- * @param {!angular.$http} $http The angular http service
- * @param {!angular.ui.$stateParams} $stateParams The angular ui router service
- * @param {pascalprecht.translate.$translate} $translate
- * @param {tmh.dynamicLocale.tmhDynamicLocale} tmhDynamicLocale
  * @param {!angular-growl.growl} growl
- * @param {!my.app.lsAppConfig} lsAppConfig The linshare configuration
+ * @param {!my.app.locale} locale
+ * @param {!my.upload_request.UploadRequest} tmhDynamicLocale
  * @constructor
  * @ngInject
  * @export
  */
-my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLocale, growl, lsAppConfig) {
+my.upload_request.Ctrl = function(growl, locale, UploadRequest) {
 
   /**
-   * @type {!angular.http}
+   * @type {!my.app.locale}
    */
-  this.http_ = $http;
-
-  /**
-   * @type {!pascalprecht.translate}
-   */
-  this.translate_ = $translate;
-
-  /**
-   * @type {!tmh.dynamicLocale}
-   */
-  this.tmhDynamicLocale_ = tmhDynamicLocale;
-
-  /**
-   * @type {!my.app.lsAppConfig}
-   */
-  this.lsAppConfig_ = lsAppConfig;
+  this.locale_ = locale;
 
   /**
    * @type {!angular-growl.growl}
    */
   this.growl_ = growl;
+
+  /**
+   * @type {!my.upload_request.Service}
+   */
+  this.UploadRequest_ = UploadRequest;
 
   /**
    * @type {Object}
@@ -52,23 +39,12 @@ my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLoc
    * @type {String}
    * @expose
    */
-  this.urlUuid = $stateParams.uuid;
-
-  tmhDynamicLocale.set($translate.use());
+  this.urlUuid = UploadRequest.urlUuid;
 
   var self = this;
 
-  $http.get(lsAppConfig.backendURL + '/requests/' + $stateParams.uuid,
-    {
-      headers: {'linshare-uploadrequest-password': '1qm6xtpyu93qp'}
-    }).
-    success(function(data) {
-      self.request = data;
-      console.log(data);
-    }).
-    error(function(data, status) {
-      console.error(data);
-      console.error(status);
+  UploadRequest.get().then(function() {
+    self.request = UploadRequest.request;
   });
 };
 
@@ -78,12 +54,10 @@ my.upload_request.Ctrl = function($http, $stateParams, $translate, tmhDynamicLoc
  * @export
  */
 my.upload_request.Ctrl.prototype.close = function() {
-  var http = this.http_;
-  var lsAppConfig = this.lsAppConfig_;
+  var UploadRequest = this.UploadRequest_;
   var request = this.request;
 
-  console.debug('CLOSE');
-  http.put(lsAppConfig.backendURL + '/requests', request);
+  UploadRequest.close();
 };
 
 /**
@@ -93,11 +67,9 @@ my.upload_request.Ctrl.prototype.close = function() {
  * @export
  */
 my.upload_request.Ctrl.prototype.changeLanguage = function(key) {
-  var translate = this.translate_;
-  var tmhDynamicLocale = this.tmhDynamicLocale_;
+  var locale = this.locale_;
 
-  translate.use(key);
-  tmhDynamicLocale.set(key);
+  locale.changeLanguage(key);
 };
 
 /**
@@ -133,7 +105,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
   var len = files.length;
   console.log(files);
 
-  if (request.maxFileCount < len) {
+  if (request.maxFileCount < (len + request.entries.length)) {
     console.error('Files count exceeded');
     console.error(files);
     growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_COUNT');
@@ -146,7 +118,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
       growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_SIZE');
       return false;
     }
-    if (!request.extensions.indexOf(files[i].getExtension())) {
+    if (request.extensions.indexOf(files[i].getExtension()) === -1) {
       console.error('Invalid extension');
       console.error(files[i]);
       growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION');

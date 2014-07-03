@@ -9,6 +9,7 @@ goog.provide('my.upload_request.module');
  * Require controller.
  */
 goog.require('my.upload_request.Ctrl');
+goog.require('my.upload_request.Service');
 
 
 
@@ -48,4 +49,5 @@ my.upload_request.module.configuration = function($stateProvider) {
  */
 my.upload_request.module
 .config(my.upload_request.module.configuration)
-.controller('UploadRequestCtrl', my.upload_request.Ctrl);
+.controller('UploadRequestCtrl', my.upload_request.Ctrl)
+.service('UploadRequest', my.upload_request.Service);

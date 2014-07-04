@@ -1,8 +1,8 @@
 {
   "TITLE": "Upload request",
   "PARAGRAPH": {
-    "WELCOME": "Bonjour {{mail}}",
-    "DESCRIPTION": "Vous pouvez déposer ici vos documents à l'attention de {{mail}}"
+    "WELCOME": "Bonjour <b>{{mail}}</b>",
+    "DESCRIPTION": "Vous pouvez déposer ici vos documents à l'attention de <b>{{mail}}</b>"
   },
   "LANGUAGE": {
     "ENGLISH": "Anglais",
@@ -22,7 +22,23 @@
     "MAX_FILE_SIZE": "Taille maximum par fichier : {{size}}",
     "FLOW_COUNT": "Fichier(s) dans la file : {{count}}",
     "BUTTON_UPLOAD": "Dépôt",
-    "LABEL_OR_DROP": "ou glisser / déposer le(s) fihcier(s) ici"
+    "LABEL_OR_DROP": "ou glisser / déposer le(s) fichier(s) ici"
+  },
+  "VALIDATION_ERROR": {
+    "MAX_FILE_SIZE": "Taille maximum de fichier dépassée",
+    "MAX_FILE_COUNT": "Nombre de fichier maximum dépassé",
+    "INVALID_EXTENSION": "Extension invalide",
+    "MAX_DEPOSIT_SIZE": "Taille maximum du dépôt dépassée"
+  },
+  "SERVER_ERROR": {
+    "ERRCODE_30404": "Invitation de dépôt non connue",
+    "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
+    "ERRCODE_30001": "Invitation non active",
+    "ERRCODE_30002": "Invitation expirée",
+    "ERRCODE_30003": "@:VALIDATION_ERROR.MAX_DEPOSIT_SIZE",
+    "ERRCODE_30004": "@:VALIDATION_ERROR.MAX_FILE_SIZE",
+    "ERRCODE_30005": "Invitation en lecture seule",
+    "ERRCODE_31404": "Document d'invitation introuvable"
   },
   "LEGEND_FILES_ALREADY_UPLOADED": "Fichiers déjà déposés",
   "TABLE": {
@@ -30,6 +46,7 @@
     "HEADER_SIZE": "Taille du fichier",
     "HEADER_ACTION": "Action",
     "BUTTON_DELETE": "Supprimer",
+    "LABEL_NO_ACTION_AVAILABLE": "Pas d'action disponible",
     "BUTTON_DELETE_YES": "Oui",
     "BUTTON_DELETE_NO": "Non"
   },

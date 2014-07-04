@@ -26,5 +26,6 @@ my.logo.Ctrl = function(lsAppConfig) {
 my.logo.Ctrl.prototype.getCustomLogoURL = function() {
   var lsAppConfig = this.lsAppConfig_;
 
+  console.log('DIDGERIDOO');
   return lsAppConfig.customLogoURL;
 };

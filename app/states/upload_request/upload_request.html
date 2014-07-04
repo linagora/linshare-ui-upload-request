@@ -10,6 +10,7 @@
       {{'LANGUAGE.FRENCH' | translate}}
     </button>
   </div>
+    {{logo}}
     <p x-translate="PARAGRAPH.WELCOME"
        x-translate-value-mail="{{upload_request.request.recipient.mail}}">
     </p>
@@ -120,15 +121,15 @@
                  x-flow-drag-leave="style={border: '2px #46b8da dashed'}"
                  x-ng-style="style">
               <span class="btn btn-primary"
-                    x-flow-btn>
+                    x-flow-btn
+                    x-ng-disabled="upload_request.request.entries.length === upload_request.request.maxFileCount">
                 <i class="fa fa-cloud-upload"></i>&nbsp;{{'FLOW.BUTTON_UPLOAD' | translate}}
-                <input type="file" multiple="multiple" style="visibility:hidden; position:absolute;">
               </span>
               <b>{{'FLOW.LABEL_OR_DROP' | translate}}</b>
             </div>
             <br>
             <div x-ng-repeat="file in $flow.files">
-              <span>{{file.name}} ({{upload_request.humanFileSize(file.size)}} )</span>
+              <span>{{file.name}} ({{upload_request.humanFileSize(file.size)}})</span>
               <button class="btn btn-warning btn-xs"
                       x-ng-click="file.pause()"
                       x-ng-show="!file.paused"
@@ -176,23 +177,27 @@
                     sortable="'size'">
                   {{upload_request.humanFileSize(entry.size)}}
                 </td>
-                <td data-title="'TABLE.HEADER_ACTION' | translate"
-                    x-ng-show="upload_request.request.canDeleteDocument">
-                  <button class="btn btn-danger"
-                          x-ng-show="confirm === undefined"
-                          x-ng-click="confirm = $index">
-                    {{'TABLE.BUTTON_DELETE' | translate}}
-                  </button>
-                  <button class="btn"
-                          x-ng-show="confirm === $index"
-                          x-ng-click="confirm = undefined">
-                    {{'TABLE.BUTTON_DELETE_NO' | translate}}
-                  </button>
-                  <button class="btn btn-danger"
-                          x-ng-show="confirm === $index"
-                          x-ng-click="upload_request.deleteEntry(entry)">
-                    {{'TABLE.BUTTON_DELETE_YES' | translate}}
-                  </button>
+                <td data-title="'TABLE.HEADER_ACTION' | translate">
+                  <div x-ng-show="upload_request.request.canDeleteDocument">
+                    <button class="btn btn-danger"
+                            x-ng-show="confirm === undefined"
+                            x-ng-click="confirm = $index">
+                      {{'TABLE.BUTTON_DELETE' | translate}}
+                    </button>
+                    <button class="btn"
+                            x-ng-show="confirm === $index"
+                            x-ng-click="confirm = undefined">
+                      {{'TABLE.BUTTON_DELETE_NO' | translate}}
+                    </button>
+                    <button class="btn btn-danger"
+                            x-ng-show="confirm === $index"
+                            x-ng-click="upload_request.deleteEntry(entry)">
+                      {{'TABLE.BUTTON_DELETE_YES' | translate}}
+                    </button>
+                  </div>
+                  <div x-ng-show="!upload_request.request.canDeleteDocument">
+                    {{'TABLE.LABEL_NO_ACTION_AVAILABLE' | translate}}
+                  </div>
                 </td>
               </tr>
             </tbody>

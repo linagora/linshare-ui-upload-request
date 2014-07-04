@@ -10,10 +10,9 @@
   <!-- endinject -->
 </head>
 <body x-flow-prevent-drop>
-  <header>
+  <header class="col-md-10 col-md-offset-1" style="padding: 4%; padding-bottom: 0">
     <img src="img/logo_linshare.png">
-    <img x-ng-show="logo.getCustomLogoURL()"
-         x-ng-src="{{logo.getCustomLogoURL()}}">
+    <span class="pull-right" x-logo></span>
   </header>
   <section class="content container">
     <h1 class="text-center">
@@ -21,6 +20,7 @@
     </h1>
 
     <div x-ui-view></div>
+    <div growl></div>
   </section>
 
   <!-- inject:js -->

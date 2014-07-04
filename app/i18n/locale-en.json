@@ -1,26 +1,45 @@
 {
-  "TITLE": "Upload proposition",
+  "TITLE": "Upload request",
   "PARAGRAPH": {
-    "DESCRIPTION": "This application form create an upload proposition to your recipient. An email will be send to you after analyse of your proposition. In case of positive response, information relative to your upload will be send"
+    "WELCOME": "Hello {{mail}}",
+    "DESCRIPTION": "This application form authorize you to upload file(s) for {{mail}}"
   },
   "LANGUAGE": {
     "ENGLISH": "English",
     "FRENCH": "French"
   },
-  "LEGEND_USER": "Coordinates",
-  "LEGEND_PROPOSAL": "Proposal",
-  "LEGEND_VALIDATE": "Validation",
-  "FORM": {
-    "FIRSTNAME": "First name",
-    "LASTNAME": "Last name",
-    "SENDER_EMAIL": "Your email",
-    "TARGET_EMAIL": "Proposition's recipient",
-    "SUBJECT": "Proposition's subject",
-    "CONTENT": "Proposition's content",
-    "CAPTCHA": "Captcha"
+  "LEGEND_MESSAGE": "Message",
+  "LABEL_SUBJECT": "Subject",
+  "LABEL_BODY": "Body",
+  "LEGEND_STATUS": "Status",
+  "LABEL_ACTIVATION_DATE": "Activation date",
+  "LABEL_EXPIRY_DATE": "Expiry date",
+  "DATE_HELP_BLOCK": "You can upload files until the expiry date or the request closure",
+  "LEGEND_UPLOAD": "Upload",
+  "LABEL_FILE_COUNT": "File count",
+  "LABEL_DEPOSIT_SIZE": "Deposit size",
+  "FLOW": {
+    "MAX_FILE_SIZE": "Max file size : {{size}}",
+    "FLOW_COUNT": "Queued file(s) : {{count}}",
+    "BUTTON_UPLOAD": "Upload",
+    "LABEL_OR_DROP": "or drop file(s) here"
+  },
+  "LEGEND_FILES_ALREADY_UPLOADED": "Files already uploaded",
+  "TABLE": {
+    "HEADER_NAME": "File name",
+    "HEADER_SIZE": "Size",
+    "HEADER_ACTION": "Action",
+    "BUTTON_DELETE": "Delete",
+    "BUTTON_DELETE_YES": "Yes",
+    "BUTTON_DELETE_NO": "No"
+  },
+  "PARAGRAPH_CONFIRM_CLOSURE": "Close the request notify end of upload at the request owner. Closure is definitive : you will not be able to upload file later with this request.",
+  "MODAL": {
+    "TITLE": "Confirmation",
+    "CANCEL": "Cancel",
+    "VALIDATE": "Validate"
   },
   "FORM_ACTIONS": {
-    "RESET": "Reset",
-    "SUBMIT": "Submit"
+    "CLOSE_REQUEST": "Close the request"
   }
 }

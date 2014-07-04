@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html x-ng-app="app">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +11,16 @@
 </head>
 <body x-flow-prevent-drop>
   <header>
-    LOGO
+    <img src="img/logo_linshare.png">
+    <img x-ng-show="logo.getCustomLogoURL()"
+         x-ng-src="{{logo.getCustomLogoURL()}}">
   </header>
   <section class="content container">
     <h1 class="text-center">
       {{'TITLE' | translate}}
     </h1>
 
-    <div ui-view></div>
+    <div x-ui-view></div>
   </section>
 
   <!-- inject:js -->

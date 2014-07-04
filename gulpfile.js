@@ -147,6 +147,8 @@ gulp.task('copy', ['clean'], function() {
     .pipe(gulp.dest(paths.dest + '/styles/AdminLTE'));
   gulp.src(paths.src + '/i18n/**/*')
     .pipe(gulp.dest(paths.dest + '/i18n/'));
+  gulp.src(paths.images)
+    .pipe(gulp.dest(paths.dest + '/img/'));
   gulp.src(paths.config)
     .pipe(gulp.dest(paths.dest));
 });

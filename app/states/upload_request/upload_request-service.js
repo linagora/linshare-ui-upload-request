@@ -15,6 +15,11 @@ goog.provide('my.upload_request.Service');
 my.upload_request.Service = function($http, $log, $stateParams, lsAppConfig) {
 
   /**
+   * @type {String}
+   */
+  this.apiUrl_ = 'requests';
+
+  /**
    * @type {!angular.http}
    */
   this.$http_ = $http;
@@ -43,13 +48,14 @@ my.upload_request.Service = function($http, $log, $stateParams, lsAppConfig) {
  * Get the request
  */
 my.upload_request.Service.prototype.get = function() {
+  var apiUrl = this.apiUrl_;
   var $http = this.$http_;
   var $log = this.$log_;
   var $stateParams = this.$stateParams_;
   var lsAppConfig = this.lsAppConfig_;
   var self = this;
 
-  return $http.get(lsAppConfig.backendURL + '/requests/' + $stateParams.uuid,
+  return $http.get([lsAppConfig.backendURL, apiUrl, $stateParams.uuid].join('/'),
     {
       headers: {'linshare-uploadrequest-password': '1qm6xtpyu93qp'}
     }).
@@ -67,9 +73,48 @@ my.upload_request.Service.prototype.get = function() {
  * Close the request
  */
 my.upload_request.Service.prototype.close = function() {
+  var apiUrl = this.apiUrl_;
   var $http = this.$http_;
+  var $log = this.$log_;
   var lsAppConfig = this.lsAppConfig_;
   var request = this.request;
 
-  return $http.put(lsAppConfig.backendURL + '/requests', request);
+  request.closed = true;
+  return $http.put([lsAppConfig.backendURL, apiUrl, request].join('/'),
+    {
+      headers: {'linshare-uploadrequest-password': '1qm6xtpyu93qp'}
+    }).
+    success(function(data) {
+      self.request = data;
+      $log.debug(data);
+    }).
+    error(function(data, status) {
+      $log.error(data);
+      $log.error(status);
+  });
+};
+
+/**
+ * Delete a request entry
+ * @param {String} entryUuid
+ */
+my.upload_request.Service.prototype.deleteEntry = function(entryUuid) {
+  var apiUrl = this.apiUrl_;
+  var $http = this.$http_;
+  var $log = this.$log_;
+  var lsAppConfig = this.lsAppConfig_;
+  var request = this.request;
+
+  return $http.delete([lsAppConfig.backendURL, apiUrl, request.uuid, entryUuid].join('/'),
+    {
+      headers: {'linshare-uploadrequest-password': '1qm6xtpyu93qp'}
+    }).
+    success(function(data) {
+      self.request = data;
+      $log.debug(data);
+    }).
+    error(function(data, status) {
+      $log.error(data);
+      $log.error(status);
+  });
 };

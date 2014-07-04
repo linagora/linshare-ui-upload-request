@@ -5,6 +5,9 @@ goog.provide('my.upload_request.Ctrl');
 /**
  * UploadRequest controller.
  *
+ * @param {!angular.$filter} $filter
+ * @param {!angular-boostrap.$modal} $modal
+ * @param {!ngTable.ngTableParams} ngTableParams
  * @param {!angular-growl.growl} growl
  * @param {!my.app.locale} locale
  * @param {!my.upload_request.UploadRequest} tmhDynamicLocale
@@ -12,12 +15,12 @@ goog.provide('my.upload_request.Ctrl');
  * @ngInject
  * @export
  */
-my.upload_request.Ctrl = function(growl, locale, UploadRequest) {
+my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale, UploadRequest) {
 
   /**
-   * @type {!my.app.locale}
+   * @type {!angular-boostrap.$modal}
    */
-  this.locale_ = locale;
+  this.$modal_ = $modal;
 
   /**
    * @type {!angular-growl.growl}
@@ -28,6 +31,11 @@ my.upload_request.Ctrl = function(growl, locale, UploadRequest) {
    * @type {!my.upload_request.Service}
    */
   this.UploadRequest_ = UploadRequest;
+
+  /**
+   * @type {!my.app.locale}
+   */
+  this.locale_ = locale;
 
   /**
    * @type {Object}
@@ -43,8 +51,28 @@ my.upload_request.Ctrl = function(growl, locale, UploadRequest) {
 
   var self = this;
 
-  UploadRequest.get().then(function() {
-    self.request = UploadRequest.request;
+  /**
+   * @type {!ngTable.ngTableParams}
+   */
+  this.tableParams = new ngTableParams({
+    page: 1,
+    count: 10,
+    sorting: {
+      name: 'asc'
+    },
+  }, {
+    debugMode: false,
+    total: 0,
+    getData: function($defer, params) {
+      UploadRequest.get().then(function() {
+        self.request = UploadRequest.request;
+        var orderedData = params.sorting() ?
+                          $filter('orderBy')(self.request.entries, params.orderBy()) :
+                          self.request.entries;
+        params.total(orderedData.length);
+        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+      });
+    }
   });
 };
 
@@ -53,11 +81,36 @@ my.upload_request.Ctrl = function(growl, locale, UploadRequest) {
  *
  * @export
  */
-my.upload_request.Ctrl.prototype.close = function() {
+my.upload_request.Ctrl.prototype.closeRequest = function() {
+  var $modal = this.$modal_;
   var UploadRequest = this.UploadRequest_;
-  var request = this.request;
 
-  UploadRequest.close();
+  var modalInstance = $modal.open({
+    templateUrl: 'upload_request-closure.tpl.html',
+    controller: 'confirm_dialog',
+    resolve: {
+      content: function() {
+        return 'PARAGRAPH_CONFIRM_CLOSURE';
+      }
+    }
+  });
+  modalInstance.result.then(function success() {
+    UploadRequest.close();
+  });
+};
+
+/**
+ * Delete a request entry
+ *
+ * @export
+ */
+my.upload_request.Ctrl.prototype.deleteEntry = function(entry) {
+  var UploadRequest = this.UploadRequest_;
+  var tableParams = this.tableParams;
+
+  UploadRequest.deleteEntry(entry.uuid).then(function() {
+    tableParams.reload();
+  });
 };
 
 /**
@@ -103,7 +156,6 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
 
   var currentDepositFile = 0;
   var len = files.length;
-  console.log(files);
 
   if (request.maxFileCount < (len + request.entries.length)) {
     console.error('Files count exceeded');
@@ -130,4 +182,34 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
     growl.addErrorMessage('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
     return false;
   }
+};
+
+/**
+ * Get the progress bar type for angular-bootstrap
+ *
+ * @param {!flow.File} file
+ * @export
+ */
+my.upload_request.Ctrl.prototype.getProgressbarType = function(file) {
+  if (file.isComplete()) {
+    if (file.error) {
+      return 'danger';
+    }
+    return 'success';
+  }
+  return 'default';
+};
+
+/**
+ * Handle flow js errors 
+ *
+ * @param {!flow.File} file
+ * @export
+ */
+my.upload_request.Ctrl.prototype.handleError = function(file, message) {
+  var growl = this.growl_;
+
+  console.error(file);
+  console.error(message);
+  growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + message.errCode);
 };

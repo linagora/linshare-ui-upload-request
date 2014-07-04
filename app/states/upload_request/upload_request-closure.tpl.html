@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h3 class="modal-title">
+    {{'MODAL.TITLE' | translate}}
+  </h3>
+</div>
+<div class="modal-body">
+  <p>
+    {{content | translate}}
+  </p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" 
+          x-ng-click="confirm_dialog.cancel()">
+    {{'MODAL.CANCEL' | translate}}
+  </button>
+  <button class="btn btn-primary"
+          x-ng-click="confirm_dialog.validate()">
+    {{'MODAL.VALIDATE' | translate}}
+  </button>
+</div>

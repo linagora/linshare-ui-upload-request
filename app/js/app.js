@@ -2,6 +2,8 @@
 
 goog.require('my.upload_request.module');
 goog.require('my.locale.Service');
+goog.require('my.logo.Ctrl');
+goog.require('my.confirm_dialog.Ctrl');
 
 /**
  * Main app.
@@ -22,6 +24,8 @@ angular.module('app', [
   my.upload_request.module.name
 ])
 .config(config)
+.controller('logo', my.logo.Ctrl)
+.controller('confirm_dialog', my.confirm_dialog.Ctrl)
 .service('locale', my.locale.Service);
 
 /**

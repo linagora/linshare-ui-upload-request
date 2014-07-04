@@ -1,26 +1,45 @@
 {
-  "TITLE": "Demande d'invitation de dépôt",
+  "TITLE": "Upload request",
   "PARAGRAPH": {
-    "DESCRIPTION": "Ce formulaire vous permettra de soumettre une demande d'invitation de dépôt à votre interlocuteur. Un courriel vous sera adressé suite à l'acceptation ou au refus de votre demande. En cas d'une réponse positive, les informations nécessaires pour déposer vos fichiers vous seront transmises"
+    "WELCOME": "Bonjour {{mail}}",
+    "DESCRIPTION": "Vous pouvez déposer ici vos documents à l'attention de {{mail}}"
   },
   "LANGUAGE": {
     "ENGLISH": "Anglais",
     "FRENCH": "Français"
   },
-  "LEGEND_USER": "Coordonnées",
-  "LEGEND_PROPOSAL": "Demande",
-  "LEGEND_VALIDATE": "Validation",
-  "FORM": {
-    "FIRSTNAME": "Prénom",
-    "LASTNAME": "Nom",
-    "SENDER_EMAIL": "Votre adresse électronique",
-    "TARGET_EMAIL": "Adresse électronique du destinataire de la demande",
-    "SUBJECT": "Sujet de la demande",
-    "CONTENT": "Motif de la demande",
-    "CAPTCHA": "Captcha"
+  "LEGEND_MESSAGE": "Message",
+  "LABEL_SUBJECT": "Sujet",
+  "LABEL_BODY": "Corps du message",
+  "LEGEND_STATUS": "Statut",
+  "LABEL_ACTIVATION_DATE": "Date d'activation",
+  "LABEL_EXPIRY_DATE": "Date d'expiration",
+  "DATE_HELP_BLOCK": "Vous pouvez déposer vos fichiers jusqu'à la date indiquée ou la clôture de cette invitation.",
+  "LEGEND_UPLOAD": "Dépôt",
+  "LABEL_FILE_COUNT": "Nombre de fichier",
+  "LABEL_DEPOSIT_SIZE": "Taille totale du dépôt",
+  "FLOW": {
+    "MAX_FILE_SIZE": "Taille maximum par fichier : {{size}}",
+    "FLOW_COUNT": "Fichier(s) dans la file : {{count}}",
+    "BUTTON_UPLOAD": "Dépôt",
+    "LABEL_OR_DROP": "ou glisser / déposer le(s) fihcier(s) ici"
+  },
+  "LEGEND_FILES_ALREADY_UPLOADED": "Fichiers déjà déposés",
+  "TABLE": {
+    "HEADER_NAME": "Nom du fichier",
+    "HEADER_SIZE": "Taille du fichier",
+    "HEADER_ACTION": "Action",
+    "BUTTON_DELETE": "Supprimer",
+    "BUTTON_DELETE_YES": "Oui",
+    "BUTTON_DELETE_NO": "Non"
+  },
+  "PARAGRAPH_CONFIRM_CLOSURE": "La clôture de l'invitation avertit votre destinataire que le dépôt de fichier eset terminé. Toute clôture est définitive vous ne pourrez plus déposer de fichiers ultérieurement dans cette invitation.",
+  "MODAL": {
+    "TITLE": "Confirmation",
+    "CANCEL": "Annuler",
+    "VALIDATE": "Valider"
   },
   "FORM_ACTIONS": {
-    "RESET": "Réinitialiser",
-    "SUBMIT": "Envoyer"
+    "CLOSE_REQUEST": "Cloturer l'invitation"
   }
 }

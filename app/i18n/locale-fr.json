@@ -50,7 +50,7 @@
     "BUTTON_DELETE_YES": "Oui",
     "BUTTON_DELETE_NO": "Non"
   },
-  "PARAGRAPH_CONFIRM_CLOSURE": "La clôture de l'invitation avertit votre destinataire que le dépôt de fichier eset terminé. Toute clôture est définitive vous ne pourrez plus déposer de fichiers ultérieurement dans cette invitation.",
+  "PARAGRAPH_CONFIRM_CLOSURE": "La clôture de l'invitation avertit votre destinataire que le dépôt de fichier est terminé. Toute clôture est définitive vous ne pourrez plus déposer de fichiers ultérieurement dans cette invitation.",
   "MODAL": {
     "TITLE": "Confirmation",
     "CANCEL": "Annuler",

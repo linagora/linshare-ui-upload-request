@@ -1,9 +1,9 @@
 'use strict';
 
 goog.require('my.upload_request.module');
-goog.require('my.locale.Service');
 goog.require('my.logo.Directive.factory');
-goog.require('my.confirm_dialog.Ctrl');
+goog.require('my.auth.Service');
+goog.require('my.locale.Service');
 
 /**
  * Main app.
@@ -24,8 +24,8 @@ angular.module('app', [
   my.upload_request.module.name
 ])
 .config(config)
-.controller('confirm_dialog', my.confirm_dialog.Ctrl)
 .directive('logo', my.logo.Directive.factory)
+.service('auth', my.auth.Service)
 .service('locale', my.locale.Service);
 
 /**

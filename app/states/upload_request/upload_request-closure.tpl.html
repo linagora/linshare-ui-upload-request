@@ -5,16 +5,16 @@
 </div>
 <div class="modal-body">
   <p>
-    {{content | translate}}
+    {{modal.content | translate}}
   </p>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" 
-          x-ng-click="confirm_dialog.cancel()">
+          x-ng-click="modal.cancel()">
     {{'MODAL.CANCEL' | translate}}
   </button>
   <button class="btn btn-primary"
-          x-ng-click="confirm_dialog.validate()">
+          x-ng-click="modal.validate()">
     {{'MODAL.VALIDATE' | translate}}
   </button>
 </div>

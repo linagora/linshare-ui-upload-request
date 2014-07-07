@@ -86,8 +86,17 @@ my.upload_request.Ctrl.prototype.closeRequest = function() {
   var UploadRequest = this.UploadRequest_;
 
   var modalInstance = $modal.open({
-    templateUrl: 'upload_request-closure.tpl.html',
-    controller: 'confirm_dialog',
+    templateUrl: 'states/upload_request/upload_request-closure.tpl.html',
+    controller: ['$scope', '$modalInstance', 'content', function($scope, $modalInstance, content) {
+      $scope.modal = {};
+      $scope.modal.content = content;
+      $scope.modal.validate = function() {
+        $modalInstance.close();
+      };
+      $scope.modal.cancel = function() {
+        $modalInstance.dismiss();
+      };
+    }],
     resolve: {
       content: function() {
         return 'PARAGRAPH_CONFIRM_CLOSURE';

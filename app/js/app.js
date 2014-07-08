@@ -46,6 +46,10 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
 
+  $stateProvider.state('404', {
+    url: '/404',
+    templateUrl: 'states/404/404.html',
+  });
   $urlRouterProvider.otherwise('/404');
 
   $translateProvider.useStaticFilesLoader({

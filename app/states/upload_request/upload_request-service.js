@@ -13,7 +13,7 @@ goog.provide('my.upload_request.Service');
  * @constructor
  * @ngInject
  */
-my.upload_request.Service = function($q, $http, $log, $stateParams, auth, lsAppConfig) {
+my.upload_request.Service = function($q, $http, $log, $stateParams, $state, auth, lsAppConfig) {
   /**
    * @type {!angular.$q}
    */
@@ -33,6 +33,11 @@ my.upload_request.Service = function($q, $http, $log, $stateParams, auth, lsAppC
    * @type {!angular.ui.$stateParams}
    */
   this.$stateParams_ = $stateParams;
+
+  /**
+   * @type {!angular.ui.$state}
+   */
+  this.$state = $state;
 
   /**
    * @type {angular.Service}
@@ -64,6 +69,7 @@ my.upload_request.Service.prototype.get = function() {
   var $http = this.$http_;
   var $log = this.$log_;
   var $stateParams = this.$stateParams_;
+  var $state = this.$state;
   var auth = this.auth_;
   var lsAppConfig = this.lsAppConfig_;
   var apiUrl = this.apiUrl_;
@@ -87,6 +93,8 @@ my.upload_request.Service.prototype.get = function() {
             self.password = passwd;
             doQuery(passwd);
           });
+        } else if (status === 403 || status === 404) {
+          $state.go('404');
         } else {
           $log.error(data);
           $log.error(status);

@@ -58,5 +58,9 @@
   },
   "FORM_ACTIONS": {
     "CLOSE_REQUEST": "Cloturer l'invitation"
+  },
+  "404": {
+    "TITLE": "Oups! Page introuvable.",
+    "CONTENT": "Nous ne pouvons pas trouver la page que vous chercher. Verifier l'URL et assurer vous que la requête existe."
   }
 }

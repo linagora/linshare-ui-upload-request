@@ -128,6 +128,7 @@ my.upload_request.Service.prototype.close = function() {
       success(function(data) {
         self.request = data;
         $log.debug(data);
+        deferred.resolve(data);
       }).
       error(function(data, status) {
         if (status === 401) {
@@ -168,6 +169,7 @@ my.upload_request.Service.prototype.deleteEntry = function(entryUuid) {
       success(function(data) {
         self.request = data;
         $log.debug(data);
+        deferred.resolve(data);
       }).
       error(function(data, status) {
         if (status === 401) {

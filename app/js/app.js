@@ -70,7 +70,7 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
     generateUniqueIdentifier: function() {
       return uuid.v4();
     },
-    target: '/linshare/flow/upload',
+    target: lsAppConfig.backendURL + '/flow/upload',
     permanentErrors:[401, 404, 500, 501]
   };
 }

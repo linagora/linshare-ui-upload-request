@@ -2,7 +2,7 @@ var gulp = require('gulp');
 
 var closureCompiler = require('gulp-closure-compiler');
 var inject = require('gulp-inject');
-var bowerFiles = require('gulp-bower-files');
+var bowerFiles = require('main-bower-files');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var rimraf = require('gulp-rimraf');
@@ -123,9 +123,9 @@ gulp.task('inject', ['clean', 'sass', 'compile', 'bower-concat', 'copy'], functi
 
 // Concatenate bower js files
 gulp.task('bower-concat', ['clean'], function() {
-  bowerFiles({
+  gulp.src(bowerFiles({
     env: process.env.NODE_ENV || 'development'
-  })
+  }))
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest(paths.dest + '/'));
 });

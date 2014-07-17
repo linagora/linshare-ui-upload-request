@@ -51,10 +51,12 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
 
   var self = this;
 
+  // Avoid JsHint warning
+  var NgTableParams = ngTableParams;
   /**
    * @type {!ngTable.ngTableParams}
    */
-  this.tableParams = new ngTableParams({
+  this.tableParams = new NgTableParams({
     page: 1,
     count: 10,
     sorting: {

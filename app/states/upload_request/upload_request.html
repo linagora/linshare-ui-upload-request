@@ -104,7 +104,8 @@
                x-flow-files-added="upload_request.validateFiles($files)"
                x-flow-complete="upload_request.tableParams.reload()"
                x-flow-file-error="upload_request.handleError($file, $message)"
-               x-flow-files-submitted="$flow.upload()">
+               x-flow-files-submitted="$flow.upload()"
+               x-ng-hide="upload_request.request.closed">
 
             <span class="label label-primary"
                   x-ng-show="upload_request.request.maxFileSize"

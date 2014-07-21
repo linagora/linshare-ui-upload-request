@@ -86,6 +86,7 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
 my.upload_request.Ctrl.prototype.closeRequest = function() {
   var $modal = this.$modal_;
   var UploadRequest = this.UploadRequest_;
+  var tableParams = this.tableParams;
 
   var modalInstance = $modal.open({
     templateUrl: 'states/upload_request/upload_request-closure.tpl.html',
@@ -106,7 +107,9 @@ my.upload_request.Ctrl.prototype.closeRequest = function() {
     }
   });
   modalInstance.result.then(function success() {
-    UploadRequest.close();
+    UploadRequest.close().then(function success() {
+      tableParams.reload();
+    });
   });
 };
 

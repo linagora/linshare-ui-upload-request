@@ -121,7 +121,7 @@ my.upload_request.Service.prototype.close = function() {
   var deferred = $q.defer();
   request.closed = true;
   (function doQuery(password) {
-    $http.put([lsAppConfig.backendURL, apiUrl].join('/'), request,
+    $http.put([lsAppConfig.backendURL, apiUrl, request.uuid].join('/'), {},
       {
         headers: {'linshare-uploadrequest-password': password}
       }).

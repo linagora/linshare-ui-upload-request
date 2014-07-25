@@ -29,10 +29,10 @@
     "lodash": "~2.4.1",
     "messageformat": "~0.1.8",
     "node-uuid": "~1.4.1",
-    "angular": "~1.2.19",
-    "angular-cookies": "~1.2.19",
-    "angular-resource": "~1.2.19",
-    "angular-sanitize": "~1.2.19",
+    "angular": "~1.2.20",
+    "angular-cookies": "~1.2.20",
+    "angular-resource": "~1.2.20",
+    "angular-sanitize": "~1.2.20",
     "angular-translate": "~2.2.0",
     "angular-translate-loader-static-files": "~2.2.0",
     "angular-translate-interpolation-messageformat": "~2.1.0",
@@ -171,6 +171,6 @@
   },
   "resolutions": {
     "angular-translate": "~2.2.0",
-    "angular": "~1.2.19"
+    "angular": "~1.2.20"
   }
 }

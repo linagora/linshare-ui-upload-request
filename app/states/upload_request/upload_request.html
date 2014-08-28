@@ -89,7 +89,8 @@
             </p>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group"
+             x-ng-show="upload_request.request.maxDepositSize">
           <label class="control-label col-md-2">
             {{'LABEL_DEPOSIT_SIZE' | translate}}
           </label>

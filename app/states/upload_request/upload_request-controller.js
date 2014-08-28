@@ -191,7 +191,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
       return false;
     }
   }
-  if (request.maxDepositSize < (currentDepositFile + request.usedSpace)) {
+  if (request.maxDepositSize && request.maxDepositSize < (currentDepositFile + request.usedSpace)) {
     console.error('Deposit too big');
     growl.addErrorMessage('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
     return false;

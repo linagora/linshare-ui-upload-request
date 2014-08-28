@@ -1,6 +1,6 @@
 {
   "name": "linshare-ui-upload-request",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0",
   "description": "Linshare upload request UI",
   "main": "app/index.js",
   "keywords": [

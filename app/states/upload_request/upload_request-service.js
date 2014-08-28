@@ -13,7 +13,7 @@ goog.provide('my.upload_request.Service');
  * @constructor
  * @ngInject
  */
-my.upload_request.Service = function($q, $http, $log, $stateParams, $state, auth, lsAppConfig) {
+my.upload_request.Service = function($q, $http, $log, $stateParams, $state, growl, auth, lsAppConfig) {
   /**
    * @type {!angular.$q}
    */
@@ -38,6 +38,11 @@ my.upload_request.Service = function($q, $http, $log, $stateParams, $state, auth
    * @type {!angular.ui.$state}
    */
   this.$state = $state;
+
+  /**
+   * @type {!angular-growl.growl}
+   */
+  this.growl_ = growl;
 
   /**
    * @type {angular.Service}
@@ -70,6 +75,7 @@ my.upload_request.Service.prototype.get = function() {
   var $log = this.$log_;
   var $stateParams = this.$stateParams_;
   var $state = this.$state;
+  var growl = this.growl_;
   var auth = this.auth_;
   var lsAppConfig = this.lsAppConfig_;
   var apiUrl = this.apiUrl_;
@@ -96,6 +102,7 @@ my.upload_request.Service.prototype.get = function() {
         } else if (status === 403 || status === 404) {
           $state.go('404');
         } else {
+          growl.addErrorMessage('SERVER_ERROR.UNKNOWN_ERROR');
           $log.error(data);
           $log.error(status);
         }

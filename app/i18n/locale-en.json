@@ -31,6 +31,7 @@
     "MAX_DEPOSIT_SIZE": "Max deposit size exceeded"
   },
   "SERVER_ERROR": {
+    "UNKNOWN_ERROR": "An error occurred... Please contact your administrator",
     "ERRCODE_30404": "Upload request not found",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
     "ERRCODE_30001": "Upload request not enable yet",

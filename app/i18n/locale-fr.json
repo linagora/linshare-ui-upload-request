@@ -31,6 +31,7 @@
     "MAX_DEPOSIT_SIZE": "Taille maximum du dépôt dépassée"
   },
   "SERVER_ERROR": {
+    "UNKNOWN_ERROR": "Une erreur est survenue... Veuillez contacter votre administrateur",
     "ERRCODE_30404": "Invitation de dépôt non connue",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
     "ERRCODE_30001": "Invitation non active",

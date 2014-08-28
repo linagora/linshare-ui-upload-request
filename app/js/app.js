@@ -70,7 +70,7 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
     generateUniqueIdentifier: function() {
       return uuid.v4();
     },
-    target: lsAppConfig.backendURL + '/flow/upload',
+    target: lsAppConfig.backendURL + '/flow/upload.json',
     permanentErrors:[401, 404, 500, 501]
   };
 }

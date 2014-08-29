@@ -224,6 +224,7 @@ my.upload_request.Ctrl.prototype.handleError = function(file, message) {
   var growl = this.growl_;
 
   console.error(file);
-  console.error(message);
+  message = angular.fromJson(message);
+  console.error(message.message);
   growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + message.errCode);
 };

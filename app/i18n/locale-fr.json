@@ -33,6 +33,7 @@
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "Une erreur est survenue... Veuillez contacter votre administrateur",
     "ERRCODE_30404": "Invitation de dépôt non connue",
+    "ERRCODE_3001": "Le fichier est trop volumineux pour l'espace de l'utilisateur",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
     "ERRCODE_30001": "Invitation non active",
     "ERRCODE_30002": "Invitation expirée",

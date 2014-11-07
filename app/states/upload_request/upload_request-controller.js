@@ -68,6 +68,7 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
     getData: function($defer, params) {
       UploadRequest.get().then(function() {
         self.request = UploadRequest.request;
+	self.locale_.changeLanguage(self.request.locale);
         var orderedData = params.sorting() ?
                           $filter('orderBy')(self.request.entries, params.orderBy()) :
                           self.request.entries;

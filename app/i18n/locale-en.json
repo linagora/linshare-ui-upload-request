@@ -30,6 +30,9 @@
     "INVALID_EXTENSION": "Invalid extension",
     "MAX_DEPOSIT_SIZE": "Max deposit size exceeded"
   },
+  "VALIDATION_SUCCESS": {
+    "ON_SUCCESS": "File(s) uploaded with success"
+  },
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "An error occurred... Please contact your administrator",
     "ERRCODE_30404": "Upload request not found",
@@ -48,9 +51,17 @@
     "HEADER_SIZE": "Size",
     "HEADER_ACTION": "Action",
     "BUTTON_DELETE": "Delete",
+    "BUTTON_DELETE_ALL": "Remove All",
     "LABEL_NO_ACTION_AVAILABLE": "Pas d'action disponible",
     "BUTTON_DELETE_YES": "Yes",
-    "BUTTON_DELETE_NO": "No"
+    "BUTTON_DELETE_NO": "No",
+    "BUTTON_CANCEL": "Cancel",
+    "BUTTON_CANCEL_ALL": "Cancel all",
+    "BUTTON_UPLOAD": "Upload",
+    "BUTTON_UPLOAD_ALL": "Upload all",
+    "HEADER_STATUS": "Status",
+    "HEADER_PROGRESS": "Progress",
+    "QUEUE_PROGRESS": "Queue progress"
   },
   "PARAGRAPH_CONFIRM_CLOSURE": "Close the request notify end of upload at the request owner. Closure is definitive : you will not be able to upload file later with this request.",
   "MODAL": {
@@ -64,5 +75,6 @@
   "404": {
     "TITLE": "Oops! Page not found.",
     "CONTENT": "We could not find the page you were looking for. Check URL and ensure that the upload request exists."
-  }
+  },
+  "SELECT_FILE": "Select File"
 }

@@ -101,7 +101,9 @@ my.upload_request.Service.prototype.get = function() {
           });
         } else if (status === 403 || status === 404) {
           $state.go('404');
-        } else {
+        } else if (status === 400){
+          growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + data.errCode);
+        }else {
           growl.addErrorMessage('SERVER_ERROR.UNKNOWN_ERROR');
           $log.error(data);
           $log.error(status);

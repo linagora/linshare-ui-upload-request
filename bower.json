@@ -45,7 +45,8 @@
     "ng-flow": "~2.4.0",
     "angular-growl": "~0.4.0",
     "ng-table": "~0.3.3",
-    "normalize-css": "~3.0.1"
+    "normalize-css": "~3.0.1",
+    "angular-file-upload": "~1.1.5"
   },
   "overrides": {
     "closure-compiler": {

@@ -1,0 +1,221 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-primary"
+                    x-ng-click="ie_upload_request.changeLanguage('en')">
+                {{'LANGUAGE.ENGLISH' | translate}}
+            </button>
+            <button type="button" class="btn btn-primary"
+                    x-ng-click="ie_upload_request.changeLanguage('fr')">
+                {{'LANGUAGE.FRENCH' | translate}}
+            </button>
+        </div>
+        {{logo}}
+        <p x-translate="PARAGRAPH.WELCOME"
+           x-translate-value-mail="{{ie_upload_request.request.recipient.mail}}">
+        </p>
+        <p x-translate="PARAGRAPH.DESCRIPTION"
+           x-translate-value-mail="{{ie_upload_request.request.owner.mail}}">
+        </p>
+        <form class="form-horizontal" name="uploadRequestForm" novalidate
+              x-ng-submit="ie_upload_request.submit()">
+            <fieldset>
+                <legend>
+                    {{'LEGEND_MESSAGE' | translate}}
+                </legend>
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        {{'LABEL_SUBJECT' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                        <p class="form-control-static">
+                            {{ie_upload_request.request.subject}}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group"
+                     x-ng-show="ie_upload_request.request.body">
+                    <label class="control-label col-md-2">
+                        {{'LABEL_BODY' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                        <p class="form-control-static">
+                            {{ie_upload_request.request.body}}
+                        </p>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    {{'LEGEND_STATUS' | translate}}
+                </legend>
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        {{'LABEL_ACTIVATION_DATE' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                        <p class="form-control-static">
+                            {{ie_upload_request.request.activationDate | date:medium}}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group"
+                     x-ng-show="ie_upload_request.request.expiryDate">
+                    <label class="control-label col-md-2">
+                        {{'LABEL_EXPIRY_DATE' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                        <p class="form-control-static">
+                            {{ie_upload_request.request.expiryDate | date:medium}}
+                        </p>
+                        <p class="help-block">
+                            {{'DATE_HELP_BLOCK' | translate}}
+                        </p>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset nv-file-drop="" uploader="ie_upload_request.uploader" filters="queueLimit, customFilter">
+                <legend>
+                    {{'LEGEND_UPLOAD' | translate}}
+                </legend>
+                <div class="form-group"
+                     x-ng-show="ie_upload_request.request.maxFileCount">
+                    <label class="control-label col-md-2">
+                        {{'LABEL_FILE_COUNT' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                        <p class="form-control-static">
+                            {{ie_upload_request.request.entries.length}} / {{ie_upload_request.request.maxFileCount}}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group"
+                     x-ng-show="ie_upload_request.request.maxDepositSize">
+                    <label class="control-label col-md-2">
+                        {{'LABEL_DEPOSIT_SIZE' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                        <p class="form-control-static">
+                            {{ie_upload_request.humanFileSize(ie_upload_request.request.usedSpace)}} / {{ie_upload_request.humanFileSize(ie_upload_request.request.maxDepositSize)}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-9" style="margin-bottom: 40px">
+                        <input type="file" ng-hide="ie_upload_request.tableParams.data.length === ie_upload_request.request.maxFileCount" nv-file-select="" uploader="ie_upload_request.uploader" />
+
+                        <table class="table" ng-hide="ie_upload_request.uploader.queue.length ===0">
+
+                            <thead>
+                            <tr>
+                                <th width="50%">{{'TABLE.HEADER_NAME' | translate}}</th>
+                                <th ng-show="ie_upload_request.uploader.isHTML5">Size</th>
+                                <th ng-show="ie_upload_request.uploader.isHTML5">Progress</th>
+                                <th>{{'TABLE.HEADER_STATUS' | translate}}</th>
+                                <th>{{'TABLE.HEADER_ACTION' | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in ie_upload_request.uploader.queue">
+                                <td><strong>{{ item.file.name }}</strong></td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" x-ng-click="item.upload()"  ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                    <span class="glyphicon glyphicon-upload"></span> {{'TABLE.BUTTON_UPLOAD' | translate}}
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" x-ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                    <span class="glyphicon glyphicon-ban-circle"></span> {{'TABLE.BUTTON_CANCEL' | translate}}
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" x-ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> {{'TABLE.BUTTON_CANCEL' | translate}}
+                                    </button>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-md-9" ng-show="ie_upload_request.uploader.queue.length > 1">
+                        <button type="button" class="btn btn-success btn-s" ng-click="ie_upload_request.uploader.uploadAll()" ng-disabled="!ie_upload_request.uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> {{'TABLE.BUTTON_UPLOAD_ALL' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-warning btn-s" ng-click="ie_upload_request.uploader.cancelAll()" ng-disabled="!ie_upload_request.uploader.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> {{'TABLE.BUTTON_CANCEL_ALL' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-danger btn-s" ng-click="ie_upload_request.uploader.clearQueue()" ng-disabled="!ie_upload_request.uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> {{'TABLE.BUTTON_DELETE_ALL' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <fieldset x-ng-hide="ie_upload_request.tableParams.data.length === 0">
+                <legend>
+                    {{'LEGEND_FILES_ALREADY_UPLOADED' | translate}}
+                </legend>
+                <div class="table-responsive">
+                    <table class="table table-striped"
+                           x-ng-table="ie_upload_request.tableParams">
+
+                        <thead>
+                        <tr>
+                            <th>{{'TABLE.HEADER_NAME' | translate}}</th>
+                            <th>{{'TABLE.HEADER_SIZE' | translate}}</th>
+                            <th>{{'TABLE.HEADER_ACTION' | translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr x-ng-repeat="entry in $data">
+                            <td class="text-center">
+                                {{entry.name}}
+                            </td>
+                            <td class="text-center">
+                                {{ie_upload_request.humanFileSize(entry.size)}}
+                            </td>
+                            <td class="text-center">
+                                <div x-ng-show="ie_upload_request.request.canDeleteDocument">
+                                    <button class="btn btn-danger"
+                                            x-ng-show="confirm === undefined"
+                                            x-ng-click="confirm = $index">
+                                        {{'TABLE.BUTTON_DELETE' | translate}}
+                                    </button>
+                                    <button class="btn"
+                                            x-ng-show="confirm === $index"
+                                            x-ng-click="confirm = undefined">
+                                        {{'TABLE.BUTTON_DELETE_NO' | translate}}
+                                    </button>
+                                    <button class="btn btn-danger"
+                                            x-ng-show="confirm === $index"
+                                            x-ng-click="ie_upload_request.deleteEntry(entry)">
+                                        {{'TABLE.BUTTON_DELETE_YES' | translate}}
+                                    </button>
+                                </div>
+                                <div x-ng-show="!ie_upload_request.request.canDeleteDocument">
+                                    {{'TABLE.LABEL_NO_ACTION_AVAILABLE' | translate}}
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </fieldset>
+            <fieldset x-ng-show="ie_upload_request.request.canClose">
+                <div class="form-group">
+                    <div class="controls">
+                        <button type="button" class="btn btn-warning" id="reset"
+                                x-ng-click="ie_upload_request.closeRequest()">
+                            {{'FORM_ACTIONS.CLOSE_REQUEST' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

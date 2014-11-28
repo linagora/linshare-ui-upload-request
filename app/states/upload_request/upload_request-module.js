@@ -10,7 +10,9 @@ goog.provide('my.upload_request.module');
  */
 goog.require('my.upload_request.Ctrl');
 goog.require('my.upload_request.Service');
-
+goog.require('my.ie_upload_request.Ctrl');
+goog.require('my.auth.Service');
+goog.require('my.locale.Service');
 
 
 /**
@@ -19,7 +21,7 @@ goog.require('my.upload_request.Service');
  * @return {angular.Module}
  */
 my.upload_request.module = angular.module('upload_request', [
-  'ui.router'
+  'ui.router', 'angularFileUpload'
 ]);
 
 
@@ -36,8 +38,16 @@ my.upload_request.module.configuration = function($stateProvider) {
 
   $stateProvider.state('upload_request', {
     url: '/:uuid',
-    templateUrl: 'states/upload_request/upload_request.html',
-    controller: 'UploadRequestCtrl as upload_request'
+    views: {
+        'flow':{
+            templateUrl: 'states/upload_request/upload_request.html',
+            controller: 'UploadRequestCtrl as upload_request'
+        },
+        'ie_upload': {
+            templateUrl: 'states/upload_request/ie_upload_request.html',
+            controller: 'IeUploadRequestCtrl as ie_upload_request'
+        }
+    }
   });
 
 };
@@ -50,4 +60,5 @@ my.upload_request.module.configuration = function($stateProvider) {
 my.upload_request.module
 .config(my.upload_request.module.configuration)
 .controller('UploadRequestCtrl', my.upload_request.Ctrl)
+.controller('IeUploadRequestCtrl', my.ie_upload_request.Ctrl)
 .service('UploadRequest', my.upload_request.Service);

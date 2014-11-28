@@ -20,8 +20,14 @@
     <h1 class="text-center">
       {{'TITLE' | translate}}
     </h1>
-
     <div x-ui-view></div>
+    <!--[if gt IE 9 |!IE]><!-->
+    <div x-ui-view="flow"></div>
+    <![endif]-->
+
+    <!--[if IE 9]>
+    <div x-ui-view="ie_upload"></div>
+    <![endif]-->
     <div growl></div>
   </section>
 

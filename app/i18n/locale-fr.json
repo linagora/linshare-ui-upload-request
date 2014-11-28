@@ -30,6 +30,9 @@
     "INVALID_EXTENSION": "Extension invalide",
     "MAX_DEPOSIT_SIZE": "Taille maximum du dépôt dépassée"
   },
+  "VALIDATION_SUCCESS": {
+    "ON_SUCCESS": "Fichier(s) déposé(s) avec succès"
+  },
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "Une erreur est survenue... Veuillez contacter votre administrateur",
     "ERRCODE_30404": "Invitation de dépôt non connue",
@@ -48,9 +51,18 @@
     "HEADER_SIZE": "Taille du fichier",
     "HEADER_ACTION": "Action",
     "BUTTON_DELETE": "Supprimer",
+    "BUTTON_DELETE_ALL": "Supprimer tout",
     "LABEL_NO_ACTION_AVAILABLE": "Pas d'action disponible",
     "BUTTON_DELETE_YES": "Oui",
-    "BUTTON_DELETE_NO": "Non"
+    "BUTTON_DELETE_NO": "Non",
+    "BUTTON_CANCEL": "Annuler",
+    "BUTTON_CANCEL_ALL": "Annuler tout",
+    "BUTTON_UPLOAD": "Déposer",
+    "BUTTON_UPLOAD_ALL": "Déposer tout",
+    "HEADER_STATUS": "Statut",
+    "HEADER_PROGRESS": "Progression",
+    "QUEUE_PROGRESS": "Progression"
+
   },
   "PARAGRAPH_CONFIRM_CLOSURE": "La clôture de l'invitation avertit votre destinataire que le dépôt de fichier est terminé. Toute clôture est définitive vous ne pourrez plus déposer de fichiers ultérieurement dans cette invitation.",
   "MODAL": {
@@ -64,5 +76,6 @@
   "404": {
     "TITLE": "Oups! Page introuvable.",
     "CONTENT": "Nous ne pouvons pas trouver la page que vous chercher. Verifier l'URL et assurer vous que la requête existe."
-  }
+  },
+  "SELECT_FILE": "Sélection du fichier"
 }

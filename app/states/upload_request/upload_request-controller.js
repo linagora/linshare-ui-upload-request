@@ -61,24 +61,23 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
     count: 10,
     sorting: {
       name: 'asc'
-    },
+    }
   }, {
     debugMode: false,
     total: 0,
     getData: function($defer, params) {
       UploadRequest.get().then(function() {
         self.request = UploadRequest.request;
-	self.locale_.changeLanguage(self.request.locale);
+        self.locale_.changeLanguage(self.request.locale);
         var orderedData = params.sorting() ?
-                          $filter('orderBy')(self.request.entries, params.orderBy()) :
-                          self.request.entries;
+            $filter('orderBy')(self.request.entries, params.orderBy()) :
+            self.request.entries;
         params.total(orderedData.length);
         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       });
     }
   });
 };
-
 /**
  * Close the request
  *

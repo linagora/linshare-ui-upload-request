@@ -14,7 +14,7 @@
   "LEGEND_STATUS": "Statut",
   "LABEL_ACTIVATION_DATE": "Date d'activation",
   "LABEL_EXPIRY_DATE": "Date d'expiration",
-  "DATE_HELP_BLOCK": "Vous pouvez déposer vos fichiers jusqu'à la date indiquée ou la clôture de cette invitation.",
+  "DATE_HELP_BLOCK": "Vous pouvez déposer vos fichiers jusqu'à la date d'expiration indiquée ou jusqu'à la clôture de cette invitation.",
   "LEGEND_UPLOAD": "Dépôt",
   "LABEL_FILE_COUNT": "Nombre de fichier",
   "LABEL_DEPOSIT_SIZE": "Taille totale du dépôt",

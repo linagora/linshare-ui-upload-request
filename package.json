@@ -1,6 +1,6 @@
 {
   "name": "linshare-ui-upload-request",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Linshare upload request UI",
   "main": "app/index.js",
   "keywords": [
@@ -28,6 +28,10 @@
     {
       "name": "Nicolas BERTRAND",
       "email": "nbertrand@linagora.com"
+    },
+    {
+      "name": "Alpha SALL",
+      "email": "asall@linagora.com"
     }
   ],
   "license": "http://www.linshare.org/licenses/LinShare-License_AfferoGPL-v3_en.pdf",

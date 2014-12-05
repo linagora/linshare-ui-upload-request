@@ -46,10 +46,12 @@
     "angular-ui-router": "~0.2.10",
     "angular-bootstrap": "~0.11.0",
     "angular-loading-bar": "~0.5.0",
+    "fusty-flow.js": "~1",
     "ng-flow": "~2.4.0",
     "angular-growl": "~0.4.0",
     "ng-table": "~0.3.3",
     "normalize-css": "~3.0.1",
+    "blueimp-file-upload": "~9.8.0",
     "angular-file-upload": "~1.1.5"
   },
   "overrides": {

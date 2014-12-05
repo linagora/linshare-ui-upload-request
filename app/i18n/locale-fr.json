@@ -17,6 +17,7 @@
   "DATE_HELP_BLOCK": "Vous pouvez déposer vos fichiers jusqu'à la date d'expiration indiquée ou jusqu'à la clôture de cette invitation.",
   "LEGEND_UPLOAD": "Dépôt",
   "LABEL_FILE_COUNT": "Nombre de fichier",
+  "LABEL_FILE_SIZE" : "Taille maximun par fichier",
   "LABEL_DEPOSIT_SIZE": "Taille totale du dépôt",
   "FLOW": {
     "MAX_FILE_SIZE": "Taille maximum par fichier : {{size}}",

@@ -17,6 +17,7 @@
   "DATE_HELP_BLOCK": "You can upload files until the expiry date or the request closure",
   "LEGEND_UPLOAD": "Upload",
   "LABEL_FILE_COUNT": "File count",
+  "LABEL_FILE_SIZE" : "Max size per file",
   "LABEL_DEPOSIT_SIZE": "Deposit size",
   "FLOW": {
     "MAX_FILE_SIZE": "Max file size : {{size}}",

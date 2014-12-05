@@ -51,16 +51,7 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
      */
     this.urlUuid = UploadRequest.urlUuid;
 
-    /**
-     * @type {FileUploader}
-     * @expose
-     */
-    this.uploader = new FileUploader({
-        url: lsAppConfig.backendURL + '/flow/upload/iexplorer',
-        formData: [{'requestUrlUuid': this.urlUuid, password: ''}],
-        removeAfterUpload: true,
-        autoUpload: false
-    });
+    this.password = UploadRequest.password;
 
     var self = this;
 
@@ -81,6 +72,7 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         getData: function($defer, params) {
             UploadRequest.get().then(function() {
                 self.request = UploadRequest.request;
+                self.password = UploadRequest.password;
                 self.locale_.changeLanguage(self.request.locale);
                 var orderedData = params.sorting() ?
                     $filter('orderBy')(self.request.entries, params.orderBy()) :
@@ -91,6 +83,15 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         }
     });
 
+    /**
+     * @type {FileUploader}
+     * @expose
+     */
+    this.uploader = new FileUploader({
+        url: lsAppConfig.backendURL + '/flow/upload/iexplorer',
+        removeAfterUpload: true
+    });
+
     this.uploader.filters.push({
         name: 'customFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
@@ -99,9 +100,16 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
     });
 
     this.uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+        growl.addErrorMessage('VALIDATION_ERROR.ERROR');
         console.info('onWhenAddingFileFailed', item, filter, options);
     };
     this.uploader.onAfterAddingFile = function(fileItem) {
+        if (self.request.extensions.indexOf(fileItem.file.type.slice(fileItem.file.type.indexOf('/') + 1)) === -1) {
+            fileItem.remove();
+            console.info('invalid extension ', fileItem.file.size);
+            var growl = self.growl_;
+            growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION', {ttl: 5000});
+        }
         console.info('onAfterAddingFile', fileItem);
     };
     this.uploader.onAfterAddingAll = function(addedFileItems) {
@@ -119,7 +127,7 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
     this.uploader.onSuccessItem = function(fileItem, response, status, headers) {
         self.tableParams.reload();
         var growl = self.growl_;
-        growl.addSuccessMessage('VALIDATION_SUCCESS.ON_SUCCESS', {ttl: 3000});
+        growl.addSuccessMessage('VALIDATION_SUCCESS.ON_SUCCESS', {ttl: 5000});
         console.info('onSuccessItem', fileItem, response, status, headers);
     };
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {

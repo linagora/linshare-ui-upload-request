@@ -44,7 +44,8 @@
     "ERRCODE_30003": "@:VALIDATION_ERROR.MAX_DEPOSIT_SIZE",
     "ERRCODE_30004": "@:VALIDATION_ERROR.MAX_FILE_SIZE",
     "ERRCODE_30005": "Upload request in read-only mode",
-    "ERRCODE_31404": "Upload request entry not found"
+    "ERRCODE_31404": "Upload request entry not found",
+    "ERRCODE_32401": "UPLOAD_REQUEST_URL_FORBIDDEN(32401, Status.UNAUTHORIZED)"
   },
   "LEGEND_FILES_ALREADY_UPLOADED": "Files already uploaded",
   "TABLE": {

@@ -49,6 +49,10 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
    */
   this.urlUuid = UploadRequest.urlUuid;
 
+  this.password = UploadRequest.password;
+
+  this.flowStarter = false;
+
   var self = this;
 
   // Avoid JsHint warning
@@ -65,9 +69,12 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
   }, {
     debugMode: false,
     total: 0,
+    counts: [],
     getData: function($defer, params) {
       UploadRequest.get().then(function() {
         self.request = UploadRequest.request;
+        self.password = UploadRequest.password;
+        self.flowStarter = true;
         self.locale_.changeLanguage(self.request.locale);
         var orderedData = params.sorting() ?
             $filter('orderBy')(self.request.entries, params.orderBy()) :

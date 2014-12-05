@@ -101,7 +101,7 @@
           </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-          <div x-flow-init="{query: {'requestUrlUuid': upload_request.urlUuid, 'password': '1qm6xtpyu93qp'}}"
+          <div x-ng-if="upload_request.flowStarter" x-flow-init="{query: {'requestUrlUuid': upload_request.urlUuid, 'password': upload_request.password}}"
                x-flow-files-added="upload_request.validateFiles($files)"
                x-flow-complete="upload_request.tableParams.reload()"
                x-flow-file-error="upload_request.handleError($file, $message)"

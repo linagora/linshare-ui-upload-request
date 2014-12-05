@@ -48,7 +48,7 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
 
   $stateProvider.state('404', {
     url: '/404',
-    templateUrl: 'states/404/404.html',
+    templateUrl: 'states/404/404.html'
   });
   $urlRouterProvider.otherwise('/404');
 

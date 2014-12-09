@@ -17,7 +17,7 @@ goog.provide('my.ie_upload_request.Ctrl');
  * @ngInject
  * @export
  */
-my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTableParams, growl, locale, UploadRequest, FileUploader, lsAppConfig) {
+my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTableParams, growl, locale, UploadRequest, FileUploader, lsAppConfig, $window) {
 
     /**
      * @type {!angular-boostrap.$modal}
@@ -83,6 +83,11 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         }
     });
 
+    // not call the console if not opened
+    var consoleLog = function(logMsg){
+        if($window.console) console.info(logMsg);
+    };
+
     /**
      * @type {FileUploader}
      * @expose
@@ -101,28 +106,28 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
 
     this.uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
         growl.addErrorMessage('VALIDATION_ERROR.ERROR');
-        console.info('onWhenAddingFileFailed', item, filter, options);
+        consoleLog(['onWhenAddingFileFailed', item, filter, options]);
     };
     this.uploader.onAfterAddingFile = function(fileItem) {
         if (self.request.extensions.indexOf(fileItem.file.type.slice(fileItem.file.type.indexOf('/') + 1)) === -1) {
             fileItem.remove();
-            console.info('invalid extension ', fileItem.file.size);
+            consoleLog(['invalid extension ', fileItem]);
             var growl = self.growl_;
             growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION', {ttl: 5000});
         }
-        console.info('onAfterAddingFile', fileItem);
+        consoleLog(['onAfterAddingFile', fileItem]);
     };
     this.uploader.onAfterAddingAll = function(addedFileItems) {
-        console.info('onAfterAddingAll', addedFileItems);
+        consoleLog(['onAfterAddingAll', addedFileItems]);
     };
     this.uploader.onBeforeUploadItem = function(item) {
-        console.info('onBeforeUploadItem', item);
+        consoleLog(['onBeforeUploadItem', item]);
     };
     this.uploader.onProgressItem = function(fileItem, progress) {
-        console.info('onProgressItem', fileItem, progress);
+        consoleLog(['onProgressItem', fileItem, progress]);
     };
     this.uploader.onProgressAll = function(progress) {
-        console.info('onProgressAll', progress);
+        consoleLog(['onProgressAll', progress]);
     };
     this.uploader.onSuccessItem = function(fileItem, response, status, headers) {
         self.tableParams.reload();
@@ -134,21 +139,21 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         }
         if (bodyObject.errCode === 0) growl.addSuccessMessage('VALIDATION_SUCCESS.ON_SUCCESS', {ttl: 5000});
         else growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + bodyObject.errCode, {ttl: 5000});
-        console.info('onSuccessItem', fileItem, bodyObject.message, status, headers);
+        consoleLog(['onSuccessItem', fileItem, bodyObject.message, status, headers]);
     };
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
+        consoleLog(['onErrorItem', fileItem, response, status, headers]);
     };
     this.uploader.onCancelItem = function(fileItem, response, status, headers) {
-        console.info('onCancelItem', fileItem, response, status, headers);
+        consoleLog(['onCancelItem', fileItem, response, status, headers]);
     };
     this.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-        console.info('onCompleteItem', fileItem, response, status, headers);
+        consoleLog(['onCompleteItem', fileItem, response, status, headers]);
     };
     this.uploader.onCompleteAll = function() {
-        console.info('onCompleteAll');
+        consoleLog(['onCompleteAll']);
     };
-    console.info('uploader', this.uploader);
+    consoleLog(['uploader', this.uploader]);
 };
 
 

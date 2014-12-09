@@ -126,9 +126,15 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
     };
     this.uploader.onSuccessItem = function(fileItem, response, status, headers) {
         self.tableParams.reload();
+        var bodyObject = response;
         var growl = self.growl_;
-        growl.addSuccessMessage('VALIDATION_SUCCESS.ON_SUCCESS', {ttl: 5000});
-        console.info('onSuccessItem', fileItem, response, status, headers);
+        if (angular.isString(response) && (/^<pre>/).test(response)) {
+            var body = response.replace(/<\/?pre>/ig, '');
+            bodyObject = angular.fromJson(body);
+        }
+        if (bodyObject.errCode === 0) growl.addSuccessMessage('VALIDATION_SUCCESS.ON_SUCCESS', {ttl: 5000});
+        else growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + bodyObject.errCode, {ttl: 5000});
+        console.info('onSuccessItem', fileItem, bodyObject.message, status, headers);
     };
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
         console.info('onErrorItem', fileItem, response, status, headers);

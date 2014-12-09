@@ -36,6 +36,7 @@
   },
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "An error occurred... Please contact your administrator",
+    "ERRCODE_1000": "@:SERVER_ERROR.UNKNOWN_ERROR",
     "ERRCODE_30404": "Upload request not found",
     "ERRCODE_3001": "The file is too large to fit in user's space",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
@@ -44,8 +45,10 @@
     "ERRCODE_30003": "@:VALIDATION_ERROR.MAX_DEPOSIT_SIZE",
     "ERRCODE_30004": "@:VALIDATION_ERROR.MAX_FILE_SIZE",
     "ERRCODE_30005": "Upload request in read-only mode",
-    "ERRCODE_31404": "Upload request entry not found",
-    "ERRCODE_32401": "UPLOAD_REQUEST_URL_FORBIDDEN(32401, Status.UNAUTHORIZED)"
+    "ERRCODE_30406": "The access to this upload request is forbidden",
+    "ERRCODE_31404": "Upload request not found",
+    "ERRCODE_31405": "The file associated to this upload request is no more available",
+    "ERRCODE_32401": "You do not have access to this upload request"
   },
   "LEGEND_FILES_ALREADY_UPLOADED": "Files already uploaded",
   "TABLE": {

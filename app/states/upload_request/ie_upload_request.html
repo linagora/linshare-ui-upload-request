@@ -111,7 +111,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-8 col-md-offset-2">
+                <div ng-hide="ie_upload_request.request.closed" class="col-md-8 col-md-offset-2">
                     <div class="col-md-9" style="margin-bottom: 40px">
                         <input type="file" ng-hide="ie_upload_request.tableParams.data.length === ie_upload_request.request.maxFileCount" nv-file-select="" uploader="ie_upload_request.uploader" options="{formData: [{'requestUrlUuid': ie_upload_request.urlUuid, password: ie_upload_request.password}]}" filters="queueLimit, customFilter"/>
 

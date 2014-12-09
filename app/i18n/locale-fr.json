@@ -36,7 +36,8 @@
   },
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "Une erreur est survenue... Veuillez contacter votre administrateur",
-    "ERRCODE_30404": "Invitation de dépôt non connue",
+    "ERRCODE_1000": "@:SERVER_ERROR.UNKNOWN_ERROR",
+    "ERRCODE_30404": "L'invitation de dépôt est introuvable",
     "ERRCODE_3001": "Le fichier est trop volumineux pour l'espace de l'utilisateur",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
     "ERRCODE_30001": "Invitation non active",
@@ -44,8 +45,10 @@
     "ERRCODE_30003": "@:VALIDATION_ERROR.MAX_DEPOSIT_SIZE",
     "ERRCODE_30004": "@:VALIDATION_ERROR.MAX_FILE_SIZE",
     "ERRCODE_30005": "Invitation en lecture seule",
-    "ERRCODE_31404": "Document d'invitation introuvable",
-    "ERRCODE_32401": "UPLOAD_REQUEST_URL_FORBIDDEN(32401, Status.UNAUTHORIZED)"
+    "ERRCODE_30406": "L'accès à cette invitation de dépôt est interdit",
+    "ERRCODE_31404": "Invitation de dépôt introuvable",
+    "ERRCODE_31405": "Le document associé à cette invitation n'est plus disponible",
+    "ERRCODE_32401": "Vous n'avez pas accès à cette invitation de dépôt"
   },
   "LEGEND_FILES_ALREADY_UPLOADED": "Fichiers déjà déposés",
   "TABLE": {

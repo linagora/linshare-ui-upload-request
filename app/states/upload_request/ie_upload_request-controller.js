@@ -11,7 +11,7 @@ goog.provide('my.ie_upload_request.Ctrl');
  * @param {!angular-growl.growl} growl
  * @param {!my.app.locale} locale
  * @param {!my.upload_request.UploadRequest} tmhDynamicLocale
- * @param {!angularFileUpload} FineUploader
+ * @param {!angularFileUpload} FileUploader
  * @param {!my.app.lsAppConfig} lsAppConfig The linshare configuration
  * @constructor
  * @ngInject
@@ -69,6 +69,7 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
     }, {
         debugMode: false,
         total: 0,
+        counts: [],
         getData: function($defer, params) {
             UploadRequest.get().then(function() {
                 self.request = UploadRequest.request;

@@ -1,5 +1,5 @@
 {
-  "TITLE": "Demande de dépôt",
+  "TITLE": "Invitation de dépôt",
   "PARAGRAPH": {
     "WELCOME": "Bonjour <b>{{mail}}</b>",
     "DESCRIPTION": "Vous pouvez déposer ici vos documents à l'attention de <b>{{mail}}</b>"

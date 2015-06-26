@@ -89,9 +89,8 @@ gulp.task('inject', ['clean', 'sass', 'compile', 'bower-concat', 'copy'], functi
       gulp.src(
         [
           paths.dest + '/**/normalize.css',
-          paths.dest + '/styles/AdminLTE/css/bootstrap.css',
-          paths.dest + '/styles/AdminLTE/css/font-awesome.css',
-          paths.dest + '/styles/AdminLTE/css/AdminLTE.css',
+          paths.dest + '/styles/bootstrap.css',
+          paths.dest + '/styles/font-awesome.css',
           paths.dest + '/styles/main.css',
           paths.dest + '/styles/loading-bar.min.css',
           paths.dest + '/styles/angular-growl.min.css',
@@ -143,8 +142,12 @@ gulp.task('copy', ['clean'], function() {
     paths.bowerComponents + '/ng-table/ng-table.min.css'
   ])
     .pipe(gulp.dest(paths.dest + '/styles/'));
-  gulp.src(paths.src + '/styles/AdminLTE/**/*')
-    .pipe(gulp.dest(paths.dest + '/styles/AdminLTE'));
+  gulp.src(paths.src + '/styles/bootstrap.css')
+    .pipe(gulp.dest(paths.dest + '/styles/'));
+  gulp.src(paths.src + '/styles/font-awesome.css')
+    .pipe(gulp.dest(paths.dest + '/styles/'));
+  gulp.src(paths.src + '/styles/linshare/fonts/fontawesome-webfont.*')
+    .pipe(gulp.dest(paths.dest + '/styles/linshare/fonts'));
   gulp.src(paths.src + '/i18n/**/*')
     .pipe(gulp.dest(paths.dest + '/i18n/'));
   gulp.src(paths.images)

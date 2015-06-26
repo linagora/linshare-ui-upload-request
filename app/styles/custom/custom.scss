@@ -1,0 +1,80 @@
+$pink: #D70075;
+$darkPink: #ca195a;
+$blue: #0372B3;
+$darkBlue: #015A8F;
+$red: #EE0037;
+$green: #00A114;
+$beige: #F4F4F4;
+$black: #444;
+$lightBlack: #555;
+$grey: #ddd;
+$darkGrey: #999;
+$lightGrey: #EFEFEF;
+$orange: #f0ad4e;
+$yellow: #FFBB00;
+
+header {
+  h1 {
+  	color: $blue;
+    margin-bottom: 30px;
+  }
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro',sans-serif;
+}
+
+.grey {
+  color: $darkGrey;
+}
+
+.boldOption {
+  font-weight:bold;
+}
+
+.btn-primary {
+  background-color: $blue;
+  border-color: $darkBlue;
+  &.active {
+    background-color: $darkBlue;
+  }
+}
+
+.error-page {
+	h2 {
+    font-size: 100px;
+    color: #0372B3;
+  }
+  h3 {
+		margin-top: 60px;
+    i {
+      color: #FFBB00;
+    }
+	}
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  line-height: inherit;
+  color: #0372B3;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.btn.btn-success {
+  color: #fff;
+  background-color: #00a65a;
+  border-color: #008d4c;
+}
+
+.progress-bar.progress-bar {
+  background-color: #3276b1;
+}
+
+.progress-bar.progress-bar-success {
+  background-color: #00a65a;
+}

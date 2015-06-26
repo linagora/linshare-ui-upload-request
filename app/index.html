@@ -13,12 +13,12 @@
 </head>
 <body x-flow-prevent-drop>
   <header class="col-md-10 col-md-offset-1" style="padding: 4%; padding-bottom: 0">
-    <span x-logo></span>
-  </header>
-  <section class="content container">
+    <span x-logo class="center-block"></span>
     <h1 class="text-center">
       {{'TITLE' | translate}}
     </h1>
+  </header>
+  <section class="content container">
     <div x-ui-view></div>
     <!--[if gt IE 9 |!IE]><!-->
     <div x-ui-view="flow"></div>

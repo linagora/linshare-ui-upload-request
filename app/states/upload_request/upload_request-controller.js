@@ -55,6 +55,9 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
 
   var self = this;
 
+  // Set language on the scope
+  my.upload_request.Ctrl.prototype.lang = self.locale_.lang;
+
   // Avoid JsHint warning
   var NgTableParams = ngTableParams;
   /**
@@ -144,6 +147,8 @@ my.upload_request.Ctrl.prototype.changeLanguage = function(key) {
   var locale = this.locale_;
 
   locale.changeLanguage(key);
+  // change local value on the scope
+  my.upload_request.Ctrl.prototype.lang = key;
 };
 
 /**

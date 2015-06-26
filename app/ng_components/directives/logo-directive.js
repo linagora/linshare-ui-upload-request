@@ -51,17 +51,22 @@ my.logo.Directive.factory = function(lsAppConfig) {
  */
 my.logo.Directive.prototype.link = function(scope, elem, attrs) {
   var lsAppConfig = this.lsAppConfig_;
-  
   this.scope = scope;
   this.elem = elem;
   this.attrs = attrs;
 
   if (lsAppConfig.defaultLogo){
-    var defaultTag = '<img class="pull-left" src="' + lsAppConfig.defaultLogo + '">';
+      var defaultTag = '<img class="center-block" src="' + lsAppConfig.defaultLogo + '">';
+    if (lsAppConfig.customLogoURL){
+      defaultTag = '<img class="pull-left" src="' + lsAppConfig.defaultLogo + '">';
+    }
     this.elem.append(defaultTag);
   }
   if (lsAppConfig.customLogoURL) {
-    var tag = '<img class="pull-right" src="' + lsAppConfig.customLogoURL + '">';
+    var tag = '<img class="center-block" src="' + lsAppConfig.customLogoURL + '">';
+    if (lsAppConfig.defaultLogo){
+      tag = '<img class="pull-right" src="' + lsAppConfig.customLogoURL + '">';
+    }
     this.elem.append(tag);
   }
 };

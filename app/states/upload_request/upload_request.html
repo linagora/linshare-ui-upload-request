@@ -1,12 +1,14 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
   <div class="btn-group pull-right">
-    <button type="button" class="btn btn-primary"
-            x-ng-click="upload_request.changeLanguage('en')">
+    <button class="btn btn-primary"
+      x-ng-click="upload_request.changeLanguage('en')"
+      x-ng-class="{'active': upload_request.lang == 'en'}">
       {{'LANGUAGE.ENGLISH' | translate}}
     </button>
-    <button type="button" class="btn btn-primary"
-            x-ng-click="upload_request.changeLanguage('fr')">
+    <button class="btn btn-primary"
+      x-ng-click="upload_request.changeLanguage('fr')"
+      x-ng-class="{'active': upload_request.lang != 'en'}">
       {{'LANGUAGE.FRENCH' | translate}}
     </button>
   </div>
@@ -132,28 +134,30 @@
             <br>
             <div x-ng-repeat="file in $flow.files">
               <span>{{file.name}} ({{upload_request.humanFileSize(file.size)}})</span>
-              <button class="btn btn-warning btn-xs"
-                      x-ng-click="file.pause()"
-                      x-ng-show="!file.paused"
-                      x-ng-hide="file.isComplete()">
-                <i class="fa fa-pause"></i>
-              </button>
-              <button class="btn btn-success btn-xs"
-                      x-ng-click="file.resume()"
-                      x-ng-show="file.paused"
-                      x-ng-hide="file.isComplete()">
-                <i class="fa fa-play"></i>
-              </button>
-              <button class="btn btn-danger btn-xs"
-                      x-ng-click="file.cancel()"
-                      x-ng-hide="file.isComplete()">
-                <i class="fa fa-stop"></i>
-              </button>
-              <button class="btn btn-success btn-xs"
-                      x-ng-click="file.cancel()"
-                      x-ng-show="file.isComplete() && !file.error">
-                <i class="fa fa-eject"></i>
-              </button>
+              <div class="pull-right">
+                <button class="btn btn-warning btn-xs"
+                        x-ng-click="file.pause()"
+                        x-ng-show="!file.paused"
+                        x-ng-hide="file.isComplete()">
+                  <i class="fa fa-pause"></i>
+                </button>
+                <button class="btn btn-success btn-xs"
+                        x-ng-click="file.resume()"
+                        x-ng-show="file.paused"
+                        x-ng-hide="file.isComplete()">
+                  <i class="fa fa-play"></i>
+                </button>
+                <button class="btn btn-danger btn-xs"
+                        x-ng-click="file.cancel()"
+                        x-ng-hide="file.isComplete()">
+                  <i class="fa fa-stop"></i>
+                </button>
+                <button class="btn btn-success btn-xs"
+                        x-ng-click="file.cancel()"
+                        x-ng-show="file.isComplete() && !file.error">
+                  <i class="fa fa-eject"></i>
+                </button>
+              </div>
               <progressbar class="progress-striped" min="0" max="100" value="file.progress()*100" style="width:100%" type="{{upload_request.getProgressbarType(file)}}"
                            x-ng-class="{'active': file.isUploading()}">
                 {{(file.progress() * 100).toFixed(2)}}%
@@ -176,11 +180,11 @@
                   {{entry.name}}
                 </td>
                 <td data-title="'TABLE.HEADER_SIZE' | translate"
-                    sortable="'size'">
+                    sortable="'size'" class="text-right">
                   {{upload_request.humanFileSize(entry.size)}}
                 </td>
                 <td data-title="'TABLE.HEADER_ACTION' | translate">
-                  <div x-ng-show="upload_request.request.canDeleteDocument">
+                  <div x-ng-show="upload_request.request.canDeleteDocument" class="pull-right">
                     <button class="btn btn-danger"
                             x-ng-show="confirm === undefined"
                             x-ng-click="confirm = $index">
@@ -208,9 +212,10 @@
       </fieldset>
       <fieldset x-ng-show="upload_request.request.canClose">
         <div class="form-group">
-          <div class="controls">
+          <div class="controls pull-right">
             <button type="button" class="btn btn-warning" id="reset"
                     x-ng-click="upload_request.closeRequest()">
+              <i class="fa fa-times"></i>&nbsp;
               {{'FORM_ACTIONS.CLOSE_REQUEST' | translate}}
             </button>
           </div>

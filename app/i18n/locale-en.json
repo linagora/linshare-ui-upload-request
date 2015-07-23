@@ -36,6 +36,7 @@
   },
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "An error occurred... Please contact your administrator",
+    "ERRCODE_503": "Service Unavailable",
     "ERRCODE_1000": "@:SERVER_ERROR.UNKNOWN_ERROR",
     "ERRCODE_30404": "Upload request not found",
     "ERRCODE_3001": "The file is too large to fit in user's space",

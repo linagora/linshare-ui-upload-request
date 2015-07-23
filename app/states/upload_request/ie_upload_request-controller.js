@@ -25,6 +25,11 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
     this.$modal_ = $modal;
 
     /**
+     * @type {!angular-boostrap.$filter}
+     */
+    this.$filter_ = $filter;
+
+    /**
      * @type {!angular-growl.growl}
      */
     this.growl_ = growl;
@@ -106,7 +111,10 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
     });
 
     this.uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-        growl.addErrorMessage('VALIDATION_ERROR.ERROR');
+        var $filter = this.$filter_;
+        var date = $filter('date')(new Date(), 'H:mm:ss');
+        var msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_COUNT');
+        growl.addErrorMessage(date + '<br/>' + msg);
         consoleLog(['onWhenAddingFileFailed', item, filter, options]);
     };
     this.uploader.onAfterAddingFile = function(fileItem) {
@@ -114,7 +122,10 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
             fileItem.remove();
             consoleLog(['invalid extension ', fileItem]);
             var growl = self.growl_;
-            growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION', {ttl: 5000});
+            var $filter = self.$filter_;
+            var date = $filter('date')(new Date(), 'H:mm:ss');
+            var msg = $filter('translate')('VALIDATION_ERROR.INVALID_EXTENSION');
+            growl.addErrorMessage(date + '<br/>' + msg, {ttl: 5000});
         }
         consoleLog(['onAfterAddingFile', fileItem]);
     };
@@ -134,12 +145,18 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         self.tableParams.reload();
         var bodyObject = response;
         var growl = self.growl_;
+
         if (angular.isString(response) && (/^<pre>/).test(response)) {
             var body = response.replace(/<\/?pre>/ig, '');
             bodyObject = angular.fromJson(body);
         }
         if (bodyObject.errCode === 0) growl.addSuccessMessage('VALIDATION_SUCCESS.ON_SUCCESS', {ttl: 5000});
-        else growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + bodyObject.errCode, {ttl: 5000});
+        else {
+            var $filter = self.$filter_;
+            var date = $filter('date')(new Date(), 'H:mm:ss');
+            var msg = $filter('translate')('SERVER_ERROR.ERRCODE_' + bodyObject.errCode);
+            growl.addErrorMessage(date + '<br/>' + msg, {ttl: 5000});
+        }
         consoleLog(['onSuccessItem', fileItem, bodyObject.message, status, headers]);
     };
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
@@ -247,6 +264,9 @@ my.ie_upload_request.Ctrl.prototype.humanFileSize = function (bytes, si) {
 my.ie_upload_request.Ctrl.prototype.validateFiles = function (files) {
     var request = this.request;
     var growl = this.growl_;
+    var $filter = this.$filter_;
+    var date = $filter('date')(new Date(), 'H:mm:ss');
+    var msg;
 
     var currentDepositFile = 0;
     var len = files.length;
@@ -254,26 +274,30 @@ my.ie_upload_request.Ctrl.prototype.validateFiles = function (files) {
     if (request.maxFileCount < (len + request.entries.length)) {
         console.error('Files count exceeded');
         console.error(files);
-        growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_COUNT');
+        msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_COUNT');
+        growl.addErrorMessage(date + '<br/>' + msg);
         return false;
     }
     for (var i = 0; i < len; i++) {
         if (request.maxFileSize < files[i].size) {
             console.error('File too big:');
             console.error(files[i]);
-            growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_SIZE');
+            msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_SIZE');
+            growl.addErrorMessage(date + '<br/>' + msg);
             return false;
         }
         if (request.extensions.indexOf(files[i].getExtension()) === -1) {
             console.error('Invalid extension');
             console.error(files[i]);
-            growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION');
+            msg = $filter('translate')('VALIDATION_ERROR.INVALID_EXTENSION');
+            growl.addErrorMessage(date + '<br/>' + msg);
             return false;
         }
     }
     if (request.maxDepositSize && request.maxDepositSize < (currentDepositFile + request.usedSpace)) {
         console.error('Deposit too big');
-        growl.addErrorMessage('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
+        msg = $filter('translate')('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
+        growl.addErrorMessage(date + '<br/>' + msg);
         return false;
     }
 };
@@ -302,10 +326,13 @@ my.ie_upload_request.Ctrl.prototype.getProgressbarType = function (file) {
  */
 my.ie_upload_request.Ctrl.prototype.handleError = function (file, message) {
     var growl = this.growl_;
+    var $filter = this.$filter_;
+    var date = $filter('date')(new Date(), 'H:mm:ss');
 
     console.error(file);
     message = angular.fromJson(message);
     console.error(message.message);
-    growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + message.errCode);
+    var msg = $filter('translate')('SERVER_ERROR.ERRCODE_' + message.errCode);
+    growl.addErrorMessage(date + '<br/>' + msg);
 };
 

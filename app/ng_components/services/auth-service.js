@@ -45,7 +45,7 @@ my.auth.Service.prototype.getPassword = function() {
         '<input type="password" class="form-control" placeholder="Password" x-ng-model="modal.password">',
       '</div>',
       '<div class="modal-footer">',
-        '<button class="btn btn-primary" x-ng-click="modal.validate()">',
+        '<button class="btn btn-primary" x-ng-click="modal.validate()" type="submit">',
           'OK',
         '</button>',
       '</div>'

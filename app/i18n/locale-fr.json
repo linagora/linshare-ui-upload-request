@@ -36,6 +36,7 @@
   },
   "SERVER_ERROR": {
     "UNKNOWN_ERROR": "Une erreur est survenue... Veuillez contacter votre administrateur",
+    "ERRCODE_503": "Serveur indisponible",
     "ERRCODE_1000": "@:SERVER_ERROR.UNKNOWN_ERROR",
     "ERRCODE_30404": "L'invitation de dépôt est introuvable",
     "ERRCODE_3001": "Le fichier est trop volumineux pour l'espace de l'utilisateur",

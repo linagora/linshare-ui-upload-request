@@ -13,7 +13,7 @@ goog.provide('my.upload_request.Service');
  * @constructor
  * @ngInject
  */
-my.upload_request.Service = function($q, $http, $log, $stateParams, $state, growl, auth, lsAppConfig) {
+my.upload_request.Service = function($q, $http, $log, $stateParams, $state, $filter, growl, auth, lsAppConfig) {
   /**
    * @type {!angular.$q}
    */
@@ -38,6 +38,11 @@ my.upload_request.Service = function($q, $http, $log, $stateParams, $state, grow
    * @type {!angular.ui.$state}
    */
   this.$state = $state;
+
+  /**
+   * @type {!angular.ui.$filter}
+   */
+  this.$filter = $filter;
 
   /**
    * @type {!angular-growl.growl}
@@ -74,6 +79,7 @@ my.upload_request.Service.prototype.get = function() {
   var $http = this.$http_;
   var $log = this.$log_;
   var $stateParams = this.$stateParams_;
+  var $filter = this.$filter;
   var $state = this.$state;
   var growl = this.growl_;
   var auth = this.auth_;
@@ -95,18 +101,29 @@ my.upload_request.Service.prototype.get = function() {
       }).
       error(function(data, status) {
         if (status === 401) {
+
           auth.getPassword().then(function(passwd) {
             self.password = passwd;
             doQuery(passwd);
           });
         } else if (status === 403 || status === 404) {
           $state.go('404');
-        } else if (status === 400){
-          growl.addErrorMessage('SERVER_ERROR.ERRCODE_' + data.errCode);
-        }else {
-          growl.addErrorMessage('SERVER_ERROR.UNKNOWN_ERROR');
-          $log.error(data);
-          $log.error(status);
+        } else {
+          var date = $filter('date')(new Date(), 'H:mm:ss');
+          var msg;
+
+          if (status === 400){
+            msg = $filter('translate')('SERVER_ERROR.ERRCODE_' + data.errCode);
+          }
+          else if (status === 503) {
+            msg = $filter('translate')('SERVER_ERROR.ERRCODE_503');
+          }
+          else {
+            msg = $filter('translate')('SERVER_ERROR.UNKNOWN_ERROR');
+            $log.error(data);
+            $log.error(status);
+          }
+          growl.addErrorMessage(date + '<br/>' + msg);
         }
     });
   }(password));

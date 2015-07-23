@@ -38,10 +38,11 @@ angular.module('app', [
  * @param {tmh.dynamicLocale.tmhDynamicLocaleProvider} tmhDynamicLocaleProvider
  * @param {chieffancypants.loadingBar.cfpLoadingBarProvider} cfpLoadingBarProvider
  * @param {flow.flowFactoryProvider} flowFactoryProvider
+ * @param {growl.growlProvider} growlProvider
  * @param {app.lsAppConfig} lsAppConfig
  * @ngInject
  */
-function config($logProvider, $stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, cfpLoadingBarProvider, flowFactoryProvider, lsAppConfig) {
+function config($logProvider, $stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, cfpLoadingBarProvider, flowFactoryProvider, growlProvider, lsAppConfig) {
 
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
@@ -73,4 +74,6 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
     target: lsAppConfig.backendURL + '/flow/upload.json',
     permanentErrors:[401, 404, 500, 501]
   };
+
+ growlProvider.globalEnableHtml(true);
 }

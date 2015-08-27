@@ -191,7 +191,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
       growl.addErrorMessage('VALIDATION_ERROR.MAX_FILE_SIZE');
       return false;
     }
-    if (request.extensions.indexOf(files[i].getExtension()) === -1) {
+    if (request.extensions.length > 0 && request.extensions.indexOf(files[i].getExtension()) === -1) {
       console.error('Invalid extension');
       console.error(files[i]);
       growl.addErrorMessage('VALIDATION_ERROR.INVALID_EXTENSION');

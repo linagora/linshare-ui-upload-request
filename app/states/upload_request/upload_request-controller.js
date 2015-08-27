@@ -206,7 +206,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
       growl.addErrorMessage(date + '<br/>' + msg);
       return false;
     }
-    if (request.extensions.indexOf(files[i].getExtension()) === -1) {
+    if (request.extensions.length > 0 && request.extensions.indexOf(files[i].getExtension()) === -1) {
       console.error('Invalid extension');
       console.error(files[i]);
       msg = $filter('translate')('VALIDATION_ERROR.INVALID_EXTENSION');

@@ -1,8 +1,16 @@
 {
   "TITLE": "Invitation de dépôt",
+  "HOME": {
+    "TITLE": "Bienvenue sur l'application d'invitation de dépôt",
+    "DESCRIPTION": "Cette application vous permet de déposer des fichiers suite à une invitation de dépôt. Pour accéder au formulaire de dépôt de fichiers, saisissez le lien que vous avez reçu par courriel, dans la barre d'adresse de votre navigateur."
+  },
   "PARAGRAPH": {
     "WELCOME": "Bonjour <b>{{mail}}</b>",
     "DESCRIPTION": "Vous pouvez déposer ici vos documents à l'attention de <b>{{mail}}</b>"
+  },
+  "AUTH_MODAL": {
+    "TITLE": "Mot de passe",
+    "LABEL": "Veuillez renseigner le mot de passe que vous avez reçu par courriel."
   },
   "LANGUAGE": {
     "ENGLISH": "Anglais",
@@ -81,7 +89,8 @@
   },
   "404": {
     "TITLE": "Oups! Page introuvable.",
-    "CONTENT": "Nous ne pouvons pas trouver la page que vous chercher. Verifier l'URL et assurer vous que la requête existe."
+    "CONTENT": "Vous essayez d'accéder à une page inexistante. Le lien vers l'invitation de dépôt que vous avez reçu n'est peut être plus valide.",
+    "BACK_HOME": "Retour vers l'accueil."
   },
   "SELECT_FILE": "Sélection du fichier"
 }

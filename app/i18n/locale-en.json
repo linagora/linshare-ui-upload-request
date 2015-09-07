@@ -1,8 +1,16 @@
 {
   "TITLE": "Upload request",
+  "HOME": {
+    "TITLE": "Welcome to the upload request application",
+    "DESCRIPTION": "This application is aimed to upload files following an upload request. To get the upload form, please enter the link you have received by email in your browser address bar."
+  },
   "PARAGRAPH": {
     "WELCOME": "Hello <b>{{mail}}</b>",
-    "DESCRIPTION": "This application form authorize you to upload file(s) for <b>{{mail}}</b>"
+    "DESCRIPTION": "This application form authorizes you to upload file(s) for <b>{{mail}}</b>"
+  },
+  "AUTH_MODAL": {
+    "TITLE": "Password",
+    "LABEL": "Please enter the password you have received."
   },
   "LANGUAGE": {
     "ENGLISH": "English",
@@ -80,7 +88,8 @@
   },
   "404": {
     "TITLE": "Oops! Page not found.",
-    "CONTENT": "We could not find the page you were looking for. Check URL and ensure that the upload request exists."
+    "CONTENT": "The page you are looking for does not exist. The link to the upload request you received is maybe not valid anymore.",
+    "BACK_HOME": "Back to home."
   },
   "SELECT_FILE": "Select File"
 }

@@ -234,6 +234,8 @@ my.ie_upload_request.Ctrl.prototype.changeLanguage = function (key) {
     var locale = this.locale_;
 
     locale.changeLanguage(key);
+    // change local value on the scope
+    my.ie_upload_request.Ctrl.prototype.lang = key;
 };
 
 /**

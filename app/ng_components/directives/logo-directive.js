@@ -37,7 +37,7 @@ my.logo.Directive = function(lsAppConfig) {
 my.logo.Directive.factory = function(lsAppConfig) {
   var dir = new my.logo.Directive(lsAppConfig);
   return {
-    restrict: 'A',
+    restrict: 'E',
     link: dir.link
   };
 };

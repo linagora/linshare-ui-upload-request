@@ -34,21 +34,28 @@ my.upload_request.module = angular.module('upload_request', [
  * @param {ui.router.$stateProvider} $stateProvider
  * @ngInject
  */
-my.upload_request.module.configuration = function($stateProvider) {
+my.upload_request.module.configuration = function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider.state('upload_request', {
-    url: '/:uuid',
-    views: {
-        'flow':{
-            templateUrl: 'states/upload_request/upload_request.html',
-            controller: 'UploadRequestCtrl as upload_request'
-        },
-        'ie_upload': {
-            templateUrl: 'states/upload_request/ie_upload_request.html',
-            controller: 'IeUploadRequestCtrl as ie_upload_request'
-        }
-    }
-  });
+  $urlRouterProvider.otherwise('/');
+  $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'states/home/index.html',
+      controller: 'UploadRequestCtrl as upload_request'
+    })
+    .state('upload_request', {
+      url: '/:uuid',
+      views: {
+          'flow':{
+              templateUrl: 'states/upload_request/upload_request.html',
+              controller: 'UploadRequestCtrl as upload_request'
+          },
+          'ie_upload': {
+              templateUrl: 'states/upload_request/ie_upload_request.html',
+              controller: 'IeUploadRequestCtrl as ie_upload_request'
+          }
+      }
+    });
 
 };
 

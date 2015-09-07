@@ -12,11 +12,9 @@
   <link rel="icon" href="favicon.png" type="image/png" />
 </head>
 <body x-flow-prevent-drop>
-  <header class="col-md-10 col-md-offset-1" style="padding: 4%; padding-bottom: 0">
-    <span x-logo class="center-block"></span>
-    <h1 class="text-center">
-      {{'TITLE' | translate}}
-    </h1>
+  <header class="header">
+    <nav class="navbar" role="navigation" x-navbar>
+    </nav>
   </header>
   <section class="content container">
     <div x-ui-view></div>

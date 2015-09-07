@@ -1,0 +1,29 @@
+<a href="index.html" class="logo col-xs-4 col-sm-2 col-md-2 col-lg-1">
+  <img src="{{getLogo()}}">
+</a>
+<div class="navbar-left col-xs-6 col-sm-8 col-md-9  col-lg-10">
+  <span class="base-line">{{'TITLE' | translate}}</span>
+</div>
+<div class="navbar-right col-xs-2 col-sm-2 col-md-1 col-lg-1 pull-right">
+  <ul class="nav navbar-nav">
+    <li class="language-menu"
+        dropdown
+        is-open="isopen">
+      <a href="#" class="dropdown-toggle">
+        <i class="fa fa-flag"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li x-ng-class="{disabled: getCurrentLang == 'en'}">
+          <a x-ng-click="setLang('en');isopen=false;">
+            {{'LANGUAGE.ENGLISH' | translate}}
+          </a>
+        </li>
+        <li x-ng-class="{disabled: getCurrentLang == 'fr'}">
+          <a x-ng-click="setLang('fr');isopen=false;">
+            {{'LANGUAGE.FRENCH' | translate}}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

@@ -1,15 +1,5 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-primary"
-                    x-ng-click="ie_upload_request.changeLanguage('en')">
-                {{'LANGUAGE.ENGLISH' | translate}}
-            </button>
-            <button type="button" class="btn btn-primary"
-                    x-ng-click="ie_upload_request.changeLanguage('fr')">
-                {{'LANGUAGE.FRENCH' | translate}}
-            </button>
-        </div>
         {{logo}}
         <p x-translate="PARAGRAPH.WELCOME"
            x-translate-value-mail="{{ie_upload_request.request.recipient.mail}}">
@@ -190,18 +180,19 @@
                                 {{ie_upload_request.humanFileSize(entry.size)}}
                             </td>
                             <td class="text-center">
-                                <div x-ng-show="ie_upload_request.request.canDeleteDocument">
-                                    <button class="btn btn-danger"
+                                <div x-ng-show="ie_upload_request.request.canDeleteDocument"
+                                    class="pull-right">
+                                    <button class="clear-btn error"
                                             x-ng-show="confirm === undefined"
                                             x-ng-click="confirm = $index">
-                                        {{'TABLE.BUTTON_DELETE' | translate}}
+                                        <i class="fa fa-trash-o"></i>
                                     </button>
-                                    <button class="btn"
+                                    <button class="clear-btn primary"
                                             x-ng-show="confirm === $index"
                                             x-ng-click="confirm = undefined">
                                         {{'TABLE.BUTTON_DELETE_NO' | translate}}
                                     </button>
-                                    <button class="btn btn-danger"
+                                    <button class="clear-btn error"
                                             x-ng-show="confirm === $index"
                                             x-ng-click="ie_upload_request.deleteEntry(entry)">
                                         {{'TABLE.BUTTON_DELETE_YES' | translate}}
@@ -219,9 +210,10 @@
             </fieldset>
             <fieldset x-ng-show="ie_upload_request.request.canClose">
                 <div class="form-group">
-                    <div class="controls">
+                    <div class="controls pull-right">
                         <button type="button" class="btn btn-warning" id="reset"
                                 x-ng-click="ie_upload_request.closeRequest()">
+                            <i class="fa fa-lg fa-times"></i>&nbsp;
                             {{'FORM_ACTIONS.CLOSE_REQUEST' | translate}}
                         </button>
                     </div>

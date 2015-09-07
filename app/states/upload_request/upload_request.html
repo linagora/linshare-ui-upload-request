@@ -1,17 +1,5 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-  <div class="btn-group pull-right">
-    <button class="btn btn-primary"
-      x-ng-click="upload_request.changeLanguage('en')"
-      x-ng-class="{'active': upload_request.lang == 'en'}">
-      {{'LANGUAGE.ENGLISH' | translate}}
-    </button>
-    <button class="btn btn-primary"
-      x-ng-click="upload_request.changeLanguage('fr')"
-      x-ng-class="{'active': upload_request.lang != 'en'}">
-      {{'LANGUAGE.FRENCH' | translate}}
-    </button>
-  </div>
     {{logo}}
     <p x-translate="PARAGRAPH.WELCOME"
        x-translate-value-mail="{{upload_request.request.recipient.mail}}">
@@ -185,17 +173,17 @@
                 </td>
                 <td data-title="'TABLE.HEADER_ACTION' | translate">
                   <div x-ng-show="upload_request.request.canDeleteDocument" class="pull-right">
-                    <button class="btn btn-danger"
+                    <button class="clear-btn error"
                             x-ng-show="confirm === undefined"
                             x-ng-click="confirm = $index">
-                      {{'TABLE.BUTTON_DELETE' | translate}}
+                      <i class="fa fa-trash-o"></i>
                     </button>
-                    <button class="btn"
+                    <button class="clear-btn primary"
                             x-ng-show="confirm === $index"
                             x-ng-click="confirm = undefined">
                       {{'TABLE.BUTTON_DELETE_NO' | translate}}
                     </button>
-                    <button class="btn btn-danger"
+                    <button class="clear-btn error"
                             x-ng-show="confirm === $index"
                             x-ng-click="upload_request.deleteEntry(entry)">
                       {{'TABLE.BUTTON_DELETE_YES' | translate}}
@@ -215,7 +203,7 @@
           <div class="controls pull-right">
             <button type="button" class="btn btn-warning" id="reset"
                     x-ng-click="upload_request.closeRequest()">
-              <i class="fa fa-times"></i>&nbsp;
+              <i class="fa fa-lg fa-times"></i>&nbsp;
               {{'FORM_ACTIONS.CLOSE_REQUEST' | translate}}
             </button>
           </div>

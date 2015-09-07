@@ -2,6 +2,7 @@
 
 goog.require('my.upload_request.module');
 goog.require('my.logo.Directive.factory');
+goog.require('my.navbar.Directive.factory');
 goog.require('my.auth.Service');
 goog.require('my.locale.Service');
 
@@ -25,6 +26,7 @@ angular.module('app', [
 ])
 .config(config)
 .directive('logo', my.logo.Directive.factory)
+.directive('navbar', my.navbar.Directive.factory)
 .service('auth', my.auth.Service)
 .service('locale', my.locale.Service);
 
@@ -47,11 +49,12 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
 
-  $stateProvider.state('404', {
-    url: '/404',
-    templateUrl: 'states/404/404.html'
-  });
-  $urlRouterProvider.otherwise('/404');
+  $stateProvider
+    .state('404', {
+      url: '/404',
+      templateUrl: 'states/404/404.html',
+      controller: 'UploadRequestCtrl as upload_request'
+    });
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'i18n/locale-',

@@ -6,17 +6,11 @@ goog.provide('my.auth.Service');
  * Authentication service
  *
  * @param {angular.Scope} $rootScope
- * @param {angular.log} $log
  * @param {angular-bootstrap.$modal} $modal
  * @constructor
  * @ngInject
  */
-my.auth.Service = function($rootScope, $log, $modal) {
-  /**
-   * @type {angular.log}
-   */
-  this.$log_ = $log;
-
+my.auth.Service = function($rootScope, $modal) {
   /**
    * @type {angular-bootstrap.$modal}
    */
@@ -38,17 +32,23 @@ my.auth.Service.prototype.getPassword = function() {
     template: [
       '<div class="modal-header">',
         '<h3 class="modal-title">',
-          'Password',
+          '{{\'AUTH_MODAL.TITLE\' | translate}}',
         '</h3>',
       '</div>',
-      '<div class="modal-body">',
-        '<input type="password" class="form-control" placeholder="Password" x-ng-model="modal.password">',
-      '</div>',
-      '<div class="modal-footer">',
-        '<button class="btn btn-primary" x-ng-click="modal.validate()" type="submit">',
-          'OK',
-        '</button>',
-      '</div>'
+      '<form>',
+        '<div class="modal-body">',
+          '<p>',
+            '{{ \'AUTH_MODAL.LABEL\' | translate }}',
+          '</p>',
+          '<label>',
+            '{{ \'AUTH_MODAL.TITLE\' | translate }}',
+          '</label>',
+          '<input type="password" class="form-control" placeholder="{{\'AUTH_MODAL.TITLE\' | translate}}" x-ng-model="modal.password">',
+        '</div>',
+        '<div class="modal-footer">',
+          '<input class="btn btn-primary" x-ng-click="modal.validate()" type="submit" value="Ok" />',
+        '</div>',
+      '</form>'
     ].join('\n')
   });
   return modalInstance.result;

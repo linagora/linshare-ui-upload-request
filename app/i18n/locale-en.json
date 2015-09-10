@@ -37,7 +37,8 @@
     "MAX_FILE_SIZE": "Max file size exceeded",
     "MAX_FILE_COUNT": "Max file count exceeded",
     "INVALID_EXTENSION": "Invalid extension",
-    "MAX_DEPOSIT_SIZE": "Max deposit size exceeded"
+    "MAX_DEPOSIT_SIZE": "Max deposit size exceeded",
+    "EMPTY_FILE": "This file is empty"
   },
   "VALIDATION_SUCCESS": {
     "ON_SUCCESS": "File(s) uploaded with success"
@@ -48,6 +49,7 @@
     "ERRCODE_1000": "@:SERVER_ERROR.UNKNOWN_ERROR",
     "ERRCODE_30404": "Upload request not found",
     "ERRCODE_3001": "The file is too large to fit in user's space",
+    "ERRCODE_20000": "A error has occured, please contact your LinShare administrator",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
     "ERRCODE_30001": "Upload request not enable yet",
     "ERRCODE_30002": "Upload request expired",

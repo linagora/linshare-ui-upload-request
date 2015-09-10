@@ -7,6 +7,7 @@ goog.provide('my.upload_request.Ctrl');
  *
  * @param {!angular.$filter} $filter
  * @param {!angular-boostrap.$modal} $modal
+ * @param {!angular.log} $log
  * @param {!ngTable.ngTableParams} ngTableParams
  * @param {!angular-growl.growl} growl
  * @param {!my.app.locale} locale
@@ -15,7 +16,7 @@ goog.provide('my.upload_request.Ctrl');
  * @ngInject
  * @export
  */
-my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale, UploadRequest) {
+my.upload_request.Ctrl = function($filter, $modal, $log, ngTableParams, growl, locale, UploadRequest) {
 
   /**
    * @type {!angular-boostrap.$modal}
@@ -26,6 +27,11 @@ my.upload_request.Ctrl = function($filter, $modal, ngTableParams, growl, locale,
    * @type {!angular-boostrap.$filter}
    */
   this.$filter_ = $filter;
+
+  /**
+   * @type {angular.log}
+   */
+  this.$log_ = $log;
 
   /**
    * @type {!angular-growl.growl}
@@ -185,6 +191,7 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
   var request = this.request;
   var growl = this.growl_;
   var $filter = this.$filter_;
+  var $log = this.$log_;
   var date = $filter('date')(new Date(), 'H:mm:ss');
   var msg;
 
@@ -192,30 +199,37 @@ my.upload_request.Ctrl.prototype.validateFiles = function(files) {
   var len = files.length;
 
   if (request.maxFileCount < (len + request.entries.length)) {
-    console.error('Files count exceeded');
-    console.error(files);
+    $log.error('Files count exceeded');
+    $log.error(files);
     msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_COUNT');
     growl.addErrorMessage(date + '<br/>' + msg);
     return false;
   }
   for (var i = 0; i < len; i++) {
     if (request.maxFileSize < files[i].size) {
-      console.error('File too big:');
-      console.error(files[i]);
+      $log.error('File too big:');
+      $log.error(files[i]);
       msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_SIZE');
       growl.addErrorMessage(date + '<br/>' + msg);
       return false;
     }
+    if (files[i].size <= 0) {
+      $log.error('File too small:');
+      $log.error(files[i]);
+      msg = $filter('translate')('VALIDATION_ERROR.EMPTY_FILE');
+      growl.addErrorMessage(date + '<br/>' + msg);
+      return false;
+    }
     if (request.extensions.length > 0 && request.extensions.indexOf(files[i].getExtension()) === -1) {
-      console.error('Invalid extension');
-      console.error(files[i]);
+      $log.error('Invalid extension');
+      $log.error(files[i]);
       msg = $filter('translate')('VALIDATION_ERROR.INVALID_EXTENSION');
       growl.addErrorMessage(date + '<br/>' + msg);
       return false;
     }
   }
   if (request.maxDepositSize && request.maxDepositSize < (currentDepositFile + request.usedSpace)) {
-    console.error('Deposit too big');
+    $log.error('Deposit too big');
     msg = $filter('translate')('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
     growl.addErrorMessage(date + '<br/>' + msg);
     return false;
@@ -247,11 +261,12 @@ my.upload_request.Ctrl.prototype.getProgressbarType = function(file) {
 my.upload_request.Ctrl.prototype.handleError = function(file, message) {
   var growl = this.growl_;
   var $filter = this.$filter_;
+  var $log = this.$log_;
   var date = $filter('date')(new Date(), 'H:mm:ss');
 
-  console.error(file);
+  $log.error(file);
   message = angular.fromJson(message);
-  console.error(message.message);
+  $log.error(message.message);
   var msg = $filter('translate')('SERVER_ERROR.ERRCODE_' + message.errCode);
   growl.addErrorMessage(date + '<br/>' + msg);
 };

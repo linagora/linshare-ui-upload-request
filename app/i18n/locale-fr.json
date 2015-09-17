@@ -29,7 +29,8 @@
     "MAX_FILE_SIZE": "Taille maximum de fichier dépassée",
     "MAX_FILE_COUNT": "Nombre de fichier maximum dépassé",
     "INVALID_EXTENSION": "Extension invalide",
-    "MAX_DEPOSIT_SIZE": "Taille maximum du dépôt dépassée"
+    "MAX_DEPOSIT_SIZE": "Taille maximum du dépôt dépassée",
+    "EMPTY_FILE": "Ce fichier est vide"
   },
   "VALIDATION_SUCCESS": {
     "ON_SUCCESS": "Fichier(s) déposé(s) avec succès"
@@ -39,6 +40,7 @@
     "ERRCODE_1000": "@:SERVER_ERROR.UNKNOWN_ERROR",
     "ERRCODE_30404": "L'invitation de dépôt est introuvable",
     "ERRCODE_3001": "Le fichier est trop volumineux pour l'espace de l'utilisateur",
+    "ERRCODE_20000": "Une erreur s'est produite, veuillez contacter votre administrateur LinShare",
     "ERRCODE_30000": "@:VALIDATION_ERROR.MAX_FILE_COUNT",
     "ERRCODE_30001": "Invitation non active",
     "ERRCODE_30002": "Invitation expirée",

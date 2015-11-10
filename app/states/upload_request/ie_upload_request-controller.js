@@ -99,7 +99,7 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
      * @expose
      */
     this.uploader = new FileUploader({
-        url: lsAppConfig.backendURL + '/flow/upload/iexplorer',
+        url: [lsAppConfig.fqdn, lsAppConfig.backendURL, 'flow/upload/iexplorer'].join('/'),
         removeAfterUpload: true
     });
 

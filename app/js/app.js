@@ -44,7 +44,8 @@ angular.module('app', [
  * @param {app.lsAppConfig} lsAppConfig
  * @ngInject
  */
-function config($logProvider, $stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider, cfpLoadingBarProvider, flowFactoryProvider, growlProvider, lsAppConfig) {
+function config($logProvider, $stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider,
+                cfpLoadingBarProvider, flowFactoryProvider, growlProvider, lsAppConfig, $windowProvider) {
 
   var debug = lsAppConfig.debug;
   $logProvider.debugEnabled(debug);
@@ -69,14 +70,25 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
 
   cfpLoadingBarProvider.includeSpinner = false;
 
+  var protocol = $windowProvider.$get().location.protocol;
+  var host = $windowProvider.$get().location.host.replace(/\/$/, '');
+  lsAppConfig.fqdn = protocol + '//' + host;
+  lsAppConfig.backendUrl = validate(lsAppConfig.backendURL);
+
   flowFactoryProvider.defaults = {
     simultaneousUploads: 1,
     generateUniqueIdentifier: function() {
       return uuid.v4();
     },
-    target: lsAppConfig.backendURL + '/flow/upload.json',
+    target: [lsAppConfig.fqdn, lsAppConfig.backendURL, 'flow/upload.json'].join('/'),
     permanentErrors:[401, 404, 500, 501]
   };
 
  growlProvider.globalEnableHtml(true);
+}
+
+function validate(str) {
+  str = str.trim();
+  str = str.replace(/^\/|\/$/g, ''); //remove first and last slash if present
+  return str;
 }

@@ -90,7 +90,7 @@ my.upload_request.Service.prototype.get = function() {
 
   var deferred = $q.defer();
   (function doQuery(password) {
-    $http.get([lsAppConfig.backendURL, apiUrl, $stateParams.uuid].join('/'),
+    $http.get([lsAppConfig.fqdn, lsAppConfig.backendURL, apiUrl, $stateParams.uuid].join('/'),
       {
         headers: {'linshare-uploadrequest-password': password}
       }).
@@ -147,7 +147,7 @@ my.upload_request.Service.prototype.close = function() {
   var deferred = $q.defer();
   request.closed = true;
   (function doQuery(password) {
-    $http.put([lsAppConfig.backendURL, apiUrl, request.uuid].join('/'), {},
+    $http.put([lsAppConfig.fqdn, lsAppConfig.backendURL, apiUrl, request.uuid].join('/'), {},
       {
         headers: {'linshare-uploadrequest-password': password}
       }).
@@ -188,7 +188,7 @@ my.upload_request.Service.prototype.deleteEntry = function(entryUuid) {
 
   var deferred = $q.defer();
   (function doQuery(password) {
-    $http.delete([lsAppConfig.backendURL, apiUrl, request.uuid, entryUuid].join('/'),
+    $http.delete([lsAppConfig.fqdn, lsAppConfig.backendURL, apiUrl, request.uuid, entryUuid].join('/'),
       {
         headers: {'linshare-uploadrequest-password': password}
       }).

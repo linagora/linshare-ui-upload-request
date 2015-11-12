@@ -61,8 +61,9 @@ fi
 
 mv -v dist ${l_dist}
 if [ "${l_mode}" == "dev" ] || [ "${l_mode}" == "dev-nomin" ] ; then
-  sed -i -e 's/debug: true/debug: false/g' ${l_dist}/${g_application_config_file}
   sed -i -e 's/version.*$/version": "'${l_version}-${l_git_uuid}'",/g' ${l_dist}/${g_application_version_file}
+else
+  sed -i -e 's/debug: true/debug: false/g' ${l_dist}/${g_application_config_file}
 fi
 
 tar cjf ${l_output} ${l_dist}

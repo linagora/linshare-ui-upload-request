@@ -17,7 +17,7 @@ goog.provide('my.ie_upload_request.Ctrl');
  * @ngInject
  * @export
  */
-my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTableParams, growl, locale, UploadRequest, FileUploader, lsAppConfig, $window) {
+my.ie_upload_request.Ctrl = function($http, $filter, $modal, ngTableParams, growl, locale, UploadRequest, FileUploader, lsAppConfig, $log) {
 
     /**
      * @type {!angular-boostrap.$modal}
@@ -28,6 +28,11 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
      * @type {!angular-boostrap.$filter}
      */
     this.$filter_ = $filter;
+
+    /**
+     * @type {angular.log}
+     */
+    this.$log_ = $log;
 
     /**
      * @type {!angular-growl.growl}
@@ -89,11 +94,6 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         }
     });
 
-    // not call the console if not opened
-    var consoleLog = function(logMsg){
-        if($window.console) console.info(logMsg);
-    };
-
     /**
      * @type {FileUploader}
      * @expose
@@ -115,31 +115,31 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
         var date = $filter('date')(new Date(), 'H:mm:ss');
         var msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_COUNT');
         growl.addErrorMessage(date + '<br/>' + msg);
-        consoleLog(['onWhenAddingFileFailed', item, filter, options]);
+        self.$log_.debug(['onWhenAddingFileFailed', item, filter, options]);
     };
     this.uploader.onAfterAddingFile = function(fileItem) {
         if (self.request.extensions.length > 0 && self.request.extensions.indexOf(fileItem.file.type.slice(fileItem.file.type.indexOf('/') + 1)) === -1) {
             fileItem.remove();
-            consoleLog(['invalid extension ', fileItem]);
+            self.$log_.debug(['invalid extension ', fileItem]);
             var growl = self.growl_;
             var $filter = self.$filter_;
             var date = $filter('date')(new Date(), 'H:mm:ss');
             var msg = $filter('translate')('VALIDATION_ERROR.INVALID_EXTENSION');
             growl.addErrorMessage(date + '<br/>' + msg, {ttl: 5000});
         }
-        consoleLog(['onAfterAddingFile', fileItem]);
+        self.$log_.debug(['onAfterAddingFile', fileItem]);
     };
     this.uploader.onAfterAddingAll = function(addedFileItems) {
-        consoleLog(['onAfterAddingAll', addedFileItems]);
+        self.$log_.debug(['onAfterAddingAll', addedFileItems]);
     };
     this.uploader.onBeforeUploadItem = function(item) {
-        consoleLog(['onBeforeUploadItem', item]);
+        self.$log_.debug(['onBeforeUploadItem', item]);
     };
     this.uploader.onProgressItem = function(fileItem, progress) {
-        consoleLog(['onProgressItem', fileItem, progress]);
+        self.$log_.debug(['onProgressItem', fileItem, progress]);
     };
     this.uploader.onProgressAll = function(progress) {
-        consoleLog(['onProgressAll', progress]);
+        self.$log_.debug(['onProgressAll', progress]);
     };
     this.uploader.onSuccessItem = function(fileItem, response, status, headers) {
         self.tableParams.reload();
@@ -157,21 +157,21 @@ my.ie_upload_request.Ctrl = function($scope, $http, $filter, $modal, ngTablePara
             var msg = $filter('translate')('SERVER_ERROR.ERRCODE_' + bodyObject.errCode);
             growl.addErrorMessage(date + '<br/>' + msg, {ttl: 5000});
         }
-        consoleLog(['onSuccessItem', fileItem, bodyObject.message, status, headers]);
+        self.$log_.debug(['onSuccessItem', fileItem, bodyObject.message, status, headers]);
     };
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
-        consoleLog(['onErrorItem', fileItem, response, status, headers]);
+        self.$log_.debug(['onErrorItem', fileItem, response, status, headers]);
     };
     this.uploader.onCancelItem = function(fileItem, response, status, headers) {
-        consoleLog(['onCancelItem', fileItem, response, status, headers]);
+        self.$log_.debug(['onCancelItem', fileItem, response, status, headers]);
     };
     this.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-        consoleLog(['onCompleteItem', fileItem, response, status, headers]);
+        self.$log_.debug(['onCompleteItem', fileItem, response, status, headers]);
     };
     this.uploader.onCompleteAll = function() {
-        consoleLog(['onCompleteAll']);
+        self.$log_.debug(['onCompleteAll']);
     };
-    consoleLog(['uploader', this.uploader]);
+    self.$log_.debug(['uploader', this.uploader]);
 };
 
 
@@ -267,6 +267,7 @@ my.ie_upload_request.Ctrl.prototype.validateFiles = function (files) {
     var request = this.request;
     var growl = this.growl_;
     var $filter = this.$filter_;
+    var $log = this.$log_;
     var date = $filter('date')(new Date(), 'H:mm:ss');
     var msg;
 
@@ -274,30 +275,30 @@ my.ie_upload_request.Ctrl.prototype.validateFiles = function (files) {
     var len = files.length;
 
     if (request.maxFileCount < (len + request.entries.length)) {
-        console.error('Files count exceeded');
-        console.error(files);
+        $log.error('Files count exceeded');
+        $log.error(files);
         msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_COUNT');
         growl.addErrorMessage(date + '<br/>' + msg);
         return false;
     }
     for (var i = 0; i < len; i++) {
         if (request.maxFileSize < files[i].size) {
-            console.error('File too big:');
-            console.error(files[i]);
+            $log.error('File too big:');
+            $log.error(files[i]);
             msg = $filter('translate')('VALIDATION_ERROR.MAX_FILE_SIZE');
             growl.addErrorMessage(date + '<br/>' + msg);
             return false;
         }
         if (request.extensions.length > 0 && request.extensions.indexOf(files[i].getExtension()) === -1) {
-            console.error('Invalid extension');
-            console.error(files[i]);
+            $log.error('Invalid extension');
+            $log.error(files[i]);
             msg = $filter('translate')('VALIDATION_ERROR.INVALID_EXTENSION');
             growl.addErrorMessage(date + '<br/>' + msg);
             return false;
         }
     }
     if (request.maxDepositSize && request.maxDepositSize < (currentDepositFile + request.usedSpace)) {
-        console.error('Deposit too big');
+        $log.error('Deposit too big');
         msg = $filter('translate')('VALIDATION_ERROR.MAX_DEPOSIT_SIZE');
         growl.addErrorMessage(date + '<br/>' + msg);
         return false;
@@ -329,11 +330,12 @@ my.ie_upload_request.Ctrl.prototype.getProgressbarType = function (file) {
 my.ie_upload_request.Ctrl.prototype.handleError = function (file, message) {
     var growl = this.growl_;
     var $filter = this.$filter_;
+    var $log = this.$log_;
     var date = $filter('date')(new Date(), 'H:mm:ss');
 
-    console.error(file);
+    $log.error(file);
     message = angular.fromJson(message);
-    console.error(message.message);
+    $log.error(message.message);
     var msg = $filter('translate')('SERVER_ERROR.ERRCODE_' + message.errCode);
     growl.addErrorMessage(date + '<br/>' + msg);
 };

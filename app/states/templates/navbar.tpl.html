@@ -10,17 +10,17 @@
         dropdown
         is-open="isopen">
       <a href="#" class="dropdown-toggle">
-        <i class="fa fa-flag"></i>
+        <i class="fa fa-flag fa-lg"></i>
       </a>
       <ul class="dropdown-menu">
         <li x-ng-class="{disabled: getCurrentLang == 'en'}">
           <a x-ng-click="setLang('en');isopen=false;">
-            {{'LANGUAGE.ENGLISH' | translate}}
+            {{'LANGUAGE.ENGLISH' | translate}} (English)
           </a>
         </li>
         <li x-ng-class="{disabled: getCurrentLang == 'fr'}">
           <a x-ng-click="setLang('fr');isopen=false;">
-            {{'LANGUAGE.FRENCH' | translate}}
+            {{'LANGUAGE.FRENCH' | translate}} (French)
           </a>
         </li>
       </ul>

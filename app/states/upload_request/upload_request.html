@@ -90,13 +90,14 @@
             </p>
           </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
-          <div x-ng-if="upload_request.flowStarter" x-flow-init="{query: {'requestUrlUuid': upload_request.urlUuid, 'password': upload_request.password}}"
-               x-flow-files-added="upload_request.validateFiles($files)"
-               x-flow-complete="upload_request.tableParams.reload()"
-               x-flow-file-error="upload_request.handleError($file, $message)"
-               x-flow-files-submitted="$flow.upload()"
-               x-ng-hide="upload_request.request.closed">
+        <div class="form-group">
+          <div class="col-md-10 col-md-offset-2">
+            <div x-ng-if="upload_request.flowStarter" x-flow-init="{query: {'requestUrlUuid': upload_request.urlUuid, 'password': upload_request.password}}"
+                 x-flow-files-added="upload_request.validateFiles($files)"
+                 x-flow-complete="upload_request.tableParams.reload()"
+                 x-flow-file-error="upload_request.handleError($file, $message)"
+                 x-flow-files-submitted="$flow.upload()"
+                 x-ng-hide="upload_request.request.closed">
 
             <span class="label label-primary"
                   x-ng-show="upload_request.request.maxFileSize"
@@ -107,49 +108,50 @@
                   x-translate="FLOW.FLOW_COUNT"
                   x-translate-value-count="{{$flow.getSize()}}">
             </span>
-            <div class="drop"
-                 x-flow-drop
-                 x-flow-drag-enter="style={border: '2px #4cae4c dashed'}"
-                 x-flow-drag-leave="style={border: '2px #46b8da dashed'}"
-                 x-ng-style="style">
+              <div class="drop"
+                   x-flow-drop
+                   x-flow-drag-enter="style={border: '2px #4cae4c dashed'}"
+                   x-flow-drag-leave="style={border: '2px #46b8da dashed'}"
+                   x-ng-style="style">
               <span class="btn btn-primary"
                     x-flow-btn
                     x-ng-disabled="upload_request.request.entries.length === upload_request.request.maxFileCount">
                 <i class="fa fa-cloud-upload"></i>&nbsp;{{'FLOW.BUTTON_UPLOAD' | translate}}
               </span>
-              <b>{{'FLOW.LABEL_OR_DROP' | translate}}</b>
-            </div>
-            <br>
-            <div x-ng-repeat="file in $flow.files">
-              <span>{{file.name}} ({{upload_request.humanFileSize(file.size)}})</span>
-              <div class="pull-right">
-                <button class="btn btn-warning btn-xs"
-                        x-ng-click="file.pause()"
-                        x-ng-show="!file.paused"
-                        x-ng-hide="file.isComplete()">
-                  <i class="fa fa-pause"></i>
-                </button>
-                <button class="btn btn-success btn-xs"
-                        x-ng-click="file.resume()"
-                        x-ng-show="file.paused"
-                        x-ng-hide="file.isComplete()">
-                  <i class="fa fa-play"></i>
-                </button>
-                <button class="btn btn-danger btn-xs"
-                        x-ng-click="file.cancel()"
-                        x-ng-hide="file.isComplete()">
-                  <i class="fa fa-stop"></i>
-                </button>
-                <button class="btn btn-success btn-xs"
-                        x-ng-click="file.cancel()"
-                        x-ng-show="file.isComplete() && !file.error">
-                  <i class="fa fa-eject"></i>
-                </button>
+                <b>{{'FLOW.LABEL_OR_DROP' | translate}}</b>
               </div>
-              <progressbar class="progress-striped" min="0" max="100" value="file.progress()*100" style="width:100%" type="{{upload_request.getProgressbarType(file)}}"
-                           x-ng-class="{'active': file.isUploading()}">
-                {{(file.progress() * 100).toFixed(2)}}%
-              </progressbar>
+              <br>
+              <div x-ng-repeat="file in $flow.files">
+                <span>{{file.name}} ({{upload_request.humanFileSize(file.size)}})</span>
+                <div class="pull-right">
+                  <button class="btn btn-warning btn-xs"
+                          x-ng-click="file.pause()"
+                          x-ng-show="!file.paused"
+                          x-ng-hide="file.isComplete()">
+                    <i class="fa fa-pause"></i>
+                  </button>
+                  <button class="btn btn-success btn-xs"
+                          x-ng-click="file.resume()"
+                          x-ng-show="file.paused"
+                          x-ng-hide="file.isComplete()">
+                    <i class="fa fa-play"></i>
+                  </button>
+                  <button class="btn btn-danger btn-xs"
+                          x-ng-click="file.cancel()"
+                          x-ng-hide="file.isComplete()">
+                    <i class="fa fa-stop"></i>
+                  </button>
+                  <button class="btn btn-success btn-xs"
+                          x-ng-click="file.cancel()"
+                          x-ng-show="file.isComplete() && !file.error">
+                    <i class="fa fa-eject"></i>
+                  </button>
+                </div>
+                <progressbar class="progress-striped" min="0" max="100" value="file.progress()*100" style="width:100%" type="{{upload_request.getProgressbarType(file)}}"
+                             x-ng-class="{'active': file.isUploading()}">
+                  {{(file.progress() * 100).toFixed(2)}}%
+                </progressbar>
+              </div>
             </div>
           </div>
         </div>
@@ -168,11 +170,11 @@
                   {{entry.name}}
                 </td>
                 <td data-title="'TABLE.HEADER_SIZE' | translate"
-                    sortable="'size'" class="text-right">
+                    sortable="'size'" class="text-center">
                   {{upload_request.humanFileSize(entry.size)}}
                 </td>
                 <td data-title="'TABLE.HEADER_ACTION' | translate">
-                  <div x-ng-show="upload_request.request.canDeleteDocument" class="pull-right">
+                  <div x-ng-show="upload_request.request.canDeleteDocument" class="text-center">
                     <button class="clear-btn error"
                             x-ng-show="confirm === undefined"
                             x-ng-click="confirm = $index">
@@ -200,7 +202,7 @@
       </fieldset>
       <fieldset x-ng-show="upload_request.request.canClose">
         <div class="form-group">
-          <div class="controls pull-right">
+          <div class="controls text-center">
             <button type="button" class="btn btn-warning" id="reset"
                     x-ng-click="upload_request.closeRequest()">
               <i class="fa fa-lg fa-times"></i>&nbsp;

@@ -57,11 +57,13 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
       controller: 'UploadRequestCtrl as upload_request'
     });
 
+  var browserLanguage = $windowProvider.$get().navigator.language || $windowProvider.$get().navigator.userLanguage;
   $translateProvider.useStaticFilesLoader({
     prefix: 'i18n/locale-',
     suffix: '.json'
   });
   $translateProvider.preferredLanguage('en');
+  $translateProvider.use(browserLanguage.split('-')[0]);
   $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
   $translateProvider.useMissingTranslationHandlerLog();
   $translateProvider.useCookieStorage();

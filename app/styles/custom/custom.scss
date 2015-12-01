@@ -20,11 +20,14 @@ header {
   }
 }
 header + .container {
-  padding-top: 110px;
+  padding-top: 90px;
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   font-family: 'Source Sans Pro',sans-serif;
+}
+.h4 {
+  color: $blue;
 }
 
 .grey {
@@ -180,4 +183,8 @@ legend {
 }
 .growl {
   z-index: 1000;
+}
+
+.upload-request-information {
+  margin-bottom: 50px;
 }

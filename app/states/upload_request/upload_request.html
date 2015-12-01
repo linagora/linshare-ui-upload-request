@@ -1,12 +1,21 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
     {{logo}}
-    <p x-translate="PARAGRAPH.WELCOME"
-       x-translate-value-mail="{{upload_request.request.recipient.mail}}">
-    </p>
-    <p x-translate="PARAGRAPH.DESCRIPTION"
-       x-translate-value-mail="{{upload_request.request.owner.mail}}">
-    </p>
+    <div class="upload-request-information">
+      <p x-translate="PARAGRAPH.WELCOME"
+         x-translate-value-mail="{{upload_request.request.recipient.mail}}">,
+      </p>
+      <p x-ng-show="upload_request.request.closed"
+          x-translate="PARAGRAPH.CLOSED"
+          x-translate-value-date="{{upload_request.request.expiryDate | date:medium}}"
+          x-translate-value-mail="{{upload_request.request.owner.mail}}">
+      </p>
+      <p x-ng-hide="upload_request.request.closed"
+          x-translate="PARAGRAPH.ACTIVE"
+          x-translate-value-date="{{upload_request.request.expiryDate | date:medium}}"
+          x-translate-value-mail="{{upload_request.request.owner.mail}}">
+      </p>
+    </div>
     <form class="form-horizontal" name="uploadRequestForm" novalidate
           x-ng-submit="upload_request.submit()">
       <fieldset>

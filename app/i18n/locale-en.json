@@ -5,8 +5,9 @@
     "DESCRIPTION": "This application is aimed to upload files following an upload request. To get the upload form, please enter the link you have received by email in your browser address bar."
   },
   "PARAGRAPH": {
-    "WELCOME": "Hello <b>{{mail}}</b>",
-    "DESCRIPTION": "This application form authorizes you to upload file(s) for <b>{{mail}}</b>"
+    "WELCOME": "Hello <b>{{mail}}</b>,",
+    "ACTIVE": "You received an upload request from <b>{{mail}}</b>. The upload request will be functional until {{date}}. Beyond that date, you could not be able to upload nor delete files.",
+    "CLOSED": "You received an upload request from <b>{{mail}}</b>. The upload request has been closed since {{date}} and is no longer exploitable."
   },
   "AUTH_MODAL": {
     "TITLE": "Password",

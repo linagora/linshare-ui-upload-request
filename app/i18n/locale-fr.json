@@ -5,8 +5,9 @@
     "DESCRIPTION": "Cette application vous permet de déposer des fichiers suite à une invitation de dépôt. Pour accéder au formulaire de dépôt de fichiers, saisissez le lien que vous avez reçu par courriel, dans la barre d'adresse de votre navigateur."
   },
   "PARAGRAPH": {
-    "WELCOME": "Bonjour <b>{{mail}}</b>",
-    "DESCRIPTION": "Vous pouvez déposer ici vos documents à l'attention de <b>{{mail}}</b>"
+    "WELCOME": "Bonjour <b>{{mail}}</b>,",
+    "ACTIVE": "Vous avez reçu une invitation de dépôt de la part de <b>{{mail}}</b>. L'invitation sera active jusqu'au {{date}}. Au delà de cette date, l'invitation de dépôt ne sera plus exploitable.",
+    "CLOSED": "Vous avez reçu une invitation de dépôt de la part de <b>{{mail}}</b>. L'invitation a été clôturée depuis le {{date}}, vous ne pouvez plus déposer de fichiers."
   },
   "AUTH_MODAL": {
     "TITLE": "Mot de passe",

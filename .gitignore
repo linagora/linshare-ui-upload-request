@@ -3,3 +3,6 @@ node_modules
 dist
 .vimrc
 app/js/config.js
+target
+node
+

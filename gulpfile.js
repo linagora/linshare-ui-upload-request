@@ -5,7 +5,7 @@ var inject = require('gulp-inject');
 var bowerFiles = require('main-bower-files');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
-var rimraf = require('gulp-rimraf');
+var del = require('del');
 var jshint = require('gulp-jshint');
 var gutil = require('gulp-util');
 var filter = require('gulp-filter');
@@ -26,8 +26,9 @@ var paths = {
 
 // Remove previous build
 gulp.task('clean', function(){
-  return gulp.src(paths.dest, {read: false})
-    .pipe(rimraf());
+  return del([
+    paths.dest
+    ]);
 });
 
 // Sync package.json & bower.json

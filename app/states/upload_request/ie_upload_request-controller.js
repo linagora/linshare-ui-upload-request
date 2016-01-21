@@ -51,13 +51,13 @@ my.ie_upload_request.Ctrl = function($http, $filter, $modal, ngTableParams, grow
 
     /**
      * @type {Object}
-     * @expose
+     * @nocollapse
      */
     this.request = {};
 
     /**
      * @type {String}
-     * @expose
+     * @nocollapse
      */
     this.urlUuid = UploadRequest.urlUuid;
 
@@ -96,7 +96,7 @@ my.ie_upload_request.Ctrl = function($http, $filter, $modal, ngTableParams, grow
 
     /**
      * @type {FileUploader}
-     * @expose
+     * @nocollapse
      */
     this.uploader = new FileUploader({
         url: [lsAppConfig.fqdn, lsAppConfig.backendURL, 'flow/upload/iexplorer'].join('/'),

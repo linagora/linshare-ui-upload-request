@@ -50,13 +50,13 @@ my.upload_request.Ctrl = function($filter, $modal, $log, ngTableParams, growl, l
 
   /**
    * @type {Object}
-   * @expose
+   * @nocollapse
    */
   this.request = {};
 
   /**
    * @type {String}
-   * @expose
+   * @nocollapse
    */
   this.urlUuid = UploadRequest.urlUuid;
 

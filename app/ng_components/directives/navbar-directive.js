@@ -49,9 +49,8 @@ my.navbar.Directive.factory = function(lsAppConfig) {
           $log.debug('Language: switched to ' + lang);
           tmhDynamicLocale.set(lang);
         });
-        $scope.getLogo = function () {
-          return (lsAppConfig.defaultLogo) ? lsAppConfig.defaultLogo : lsAppConfig.customLogoURL;
-        };
+        $scope.customLogo = lsAppConfig.customLogoURL;
+        $scope.linshareLogo = lsAppConfig.defaultLogo;
       }
     ],
     templateUrl: 'states/templates/navbar.tpl.html'

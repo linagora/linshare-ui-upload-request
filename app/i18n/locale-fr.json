@@ -6,8 +6,8 @@
   },
   "PARAGRAPH": {
     "WELCOME": "Bonjour <b>{{mail}}</b>,",
-    "ACTIVE": "Vous avez reçu une invitation de dépôt de la part de <b>{{mail}}</b>. L'invitation sera active jusqu'au {{date}}. Au delà de cette date, l'invitation de dépôt ne sera plus exploitable.",
-    "CLOSED": "Vous avez reçu une invitation de dépôt de la part de <b>{{mail}}</b>. L'invitation a été clôturée depuis le {{date}}, vous ne pouvez plus déposer de fichiers."
+    "ACTIVE": "Vous avez reçu une invitation de dépôt de la part de <b>{{firstName}} {{lastname}}</b>. L'invitation sera active jusqu'au {{date}}. Au delà de cette date, l'invitation de dépôt ne sera plus exploitable.",
+    "CLOSED": "Vous avez reçu une invitation de dépôt de la part de <b>{{firstName}} {{lastname}}</b>. L'invitation a été clôturée, vous ne pouvez plus déposer de fichiers."
   },
   "AUTH_MODAL": {
     "TITLE": "Mot de passe",

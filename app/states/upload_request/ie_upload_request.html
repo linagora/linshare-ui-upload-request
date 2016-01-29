@@ -6,15 +6,14 @@
              x-translate-value-mail="{{ie_upload_request.request.recipient.mail}}">,
           </p>
           <p x-ng-show="ie_upload_request.request.closed"
-             x-translate-value-mail="{{ie_upload_request.request.owner.mail}}"
-             x-translate-value-date="{{ie_upload_request.request.expiryDate | date:medium}}"
+             x-translate-value-firstname="{{upload_request.request.owner.firstName}}"
+             x-translate-value-lastname="{{upload_request.request.owner.lastName}}"
              x-translate="PARAGRAPH.CLOSED">
           </p>
           <p x-ng-hide="ie_upload_request.request.closed"
-              x-translate="PARAGRAPH.ACTIVE"
-              x-translate-value-mail="{{ie_upload_request.request.owner.mail}}"
-              x-translate-value-date="{{ie_upload_request.request.expiryDate | date:medium}}"
-              >
+             x-translate="PARAGRAPH.ACTIVE"
+             x-translate-value-firstname="{{upload_request.request.owner.firstName}}"
+	     x-translate-value-lastname="{{upload_request.request.owner.lastName}}">
           </p>
         </div>
         <form class="form-horizontal" name="uploadRequestForm" novalidate

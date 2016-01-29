@@ -6,8 +6,8 @@
   },
   "PARAGRAPH": {
     "WELCOME": "Hello <b>{{mail}}</b>,",
-    "ACTIVE": "You received an upload request from <b>{{mail}}</b>. The upload request will be functional until {{date}}. Beyond that date, you could not be able to upload nor delete files.",
-    "CLOSED": "You received an upload request from <b>{{mail}}</b>. The upload request has been closed since {{date}} and is no longer exploitable."
+    "ACTIVE": "You received an upload request from <b>{{firstname}} {{lastname}}</b>. The upload request will be active until {{date}}. Beyond that date, you could not be able to upload nor delete files.",
+    "CLOSED": "You received an upload request from <b>{{firstname}} {{lastname}}</b>. The upload request has been closed and is no longer exploitable."
   },
   "AUTH_MODAL": {
     "TITLE": "Password",
@@ -69,7 +69,7 @@
     "HEADER_ACTION": "Action",
     "BUTTON_DELETE": "Delete",
     "BUTTON_DELETE_ALL": "Remove All",
-    "LABEL_NO_ACTION_AVAILABLE": "Pas d'action disponible",
+    "LABEL_NO_ACTION_AVAILABLE": "No available action",
     "BUTTON_DELETE_YES": "Yes",
     "BUTTON_DELETE_NO": "No",
     "BUTTON_CANCEL": "Cancel",

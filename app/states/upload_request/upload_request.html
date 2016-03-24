@@ -13,7 +13,8 @@
       <p x-ng-hide="upload_request.request.closed"
           x-translate="PARAGRAPH.ACTIVE"
           x-translate-value-firstname="{{upload_request.request.owner.firstName}}"
-          x-translate-value-lastname="{{upload_request.request.owner.lastName}}">
+          x-translate-value-lastname="{{upload_request.request.owner.lastName}}"
+          x-translate-value-date="{{upload_request.request.expiryDate | date: 'fullDate'}}">
       </p>
     </div>
     <form class="form-horizontal" name="uploadRequestForm" novalidate

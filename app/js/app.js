@@ -52,7 +52,7 @@ function config($logProvider, $stateProvider, $urlRouterProvider, $translateProv
 
   $stateProvider
     .state('404', {
-      url: '/404',
+      url: '/error/404',
       templateUrl: 'states/404/404.html',
       controller: 'UploadRequestCtrl as upload_request'
     });

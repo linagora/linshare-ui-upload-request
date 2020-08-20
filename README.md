@@ -1,54 +1,24 @@
-# Angular UI - Linshare upload request
+# linshare-ui-upload-request
 
-## Description
-
-## Contributions
-
-### Dependencies
-
- * Java 7 JRE (for closure compiler)
-
-### Main gulp commands
+## Project setup
 ```
-gulp serve
-gulp build
+npm install
 ```
 
-Note: Set environment variable NODE_ENV to 'production' in order to build or serve minified version
-
-### Install npm package
-
+### Compiles and hot-reloads for development
 ```
-npm install my_package --save-dev
+npm run serve
 ```
 
-### Check npm packages update
-
+### Compiles and minifies for production
 ```
-npm outdated --depth=0
-```
-
-### Update npm package
-
-```
-npm update [my_package] --save-dev
+npm run build
 ```
 
-### Check bower packages update
-
+### Lints and fixes files
 ```
-bower list
-```
-
-### Synchronization between package.json and bower.json
-Fields 'name', 'version', 'description', 'license', 'homepage' are synchronize from package.json to bower.json.
-Do not modify them in bower.json or about.json (copy of the bower.json), package.json rule them all.
-
-### Update bower package
-
-```
-npm update my_package --save
+npm run lint
 ```
 
-## License
-see [http://www.linshare.org/licenses/LinShare-License_AfferoGPL-v3_en.pdf](http://www.linshare.org/licenses/LinShare-License_AfferoGPL-v3_en.pdf)
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

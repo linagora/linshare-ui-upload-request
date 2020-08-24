@@ -15,6 +15,9 @@
         <configuration>
           <filesets>
             <fileset>
+              <directory>node_modules</directory>
+            </fileset>
+            <fileset>
               <directory>dist</directory>
             </fileset>
           </filesets>

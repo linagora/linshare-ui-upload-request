@@ -2,10 +2,16 @@
   <div class="home-page-upload home-page-card">
     <div class="home-page-upload-toolbar">
       <div>
-        <v-btn icon depressed class="home-page-upload-toolbar-button home-page-upload-toolbar-add-button" color="#05B1FF" large>
+        <v-btn
+          icon
+          depressed
+          class="home-page-upload-toolbar-button home-page-upload-toolbar-add-button"
+          color="#05B1FF"
+          large
+        >
           <v-icon>add</v-icon>
         </v-btn>
-        <div class='home-page-upload-toolbar-link-container'>
+        <div class="home-page-upload-toolbar-link-container">
           <span class="home-page-upload-toolbar-subject">{{ data.subject }}</span>
         </div>
       </div>
@@ -17,10 +23,16 @@
             label="Search"
             single-line
             hide-details
-          ></v-text-field>
+          />
         </div>
         <div>
-          <v-btn icon depressed class="home-page-upload-toolbar-button" color="#5E5E5E" large>
+          <v-btn
+            icon
+            depressed
+            class="home-page-upload-toolbar-button"
+            color="#5E5E5E"
+            large
+          >
             <v-icon>sort_by_alpha</v-icon>
           </v-btn>
         </div>
@@ -43,7 +55,9 @@
           </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-btn color="primary">Upload</v-btn>
+          <v-btn color="primary">
+            Upload
+          </v-btn>
         </template>
       </v-data-table>
     </div>
@@ -51,60 +65,70 @@
 </template>
 
 <script>
-  export default {
-    name: "EntryList",
-    data() {
-      return {
-        selected: [],
-        headers: [
-          {
-            text: 'NAME',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          {
-            text: 'SIZE',
-            align: 'end',
-            sortable: false,
-            value: 'size',
-          },
-          {
-            text: 'Actions',
-            align: 'end',
-            value: 'actions',
-            sortable: false
-          },
-        ],
-        files: [
-          {
-            name: 'Frozen Yogurt',
-            size: '0.5 GB'
-          },
-          {
-            name: 'Ice cream sandwich',
-            size: '1.0 GB'
-          },
-          {
-            name: 'Eclair',
-            size: '0.3 GB'
-          },
-          {
-            name: 'Cupcake',
-            size: '200 MB'
-          },
-          {
-            name: 'Gingerbread',
-            size: '1.1 GB'
-          },
-        ],
-      };
+export default {
+  name: 'EntryList',
+  props: {
+    data: {
+      type: Object,
+      default: function() {
+        return {};
+      }
     },
-    props: {
-      data: Object,
-      entries: Array,
-    },
-  };
+    entries: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    }
+  },
+  data() {
+    return {
+      selected: [],
+      headers: [
+        {
+          text: 'NAME',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+        },
+        {
+          text: 'SIZE',
+          align: 'end',
+          sortable: false,
+          value: 'size',
+        },
+        {
+          text: 'Actions',
+          align: 'end',
+          value: 'actions',
+          sortable: false
+        },
+      ],
+      files: [
+        {
+          name: 'Frozen Yogurt',
+          size: '0.5 GB'
+        },
+        {
+          name: 'Ice cream sandwich',
+          size: '1.0 GB'
+        },
+        {
+          name: 'Eclair',
+          size: '0.3 GB'
+        },
+        {
+          name: 'Cupcake',
+          size: '200 MB'
+        },
+        {
+          name: 'Gingerbread',
+          size: '1.1 GB'
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

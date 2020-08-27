@@ -1,19 +1,28 @@
 <template>
   <div class="home-page-request-details home-page-card">
-    <v-expansion-panels v-model="panel" accordion>
+    <v-expansion-panels
+      v-model="panel"
+      accordion
+    >
       <v-expansion-panel>
-        <v-expansion-panel-header class="request-details-header">Request details</v-expansion-panel-header>
+        <v-expansion-panel-header class="request-details-header">
+          Request details
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           <div class="request-details-content">
             <div class="request-details-user-info">
               <div>
                 <div class="user-info-icon">
-                  <img src='../../../assets/images/upload-request-2.svg'>
+                  <img src="../../../assets/images/upload-request-2.svg">
                 </div>
               </div>
               <div class="user-info-content">
-                <p class="user-info-content-welcome">Hello <span>{{ data.recipient && data.recipient.mail }}</span>,</p>
-                <p class="user-info-content-text">You received an upload request from <a :href="mailToOwner">{{ ownerName }}</a>. The upload request will be active until {{ expiryDate }} or the request closure. Beyond that, you could not be able to upload nor delete files.</p>
+                <p class="user-info-content-welcome">
+                  Hello <span>{{ data.recipient && data.recipient.mail }}</span>,
+                </p>
+                <p class="user-info-content-text">
+                  You received an upload request from <a :href="mailToOwner">{{ ownerName }}</a>. The upload request will be active until {{ expiryDate }} or the request closure. Beyond that, you could not be able to upload nor delete files.
+                </p>
               </div>
             </div>
             <div class="request-details-message">
@@ -30,20 +39,36 @@
               </div>
               <div class="metadata-content">
                 <div class="metadata-content-item">
-                  <div class="metadata-content-item-title">Activated:</div>
-                  <div class="metadata-content-item-content">{{ activationDate }}</div>
+                  <div class="metadata-content-item-title">
+                    Activated:
+                  </div>
+                  <div class="metadata-content-item-content">
+                    {{ activationDate }}
+                  </div>
                 </div>
                 <div class="metadata-content-item">
-                  <div class="metadata-content-item-title">Expiration:</div>
-                  <div class="metadata-content-item-content">{{ expiryDate }}</div>
+                  <div class="metadata-content-item-title">
+                    Expiration:
+                  </div>
+                  <div class="metadata-content-item-content">
+                    {{ expiryDate }}
+                  </div>
                 </div>
                 <div class="metadata-content-item">
-                  <div class="metadata-content-item-title">File count:</div>
-                  <div class="metadata-content-item-content">{{ entries.length }} / {{ data.maxFileCount }}</div>
+                  <div class="metadata-content-item-title">
+                    File count:
+                  </div>
+                  <div class="metadata-content-item-content">
+                    {{ entries.length }} / {{ data.maxFileCount }}
+                  </div>
                 </div>
                 <div class="metadata-content-item">
-                  <div class="metadata-content-item-title">Max file size:</div>
-                  <div class="metadata-content-item-content">{{ maxFileSize }}</div>
+                  <div class="metadata-content-item-title">
+                    Max file size:
+                  </div>
+                  <div class="metadata-content-item-content">
+                    {{ maxFileSize }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -55,44 +80,54 @@
 </template>
 
 <script>
-  import moment from 'moment';
-  import { formatBytes } from '@/common';
-  export default {
-    name: "RequestDetails",
-    data() {
-      return {
-        panel: 0,
+import moment from 'moment';
+import { formatBytes } from '@/common';
+export default {
+  name: 'RequestDetails',
+  props: {
+    data: {
+      type: Object,
+      default: function() {
+        return {};
       }
     },
-    props: {
-      data: Object,
-      entries: Array,
-    },
-    computed: {
-      expiryDate() {
-        return this.data && this.data.expiryDate ? moment(this.data.expiryDate).format('MMM DD, YYYY') : '';
-      },
-      activationDate() {
-        return this.data && this.data.activationDate ? moment(this.data.activationDate).format('MMM DD, YYYY') : '';
-      },
-      maxFileSize() {
-        return formatBytes(this.data.maxFileSize || 0)
-      },
-      mailToOwner() {
-        const data = this.data;
-        return data.owner && data.owner.mail ? `mailto:${data.owner.mail}` : ''
-      },
-      ownerName() {
-        const data = this.data;
-        if (data.owner) {
-          data.owner.firstName = data.owner.firstName || "";
-          data.owner.lastName = data.owner.lastName || "";
-          return `${data.owner.firstName} ${data.owner.lastName}`;
-        }
-        return "";
+    entries: {
+      type: Array,
+      default: function() {
+        return [];
       }
+    }
+  },
+  data() {
+    return {
+      panel: 0,
+    };
+  },
+  computed: {
+    expiryDate() {
+      return this.data && this.data.expiryDate ? moment(this.data.expiryDate).format('MMM DD, YYYY') : '';
     },
-  };
+    activationDate() {
+      return this.data && this.data.activationDate ? moment(this.data.activationDate).format('MMM DD, YYYY') : '';
+    },
+    maxFileSize() {
+      return formatBytes(this.data.maxFileSize || 0);
+    },
+    mailToOwner() {
+      const data = this.data;
+      return data.owner && data.owner.mail ? `mailto:${data.owner.mail}` : '';
+    },
+    ownerName() {
+      const data = this.data;
+      if (data.owner) {
+        data.owner.firstName = data.owner.firstName || '';
+        data.owner.lastName = data.owner.lastName || '';
+        return `${data.owner.firstName} ${data.owner.lastName}`;
+      }
+      return '';
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>

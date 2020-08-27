@@ -1,1 +1,1 @@
-export const API_URL = "/linshare/webservice/rest/uploadrequest/v2";
+export const API_URL = '/linshare/webservice/rest/uploadrequest/v2';

@@ -1,7 +1,7 @@
 const LINSHARE_BACKEND_URL = process.env.LINSHARE_BACKEND_URL || 'http://localhost:30000';
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
+  'transpileDependencies': [
+    'vuetify'
   ],
   devServer: {
     proxy: {
@@ -12,4 +12,4 @@ module.exports = {
       }
     }
   }
-}
+};

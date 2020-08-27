@@ -1,45 +1,50 @@
 <template>
   <div class="home-page">
-    <div class="home-page-first-background">
-    </div>
+    <div class="home-page-first-background" />
     <div class="home-page-content">
-      <RequestDetails :data="data" :entries="entries"/>
-      <EntryList :data="data" :entries="entries"/>
+      <RequestDetails
+        :data="data"
+        :entries="entries"
+      />
+      <EntryList
+        :data="data"
+        :entries="entries"
+      />
     </div>
   </div>
 </template>
 
 <script>
-  import { UploadRequestService } from '@/services';
-  import RequestDetails from './components/RequestDetails';
-  import EntryList from './components/EntryList';
-  export default {
-    name: "Home",
-    components: {
-      RequestDetails,
-      EntryList,
-    },
-    data() {
-      return {
-        data: {},
-        entries: [],
-      }
-    },
-    created() {
-      this.fetchData();
-    },
-    methods: {
-      editItem() {},
-      deleteItem() {},
-      async fetchData() {
-        const requestId = this.$route.params.id;
-        const detailResponse = await UploadRequestService.getRequest(requestId);
-        this.data = detailResponse.data;
-        const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
-        this.entries = entriesResponse.data;
-      }
-    },
-  };
+import { UploadRequestService } from '@/services';
+import RequestDetails from './components/RequestDetails';
+import EntryList from './components/EntryList';
+export default {
+  name: 'Home',
+  components: {
+    RequestDetails,
+    EntryList,
+  },
+  data() {
+    return {
+      data: {},
+      entries: [],
+    };
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    editItem() {},
+    deleteItem() {},
+    async fetchData() {
+      const requestId = this.$route.params.id;
+      const detailResponse = await UploadRequestService.getRequest(requestId);
+      this.data = detailResponse.data;
+      const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
+      this.entries = entriesResponse.data;
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>

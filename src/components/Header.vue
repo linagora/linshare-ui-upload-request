@@ -3,7 +3,10 @@
     <ul class="header-inner">
       <li class="logo">
         <router-link :to="{ name: 'home' }">
-          <img src="../assets/images/linshare-logo-white.png" alt="Linshare Logo" />
+          <img
+            src="../assets/images/linshare-logo-white.png"
+            alt="Linshare Logo"
+          >
         </router-link>
       </li>
       <li class="header-title">
@@ -14,9 +17,9 @@
 </template>
 
 <script>
-  export default {
-    name: "Header"
-  };
+export default {
+  name: 'Header'
+};
 </script>
 
 <style lang="scss" scoped>

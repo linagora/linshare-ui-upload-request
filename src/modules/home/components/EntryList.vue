@@ -3,6 +3,7 @@
     <div class="home-page-upload-toolbar">
       <div>
         <v-btn
+          v-flow-browse
           icon
           depressed
           class="home-page-upload-toolbar-button home-page-upload-toolbar-add-button"
@@ -47,17 +48,31 @@
         show-select
         class="elevation-1"
       >
-        <template v-slot:item.actions="{ item }">
+        <template #item.actions="{ item }">
           <v-icon
             @click="deleteItem(item)"
           >
             mdi-delete
           </v-icon>
         </template>
-        <template v-slot:no-data>
-          <v-btn color="primary">
-            Upload
-          </v-btn>
+        <template #no-data>
+          <div
+            v-flow-drop
+            class="drag-and-drop"
+          >
+            <div
+              ref="dropZone"
+              class="drag-and-drop-content"
+            >
+              <div class="drag-icon-container">
+                <img src="../../../assets/images/upload-file.svg">
+              </div>
+              <div class="drag-and-drop-text">
+                <span>Drop your files here</span>
+                <p>Drag and drop your files here to upload them</p>
+              </div>
+            </div>
+          </div>
         </template>
       </v-data-table>
     </div>
@@ -104,30 +119,9 @@ export default {
           sortable: false
         },
       ],
-      files: [
-        {
-          name: 'Frozen Yogurt',
-          size: '0.5 GB'
-        },
-        {
-          name: 'Ice cream sandwich',
-          size: '1.0 GB'
-        },
-        {
-          name: 'Eclair',
-          size: '0.3 GB'
-        },
-        {
-          name: 'Cupcake',
-          size: '200 MB'
-        },
-        {
-          name: 'Gingerbread',
-          size: '1.1 GB'
-        },
-      ],
+      files: [],
     };
-  },
+  }
 };
 </script>
 
@@ -178,7 +172,56 @@ export default {
             padding-right: 15px;
           }
         }
+
+        .drag-and-drop {
+          height: 60vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #eeeeee;
+          margin: 0px -16px;
+
+
+          .drag-and-drop-content {
+            .drag-icon-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: auto;
+              border-radius: 100%;
+              width: 165px;
+              height: 165px;
+              background: #dadada;
+
+              img {
+                width: 60%;
+              }
+            }
+
+            .drag-and-drop-text {
+              user-select: none;
+              pointer-events: none;
+              font-weight: 500;
+              margin-top: 15px;
+
+              span {
+                line-height: 1.5;
+                font-size: 2.1em;
+                padding-bottom: 10px;
+                color: #6b6b6b;
+              }
+
+              p {
+                font-size: 13px;
+                font-family: roboto,sans-serif;
+                text-align: center;
+                margin: 0 0 9px;
+                color: #9c9c9c;
+              }
+            }
+          }
+        }
       }
-    } 
+    }
   }
 </style>

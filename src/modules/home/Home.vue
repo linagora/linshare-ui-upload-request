@@ -16,8 +16,10 @@
 
 <script>
 import { UploadRequestService } from '@/services';
+import { FlowService } from '@/services';
 import RequestDetails from './components/RequestDetails';
 import EntryList from './components/EntryList';
+
 export default {
   name: 'Home',
   components: {
@@ -44,6 +46,20 @@ export default {
       this.entries = entriesResponse.data;
     }
   },
+  beforeRouteEnter(to, from, next) {
+    FlowService.initFlowObject({
+      query: {
+        requestUrlUuid: to.params.id,
+        password: ''
+      }
+    });
+
+    const flow = FlowService.getFlowObject();
+
+    flow.on('filesSubmitted', () => flow.upload());
+
+    next();
+  }
 };
 </script>
 
@@ -62,7 +78,7 @@ export default {
       margin-left: auto;
       margin-right: auto;
       width: 60%;
-    } 
+    }
   }
 </style>
 

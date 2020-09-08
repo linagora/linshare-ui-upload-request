@@ -41,19 +41,51 @@
     </div>
     <div class="home-page-upload-data-table">
       <v-data-table
-        v-model="selected"
+        v-model="selectedEntries"
         :headers="headers"
-        :items="files"
-        item-key="name"
+        :items="entries"
+        item-key="id"
         show-select
         class="elevation-1"
       >
         <template #item.actions="{ item }">
-          <v-icon
-            @click="deleteItem(item)"
+          <v-menu
+            top
+            :close-on-content-click="true"
+            content-class="ls-delete-popover"
+            min-width="200"
+            min-height="80"
+            offset-x
+            absolute
           >
-            mdi-delete
-          </v-icon>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+                v-bind="attrs"
+                v-on="on"
+              >
+                mdi-delete
+              </v-icon>
+            </template>
+
+            <div>
+              <p class="ls-delete-popover-title">
+                {{ generatePopconfirmMessage(item) }}
+              </p>
+              <div class="ls-delete-popover-btn-container">
+                <v-btn small>
+                  Cancel
+                </v-btn>
+                <v-btn
+                  class="ls-delete-btn"
+                  small
+                  color="error"
+                  @click="deleteEntry(item)"
+                >
+                  Delete
+                </v-btn>
+              </div>
+            </div>
+          </v-menu>
         </template>
         <template #no-data>
           <div
@@ -94,11 +126,16 @@ export default {
       default: function() {
         return [];
       }
+    },
+    selected: {
+      type: Array,
+      default: function() {
+        return [];
+      }
     }
   },
   data() {
     return {
-      selected: [],
       headers: [
         {
           text: 'NAME',
@@ -118,14 +155,39 @@ export default {
           value: 'actions',
           sortable: false
         },
-      ],
-      files: [],
+      ]
     };
-  }
+  },
+  computed: {
+    selectedEntries: {
+      get() {
+        return this.selected;
+      },
+      set(value) {
+        this.$emit('changeSelected', value);
+      }
+    }
+  },
+  methods: {
+    deleteEntry(item) {
+      if (this.selected && this.selected.length && this.selected.map(entry => entry.id).indexOf(item.id) >= 0) {
+        this.$emit('deleteMultipleEntries', this.selected);
+      } else {
+        this.$emit('deleteSingleEntry', item);
+      }
+    },
+    generatePopconfirmMessage (item) {
+      if (this.selected && this.selected.length && this.selected.map(entry => entry.id).indexOf(item.id) >= 0) {
+        return `Are you sure you want to delete ${this.selected.length} entries?`;
+      } else {
+        return 'Are you sure you want to delete this entry?';
+      }
+    }
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .home-page {
     .home-page-content {
       .home-page-card {
@@ -221,6 +283,20 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+  .ls-delete-popover {
+    max-width: 240px;
+    padding: 10px;
+    background-color: #ffffff;
+    .ls-delete-popover-title {
+      text-align: center;
+    }
+    .ls-delete-popover-btn-container {
+      float: right;
+      .ls-delete-btn {
+        margin-left: 10px;
       }
     }
   }

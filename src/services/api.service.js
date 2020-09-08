@@ -22,11 +22,15 @@ export const ApiService = {
   },
 
   post(resource, params) {
-    return Vue.axios.post(`${resource}`, params);
+    return Vue.axios.post(`${resource}`, params).catch(error => {
+      throw new Error(`[Linshare] ApiService ${error}`);
+    });
   },
 
   update(resource, id, params) {
-    return Vue.axios.put(`${resource}/${id}`, params);
+    return Vue.axios.put(`${resource}/${id}`, params).catch(error => {
+      throw new Error(`[Linshare] ApiService ${error}`);
+    });
   },
 
   delete(resource, id) {
@@ -44,5 +48,10 @@ export const UploadRequestService = {
     return Vue.axios.get(`requests/${requestId}/entries`).catch(error => {
       throw new Error(`[Linshare] ApiService ${error}`);
     });
+  },
+  deleteEntry(requestId, entryId) {
+    return Vue.axios.delete(`requests/${requestId}/entries/${entryId}`).catch(error => {
+      throw new Error(`[Linshare] ApiService ${error}`);
+    })
   }
 };

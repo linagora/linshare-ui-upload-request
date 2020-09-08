@@ -9,7 +9,12 @@
       <EntryList
         :data="data"
         :entries="entries"
+        :selected="selected"
+        @deleteMultipleEntries="deleteMultipleEntries"
+        @deleteSingleEntry="deleteSingleEntry"
+        @changeSelected="changeSelected"
       />
+      <AppAlert />
     </div>
   </div>
 </template>
@@ -30,20 +35,163 @@ export default {
     return {
       data: {},
       entries: [],
+      selected: [],
+      files: [
+        {
+          id: 1,
+          name: 'Frozen Yogurt',
+          size: '0.5 GB'
+        },
+        {
+          id: 2,
+          name: 'Ice cream sandwich',
+          size: '1.0 GB'
+        },
+        {
+          id: 3,
+          name: 'Eclair',
+          size: '0.3 GB'
+        },
+        {
+          id: 4,
+          name: 'Cupcake',
+          size: '200 MB'
+        },
+        {
+          id: 5,
+          name: 'Gingerbread',
+          size: '1.1 GB'
+        },
+        {
+          id: 11,
+          name: 'Frozen Yogurt',
+          size: '0.5 GB'
+        },
+        {
+          id: 12,
+          name: 'Ice cream sandwich',
+          size: '1.0 GB'
+        },
+        {
+          id: 13,
+          name: 'Eclair',
+          size: '0.3 GB'
+        },
+        {
+          id: 14,
+          name: 'Cupcake',
+          size: '200 MB'
+        },
+        {
+          id: 15,
+          name: 'Gingerbread',
+          size: '1.1 GB'
+        },
+        {
+          id: 21,
+          name: 'Frozen Yogurt',
+          size: '0.5 GB'
+        },
+        {
+          id: 22,
+          name: 'Ice cream sandwich',
+          size: '1.0 GB'
+        },
+        {
+          id: 23,
+          name: 'Eclair',
+          size: '0.3 GB'
+        },
+        {
+          id: 24,
+          name: 'Cupcake',
+          size: '200 MB'
+        },
+        {
+          id: 25,
+          name: 'Gingerbread',
+          size: '1.1 GB'
+        },
+        {
+          id: 31,
+          name: 'Frozen Yogurt',
+          size: '0.5 GB'
+        },
+        {
+          id: 32,
+          name: 'Ice cream sandwich',
+          size: '1.0 GB'
+        },
+        {
+          id: 33,
+          name: 'Eclair',
+          size: '0.3 GB'
+        },
+        {
+          id: 34,
+          name: 'Cupcake',
+          size: '200 MB'
+        },
+        {
+          id: 35,
+          name: 'Gingerbread',
+          size: '1.1 GB'
+        },
+      ]
     };
   },
   created() {
     this.fetchData();
   },
   methods: {
-    editItem() {},
-    deleteItem() {},
+    async deleteMultipleEntries(entries) {
+      const requestId = this.$route.params.id;
+      try {
+        await Promise.all(entries.map(entry => 
+          UploadRequestService.deleteEntry(requestId, entry.id)
+        ));
+        this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.id).indexOf(entry.id) < 0);
+        this.selected = [];
+        this.$alert.open(`${entries.length} entries have been deleted successfully!`, {
+          type: 'success',
+          duration: 3
+        });
+      } catch(err) {
+        this.$alert.open('Something went wrong! Please try again', {
+          type: 'error',
+          duration: 3
+        });
+      }
+    },
+
+    async deleteSingleEntry(id) {
+      const requestId = this.$route.params.id;
+      try {
+        await UploadRequestService.deleteEntry(requestId, id);
+        this.entries = this.entries.filter(entry => entry.id !== id);
+        this.selected = this.selected.filter(entry => entry.id !== id);
+        this.$alert.open('The entry has been deleted successfully!', {
+          type: 'success',
+          duration: 3
+        });
+      } catch (err) {
+        this.$alert.open('Something went wrong! Please try again', {
+          type: 'error',
+          duration: 3
+        });
+      }
+    },
+
     async fetchData() {
       const requestId = this.$route.params.id;
       const detailResponse = await UploadRequestService.getRequest(requestId);
       this.data = detailResponse.data;
       const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
-      this.entries = entriesResponse.data;
+      this.entries = entriesResponse.data.length ? entriesResponse.data : this.files;
+    },
+
+    changeSelected(newSelected) {
+      this.selected = newSelected;
     }
   },
   beforeRouteEnter(to, from, next) {

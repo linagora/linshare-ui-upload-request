@@ -19,6 +19,7 @@
       <div class="home-page-upload-toolbar-util">
         <div class="home-page-upload-toolbar-search-container">
           <v-text-field
+            v-model="search"
             class="home-page-upload-toolbar-search"
             prepend-inner-icon="mdi-magnify"
             label="Search"
@@ -27,15 +28,49 @@
           />
         </div>
         <div>
-          <v-btn
-            icon
-            depressed
-            class="home-page-upload-toolbar-button"
-            color="#5E5E5E"
-            large
+          <v-menu
+            bottom
+            content-class="ls-sort-menu"
+            :close-on-content-click="false"
+            :offset-y="true"
           >
-            <v-icon>sort_by_alpha</v-icon>
-          </v-btn>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                icon
+                depressed
+                class="home-page-upload-toolbar-button"
+                color="#5E5E5E"
+                large
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>sort_by_alpha</v-icon>
+              </v-btn>
+            </template>
+
+            <div class="ls-sort-list-container">
+              <div class="ls-sort-list-title">
+                Order by
+              </div>
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in sortItems"
+                  :key="index"
+                  class="ls-sort-list-item"
+                  @click="selectSort(item.value)"
+                >
+                  <v-list-item-icon>
+                    <v-icon v-show="sortBy === item.value">
+                      {{ !sortDesc ? 'mdi-menu-down' : 'mdi-menu-up' }}
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="item.text" />
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </div>
+          </v-menu>
         </div>
       </div>
     </div>
@@ -44,7 +79,11 @@
         v-model="selectedEntries"
         :headers="headers"
         :items="entries"
-        item-key="id"
+        :search="search"
+        :custom-sort="customSort"
+        item-key="uuid"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
         show-select
         class="elevation-1"
       >
@@ -69,7 +108,7 @@
 
             <div>
               <p class="ls-delete-popover-title">
-                {{ generatePopconfirmMessage(item) }}
+                {{ generateConfirmMessage(item) }}
               </p>
               <div class="ls-delete-popover-btn-container">
                 <v-btn small>
@@ -136,7 +175,32 @@ export default {
   },
   data() {
     return {
-      headers: [
+      sortItems: [
+        {
+          text: 'Name',
+          value: 'name'
+        },
+        {
+          text: 'Size',
+          value: 'size'
+        }
+      ],
+      search: '',
+      sortBy: '',
+      sortDesc: false
+    };
+  },
+  computed: {
+    selectedEntries: {
+      get() {
+        return this.selected;
+      },
+      set(value) {
+        this.$emit('changeSelected', value);
+      }
+    },
+    headers() {
+      const defaultHeaders = [
         {
           text: 'NAME',
           align: 'start',
@@ -148,46 +212,61 @@ export default {
           align: 'end',
           sortable: false,
           value: 'size',
-        },
+        }
+      ];
+      return this.data.canDeleteDocument ? [
+        ...defaultHeaders,
         {
           text: 'Actions',
           align: 'end',
           value: 'actions',
           sortable: false
-        },
-      ]
-    };
-  },
-  computed: {
-    selectedEntries: {
-      get() {
-        return this.selected;
-      },
-      set(value) {
-        this.$emit('changeSelected', value);
-      }
+        }
+      ] : defaultHeaders;
     }
   },
   methods: {
     deleteEntry(item) {
-      if (this.selected && this.selected.length && this.selected.map(entry => entry.id).indexOf(item.id) >= 0) {
+      if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
         this.$emit('deleteMultipleEntries', this.selected);
       } else {
-        this.$emit('deleteSingleEntry', item);
+        this.$emit('deleteSingleEntry', item.uuid);
       }
     },
-    generatePopconfirmMessage (item) {
-      if (this.selected && this.selected.length && this.selected.map(entry => entry.id).indexOf(item.id) >= 0) {
+    generateConfirmMessage (item) {
+      if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
         return `Are you sure you want to delete ${this.selected.length} entries?`;
       } else {
         return 'Are you sure you want to delete this entry?';
       }
+    },
+    selectSort (sortBy) {
+      this.sortDesc = !this.sortDesc;
+      this.sortBy = sortBy;
+    },
+    customSort(items, index, isDesc) {
+      items.sort((a, b) => {
+        if (index[0] === 'size') {
+          if (!isDesc[0]) {
+            return a.originalSize < b.originalSize ? -1 : 1;
+          } else {
+            return b.originalSize < a.originalSize ? -1 : 1;
+          }
+        } else {
+          if (!isDesc[0]) {
+            return a[index] < b[index] ? -1 : 1;
+          } else {
+            return b[index] < a[index] ? -1 : 1;
+          }
+        }
+      });
+      return items;
     }
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .home-page {
     .home-page-content {
       .home-page-card {
@@ -297,6 +376,35 @@ export default {
       float: right;
       .ls-delete-btn {
         margin-left: 10px;
+      }
+    }
+  }
+  .ls-sort-menu {
+    padding: 0;
+    .ls-sort-list-container {
+      background: #ffffff;
+      .ls-sort-list-title {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        font-size: 18px;
+      }
+    }
+    .v-list {
+      padding: 0;
+    }
+    .ls-sort-list-item {
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      .v-list-item__icon {
+        margin: 10px 10px 10px -6px;
+      }
+      .v-list-item__title {
+        font-size: 0.9rem;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+        color: #444;
       }
     }
   }

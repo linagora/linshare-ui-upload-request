@@ -3,6 +3,7 @@
     <Header />
     <router-view />
     <Footer />
+    <AppAlert />
   </v-app>
 </template>
 

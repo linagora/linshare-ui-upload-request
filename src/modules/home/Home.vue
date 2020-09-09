@@ -14,7 +14,6 @@
         @deleteSingleEntry="deleteSingleEntry"
         @changeSelected="changeSelected"
       />
-      <AppAlert />
     </div>
   </div>
 </template>
@@ -22,6 +21,7 @@
 <script>
 import { UploadRequestService } from '@/services';
 import { FlowService } from '@/services';
+import { formatBytes } from '@/common';
 import RequestDetails from './components/RequestDetails';
 import EntryList from './components/EntryList';
 
@@ -35,109 +35,7 @@ export default {
     return {
       data: {},
       entries: [],
-      selected: [],
-      files: [
-        {
-          id: 1,
-          name: 'Frozen Yogurt',
-          size: '0.5 GB'
-        },
-        {
-          id: 2,
-          name: 'Ice cream sandwich',
-          size: '1.0 GB'
-        },
-        {
-          id: 3,
-          name: 'Eclair',
-          size: '0.3 GB'
-        },
-        {
-          id: 4,
-          name: 'Cupcake',
-          size: '200 MB'
-        },
-        {
-          id: 5,
-          name: 'Gingerbread',
-          size: '1.1 GB'
-        },
-        {
-          id: 11,
-          name: 'Frozen Yogurt',
-          size: '0.5 GB'
-        },
-        {
-          id: 12,
-          name: 'Ice cream sandwich',
-          size: '1.0 GB'
-        },
-        {
-          id: 13,
-          name: 'Eclair',
-          size: '0.3 GB'
-        },
-        {
-          id: 14,
-          name: 'Cupcake',
-          size: '200 MB'
-        },
-        {
-          id: 15,
-          name: 'Gingerbread',
-          size: '1.1 GB'
-        },
-        {
-          id: 21,
-          name: 'Frozen Yogurt',
-          size: '0.5 GB'
-        },
-        {
-          id: 22,
-          name: 'Ice cream sandwich',
-          size: '1.0 GB'
-        },
-        {
-          id: 23,
-          name: 'Eclair',
-          size: '0.3 GB'
-        },
-        {
-          id: 24,
-          name: 'Cupcake',
-          size: '200 MB'
-        },
-        {
-          id: 25,
-          name: 'Gingerbread',
-          size: '1.1 GB'
-        },
-        {
-          id: 31,
-          name: 'Frozen Yogurt',
-          size: '0.5 GB'
-        },
-        {
-          id: 32,
-          name: 'Ice cream sandwich',
-          size: '1.0 GB'
-        },
-        {
-          id: 33,
-          name: 'Eclair',
-          size: '0.3 GB'
-        },
-        {
-          id: 34,
-          name: 'Cupcake',
-          size: '200 MB'
-        },
-        {
-          id: 35,
-          name: 'Gingerbread',
-          size: '1.1 GB'
-        },
-      ]
+      selected: []
     };
   },
   created() {
@@ -148,9 +46,9 @@ export default {
       const requestId = this.$route.params.id;
       try {
         await Promise.all(entries.map(entry => 
-          UploadRequestService.deleteEntry(requestId, entry.id)
+          UploadRequestService.deleteEntry(requestId, entry.uuid)
         ));
-        this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.id).indexOf(entry.id) < 0);
+        this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.uuid).indexOf(entry.uuid) < 0);
         this.selected = [];
         this.$alert.open(`${entries.length} entries have been deleted successfully!`, {
           type: 'success',
@@ -168,8 +66,8 @@ export default {
       const requestId = this.$route.params.id;
       try {
         await UploadRequestService.deleteEntry(requestId, id);
-        this.entries = this.entries.filter(entry => entry.id !== id);
-        this.selected = this.selected.filter(entry => entry.id !== id);
+        this.entries = this.entries.filter(entry => entry.uuid !== id);
+        this.selected = this.selected.filter(entry => entry.uuid !== id);
         this.$alert.open('The entry has been deleted successfully!', {
           type: 'success',
           duration: 3
@@ -187,11 +85,19 @@ export default {
       const detailResponse = await UploadRequestService.getRequest(requestId);
       this.data = detailResponse.data;
       const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
-      this.entries = entriesResponse.data.length ? entriesResponse.data : this.files;
+      this.entries = entriesResponse.data.length ? this.transformEntries(entriesResponse.data) : [];
     },
 
     changeSelected(newSelected) {
       this.selected = newSelected;
+    },
+
+    transformEntries(data) {
+      return data.map(entry => {
+        entry.originalSize = entry.size;
+        entry.size = formatBytes(entry.size);
+        return entry; 
+      });
     }
   },
   beforeRouteEnter(to, from, next) {

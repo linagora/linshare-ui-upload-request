@@ -10,7 +10,7 @@ const module = {
       content: '',
       options: {
         type: 'info',
-        duration: 2
+        duration: 3
       },
       open (content, options) {
         this.content = content;
@@ -22,6 +22,6 @@ const module = {
       }
     };
   }
-}
+};
 
 Vue.use(module);

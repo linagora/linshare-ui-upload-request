@@ -6,7 +6,7 @@ import { ApiService } from './services';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 // Init custom plugins
-import './plugins/message';
+import './plugins/alert';
 
 Vue.config.productionTip = false;
 ApiService.init();

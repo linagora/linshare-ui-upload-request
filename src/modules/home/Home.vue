@@ -21,7 +21,7 @@
 <script>
 import { UploadRequestService } from '@/services';
 import { FlowService } from '@/services';
-import { formatBytes } from '@/common';
+import { formatBytes, validateUpload } from '@/common';
 import RequestDetails from './components/RequestDetails';
 import EntryList from './components/EntryList';
 
@@ -38,14 +38,31 @@ export default {
       selected: []
     };
   },
-  created() {
-    this.fetchData();
+  async created() {
+    const flow = FlowService.getFlowObject();
+
+    await this.fetchData();
+
+    flow.on('filesSubmitted', () => flow.upload());
+
+    flow.on('fileSuccess', () => {
+      this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
+      this.fetchData();
+    });
+
+    flow.on('fileAdded', file => {
+      const error = validateUpload(file, { ...this.data, currentFiles: this.entries });
+
+      if (!error) { return true; }
+
+      this.$alert.open(error, { type: 'error' });
+    });
   },
   methods: {
     async deleteMultipleEntries(entries) {
       const requestId = this.$route.params.id;
       try {
-        await Promise.all(entries.map(entry => 
+        await Promise.all(entries.map(entry =>
           UploadRequestService.deleteEntry(requestId, entry.uuid)
         ));
         this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.uuid).indexOf(entry.uuid) < 0);
@@ -96,7 +113,7 @@ export default {
       return data.map(entry => {
         entry.originalSize = entry.size;
         entry.size = formatBytes(entry.size);
-        return entry; 
+        return entry;
       });
     }
   },
@@ -107,10 +124,6 @@ export default {
         password: ''
       }
     });
-
-    const flow = FlowService.getFlowObject();
-
-    flow.on('filesSubmitted', () => flow.upload());
 
     next();
   }

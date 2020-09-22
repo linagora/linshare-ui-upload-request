@@ -8,7 +8,7 @@ export default new Router({
     {
       path: '/:id',
       name: 'home',
-      component: () => import('@/modules/home/Home'),
+      component: () => import('@/modules/home/Home')
     },
   ]
 });

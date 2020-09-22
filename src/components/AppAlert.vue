@@ -1,6 +1,13 @@
 <template>
-  <v-alert class="ls-alert" :type="alert.options.type" v-model="isOpen" min-width="100" transition="slide-x-reverse-transition" dismissible>
-    {{alert.content}}
+  <v-alert
+    v-model="isOpen"
+    class="ls-alert"
+    :type="alert.options.type"
+    min-width="100"
+    transition="slide-x-reverse-transition"
+    dismissible
+  >
+    {{ alert.content }}
   </v-alert>
 </template>
 
@@ -9,11 +16,16 @@ export default {
   data () {
     return {
       alert: this.$alert
-    }
+    };
   },
   computed: {
-    isOpen() {
-      return this.alert.isOpen
+    isOpen: {
+      get(){
+        return this.alert.isOpen;
+      },
+      set(value) {
+        this.alert.isOpen = value;
+      }
     }
   },
   watch: {
@@ -25,7 +37,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

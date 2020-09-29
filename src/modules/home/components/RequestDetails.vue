@@ -115,6 +115,7 @@ export default {
     },
     mailToOwner() {
       const data = this.data;
+      
       return data.owner && data.owner.mail ? `mailto:${data.owner.mail}` : '';
     },
     ownerName() {
@@ -122,8 +123,10 @@ export default {
       if (data.owner) {
         data.owner.firstName = data.owner.firstName || '';
         data.owner.lastName = data.owner.lastName || '';
+        
         return `${data.owner.firstName} ${data.owner.lastName}`;
       }
+      
       return '';
     }
   },

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { UploadRequestService } from '@/services';
+import { UploadRequestService, StorageService } from '@/services';
 import { FlowService } from '@/services';
 import { formatBytes, validateUpload } from '@/common';
 import RequestDetails from './components/RequestDetails';
@@ -68,13 +68,11 @@ export default {
         this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.uuid).indexOf(entry.uuid) < 0);
         this.selected = [];
         this.$alert.open(`${entries.length} entries have been deleted successfully!`, {
-          type: 'success',
-          duration: 3
+          type: 'success'
         });
-      } catch(err) {
+      } catch (err) {
         this.$alert.open('Something went wrong! Please try again', {
-          type: 'error',
-          duration: 3
+          type: 'error'
         });
       }
     },
@@ -86,13 +84,11 @@ export default {
         this.entries = this.entries.filter(entry => entry.uuid !== id);
         this.selected = this.selected.filter(entry => entry.uuid !== id);
         this.$alert.open('The entry has been deleted successfully!', {
-          type: 'success',
-          duration: 3
+          type: 'success'
         });
       } catch (err) {
         this.$alert.open('Something went wrong! Please try again', {
-          type: 'error',
-          duration: 3
+          type: 'error'
         });
       }
     },
@@ -113,15 +109,17 @@ export default {
       return data.map(entry => {
         entry.originalSize = entry.size;
         entry.size = formatBytes(entry.size);
+        
         return entry;
       });
     }
   },
   beforeRouteEnter(to, from, next) {
+    const requestId = to.params.id;
     FlowService.initFlowObject({
       query: {
-        requestUrlUuid: to.params.id,
-        password: ''
+        requestUrlUuid: requestId,
+        password: StorageService.getPassword(requestId) || ''
       }
     });
 

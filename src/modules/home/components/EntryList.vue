@@ -214,6 +214,7 @@ export default {
           value: 'size',
         }
       ];
+      
       return this.data.canDeleteDocument ? [
         ...defaultHeaders,
         {
@@ -260,6 +261,7 @@ export default {
           }
         }
       });
+      
       return items;
     }
   },
@@ -311,6 +313,9 @@ export default {
             display: flex;
             align-items: center;
             padding-right: 15px;
+          }
+          .home-page-upload-toolbar-add-button {
+            width: 56px;
           }
         }
 

@@ -37,6 +37,13 @@ export const ApiService = {
     return Vue.axios.delete(`${resource}/${id}`).catch(error => {
       throw new Error(`[Linshare] ApiService ${error}`);
     });
+  },
+
+  setHeaders(headers) {
+    Vue.axios.defaults.headers = {
+      ...(Vue.axios.defaults.headers || {}),
+      ...(headers || {})
+    };
   }
 };
 
@@ -52,6 +59,6 @@ export const UploadRequestService = {
   deleteEntry(requestId, entryId) {
     return Vue.axios.delete(`requests/${requestId}/entries/${entryId}`).catch(error => {
       throw new Error(`[Linshare] ApiService ${error}`);
-    })
+    });
   }
 };

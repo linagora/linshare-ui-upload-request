@@ -59,6 +59,7 @@ export default {
 
       if (this.$refs.form.validate()) {
         const result = await AuthService.checkPassword(requestId, this.password);
+
         if (result) {
           StorageService.savePassword(requestId, this.password);
           router.push({ name: 'home', params: { id: requestId }});

@@ -62,6 +62,7 @@ export default {
   methods: {
     async deleteMultipleEntries(entries) {
       const requestId = this.$route.params.id;
+
       try {
         await Promise.all(entries.map(entry =>
           UploadRequestService.deleteEntry(requestId, entry.uuid)
@@ -80,6 +81,7 @@ export default {
 
     async deleteSingleEntry(id) {
       const requestId = this.$route.params.id;
+
       try {
         await UploadRequestService.deleteEntry(requestId, id);
         this.entries = this.entries.filter(entry => entry.uuid !== id);
@@ -118,6 +120,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     const requestId = to.params.id;
+
     FlowService.initFlowObject({
       query: {
         requestUrlUuid: requestId,

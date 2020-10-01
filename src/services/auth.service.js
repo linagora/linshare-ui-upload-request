@@ -18,16 +18,13 @@ export const AuthService = {
 
       UploadRequestStore.assign(id, uploadRequest.data);
       passwordAuthorized = true;
-      
+
       return true;
     } catch (error) {
-      if (error && error.response && error.response.status === 401 && error.response.data && error.response.data.errCode === 32401) {
-        passwordAuthorized = false;
-        
-        return false;
-      }
+      passwordAuthorized = !(error && error.response && error.response.status === 401
+        && error.response.data && error.response.data.errCode === 32401);
       
-      return true;
+      return passwordAuthorized;
     }
   }
 };

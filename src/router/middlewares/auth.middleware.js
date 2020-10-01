@@ -1,9 +1,10 @@
 import { AuthService, StorageService, ApiService } from '@/services';
 
-export const checkPasswordMw = async function ({ to, next, vueNext }) {
+export const checkPasswordMw = async function ({ to, next, redirect }) {
   const requestId = to.params.id;
   const password = StorageService.getPassword(requestId);
   const isPasswordAuthenticated = await AuthService.checkPassword(requestId, password);
+
   ApiService.setHeaders({
     'linshare-uploadrequest-password': password
   });
@@ -11,17 +12,17 @@ export const checkPasswordMw = async function ({ to, next, vueNext }) {
   if (isPasswordAuthenticated) {
     next();
   } else {
-    vueNext({ name: 'password', params: { id: requestId }});
+    redirect({ name: 'password', params: { id: requestId }});
   }
 };
 
-export const checkGuestMw = async function ({ to, next, vueNext }) {
+export const checkGuestMw = async function ({ to, next, redirect }) {
   const requestId = to.params.id;
   const password = StorageService.getPassword(requestId);
   const isPasswordAuthenticated = await AuthService.checkPassword(requestId, password);
 
   if (isPasswordAuthenticated) {
-    vueNext({ name: 'home', params: { id: requestId }});
+    redirect({ name: 'home', params: { id: requestId }});
   } else {
     next();
   }

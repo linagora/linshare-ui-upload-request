@@ -120,6 +120,7 @@ export default {
     },
     ownerName() {
       const data = this.data;
+
       if (data.owner) {
         data.owner.firstName = data.owner.firstName || '';
         data.owner.lastName = data.owner.lastName || '';

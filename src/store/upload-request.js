@@ -26,6 +26,7 @@ async function fetch(id, forceNewFetch) {
     }
   }
   const uploadRequestResponse = await ApiService.getById('requests', id);
+
   assign(id, uploadRequestResponse.data);
   
   return uploadRequestResponse.data;

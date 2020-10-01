@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="request-details-message">
-              <div class="message-title">
+              <div class="section-title">
                 Message
               </div>
               <div class="message-content">
@@ -36,7 +36,7 @@
             <div class="request-details-recipients">
               <v-expansion-panels>
                 <v-expansion-panel>
-                  <v-expansion-panel-header class="mb-0 recipient-list-title">
+                  <v-expansion-panel-header class="mb-0 section-title">
                     Recipient list
                     <template v-slot:actions>
                       <span class="recipient-toggle-icon">View</span>
@@ -74,7 +74,7 @@
               </v-expansion-panels>
             </div>
             <div class="request-details-metadata">
-              <div class="metadata-title">
+              <div class="section-title">
                 Metadata
               </div>
               <div class="metadata-content">
@@ -121,7 +121,7 @@
 
 <script>
 import moment from 'moment';
-import { formatBytes } from '@/common';
+import { formatBytes, getColorByString } from '@/common';
 export default {
   name: 'RequestDetails',
   props: {
@@ -171,6 +171,11 @@ export default {
       return '';
     }
   },
+  methods: {
+    getColorByEmail(email) {
+      return getColorByString(email);
+    }
+  }
 };
 </script>
 
@@ -183,6 +188,13 @@ export default {
         border-radius: 4px;
       }
       .home-page-request-details {
+        .section-title {
+          line-height: 16px;
+          font-weight: 500;
+          font-size: 17px;
+          color: #5E5E5E;
+          margin-bottom: 10px;
+        }
         .request-details-header {
           text-transform: uppercase;
           line-height: 15px;
@@ -227,13 +239,6 @@ export default {
           margin-top: 20px;
           padding-bottom: 30px;
           border-bottom: 1px solid #E2E2E2;
-          .message-title {
-            line-height: 16px;
-            font-weight: 500;
-            font-size: 17px;
-            color: #5E5E5E;
-            margin-bottom: 10px;
-          }
           .message-content {
             font-size: 15px;
             color: #5E5E5E;
@@ -242,13 +247,6 @@ export default {
         .request-details-recipients {
           padding-bottom: 10px;
           border-bottom: 1px solid #E2E2E2;
-          .recipient-list-title {
-            line-height: 16px;
-            font-weight: 500;
-            font-size: 17px;
-            color: #5E5E5E;
-            margin-bottom: 10px;
-          }
           .recipient-toggle-icon {
             color: #05B1FF;
             font-size: 12px;
@@ -268,13 +266,6 @@ export default {
         }
         .request-details-metadata {
           margin-top: 20px;
-          .metadata-title {
-            line-height: 16px;
-            font-weight: 500;
-            font-size: 17px;
-            color: #5E5E5E;
-            margin-bottom: 10px;
-          }
           .metadata-content {
             margin-top: 20px;
             display: flex;

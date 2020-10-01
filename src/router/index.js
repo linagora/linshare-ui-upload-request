@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { checkPasswordMw, checkGuestMw, validateRequestIdMw, setHeaderAPI } from '@/router/middlewares';
+import { checkPasswordMw, checkGuestMw, validateRequestIdMw } from '@/router/middlewares';
 import { middlewarePipeline } from './middleware.pipeline.js';
 
 Vue.use(Router);
@@ -14,8 +14,7 @@ const router = new Router({
       meta: {
         middleware: [
           validateRequestIdMw,
-          checkPasswordMw,
-          setHeaderAPI
+          checkPasswordMw
         ]
       }
     },

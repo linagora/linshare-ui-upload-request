@@ -24,6 +24,7 @@ import { FlowService } from '@/services';
 import { formatBytes, validateUpload } from '@/common';
 import RequestDetails from './components/RequestDetails';
 import EntryList from './components/EntryList';
+import { UploadRequestStore } from '@/store';
 
 export default {
   name: 'Home',
@@ -47,7 +48,7 @@ export default {
 
     flow.on('fileSuccess', () => {
       this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
-      this.fetchData();
+      this.fetchData(true);
     });
 
     flow.on('fileAdded', file => {
@@ -93,11 +94,12 @@ export default {
       }
     },
 
-    async fetchData() {
+    async fetchData(forceNewFetch) {
       const requestId = this.$route.params.id;
-      const detailResponse = await UploadRequestService.getRequest(requestId);
-      this.data = detailResponse.data;
+      const uploadRequest = await UploadRequestStore.fetch(requestId, forceNewFetch);
       const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
+
+      this.data = uploadRequest;
       this.entries = entriesResponse.data.length ? this.transformEntries(entriesResponse.data) : [];
     },
 

@@ -1,4 +1,5 @@
-import Vue from 'vue';
+import { ApiService } from '@/services';
+import { UploadRequestStore } from '@/store';
 
 let passwordAuthorized = false;
 
@@ -9,11 +10,13 @@ export const AuthService = {
         return true;
       }
 
-      await Vue.axios.get(`requests/${id}`, {
+      const uploadRequest = await ApiService.getById('requests', id, {
         headers: {
           'linshare-uploadrequest-password': password
         }
       });
+
+      UploadRequestStore.assign(id, uploadRequest.data);
       passwordAuthorized = true;
       
       return true;

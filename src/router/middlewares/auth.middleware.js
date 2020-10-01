@@ -26,11 +26,3 @@ export const checkGuestMw = async function ({ to, next, vueNext }) {
     next();
   }
 };
-
-export const setHeaderAPI = function ({ to, next }) {
-  const password = StorageService.getPassword(to.params.id);
-  ApiService.setHeaders({
-    'linshare-uploadrequest-password': password
-  });
-  next();
-};

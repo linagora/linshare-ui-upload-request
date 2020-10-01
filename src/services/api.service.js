@@ -9,34 +9,20 @@ export const ApiService = {
     Vue.axios.defaults.baseURL = API_URL;
   },
 
-  query(resource, params) {
-    return Vue.axios.get(resource, params).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
-  },
-
-  getById(resource, id = '') {
-    return Vue.axios.get(`${resource}/${id}`).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
+  getById(resource, id = '', params) {
+    return Vue.axios.get(`${resource}/${id}`, params);
   },
 
   post(resource, params) {
-    return Vue.axios.post(`${resource}`, params).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
+    return Vue.axios.post(`${resource}`, params);
   },
 
   update(resource, id, params) {
-    return Vue.axios.put(`${resource}/${id}`, params).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
+    return Vue.axios.put(`${resource}/${id}`, params);
   },
 
   delete(resource, id) {
-    return Vue.axios.delete(`${resource}/${id}`).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
+    return Vue.axios.delete(`${resource}/${id}`);
   },
 
   setHeaders(headers) {
@@ -52,13 +38,9 @@ export const UploadRequestService = {
     return ApiService.getById('requests', requestId);
   },
   getRequestEntries(requestId) {
-    return Vue.axios.get(`requests/${requestId}/entries`).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
+    return Vue.axios.get(`requests/${requestId}/entries`);
   },
   deleteEntry(requestId, entryId) {
-    return Vue.axios.delete(`requests/${requestId}/entries/${entryId}`).catch(error => {
-      throw new Error(`[Linshare] ApiService ${error}`);
-    });
+    return Vue.axios.delete(`requests/${requestId}/entries/${entryId}`);
   }
 };

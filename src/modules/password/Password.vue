@@ -68,10 +68,6 @@ export default {
             type: 'error'
           });
         }
-      } else {
-        this.$alert.open('Password is required!', {
-          type: 'error'
-        });
       }
     }
   }

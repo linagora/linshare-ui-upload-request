@@ -5,7 +5,7 @@ export const StorageService = {
   savePassword: (id, password) => {
     window.localStorage.setItem(id, password);
   },
-  removePassword: (id) => {
+  removePassword: id => {
     if (window.localStorage.getItem(id)) {
       window.localStorage.removeItem(id);
     }

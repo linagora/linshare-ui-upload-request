@@ -86,6 +86,7 @@
     "no-invalid-this": 0,
     "require-yield": 0,
     "keyword-spacing": 1,
-    "newline-before-return": 1
+    "newline-before-return": 1,
+    "require-atomic-updates": 0
   }
 }

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { AuthService, StorageService, ApiService } from '@/services';
+import { checkPasswordMw, checkGuestMw, validateRequestIdMw, setHeaderAPI } from '@/router/middlewares';
+import { middlewarePipeline } from './middleware.pipeline.js';
 
 Vue.use(Router);
 
@@ -9,46 +10,46 @@ const router = new Router({
     {
       path: '/:id',
       name: 'home',
-      component: () => import('@/modules/home/Home')
+      component: () => import('@/modules/home/Home'),
+      meta: {
+        middleware: [
+          validateRequestIdMw,
+          checkPasswordMw,
+          setHeaderAPI
+        ]
+      }
     },
     {
       path: '/:id/password',
       name: 'password',
-      component: () => import('@/modules/password/Password')
+      component: () => import('@/modules/password/Password'),
+      meta: {
+        middleware: [
+          validateRequestIdMw,
+          checkGuestMw
+        ]
+      }
     }
   ]
 });
 
-// Ensure we checked auth before each page load.
-router.beforeEach(async (to, from, next) => {
-  // Set password in headers each time joining a new route with new id
-
-  if (to.params && to.params.id) {
-    const requestId = to.params.id;
-    const password = StorageService.getPassword(requestId);
-    const isPasswordAuthenticated = await AuthService.checkPassword(requestId, password);
-    if (isPasswordAuthenticated) {
-      // Set default password header
-      ApiService.setHeaders({
-        'linshare-uploadrequest-password': password
-      });
-
-      if (to.name !== 'password') {
-        next();
-      } else {
-        next({ name: 'home', params: { id: requestId }});
-      }
-    } else {
-      // Clear false password in local storage
-      StorageService.removePassword(requestId);
-
-      if (to.name !== 'password') {
-        next({ name: 'password', params: { id: requestId }});
-      } else {
-        next();
-      }
-    }
+router.beforeEach(async(to, from, next) => {
+  if (!to.meta.middleware || !to.meta.middleware.length) {
+    return next();
   }
+  const middleware = to.meta.middleware;
+
+  const context = {
+    to,
+    from,
+    next,
+    vueNext: next
+  };
+
+  return middleware[0]({
+    ...context,
+    next: middlewarePipeline(context, middleware, 1)
+  });
 });
 
 export default router;

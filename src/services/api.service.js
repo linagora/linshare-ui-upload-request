@@ -42,5 +42,8 @@ export const UploadRequestService = {
   },
   deleteEntry(requestId, entryId) {
     return Vue.axios.delete(`requests/${requestId}/entries/${entryId}`);
+  },
+  updateRequest(requestId, data) {
+    return ApiService.update('requests', requestId, data);
   }
 };

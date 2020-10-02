@@ -3,6 +3,7 @@
     <div class="home-page-upload-toolbar">
       <div>
         <v-btn
+          v-if="!data.closed"
           v-flow-browse
           icon
           depressed
@@ -85,7 +86,6 @@
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
         show-select
-        class="elevation-1"
       >
         <template #item.actions="{ item }">
           <v-menu
@@ -129,6 +129,7 @@
         <template #no-data>
           <div
             v-flow-drop
+            :style="{'pointer-events': data.closed ? 'none': 'all'}"
             class="drag-and-drop"
           >
             <div
@@ -136,16 +137,66 @@
               class="drag-and-drop-content"
             >
               <div class="drag-icon-container">
-                <img src="../../../assets/images/upload-file.svg">
+                <img
+                  v-if="!data.closed"
+                  src="../../../assets/images/upload-file.svg"
+                >
+                <img
+                  v-if="data.closed"
+                  src="../../../assets/images/upload-file-lock.svg"
+                >
               </div>
               <div class="drag-and-drop-text">
-                <span>Drop your files here</span>
-                <p>Drag and drop your files here to upload them</p>
+                <span>{{ data.closed ? 'Closed upload request' : 'Drop your files here' }}</span>
+                <p>{{ data.closed ? 'You cannot perform any action on this upload request' : 'Drag and drop your files here to upload them' }}</p>
               </div>
             </div>
           </div>
         </template>
       </v-data-table>
+    </div>
+    <div
+      v-if="data.canClose"
+      class="home-page-card--close-btn-container"
+    >
+      <v-menu
+        top
+        :close-on-content-click="true"
+        content-class="ls-delete-popover"
+        min-width="200"
+        min-height="80"
+        offset-x
+        absolute
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            :disabled="data.closed"
+            v-on="on"
+          >
+            {{ data.closed ? 'Closed' : 'Close' }}
+          </v-btn>
+        </template>
+
+        <div>
+          <p class="ls-delete-popover-title">
+            Are you sure you want to close this upload request?
+          </p>
+          <div class="ls-delete-popover-btn-container">
+            <v-btn small>
+              Cancel
+            </v-btn>
+            <v-btn
+              class="ls-delete-btn"
+              small
+              color="error"
+              @click="closeUploadRequest()"
+            >
+              Confirm
+            </v-btn>
+          </div>
+        </div>
+      </v-menu>
     </div>
   </div>
 </template>
@@ -263,6 +314,9 @@ export default {
       });
       
       return items;
+    },
+    closeUploadRequest() {
+      this.$emit('closeUploadRequest');
     }
   },
 };
@@ -275,6 +329,13 @@ export default {
         background-color: #ffffff;
         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
+        &--close-btn-container {
+          padding: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          border-top: 1px solid #ddd;
+        }
       }
       .home-page-upload {
         margin-top: 30px;

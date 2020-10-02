@@ -26,5 +26,6 @@ export function validateUpload(file, { usedSpace, maxFileCount, maxFileSize, max
 
 export function getColorByString(string) {
   const colors = ['#C62828', '#F57C00', '#05B1FF', '#2E7D32', '#5E35B1', '#1A237E'];
+  
   return colors[string.length % colors.length];
 }

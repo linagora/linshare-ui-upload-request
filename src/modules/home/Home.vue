@@ -13,13 +13,14 @@
         @deleteMultipleEntries="deleteMultipleEntries"
         @deleteSingleEntry="deleteSingleEntry"
         @changeSelected="changeSelected"
+        @closeUploadRequest="closeUploadRequest"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { UploadRequestService, StorageService } from '@/services';
+import { UploadRequestService } from '@/services';
 import { FlowService } from '@/services';
 import { formatBytes, validateUpload } from '@/common';
 import RequestDetails from './components/RequestDetails';
@@ -40,24 +41,26 @@ export default {
     };
   },
   async created() {
-    const flow = FlowService.getFlowObject();
-
     await this.fetchData();
 
-    flow.on('filesSubmitted', () => flow.upload());
+    if (!this.data.closed) {
+      const flow = FlowService.getFlowObject();
 
-    flow.on('fileSuccess', () => {
-      this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
-      this.fetchData(true);
-    });
+      flow.on('filesSubmitted', () => flow.upload());
 
-    flow.on('fileAdded', file => {
-      const error = validateUpload(file, { ...this.data, currentFiles: this.entries });
+      flow.on('fileSuccess', () => {
+        this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
+        this.fetchData(true);
+      });
 
-      if (!error) { return true; }
+      flow.on('fileAdded', file => {
+        const error = validateUpload(file, { ...this.data, currentFiles: this.entries });
 
-      this.$alert.open(error, { type: 'error' });
-    });
+        if (!error) { return true; }
+
+        this.$alert.open(error, { type: 'error' });
+      });
+    }
   },
   methods: {
     async deleteMultipleEntries(entries) {
@@ -97,12 +100,34 @@ export default {
     },
 
     async fetchData(forceNewFetch) {
-      const requestId = this.$route.params.id;
-      const uploadRequest = await UploadRequestStore.fetch(requestId, forceNewFetch);
-      const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
+      try {
+        const requestId = this.$route.params.id;
+        const uploadRequest = await UploadRequestStore.fetch(requestId, forceNewFetch);
+        const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
 
-      this.data = uploadRequest;
-      this.entries = entriesResponse.data.length ? this.transformEntries(entriesResponse.data) : [];
+        this.data = uploadRequest;
+        this.entries = entriesResponse.data.length ? this.transformEntries(entriesResponse.data) : [];
+      } catch (err) {
+        this.$alert.open('Something went wrong! Please try again', {
+          type: 'error'
+        });
+      }
+    },
+
+    async closeUploadRequest() {
+      const requestId = this.$route.params.id;
+
+      try {
+        await UploadRequestService.updateRequest(requestId, {
+          ...this.data,
+          closed: true
+        });
+        window.location.reload();
+      } catch (error) {
+        this.$alert.open('Something went wrong! Please try again', {
+          type: 'error'
+        });
+      }
     },
 
     changeSelected(newSelected) {
@@ -117,18 +142,6 @@ export default {
         return entry;
       });
     }
-  },
-  beforeRouteEnter(to, from, next) {
-    const requestId = to.params.id;
-
-    FlowService.initFlowObject({
-      query: {
-        requestUrlUuid: requestId,
-        password: StorageService.getPassword(requestId) || ''
-      }
-    });
-
-    next();
   }
 };
 </script>

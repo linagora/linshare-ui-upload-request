@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { checkPasswordMw, checkGuestMw } from '@/router/middlewares';
+import { checkPasswordMw, checkGuestMw, initFlowObjectMw } from '@/router/middlewares';
 import { middlewarePipeline } from './middleware.pipeline.js';
 
 Vue.use(Router);
@@ -13,7 +13,8 @@ const router = new Router({
       component: () => import('@/modules/home/Home'),
       meta: {
         middleware: [
-          checkPasswordMw
+          checkPasswordMw,
+          initFlowObjectMw
         ]
       }
     },

@@ -163,7 +163,7 @@
         top
         :close-on-content-click="true"
         content-class="ls-delete-popover"
-        min-width="200"
+        min-width="300"
         min-height="80"
         offset-x
         absolute
@@ -180,7 +180,7 @@
 
         <div>
           <p class="ls-delete-popover-title">
-            Are you sure you want to close this upload request?
+            You are about to close the upload request. After closing, you will not be able to upload files or perform any actions on uploaded files.
           </p>
           <div class="ls-delete-popover-btn-container">
             <v-btn small>
@@ -192,7 +192,7 @@
               color="error"
               @click="closeUploadRequest()"
             >
-              Confirm
+              Proceed
             </v-btn>
           </div>
         </div>

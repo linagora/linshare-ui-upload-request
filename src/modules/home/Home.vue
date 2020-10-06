@@ -48,17 +48,29 @@ export default {
 
       flow.on('filesSubmitted', () => flow.upload());
 
-      flow.on('fileSuccess', () => {
-        this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
-        this.fetchData(true);
+      flow.on('fileSuccess', (file, response) => {
+        try {
+          response = JSON.parse(response);
+        } catch (e) {
+          response = {};
+        }
+
+        if (!response.chunkUploadSuccess) {
+          this.$alert.open(response.errorMessage || 'Something went wrong! Please try again.', {type: 'error'});
+        } else {
+          this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
+          this.fetchData(true);
+        }
       });
 
       flow.on('fileAdded', file => {
         const error = validateUpload(file, { ...this.data, currentFiles: this.entries });
 
-        if (!error) { return true; }
+        if (error) {
+          this.$alert.open(error, { type: 'error' });
+        }
 
-        this.$alert.open(error, { type: 'error' });
+        return !error;
       });
     }
   },

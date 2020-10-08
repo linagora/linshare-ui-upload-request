@@ -31,7 +31,7 @@ export default {
   name: 'Home',
   components: {
     RequestDetails,
-    EntryList,
+    EntryList
   },
   data() {
     return {

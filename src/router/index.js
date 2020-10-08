@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { checkPasswordMw, checkGuestMw, initFlowObjectMw } from '@/router/middlewares';
+import { checkGuestMw, initFlowObjectMw, handleErrorMw, setHeaderMw } from '@/router/middlewares';
 import { middlewarePipeline } from './middleware.pipeline.js';
 
 Vue.use(Router);
@@ -8,12 +8,18 @@ Vue.use(Router);
 const router = new Router({
   routes: [
     {
+      path: '/error/:status?',
+      name: 'error',
+      component: () => import('@/modules/error/Error')
+    },
+    {
       path: '/:id',
       name: 'home',
       component: () => import('@/modules/home/Home'),
       meta: {
         middleware: [
-          checkPasswordMw,
+          handleErrorMw,
+          setHeaderMw,
           initFlowObjectMw
         ]
       }

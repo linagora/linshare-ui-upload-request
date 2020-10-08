@@ -1,11 +1,11 @@
-export const StorageService = {
-  getPassword: id => {
+export const PasswordStore = {
+  get: id => {
     return window.localStorage.getItem(id);
   },
-  savePassword: (id, password) => {
+  assign: (id, password) => {
     window.localStorage.setItem(id, password);
   },
-  removePassword: id => {
+  del: id => {
     if (window.localStorage.getItem(id)) {
       window.localStorage.removeItem(id);
     }

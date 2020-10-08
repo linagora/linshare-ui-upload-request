@@ -29,3 +29,22 @@ export function getColorByString(string) {
   
   return colors[string.length % colors.length];
 }
+
+export function generateHttpErrorMessage(statusCode) {
+  switch (statusCode) {
+    case 400:
+      return 'Bad request';
+    case 403:
+      return 'You do not have permission to access this resource.';
+    case 404:
+      return 'The page you are looking for cannot be found.';
+    case 500:
+      return 'Something went wrong. Please try again.';
+    default:
+      return 'Something went wrong. Please try again.';
+  }
+}
+
+export function validHttpErrorStatusCode(code) {
+  return [400, 401, 403, 404, 500].includes(code);
+}

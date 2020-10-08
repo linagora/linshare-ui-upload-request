@@ -39,7 +39,8 @@
 </template>
 
 <script>
-import { AuthService, StorageService } from '@/services';
+import { ErrorService } from '@/services';
+import { PasswordStore } from '@/store';
 import router from '@/router';
 export default {
   name: 'Password',
@@ -58,10 +59,10 @@ export default {
       const requestId = this.$route.params.id;
 
       if (this.$refs.form.validate()) {
-        const result = await AuthService.checkPassword(requestId, this.password);
+        const result = await ErrorService.checkPasswordError(requestId, this.password);
 
         if (result) {
-          StorageService.savePassword(requestId, this.password);
+          PasswordStore.assign(requestId, this.password);
           router.push({ name: 'home', params: { id: requestId }});
         } else {
           this.$refs.form.reset();

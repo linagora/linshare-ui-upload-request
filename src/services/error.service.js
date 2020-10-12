@@ -1,9 +1,9 @@
 import { ApiService } from '@/services';
 import { UploadRequestStore, PasswordStore } from '@/store';
 
-async function checkError(id) {
+async function checkError(id, pw) {
   try {
-    const password = PasswordStore.get(id);
+    const password = pw ? pw : PasswordStore.get(id);
     const uploadRequest = await ApiService.getById('requests', id, {
       headers: {
         'linshare-uploadrequest-password': password
@@ -20,8 +20,8 @@ async function checkError(id) {
   }
 }
 
-async function checkPasswordError(id) {
-  const error = await checkError(id);
+async function checkPasswordError(id, password) {
+  const error = await checkError(id, password);
   
   return !(error && error.response && error.response.status === 401
     && error.response.data && error.response.data.errCode === 32401);

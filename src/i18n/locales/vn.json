@@ -1,0 +1,56 @@
+{
+  "HEADER": {
+    "UPLOAD_REQUEST": "Yêu cầu tải lên",
+    "LOGO_ALT": "Logo Linshare"
+  },
+  "FOOTER": {
+    "CONTENT": "Bạn đang sử dụng phiên bản miễn phí và mã nguồn mở của LinShare™, được cung cấp bởi Linagora © 2009-2019. Hãy đóng góp vào LinShare R&D bằng cách đăng ký gói Enterprise."
+  },
+  "HOME": {
+    "ORDER_BY": "Sắp xếp theo",
+    "CANCEL": "Hủy",
+    "DELETE": "Xoá",
+    "PROCEED": "Tiếp tục",
+    "SEARCH": "Tìm kiếm",
+    "CLOSED_UPLOAD_REQUEST": "Yêu cầu tải lên đã bị đóng",
+    "CLOSED_UPLOAD_REQUEST_MESSAGE": "Bạn không thể thực hiện thao tác trên yêu cầu tải lên này",
+    "DROP_YOUR_FILES_HERE": "Thả tập tin ở đây",
+    "DRAG_AND_DROP_MESSAGE": "Kéo và thả tập tin ở đây để tải lên",
+    "CLOSE_UPLOAD_REQUEST_WARNING": "Bạn sắp đóng yêu cầu tải lên. Sau khi đóng, bạn sẽ không thể tải lên các tập tin hoặc thực hiện bất kỳ hành động nào trên các tập tin đã tải lên.",
+    "WELCOME_MESSAGE": "Bạn nhận được yêu cầu tải lên từ <a href='{href}'>{ownerName}</a>. Yêu cầu tải lên sẽ hoạt động đến {expiryDate} hoặc tới khi bị đóng. Sau thời điểm trên, bạn sẽ không thể tải lên hoặc xóa tập tin.",
+    "REQUEST_DETAILS": "Chi tiết yêu cầu",
+    "HELLO": "Xin chào",
+    "MESSAGE": "Tin nhắn",
+    "RECIPIENT_LIST": "Danh sách người nhận",
+    "VIEW": "Xem",
+    "METADATA": "Metadata",
+    "ACTIVATED": "Kích hoạt",
+    "EXPIRATION": "Hết hạn",
+    "FILE_COUNT": "Số tập tin",
+    "MAX_FILE_SIZE": "Kích cỡ tập tin tối đa",
+    "NAME": "Tên",
+    "SIZE": "Kích cỡ",
+    "ACTIONS": "Hành động"
+  },
+  "PASSWORD": {
+    "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",
+    "SUBTITLE": "Vui lòng kiểm tra email để lấy mật khẩu của bạn.",
+    "ENTER_PASSWORD": "Nhập mật khẩu",
+    "CONFIRM": "Xác nhận"
+  },
+  "MESSAGE": {
+    "SOMETHING_WENT_WRONG": "Đã có lỗi xảy ra! Vui lòng thử lại.",
+    "UPLOAD_SUCCESS": "Tập tin đã được tải lên thành công!",
+    "DELETE_ENTRIES_SUCCESS": "{length} tệp đã được xóa thành công!",
+    "DELETE_ENTRY_SUCCESS": "Ðã xóa tệp thành công!",
+    "DELETE_ENTRIES_WARNING": "Bạn có chắc là muốn xóa {length} tệp không?",
+    "DELETE_ENTRY_WARNING": "Bạn có chắc là muốn xóa tệp này không?",
+    "INCORRECT_PASSWORD": "Mật khẩu của bạn không đúng. Xin hãy thử lại!",
+    "BAD_REQUEST": "Yêu cầu không chính xác",
+    "FORBIDDEN": "Bạn không có quyền truy cập tài nguyên này.",
+    "NOT_FOUND": "Không thể tìm thấy trang mà bạn đang tìm.",
+    "ERROR_MAX_FILE_COUNT_EXCEEDED": "Bạn không thể tải lên quá {length} tập tin",
+    "ERROR_FILE_SIZE_EXCEEDED": "Tập tin của bạn không thể vượt quá {size}",
+    "ERROR_NOT_ENOUGH_SPACE": "Bạn không còn đủ dung lượng lưu trữ"
+  }
+}

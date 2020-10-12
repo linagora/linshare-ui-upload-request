@@ -1,3 +1,5 @@
+import { i18n } from '@/i18n';
+
 export function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) {return '0 Bytes';}
 
@@ -12,15 +14,15 @@ export function formatBytes(bytes, decimals = 2) {
 
 export function validateUpload(file, { usedSpace, maxFileCount, maxFileSize, maxDepositSize, currentFiles }) {
   if (currentFiles.length >= maxFileCount) {
-    return `You cannot upload more than ${maxFileCount} files`;
+    return i18n.t('MESSAGE.ERROR_MAX_FILE_COUNT_EXCEEDED', {length: maxFileCount});
   }
 
   if (file.size > maxFileSize) {
-    return `Your file cannot exceed ${formatBytes(maxFileSize)}`;
+    return i18n.t('MESSAGE.ERROR_FILE_SIZE_EXCEEDED', {size: formatBytes(maxFileSize)});
   }
 
   if (file.size + usedSpace > maxDepositSize) {
-    return 'There is not enough space on your upload storage';
+    return i18n.t('MESSAGE.ERROR_NOT_ENOUGH_SPACE');
   }
 }
 
@@ -33,15 +35,15 @@ export function getColorByString(string) {
 export function generateHttpErrorMessage(statusCode) {
   switch (statusCode) {
     case 400:
-      return 'Bad request';
+      return i18n.t('MESSAGE.BAD_REQUEST');
     case 403:
-      return 'You do not have permission to access this resource.';
+      return i18n.t('MESSAGE.FORBIDDEN');
     case 404:
-      return 'The page you are looking for cannot be found.';
+      return i18n.t('MESSAGE.NOT_FOUND');
     case 500:
-      return 'Something went wrong. Please try again.';
+      return i18n.t('MESSAGE.SOMETHING_WENT_WRONG');
     default:
-      return 'Something went wrong. Please try again.';
+      return i18n.t('MESSAGE.SOMETHING_WENT_WRONG');
   }
 }
 

@@ -56,9 +56,9 @@ export default {
         }
 
         if (!response.chunkUploadSuccess) {
-          this.$alert.open(response.errorMessage || 'Something went wrong! Please try again.', {type: 'error'});
+          this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {type: 'error'});
         } else {
-          this.$alert.open('The file has been uploaded successfully!', {type: 'success'});
+          this.$alert.open(this.$t('MESSAGE.UPLOAD_SUCCESS'), {type: 'success'});
           this.fetchData(true);
         }
       });
@@ -84,11 +84,11 @@ export default {
         ));
         this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.uuid).indexOf(entry.uuid) < 0);
         this.selected = [];
-        this.$alert.open(`${entries.length} entries have been deleted successfully!`, {
+        this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length: entries.length}), {
           type: 'success'
         });
       } catch (err) {
-        this.$alert.open('Something went wrong! Please try again', {
+        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
           type: 'error'
         });
       }
@@ -101,11 +101,11 @@ export default {
         await UploadRequestService.deleteEntry(requestId, id);
         this.entries = this.entries.filter(entry => entry.uuid !== id);
         this.selected = this.selected.filter(entry => entry.uuid !== id);
-        this.$alert.open('The entry has been deleted successfully!', {
+        this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
           type: 'success'
         });
       } catch (err) {
-        this.$alert.open('Something went wrong! Please try again', {
+        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
           type: 'error'
         });
       }
@@ -120,7 +120,7 @@ export default {
         this.data = uploadRequest;
         this.entries = entriesResponse.data.length ? this.transformEntries(entriesResponse.data) : [];
       } catch (err) {
-        this.$alert.open('Something went wrong! Please try again', {
+        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
           type: 'error'
         });
       }
@@ -136,7 +136,7 @@ export default {
         });
         window.location.reload();
       } catch (error) {
-        this.$alert.open('Something went wrong! Please try again', {
+        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
           type: 'error'
         });
       }

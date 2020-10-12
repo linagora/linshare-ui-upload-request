@@ -23,7 +23,7 @@
             v-model="search"
             class="home-page-upload-toolbar-search"
             prepend-inner-icon="mdi-magnify"
-            label="Search"
+            :label="$t('HOME.SEARCH')"
             single-line
             hide-details
           />
@@ -51,7 +51,7 @@
 
             <div class="ls-sort-list-container">
               <div class="ls-sort-list-title">
-                Order by
+                {{ $t('HOME.ORDER_BY') }}
               </div>
               <v-list>
                 <v-list-item
@@ -112,7 +112,7 @@
               </p>
               <div class="ls-delete-popover-btn-container">
                 <v-btn small>
-                  Cancel
+                  {{ $t('HOME.CANCEL') }}
                 </v-btn>
                 <v-btn
                   class="ls-delete-btn"
@@ -120,7 +120,7 @@
                   color="error"
                   @click="deleteEntry(item)"
                 >
-                  Delete
+                  {{ $t('HOME.DELETE') }}
                 </v-btn>
               </div>
             </div>
@@ -147,8 +147,8 @@
                 >
               </div>
               <div class="drag-and-drop-text">
-                <span>{{ data.closed ? 'Closed upload request' : 'Drop your files here' }}</span>
-                <p>{{ data.closed ? 'You cannot perform any action on this upload request' : 'Drag and drop your files here to upload them' }}</p>
+                <span>{{ data.closed ? $t('HOME.CLOSED_UPLOAD_REQUEST') : $t('HOME.DROP_YOUR_FILES_HERE') }}</span>
+                <p>{{ data.closed ? $t('HOME.CLOSED_UPLOAD_REQUEST_MESSAGE') : $t('HOME.DRAG_AND_DROP_MESSAGE') }}</p>
               </div>
             </div>
           </div>
@@ -180,11 +180,11 @@
 
         <div>
           <p class="ls-delete-popover-title">
-            You are about to close the upload request. After closing, you will not be able to upload files or perform any actions on uploaded files.
+            {{ $t('HOME.CLOSED_UPLOAD_REQUEST_WARNING') }}
           </p>
           <div class="ls-delete-popover-btn-container">
             <v-btn small>
-              Cancel
+              {{ $t('HOME.CANCEL') }}
             </v-btn>
             <v-btn
               class="ls-delete-btn"
@@ -192,7 +192,7 @@
               color="error"
               @click="closeUploadRequest()"
             >
-              Proceed
+              {{ $t('HOME.PROCEED') }}
             </v-btn>
           </div>
         </div>
@@ -226,16 +226,6 @@ export default {
   },
   data() {
     return {
-      sortItems: [
-        {
-          text: 'Name',
-          value: 'name'
-        },
-        {
-          text: 'Size',
-          value: 'size'
-        }
-      ],
       search: '',
       sortBy: '',
       sortDesc: false
@@ -253,13 +243,13 @@ export default {
     headers() {
       const defaultHeaders = [
         {
-          text: 'NAME',
+          text: this.name,
           align: 'start',
           sortable: false,
           value: 'name',
         },
         {
-          text: 'SIZE',
+          text: this.size,
           align: 'end',
           sortable: false,
           value: 'size',
@@ -269,12 +259,30 @@ export default {
       return this.data.canDeleteDocument ? [
         ...defaultHeaders,
         {
-          text: 'Actions',
+          text: this.$t('HOME.ACTIONS'),
           align: 'end',
           value: 'actions',
           sortable: false
         }
       ] : defaultHeaders;
+    },
+    sortItems(){
+      return [
+        {
+          text: this.name,
+          value: 'name'
+        },
+        {
+          text: this.size,
+          value: 'size'
+        }
+      ];
+    },
+    name() {
+      return this.$t('HOME.NAME');
+    },
+    size() {
+      return this.$t('HOME.SIZE');
     }
   },
   methods: {
@@ -287,9 +295,9 @@ export default {
     },
     generateConfirmMessage (item) {
       if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
-        return `Are you sure you want to delete ${this.selected.length} entries?`;
+        return this.$t('MESSAGE.DELETE_ENTRIES_WARNING', {length: this.selected.length});
       } else {
-        return 'Are you sure you want to delete this entry?';
+        return this.$t('MESSAGE.DELETE_ENTRY_WARNING');
       }
     },
     selectSort (sortBy) {

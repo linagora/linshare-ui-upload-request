@@ -6,7 +6,7 @@
     >
       <v-expansion-panel>
         <v-expansion-panel-header class="request-details-header">
-          Request details
+          {{ $t('HOME.REQUEST_DETAILS') }}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <div class="request-details-content">
@@ -18,16 +18,14 @@
               </div>
               <div class="user-info-content">
                 <p class="user-info-content-welcome">
-                  Hello <span>{{ data.recipient && data.recipient.mail }}</span>,
+                  {{ $t('HOME.HELLO') }} <span>{{ data.recipient && data.recipient.mail }}</span>,
                 </p>
-                <p class="user-info-content-text">
-                  You received an upload request from <a :href="mailToOwner">{{ ownerName }}</a>. The upload request will be active until {{ expiryDate }} or the request closure. Beyond that, you could not be able to upload nor delete files.
-                </p>
+                <p class="user-info-content-text" v-html="$t('HOME.WELCOME_MESSAGE', {href: mailToOwner, ownerName, expiryDate})" />
               </div>
             </div>
             <div class="request-details-message">
               <div class="section-title">
-                Message
+                {{ $t('HOME.MESSAGE') }}
               </div>
               <div class="message-content">
                 {{ data.body }}
@@ -37,9 +35,9 @@
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header class="mb-0 section-title">
-                    Recipient list
+                    {{ $t('HOME.RECIPIENT_LIST') }}
                     <template v-slot:actions>
-                      <span class="recipient-toggle-icon">View</span>
+                      <span class="recipient-toggle-icon">{{ $t('HOME.VIEW') }}</span>
                       <v-icon color="#05B1FF">
                         mdi-chevron-down
                       </v-icon>
@@ -75,12 +73,12 @@
             </div>
             <div class="request-details-metadata">
               <div class="section-title">
-                Metadata
+                {{ $t('HOME.METADATA') }}
               </div>
               <div class="metadata-content">
                 <div class="metadata-content-item">
                   <div class="metadata-content-item-title">
-                    Activated:
+                    {{ $t('HOME.ACTIVATED') }}:
                   </div>
                   <div class="metadata-content-item-content">
                     {{ activationDate }}
@@ -88,7 +86,7 @@
                 </div>
                 <div class="metadata-content-item">
                   <div class="metadata-content-item-title">
-                    Expiration:
+                    {{ $t('HOME.EXPIRATION') }}:
                   </div>
                   <div class="metadata-content-item-content">
                     {{ expiryDate }}
@@ -96,7 +94,7 @@
                 </div>
                 <div class="metadata-content-item">
                   <div class="metadata-content-item-title">
-                    File count:
+                    {{ $t('HOME.FILE_COUNT') }}:
                   </div>
                   <div class="metadata-content-item-content">
                     {{ entries.length }} / {{ data.maxFileCount }}
@@ -104,7 +102,7 @@
                 </div>
                 <div class="metadata-content-item">
                   <div class="metadata-content-item-title">
-                    Max file size:
+                    {{ $t('HOME.MAX_FILE_SIZE') }}:
                   </div>
                   <div class="metadata-content-item-content">
                     {{ maxFileSize }}

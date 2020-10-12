@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    You are using the Open Source and free version of LinShare™, powered by Linagora © 2009–2019. Contribute to LinShare R&D by subscribing to an Enterprise offer.
+    {{ $t('FOOTER.CONTENT') }}
   </div>
 </template>
 

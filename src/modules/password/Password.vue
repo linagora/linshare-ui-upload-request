@@ -10,8 +10,8 @@
           ref="form" 
           @submit="submitPassword"
         >
-          <v-card-title>Enter your password for the upload request</v-card-title>
-          <v-card-subtitle>Please check the invitation email to get your password.</v-card-subtitle>
+          <v-card-title>{{ $t("PASSWORD.TITLE") }}</v-card-title>
+          <v-card-subtitle>{{ $t("PASSWORD.SUBTITLE") }}</v-card-subtitle>
           <div class="password-page__input-container">
             <v-text-field
               v-model="password"
@@ -19,7 +19,7 @@
               :rules="[rules.required]"
               :type="showPassword ? 'text' : 'password'"
               name="input-password"
-              label="Enter password"
+              :label="$t('PASSWORD.ENTER_PASSWORD')"
               @click:append="showPassword = !showPassword"
             />
           </div>
@@ -29,7 +29,7 @@
               text
               type="submit"
             >
-              Confirm
+              {{ $t("PASSWORD.CONFIRM") }}
             </v-btn>
           </v-card-actions>
         </v-form>
@@ -66,7 +66,7 @@ export default {
           router.push({ name: 'home', params: { id: requestId }});
         } else {
           this.$refs.form.reset();
-          this.$alert.open('Your password is incorrect. Please try again!', {
+          this.$alert.open(this.$t('MESSAGE.INCORRECT_PASSWORD'), {
             type: 'error'
           });
         }

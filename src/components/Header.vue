@@ -5,26 +5,34 @@
         <router-link :to="{ name: 'home' }">
           <img
             src="../assets/images/linshare-logo-white.png"
-            alt="Linshare Logo"
+            :alt="$t('HEADER.LOGO_ALT')"
           >
         </router-link>
       </li>
       <li class="header-title">
-        <span>Upload request</span>
+        <span>{{ $t('HEADER.UPLOAD_REQUEST') }}</span>
       </li>
     </ul>
+    <div class="header-right-side">
+      <LanguageSelector />
+    </div>
   </nav>
 </template>
 
 <script>
+import LanguageSelector from './LanguageSelector';
 export default {
-  name: 'Header'
+  name: 'Header',
+  components: {
+    LanguageSelector
+  }
 };
 </script>
 
 <style lang="scss" scoped>
   .ls-navbar {
     display: flex;
+    justify-content: space-between;
     z-index: 3;
     align-items: center;
     min-height: 50px;
@@ -53,6 +61,9 @@ export default {
           text-transform: uppercase;
         }
       }
+    }
+    .header-right-side {
+      padding-right: 10px;
     }
   }
 </style>

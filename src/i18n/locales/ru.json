@@ -4,11 +4,11 @@
     "LOGO_ALT": "Логотип Linshare"
   },
   "FOOTER": {
-    "CONTENT": "Вы используете Open Source и бесплатную версию LinShare™, питание от Linagora © 2009-2019. Участие в R&D LinShare, подписавшись на предложение Предприятие."
+    "CONTENT": "Вы используете бесплатную и открытую версию <a href='http://linshare.org' target='_blank'>LinShare™</a>, разработанную <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2020. Внесите вклад в исследование и разработку продукта, вступив в сообщество компании."
   },
   "HOME": {
-    "ORDER_BY": "По порядку",
-    "CANCEL": "Отмена",
+    "ORDER_BY": "Упорядочить по",
+    "CANCEL": "Отменить",
     "DELETE": "Удалить",
     "PROCEED": "Продолжить",
     "SEARCH": "Поиск",

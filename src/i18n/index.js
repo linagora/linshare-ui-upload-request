@@ -6,12 +6,7 @@ import { en, fr, ru, vn } from '@/i18n/locales';
 
 Vue.use(VueI18n);
 
-const messages = {
-  en,
-  fr,
-  vn,
-  ru
-};
+const messages = { en, fr, vn, ru };
 
 let cachedLanguage = LanguageStore.get();
 

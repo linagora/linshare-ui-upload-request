@@ -1,22 +1,22 @@
 export const LANGUAGE = {
   SUPPORTED_LANGUAGE: [
     {
-      name: 'United States',
+      name: 'English',
       key: 'us',
       language: 'en'
     },
     {
-      name: 'France',
+      name: 'Français',
       key: 'fr',
       language: 'fr'
     },
     {
-      name: 'Việt Nam',
+      name: 'Tiếng Việt',
       key: 'vn',
       language: 'vn'
     },
     {
-      name: 'Russia',
+      name: 'Pусский',
       key: 'ru',
       language: 'ru'
     }

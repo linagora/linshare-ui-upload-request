@@ -330,7 +330,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .home-page {
     .home-page-content {
       .home-page-card {
@@ -386,6 +386,10 @@ export default {
           .home-page-upload-toolbar-add-button {
             width: 56px;
           }
+        }
+
+        &-data-table thead {
+          text-transform: uppercase;
         }
 
         .drag-and-drop {

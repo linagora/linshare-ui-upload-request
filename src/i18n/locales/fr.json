@@ -1,31 +1,31 @@
 {
   "HEADER": {
-    "UPLOAD_REQUEST": "Demande de téléchargement",
+    "UPLOAD_REQUEST": "Invitation de dépôt",
     "LOGO_ALT": "Logo Linshare"
   },
   "FOOTER": {
-    "CONTENT": "Vous utilisez l'Open Source et la version gratuite de LinShare™, propulsé par Linagora © 2009-2019. Contribuer à la R&D de LinShare en souscrivant à une offre d'Entreprise."
+    "CONTENT": "Vous utilisez la version libre et gratuite de <a href='http://linshare.org' target='_blank'>LinShare™</a>, développé par : <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2020. Contribuez à la R&D du produit en souscrivant à une offre entreprise."
   },
   "HOME": {
-    "ORDER_BY": "Commande par",
+    "ORDER_BY": "Ordonnée par",
     "CANCEL": "Annuler",
     "DELETE": "Supprimer",
-    "PROCEED": "Proceed",
+    "PROCEED": "Procéder",
     "SEARCH": "Rechercher",
-    "CLOSED_UPLOAD_REQUEST": "Demande de téléchargement fermée",
-    "CLOSED_UPLOAD_REQUEST_MESSAGE": "Vous ne pouvez pas effectuer d'action sur cette demande de téléchargement",
+    "CLOSED_UPLOAD_REQUEST": "Invitation de dépôt fermée",
+    "CLOSED_UPLOAD_REQUEST_MESSAGE": "Vous ne pouvez pas effectuer d'action sur cette Invitation de dépôt",
     "DROP_YOUR_FILES_HERE": "Déposez vos fichiers ici",
-    "DRAG_AND_DROP_MESSAGE": "Faites glisser et déposez vos fichiers ici pour les télécharger",
-    "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de fermer la demande de téléchargement. Après la fermeture, vous ne pourrez pas télécharger de fichiers ou effectuer des actions sur les fichiers téléchargés.",
-    "WELCOME_MESSAGE": "Vous avez reçu une demande de téléchargement de <a href='{href}'>{ ownerName }</a>. La demande de téléchargement sera active jusqu'à { expiryDate } ou la fermeture de la demande. En outre, vous ne pouvez pas télécharger ni supprimer de fichiers.",
-    "REQUEST_DETAILS": "Détails de la demande",
+    "DRAG_AND_DROP_MESSAGE": "Glissez vos fichiers dans l'interface pour les déposer",
+    "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de fermer la Invitation de dépôt. Après la fermeture, vous ne pourrez pas télécharger les fichiers ou effectuer des actions sur les fichiers déposés.",
+    "WELCOME_MESSAGE": "Vous avez reçu une Invitation de dépôt de <a href='{href}'>{ ownerName }</a>. La Invitation de dépôt sera active jusqu'à { expiryDate } ou la fermeture de la demande. En outre, vous ne pouvez pas télécharger ni supprimer les fichiers.",
+    "REQUEST_DETAILS": "Détails de l'invitation de dépôt",
     "HELLO": "Bonjour",
     "MESSAGE": "Message",
     "RECIPIENT_LIST": "Liste des destinataires",
     "VIEW": "Afficher",
-    "METADATA": "Métadonnées",
-    "ACTIVATED": "Activé",
-    "EXPIRATION": "Expiration",
+    "METADATA": "Méta données",
+    "ACTIVATED": "Activée",
+    "EXPIRATION": "Date d'expiration",
     "FILE_COUNT": "Nombre de fichiers",
     "MAX_FILE_SIZE": "Taille maximale du fichier",
     "NAME": "Nom",
@@ -33,9 +33,9 @@
     "ACTIONS": "Actions"
   },
   "PASSWORD": {
-    "TITLE": "Entrez votre mot de passe pour la demande de téléchargement",
+    "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",
     "SUBTITLE": "Veuillez consulter l'e-mail d'invitation pour obtenir votre mot de passe.",
-    "ENTER_PASSWORD": "Entrez mot de passe",
+    "ENTER_PASSWORD": "Entrez votre mot de passe",
     "CONFIRM": "Confirmer"
   },
   "MESSAGE": {
@@ -45,7 +45,7 @@
     "DELETE_ENTRY_SUCCESS": "L'entrée a été supprimée avec succès !",
     "DELETE_ENTRIES_WARNING": "Etes-vous sûr de vouloir supprimer { length } entrées?",
     "DELETE_ENTRY_WARNING": "Etes-vous sûr de vouloir supprimer cette entrée?",
-    "INCORRECT_PASSWORD": "Votre mot de passe est incorrect. Veuillez réessayer !",
+    "INCORRECT_PASSWORD": "Le mot de passe actuel est incorrect!",
     "BAD_REQUEST": "Requête incorrecte",
     "FORBIDDEN": "Vous n'êtes pas autorisé à accéder à cette ressource.",
     "NOT_FOUND": "La page que vous recherchez est introuvable.",

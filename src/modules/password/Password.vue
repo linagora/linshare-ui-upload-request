@@ -7,7 +7,7 @@
         elevation="2"
       >
         <v-form
-          ref="form" 
+          ref="form"
           @submit="submitPassword"
         >
           <v-card-title>{{ $t("PASSWORD.TITLE") }}</v-card-title>

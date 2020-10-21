@@ -368,6 +368,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '~vuetify/src/styles/styles.sass';
+
   .mobile-search-input {
     transition: all 0.3s;
     background-color: #efefef;
@@ -528,7 +530,7 @@ export default {
     }
   }
 
-  @media (min-width: 960px) {
+  @media #{map-get($display-breakpoints, 'md-and-up')} {
     .home-page {
       .home-page-content {
         .home-page-card {

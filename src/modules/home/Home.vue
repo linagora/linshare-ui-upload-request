@@ -159,6 +159,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~vuetify/src/styles/styles.sass';
+
   .home-page {
     position: relative;
     background: url("../../assets/images/bandeau_accueil_linshare.svg");
@@ -175,7 +177,7 @@ export default {
     }
   }
 
-  @media (min-width: 960px) {
+  @media #{map-get($display-breakpoints, 'md-and-up')} {
     .home-page {
       background: none;
       background-color: #E5E5E5;

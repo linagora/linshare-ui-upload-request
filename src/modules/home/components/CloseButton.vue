@@ -17,7 +17,7 @@
         class="close-button"
         v-on="on"
       >
-        {{ isClosed ? 'Closed' : 'Close' }}
+        {{ isClosed ? $t('HOME.CLOSED') : $t('HOME.CLOSE') }}
       </v-btn>
     </template>
 
@@ -30,7 +30,7 @@
           {{ $t('HOME.CANCEL') }}
         </v-btn>
         <v-btn
-          class="ls-delete-btn"
+          class="ls-popover-btn-container-delete-btn"
           small
           color="error"
           @click="closeUploadRequest()"

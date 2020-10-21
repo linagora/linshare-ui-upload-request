@@ -179,6 +179,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~vuetify/src/styles/styles.sass';
+
   .home-page-request-details {
     margin: 20px;
     background-color: #ffffff;
@@ -226,7 +228,7 @@ export default {
             font-weight: 450;
           }
         }
-        %-text {
+        &-text {
           color: #5E5E5E;
           margin-bottom: 0;
         }
@@ -288,7 +290,7 @@ export default {
     }
   }
 
-  @media (min-width: 960px) {
+  @media #{map-get($display-breakpoints, 'md-and-up')} {
     .home-page-request-details {
       margin: 0;
     }

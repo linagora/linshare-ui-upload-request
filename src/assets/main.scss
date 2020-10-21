@@ -2,12 +2,15 @@
   max-width: 240px;
   padding: 10px;
   background-color: #ffffff;
-  .ls-popover-title {
+
+  &-title {
     text-align: center;
   }
-  .ls-popover-btn-container {
+
+  &-btn-container {
     float: right;
-    .ls-delete-btn {
+
+    &-delete-btn {
       margin-left: 10px;
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <div class="home-page-first-background" />
+    <div class="hidden-sm-and-down home-page-first-background" />
     <div class="home-page-content">
       <RequestDetails
         :data="data"
@@ -150,7 +150,7 @@ export default {
       return data.map(entry => {
         entry.originalSize = entry.size;
         entry.size = formatBytes(entry.size);
-        
+
         return entry;
       });
     }
@@ -161,18 +161,29 @@ export default {
 <style lang="scss" scoped>
   .home-page {
     position: relative;
-    min-height: 100vh;
-    background-color: #E5E5E5;
+    background: url("../../assets/images/bandeau_accueil_linshare.svg");
+
     .home-page-first-background {
       background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
       background-size: cover;
       height: 350px;
     }
+
     .home-page-content {
-      margin-top: -300px;
       margin-left: auto;
       margin-right: auto;
-      width: 60%;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .home-page {
+      background: none;
+      background-color: #E5E5E5;
+
+      .home-page-content {
+        width: 60%;
+        margin-top: -300px;
+      }
     }
   }
 </style>

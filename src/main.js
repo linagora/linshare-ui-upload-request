@@ -5,6 +5,7 @@ import vuetify from './plugins/vuetify';
 import { ApiService } from './services';
 import { i18n } from './i18n';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import './assets/main.scss';
 
 // Init custom plugins
 import './plugins/alert';

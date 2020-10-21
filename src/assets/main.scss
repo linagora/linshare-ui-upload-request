@@ -1,0 +1,14 @@
+.ls-popover {
+  max-width: 240px;
+  padding: 10px;
+  background-color: #ffffff;
+  .ls-popover-title {
+    text-align: center;
+  }
+  .ls-popover-btn-container {
+    float: right;
+    .ls-delete-btn {
+      margin-left: 10px;
+    }
+  }
+}

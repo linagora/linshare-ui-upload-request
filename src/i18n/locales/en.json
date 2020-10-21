@@ -30,7 +30,9 @@
     "MAX_FILE_SIZE": "Max file size",
     "NAME": "Name",
     "SIZE": "Size",
-    "ACTIONS": "Actions"
+    "ACTIONS": "Actions",
+    "CLOSE": "Close",
+    "CLOSED": "Closed"
   },
   "PASSWORD": {
     "TITLE": "Enter your password for the upload request",

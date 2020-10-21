@@ -30,7 +30,9 @@
     "MAX_FILE_SIZE": "Taille maximale du fichier",
     "NAME": "Nom",
     "SIZE": "Taille",
-    "ACTIONS": "Actions"
+    "ACTIONS": "Actions",
+    "CLOSE": "Ferme",
+    "CLOSED": "Fermée"
   },
   "PASSWORD": {
     "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",

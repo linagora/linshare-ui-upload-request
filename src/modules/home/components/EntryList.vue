@@ -7,7 +7,7 @@
           v-flow-browse
           icon
           depressed
-          class="home-page-upload-toolbar-button home-page-upload-toolbar-add-button"
+          class="hidden-sm-and-down home-page-upload-toolbar-button home-page-upload-toolbar-add-button"
           color="#05B1FF"
           large
         >
@@ -17,7 +17,7 @@
           <span class="home-page-upload-toolbar-subject">{{ data.subject }}</span>
         </div>
       </div>
-      <div class="home-page-upload-toolbar-util">
+      <div class="hidden-sm-and-down home-page-upload-toolbar-util">
         <div class="home-page-upload-toolbar-search-container">
           <v-text-field
             v-model="search"
@@ -29,69 +29,84 @@
           />
         </div>
         <div>
-          <v-menu
-            bottom
-            content-class="ls-sort-menu"
-            :close-on-content-click="false"
-            :offset-y="true"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                icon
-                depressed
-                class="home-page-upload-toolbar-button"
-                color="#5E5E5E"
-                large
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon>sort_by_alpha</v-icon>
-              </v-btn>
-            </template>
-
-            <div class="ls-sort-list-container">
-              <div class="ls-sort-list-title">
-                {{ $t('HOME.ORDER_BY') }}
-              </div>
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in sortItems"
-                  :key="index"
-                  class="ls-sort-list-item"
-                  @click="selectSort(item.value)"
-                >
-                  <v-list-item-icon>
-                    <v-icon v-show="sortBy === item.value">
-                      {{ !sortDesc ? 'mdi-menu-down' : 'mdi-menu-up' }}
-                    </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.text" />
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </div>
-          </v-menu>
+          <SortButton
+            :sort-desc="sortDesc"
+            :sort-by="sortBy"
+            :sort-fields="sortItems"
+            @selectSort="selectSort"
+          />
         </div>
       </div>
+      <div class="hidden-md-and-up home-page-upload-toolbar-close-button">
+        <CloseButton
+          :is-closed="data.closed"
+          @closeUploadRequest="closeUploadRequest()"
+        />
+      </div>
     </div>
-    <div class="home-page-upload-data-table">
+    <div class="home-page-upload-mobile-header hidden-md-and-up">
+      <v-icon @click="toggleSelectAll()">
+        {{ mobileCheckboxIcon }}
+      </v-icon>
+      <v-icon @click="showSearchInput = !showSearchInput">
+        mdi-magnify
+      </v-icon>
+      <SortButton
+        :sort-desc="sortDesc"
+        :sort-by="sortBy"
+        :sort-fields="sortItems"
+        @selectSort="selectSort"
+      />
+    </div>
+    <v-expand-transition>
+      <div
+        v-show="showSearchInput"
+        class="mobile-search-input"
+      >
+        <div class="mobile-search-input-wrapper">
+          <v-icon
+            class="mobile-search-input-close-btn"
+            @click="showSearchInput = false"
+          >
+            mdi-close
+          </v-icon>
+          <v-text-field
+            v-model="search"
+            class="home-page-upload-toolbar-search"
+            :label="$t('HOME.SEARCH')"
+            single-line
+            hide-details
+          />
+        </div>
+      </div>
+    </v-expand-transition>
+    <div
+      v-flow-drop
+      class="home-page-upload-data-table"
+      :style="{'pointer-events': data.closed ? 'none': 'all'}"
+    >
       <v-data-table
         v-model="selectedEntries"
+        item-key="uuid"
+        show-select
+        hide-default-footer
+        :items-per-page="pageSize"
         :headers="headers"
         :items="entries"
         :search="search"
+        :custom-filter="customFilter"
         :custom-sort="customSort"
-        item-key="uuid"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
-        show-select
+        :page.sync="page"
+        :mobile-breakpoint="0"
+        @page-count="pageCount = $event"
       >
         <template #item.actions="{ item }">
           <v-menu
             top
             :close-on-content-click="true"
-            content-class="ls-delete-popover"
+            content-class="ls-popover"
             min-width="200"
             min-height="80"
             offset-x
@@ -107,10 +122,10 @@
             </template>
 
             <div>
-              <p class="ls-delete-popover-title">
+              <p class="ls-popover-title">
                 {{ generateConfirmMessage(item) }}
               </p>
-              <div class="ls-delete-popover-btn-container">
+              <div class="ls-popover-btn-container">
                 <v-btn small>
                   {{ $t('HOME.CANCEL') }}
                 </v-btn>
@@ -127,15 +142,8 @@
           </v-menu>
         </template>
         <template #no-data>
-          <div
-            v-flow-drop
-            :style="{'pointer-events': data.closed ? 'none': 'all'}"
-            class="drag-and-drop"
-          >
-            <div
-              ref="dropZone"
-              class="drag-and-drop-content"
-            >
+          <div class="drag-and-drop">
+            <div class="drag-and-drop-content">
               <div class="drag-icon-container">
                 <img
                   v-if="!data.closed"
@@ -155,55 +163,53 @@
         </template>
       </v-data-table>
     </div>
-    <div
-      v-if="data.canClose"
-      class="home-page-card--close-btn-container"
-    >
-      <v-menu
-        top
-        :close-on-content-click="true"
-        content-class="ls-delete-popover"
-        min-width="300"
-        min-height="80"
-        offset-x
-        absolute
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            v-bind="attrs"
-            :disabled="data.closed"
-            v-on="on"
-          >
-            {{ data.closed ? 'Closed' : 'Close' }}
-          </v-btn>
-        </template>
+    <div class="home-page-card-footer">
+      <div class="table-pagination">
+        <v-pagination
+          v-model="page"
+          :length="pageCount"
+        />
+      </div>
 
-        <div>
-          <p class="ls-delete-popover-title">
-            {{ $t('HOME.CLOSED_UPLOAD_REQUEST_WARNING') }}
-          </p>
-          <div class="ls-delete-popover-btn-container">
-            <v-btn small>
-              {{ $t('HOME.CANCEL') }}
-            </v-btn>
-            <v-btn
-              class="ls-delete-btn"
-              small
-              color="error"
-              @click="closeUploadRequest()"
-            >
-              {{ $t('HOME.PROCEED') }}
-            </v-btn>
-          </div>
-        </div>
-      </v-menu>
+      <div
+        v-if="data.canClose"
+        class="close-btn-container hidden-sm-and-down "
+      >
+        <CloseButton
+          :is-closed="data.closed"
+          @closeUploadRequest="closeUploadRequest()"
+        />
+      </div>
     </div>
+
+    <v-btn
+      v-if="!data.closed"
+      v-flow-browse
+      fab
+      large
+      color="primary"
+      fixed
+      right
+      bottom
+      class="hidden-md-and-up"
+    >
+      <v-icon dark>
+        add
+      </v-icon>
+    </v-btn>
   </div>
 </template>
 
 <script>
+import CloseButton from './CloseButton';
+import SortButton from './SortButton';
+
 export default {
   name: 'EntryList',
+  components: {
+    CloseButton,
+    SortButton
+  },
   props: {
     data: {
       type: Object,
@@ -226,8 +232,12 @@ export default {
   },
   data() {
     return {
+      page: 1,
+      pageCount: 0,
+      pageSize: 10,
       search: '',
-      sortBy: '',
+      showSearchInput: false,
+      sortBy: ['name'],
       sortDesc: false
     };
   },
@@ -239,6 +249,17 @@ export default {
       set(value) {
         this.$emit('changeSelected', value);
       }
+    },
+    mobileCheckboxIcon() {
+      return this.selectedEntriesInPage.length ? (this.selectedEntriesInPage.length === this.entriesInPage.length ? 'mdi-checkbox-marked' : 'mdi-minus-box') : 'mdi-checkbox-blank-outline';
+    },
+    entriesInPage() {
+      const tableEntries = this.customSort(this.entries.filter((item) => this.customFilter(null, this.search, item)), [this.sortBy], [this.sortDesc]);
+
+      return tableEntries.slice((this.page - 1) * this.pageSize, this.page * this.pageSize);
+    },
+    selectedEntriesInPage() {
+      return this.selectedEntries.filter(value => this.entriesInPage.find(entry => entry.uuid === value.uuid));
     },
     headers() {
       const defaultHeaders = [
@@ -255,7 +276,7 @@ export default {
           value: 'size',
         }
       ];
-      
+
       return this.data.canDeleteDocument ? [
         ...defaultHeaders,
         {
@@ -320,39 +341,84 @@ export default {
           }
         }
       });
-      
+
       return items;
+    },
+    customFilter(value, query, item) {
+      if (!query) {return true;}
+
+      return item.name.indexOf(query) >= 0;
     },
     closeUploadRequest() {
       this.$emit('closeUploadRequest');
+    },
+    toggleSelectAll() {
+      if (this.selectedEntriesInPage.length === this.entriesInPage.length) {
+        this.selectedEntries = this.selectedEntries.filter(entry => !this.selectedEntriesInPage.some(selected => selected.uuid === entry.uuid));
+      } else {
+        this.entriesInPage.forEach(entry => {
+          if (!this.selectedEntries.some(selected => selected.uuid === entry.uuid)) {
+            this.selectedEntries.push(entry);
+          }
+        });
+      }
     }
   },
 };
 </script>
 
 <style lang="scss">
+  .mobile-search-input {
+    transition: all 0.3s;
+    background-color: #efefef;
+    &-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 16px;
+    }
+  }
+  .mobile-search-input-close-btn {
+    padding: 5px;
+    margin-right: 8px;
+  }
   .home-page {
     .home-page-content {
       .home-page-card {
         background-color: #ffffff;
         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
-        border-radius: 4px;
-        &--close-btn-container {
-          padding: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          border-top: 1px solid #ddd;
+
+        &-footer {
+          .table-pagination {
+            padding: 10px 0;
+
+            .v-pagination__item.v-pagination__item--active.primary {
+              &:hover,
+              &:focus,
+              &:active {
+                outline: none !important;
+              }
+            }
+          }
+          .close-btn-container {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 1px solid #ddd;
+          }
         }
       }
+
       .home-page-upload {
-        margin-top: 30px;
-        margin-bottom: 30px;
+
         &-toolbar {
           display: flex;
           align-items: center;
           justify-content: space-between;
           border-bottom: 1px solid #E2E2E2;
+          height: 48px;
+
           &-button {
             border-radius: 0;
           }
@@ -383,17 +449,35 @@ export default {
             align-items: center;
             padding-right: 15px;
           }
-          .home-page-upload-toolbar-add-button {
-            width: 56px;
+          &-close-button {
+            padding-right: 15px;
           }
         }
 
-        &-data-table thead {
-          text-transform: uppercase;
+        &-mobile-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 16px;
+          background-color: #F9F9F9;
+        }
+
+        &-data-table {
+          thead {
+            text-transform: uppercase;
+          }
+
+          .v-data-table-header {
+            display: none;
+          }
+
+          .v-data-table__wrapper {
+            height: calc(100vh - 297px);
+            overflow-y: visible;
+          }
         }
 
         .drag-and-drop {
-          height: 60vh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -443,46 +527,26 @@ export default {
       }
     }
   }
-  .ls-delete-popover {
-    max-width: 240px;
-    padding: 10px;
-    background-color: #ffffff;
-    .ls-delete-popover-title {
-      text-align: center;
-    }
-    .ls-delete-popover-btn-container {
-      float: right;
-      .ls-delete-btn {
-        margin-left: 10px;
-      }
-    }
-  }
-  .ls-sort-menu {
-    padding: 0;
-    .ls-sort-list-container {
-      background: #ffffff;
-      .ls-sort-list-title {
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-        text-align: center;
-        font-size: 18px;
-      }
-    }
-    .v-list {
-      padding: 0;
-    }
-    .ls-sort-list-item {
-      border-bottom: 1px solid #eee;
-      cursor: pointer;
-      .v-list-item__icon {
-        margin: 10px 10px 10px -6px;
-      }
-      .v-list-item__title {
-        font-size: 0.9rem;
-      }
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.075);
-        color: #444;
+
+  @media (min-width: 960px) {
+    .home-page {
+      .home-page-content {
+        .home-page-card {
+          border-radius: 4px;
+        }
+
+        .home-page-upload {
+          margin-top: 30px;
+          margin-bottom: 30px;
+
+          .v-data-table-header {
+            display: table-header-group;
+          }
+
+          .v-data-table__wrapper {
+            height: calc(100vh - 437px);
+          }
+        }
       }
     }
   }

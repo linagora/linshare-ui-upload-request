@@ -11,16 +11,17 @@
         <v-expansion-panel-content>
           <div class="request-details-content">
             <div class="request-details-user-info">
-              <div>
-                <div class="user-info-icon">
-                  <img src="../../../assets/images/upload-request-2.svg">
-                </div>
+              <div class="hidden-sm-and-down user-info-icon">
+                <img src="../../../assets/images/upload-request-2.svg">
               </div>
               <div class="user-info-content">
                 <p class="user-info-content-welcome">
                   {{ $t('HOME.HELLO') }} <span>{{ data.recipient && data.recipient.mail }}</span>,
                 </p>
-                <p class="user-info-content-text" v-html="$t('HOME.WELCOME_MESSAGE', {href: mailToOwner, ownerName, expiryDate})" />
+                <p
+                  class="user-info-content-text"
+                  v-html="$t('HOME.WELCOME_MESSAGE', {href: mailToOwner, ownerName, expiryDate})"
+                />
               </div>
             </div>
             <div class="request-details-message">
@@ -153,7 +154,7 @@ export default {
     },
     mailToOwner() {
       const data = this.data;
-      
+
       return data.owner && data.owner.mail ? `mailto:${data.owner.mail}` : '';
     },
     ownerName() {
@@ -162,10 +163,10 @@ export default {
       if (data.owner) {
         data.owner.firstName = data.owner.firstName || '';
         data.owner.lastName = data.owner.lastName || '';
-        
+
         return `${data.owner.firstName} ${data.owner.lastName}`;
       }
-      
+
       return '';
     }
   },
@@ -178,116 +179,118 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .home-page {
-    .home-page-content {
-      .home-page-card {
-        background-color: #ffffff;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
-        border-radius: 4px;
+  .home-page-request-details {
+    margin: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+    .section-title {
+      line-height: 16px;
+      font-weight: 500;
+      font-size: 17px;
+      color: #5E5E5E;
+      margin-bottom: 10px;
+    }
+    .request-details-header {
+      text-transform: uppercase;
+      line-height: 15px;
+      color: #5E5E5E;
+      font-weight: 500;
+    }
+    .v-expansion-panel-header {
+      border-bottom: 1px solid #E2E2E2;
+    }
+    .request-details-content {
+      padding-top: 18px;
+    }
+    .request-details-user-info {
+      display: flex;
+      align-items: flex-start;
+      .user-info-icon {
+        width: 65px;
+        height: 65px;
+        padding: 15px;
+        margin-right: 25px;
+        background-color: #F1F1F1;
+        img {
+          width: 35px;
+          height: 35px;
+        }
       }
-      .home-page-request-details {
-        .section-title {
-          line-height: 16px;
-          font-weight: 500;
-          font-size: 17px;
+      .user-info-content {
+        &-welcome {
           color: #5E5E5E;
-          margin-bottom: 10px;
-        }
-        .request-details-header {
-          text-transform: uppercase;
-          line-height: 15px;
-          color: #5E5E5E;
-          font-weight: 500;
-        }
-        .v-expansion-panel-header {
-          border-bottom: 1px solid #E2E2E2;
-        }
-        .request-details-content {
-          padding: 20px 10px;
-        }
-        .request-details-user-info {
-          display: flex;
-          align-items: flex-start;
-          .user-info-icon {
-            width: 65px;
-            height: 65px;
-            padding: 15px;
-            background-color: #F1F1F1;
-            img {
-              width: 35px;
-              height: 35px;
-            }
-          }
-          .user-info-content {
-            margin-left: 25px;
-            &-welcome {
-              color: #5E5E5E;
-              margin-bottom: 0;
-              span {
-                font-weight: 450;
-              }
-            }
-            %-text {
-              color: #5E5E5E;
-              margin-bottom: 0;
-            }
+          margin-bottom: 0;
+          span {
+            font-weight: 450;
           }
         }
-        .request-details-message {
-          margin-top: 20px;
-          padding-bottom: 30px;
-          border-bottom: 1px solid #E2E2E2;
-          .message-content {
+        %-text {
+          color: #5E5E5E;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .request-details-message {
+      margin-top: 20px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #E2E2E2;
+      .message-content {
+        font-size: 15px;
+        color: #5E5E5E;
+      }
+    }
+    .request-details-recipients {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E2E2E2;
+      .recipient-toggle-icon {
+        color: #05B1FF;
+        font-size: 12px;
+        margin-top: 4px;
+        font-weight: 400;
+      }
+      .v-expansion-panel::before {
+        box-shadow: none;
+      }
+      .v-expansion-panel-header {
+        padding: 0;
+        border: none;
+      }
+      .v-expansion-panel-content ::v-deep .v-expansion-panel-content__wrap {
+        padding: 0;
+      }
+    }
+    .request-details-metadata {
+      margin-top: 20px;
+      .metadata-content {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        &-item {
+          padding-right: 15px;
+          margin-bottom: 15px;
+          &-title {
+            font-size: 14px;
+            line-height: 14px;
+            color: #939393;
+            margin-bottom: 10px;
+          }
+          &-content {
             font-size: 15px;
-            color: #5E5E5E;
-          }
-        }
-        .request-details-recipients {
-          padding-bottom: 10px;
-          border-bottom: 1px solid #E2E2E2;
-          .recipient-toggle-icon {
-            color: #05B1FF;
-            font-size: 12px;
-            margin-top: 4px;
-            font-weight: 400;
-          }
-          .v-expansion-panel::before {
-            box-shadow: none;
-          }
-          .v-expansion-panel-header {
-            padding: 0;
-            border: none;
-          }
-          .v-expansion-panel-content ::v-deep .v-expansion-panel-content__wrap {
-            padding: 0;
-          }
-        }
-        .request-details-metadata {
-          margin-top: 20px;
-          .metadata-content {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            &-item {
-              padding-right: 15px;
-              margin-bottom: 15px;
-              &-title {
-                font-size: 14px;
-                line-height: 14px;
-                color: #939393;
-                margin-bottom: 10px;
-              }
-              &-content {
-                font-size: 15px;
-                line-height: 15px;
-                color: #333333;
-              }
-            }
+            line-height: 15px;
+            color: #333333;
           }
         }
       }
-    } 
+    }
+  }
+
+  @media (min-width: 960px) {
+    .home-page-request-details {
+      margin: 0;
+    }
   }
 </style>

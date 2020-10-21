@@ -30,7 +30,9 @@
     "MAX_FILE_SIZE": "Kích cỡ tập tin tối đa",
     "NAME": "Tên",
     "SIZE": "Kích cỡ",
-    "ACTIONS": "Hành động"
+    "ACTIONS": "Hành động",
+    "CLOSE": "Đóng",
+    "CLOSED": "Đã đóng"
   },
   "PASSWORD": {
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",

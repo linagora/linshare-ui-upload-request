@@ -13,18 +13,25 @@
         <span>{{ $t('HEADER.UPLOAD_REQUEST') }}</span>
       </li>
     </ul>
-    <div class="header-right-side">
-      <LanguageSelector />
+    <div class="header-right-side-container">
+      <div class="upload-bar-container">
+        <UploadBar />
+      </div>
+      <div class="header-right-side">
+        <LanguageSelector />
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
 import LanguageSelector from './LanguageSelector';
+import UploadBar from './UploadBar';
 export default {
   name: 'Header',
   components: {
-    LanguageSelector
+    LanguageSelector,
+    UploadBar
   }
 };
 </script>
@@ -66,8 +73,15 @@ export default {
         }
       }
     }
-    .header-right-side {
-      padding-right: 10px;
+    .header-right-side-container {
+      display: flex;
+      align-items: center;
+      .upload-bar-container {
+        margin-right: 20px;
+      }
+      .header-right-side {
+        padding-right: 10px;
+      }
     }
   }
 </style>

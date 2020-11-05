@@ -54,5 +54,12 @@
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "Bạn không thể tải lên quá {length} tập tin",
     "ERROR_FILE_SIZE_EXCEEDED": "Tập tin của bạn không thể vượt quá {size}",
     "ERROR_NOT_ENOUGH_SPACE": "Bạn không còn đủ dung lượng lưu trữ"
+  },
+  "UPLOAD_BAR": {
+    "EMPTY": "Nhấn vào nút {icon} để tải lên tập tin mới.",
+    "UPLOADS": "Tải lên",
+    "DONE": "xong",
+    "PAUSED": "tạm dừng",
+    "SERVER_PROCESSING": "đang xử lí"
   }
 }

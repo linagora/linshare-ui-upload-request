@@ -1,49 +1,60 @@
 <template>
-  <div class="password-page">
-    <div class="password-page-first-background" />
-    <div class="password-page-content">
-      <v-card
-        class="password-page__card-container"
-        elevation="2"
-      >
-        <v-form
-          ref="form"
-          @submit="submitPassword"
+  <div>
+    <Header />
+    <div class="password-page">
+      <div class="password-page-first-background" />
+      <div class="password-page-content">
+        <v-card
+          class="password-page__card-container"
+          elevation="2"
         >
-          <v-card-title>{{ $t("PASSWORD.TITLE") }}</v-card-title>
-          <v-card-subtitle>{{ $t("PASSWORD.SUBTITLE") }}</v-card-subtitle>
-          <div class="password-page__input-container">
-            <v-text-field
-              v-model="password"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required]"
-              :type="showPassword ? 'text' : 'password'"
-              name="input-password"
-              :label="$t('PASSWORD.ENTER_PASSWORD')"
-              @click:append="showPassword = !showPassword"
-            />
-          </div>
-          <v-card-actions class="password-page__action-container">
-            <v-btn
-              color="#1976D2"
-              text
-              type="submit"
-            >
-              {{ $t("PASSWORD.CONFIRM") }}
-            </v-btn>
-          </v-card-actions>
-        </v-form>
-      </v-card>
+          <v-form
+            ref="form"
+            @submit="submitPassword"
+          >
+            <v-card-title>{{ $t("PASSWORD.TITLE") }}</v-card-title>
+            <v-card-subtitle>{{ $t("PASSWORD.SUBTITLE") }}</v-card-subtitle>
+            <div class="password-page__input-container">
+              <v-text-field
+                v-model="password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :rules="[rules.required]"
+                :type="showPassword ? 'text' : 'password'"
+                name="input-password"
+                :label="$t('PASSWORD.ENTER_PASSWORD')"
+                @click:append="showPassword = !showPassword"
+              />
+            </div>
+            <v-card-actions class="password-page__action-container">
+              <v-btn
+                color="#1976D2"
+                text
+                type="submit"
+              >
+                {{ $t("PASSWORD.CONFIRM") }}
+              </v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-card>
+      </div>
     </div>
+    <Footer />
+    <AppAlert />
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { ErrorService } from '@/services';
 import { PasswordStore } from '@/store';
 import router from '@/router';
 export default {
   name: 'Password',
+  components: {
+    Header,
+    Footer,
+  },
   data() {
     return {
       password: '',

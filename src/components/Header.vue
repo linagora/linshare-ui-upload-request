@@ -15,7 +15,7 @@
     </ul>
     <div class="header-right-side-container">
       <div class="upload-bar-container">
-        <UploadBar />
+        <slot />
       </div>
       <div class="header-right-side">
         <LanguageSelector />
@@ -26,12 +26,10 @@
 
 <script>
 import LanguageSelector from './LanguageSelector';
-import UploadBar from './UploadBar';
 export default {
   name: 'Header',
   components: {
-    LanguageSelector,
-    UploadBar
+    LanguageSelector
   }
 };
 </script>

@@ -476,6 +476,10 @@ export default {
           .v-data-table__wrapper {
             height: calc(100vh - 297px);
             overflow-y: visible;
+            .v-data-table__empty-wrapper {
+              background: #eeeeee;
+              height: calc(100vh - 345px);
+            }
           }
         }
 
@@ -539,7 +543,6 @@ export default {
 
         .home-page-upload {
           margin-top: 30px;
-          margin-bottom: 30px;
 
           .v-data-table-header {
             display: table-header-group;
@@ -547,6 +550,9 @@ export default {
 
           .v-data-table__wrapper {
             height: calc(100vh - 437px);
+            .v-data-table__empty-wrapper {
+              height: calc(100vh - 485px);
+            }
           }
         }
       }

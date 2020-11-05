@@ -1,25 +1,35 @@
 <template>
-  <div class="home-page">
-    <div class="hidden-sm-and-down home-page-first-background" />
-    <div class="home-page-content">
-      <RequestDetails
-        :data="data"
-        :entries="entries"
-      />
-      <EntryList
-        :data="data"
-        :entries="entries"
-        :selected="selected"
-        @deleteMultipleEntries="deleteMultipleEntries"
-        @deleteSingleEntry="deleteSingleEntry"
-        @changeSelected="changeSelected"
-        @closeUploadRequest="closeUploadRequest"
-      />
+  <div>
+    <Header>
+      <UploadBar :validate-file-before-upload="validateFileBeforeUpload" />
+    </Header>
+    <div class="home-page">
+      <div class="hidden-sm-and-down home-page-first-background" />
+      <div class="home-page-content">
+        <RequestDetails
+          :data="data"
+          :entries="entries"
+        />
+        <EntryList
+          :data="data"
+          :entries="entries"
+          :selected="selected"
+          @deleteMultipleEntries="deleteMultipleEntries"
+          @deleteSingleEntry="deleteSingleEntry"
+          @changeSelected="changeSelected"
+          @closeUploadRequest="closeUploadRequest"
+        />
+      </div>
     </div>
+    <Footer />
+    <AppAlert />
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import UploadBar from '@/components/UploadBar';
 import { UploadRequestService } from '@/services';
 import { FlowService } from '@/services';
 import { formatBytes, validateUpload } from '@/common';
@@ -31,7 +41,10 @@ export default {
   name: 'Home',
   components: {
     RequestDetails,
-    EntryList
+    EntryList,
+    Header,
+    Footer,
+    UploadBar
   },
   data() {
     return {
@@ -64,7 +77,7 @@ export default {
       });
 
       flow.on('fileAdded', file => {
-        const error = validateUpload(file, { ...this.data, currentFiles: this.entries });
+        const error = this.validateFileBeforeUpload(file);
 
         if (error) {
           this.$alert.open(error, { type: 'error' });
@@ -153,6 +166,10 @@ export default {
 
         return entry;
       });
+    },
+
+    validateFileBeforeUpload(file) {
+      return validateUpload(file, { ...this.data, currentFiles: this.entries });
     }
   }
 };
@@ -164,6 +181,7 @@ export default {
   .home-page {
     position: relative;
     background: url("../../assets/images/bandeau_accueil_linshare.svg");
+    padding-bottom: 20px;
 
     .home-page-first-background {
       background-image: url("../../assets/images/bandeau_accueil_linshare.svg");

@@ -1,10 +1,15 @@
 <template>
   <div class="upload-bar">
-    <v-menu offset-y content-class="upload-bar-menu" :close-on-content-click="false" :close-on-click="false">
+    <v-menu
+      offset-y
+      content-class="upload-bar-menu"
+      :close-on-content-click="false"
+      :close-on-click="false"
+    >
       <template v-slot:activator="{ on, attrs }">
         <v-badge
-          :content="1"
-          :value="1"
+          :content="files.length"
+          :value="files.length"
           color="red"
           overlap
         >
@@ -20,13 +25,39 @@
       <div>
         <v-tabs class="upload-bar-tabs">
           <v-tab>
-            Uploads
+            {{ $t('UPLOAD_BAR.UPLOADS') }}
           </v-tab>
           <v-tab-item>
-            <UploadItem />
-            <UploadItem />
-            <UploadItem />
-            <UploadItem />
+            <div v-if="files.length">
+              <UploadItem
+                v-for="file in files"
+                :key="file.uniqueIdentifier"
+                :data="file"
+                :completed="file.isCompleted"
+                :error="file.error"
+                :error-message="file.errorMessage"
+                :doing-async-upload="file.doingAsyncUpload"
+                :paused="file.paused"
+                :remaining-time="file.timeRemaining()"
+                @removeItem="removeItem"
+                @pause="pause"
+                @resume="resume"
+                @cancel="cancel"
+                @retry="retry"
+              />
+            </div>
+            <div
+              v-if="!files.length"
+              class="upload-bar-empty"
+            >
+              <i18n path="UPLOAD_BAR.EMPTY">
+                <template v-slot:icon>
+                  <v-icon class="upload-bar-add-icon">
+                    add
+                  </v-icon>
+                </template>
+              </i18n>
+            </div>
           </v-tab-item>
         </v-tabs>
       </div>
@@ -36,10 +67,82 @@
 
 <script>
 import UploadItem from './UploadItem';
+import { FlowService } from '@/services';
 export default {
   name: 'UploadBar',
   components: {
     UploadItem
+  },
+  props: {
+    validateFileBeforeUpload: {
+      type: Function,
+      default: () => true
+    }
+  },
+  data() {
+    return {
+      files: [],
+      data: {},
+    };
+  },
+  created() {
+    const flow = FlowService.getFlowObject();
+
+    flow.on('filesSubmitted', (files) => {
+      this.files.push(...files);  
+    });
+
+    flow.on('fileSuccess', (file, response) => {
+      try {
+        response = JSON.parse(response);
+      } catch (e) {
+        response = {};
+      }
+
+      if (response.chunkUploadSuccess) {
+        this.files = this.files.map(f => {
+          if (f.uniqueIdentifier === file.uniqueIdentifier) {
+            f.isCompleted = true;
+          }
+          
+          return f;
+        });
+      }
+    });
+  },
+  methods: {
+    removeItem(item) {
+      this.files = this.files.filter(f => f.uniqueIdentifier !== item.uniqueIdentifier);
+    },
+    pause(file) {
+      file.pause();
+    },
+    resume(file) {
+      const error = this.validateFileBeforeUpload(file);
+
+      if (error) {
+        this.$alert.open(error, { type: 'error' });
+        
+        return;
+      }
+      
+      file.resume();
+    },
+    cancel(file) {
+      file.cancel();
+      this.removeItem(file);
+    },
+    retry(file) {
+      const error = this.validateFileBeforeUpload(file);
+
+      if (error) {
+        this.$alert.open(error, { type: 'error' });
+        
+        return;
+      }
+
+      file.retry();
+    },
   }
 };
 </script>
@@ -70,6 +173,18 @@ export default {
     .v-tab {
       width: 100%;
       max-width: auto;
+    }
+  }
+  .upload-bar-empty {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    .upload-bar-add-icon {
+      color: #05B1FF;
     }
   }
 </style>

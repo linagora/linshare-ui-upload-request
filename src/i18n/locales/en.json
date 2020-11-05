@@ -54,5 +54,12 @@
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "You cannot upload more than {length} files",
     "ERROR_FILE_SIZE_EXCEEDED": "Your file cannot exceed {size}",
     "ERROR_NOT_ENOUGH_SPACE": "There is not enough space on your upload storage"
+  },
+  "UPLOAD_BAR": {
+    "EMPTY": "Click the {icon} button to upload new file.",
+    "UPLOADS": "Uploads",
+    "DONE": "done",
+    "PAUSED": "paused",
+    "SERVER_PROCESSING": "server processing"
   }
 }

@@ -54,5 +54,12 @@
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "Vous ne pouvez pas télécharger plus de { length } fichiers",
     "ERROR_FILE_SIZE_EXCEEDED": "Votre fichier ne peut pas dépasser { size }",
     "ERROR_NOT_ENOUGH_SPACE": "Il n'y a pas suffisamment d'espace sur votre stockage de téléchargement"
+  },
+  "UPLOAD_BAR": {
+    "EMPTY": "Cliquez sur le bouton {icon} pour télécharger un nouveau fichier.",
+    "UPLOADS": "Téléchargements",
+    "DONE": "terminé",
+    "PAUSED": "mis en pause",
+    "SERVER_PROCESSING": "le serveur traite"
   }
 }

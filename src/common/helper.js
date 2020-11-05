@@ -50,3 +50,35 @@ export function generateHttpErrorMessage(statusCode) {
 export function validHttpErrorStatusCode(code) {
   return [400, 401, 403, 404, 500].includes(code);
 }
+
+export function convertSecToTimeDisplay(sec) {
+  const NB_SECONDS_IN_DAY = 3600 * 24,
+    NB_SECONDS_IN_HOUR = 3600,
+    NB_SECONDS_IN_MIN = 60;
+
+  function secToHour(seconds) {
+    return parseInt(seconds/NB_SECONDS_IN_HOUR)  + ' h ' +
+      parseInt((parseFloat(seconds/NB_SECONDS_IN_HOUR) - parseInt(seconds/NB_SECONDS_IN_HOUR)) * 60) + ' min ';
+  }
+
+  function secToMin(seconds) {
+    return parseInt(seconds/NB_SECONDS_IN_MIN) + ' min ' +
+      Math.round((parseFloat(seconds/NB_SECONDS_IN_MIN) - parseInt(seconds/NB_SECONDS_IN_MIN)) * 60) + ' s';
+  }
+
+  function remainingTimeToShow(seconds) {
+    if (!Number.isFinite(seconds)) {
+      return '-';
+    }
+
+    if (seconds < NB_SECONDS_IN_MIN) {
+      return Math.round(seconds) + ' s';
+    } else if (NB_SECONDS_IN_MIN <= seconds < NB_SECONDS_IN_HOUR) {
+      return secToMin(seconds);
+    } else if (NB_SECONDS_IN_HOUR <= seconds < NB_SECONDS_IN_DAY) {
+      return secToHour(seconds);
+    }
+  }
+
+  return remainingTimeToShow(sec);
+}

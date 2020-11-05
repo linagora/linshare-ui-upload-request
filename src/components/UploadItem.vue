@@ -3,35 +3,146 @@
     <div class="upload-item-info">
       <div class="upload-item-info-text-container">
         <div class="upload-item-info-name-container">
-          <h5>Screenshot from 2020/10/30 Screenshot from 2020/10/30</h5>
+          <h5>{{ data.name }}</h5>
         </div>
         <div class="upload-item-info-size-container">
-          <p>200.1 kb</p>
+          <p>{{ size }}</p>
         </div>
       </div>
       <div class="upload-item-info-progress-container">
         <div>
-          <span class="upload-item-info-progress-container-status">done</span>
+          <span class="upload-item-info-progress-container-status">
+            {{ uploadStatus }}
+          </span>
         </div>
         <div>
           <v-progress-linear
             background-color="#aaa"
             color="#00bfa5"
-            value="15"
+            :value="data.progress() * 100"
           />
         </div>
       </div>
     </div>
     <div class="upload-item-check-container">
-      <v-icon class="upload-item-check-container-icon upload-item-check-container-view">mdi-eye</v-icon>
-      <v-icon class="upload-item-check-container-icon upload-item-check-container-check">mdi-check</v-icon>
+      <v-icon
+        v-show="completed && error"
+        class="upload-item-check-container-icon upload-item-check-container-retry"
+        @click="retry()"
+      >
+        mdi-restart
+      </v-icon>
+      <v-icon
+        v-show="!completed && !paused"
+        class="upload-item-check-container-icon upload-item-check-container-pause"
+        @click="pause()"
+      >
+        mdi-pause
+      </v-icon>
+      <v-icon
+        v-show="!completed && paused"
+        class="upload-item-check-container-icon upload-item-check-container-resume"
+        @click="resume()"
+      >
+        mdi-play-circle
+      </v-icon>
+      <v-icon
+        v-show="completed"
+        class="upload-item-check-container-icon upload-item-check-container-check"
+        @click="removeItem()"
+      >
+        mdi-check
+      </v-icon>
+      <v-icon
+        v-show="!completed"
+        class="upload-item-check-container-icon upload-item-check-container-cancel"
+        @click="cancel()"
+      >
+        mdi-cancel
+      </v-icon>
     </div>
   </div>
 </template>
 
 <script>
+import { formatBytes, convertSecToTimeDisplay } from '@/common';
 export default {
   name: 'UploadItem',
+  props: {
+    data: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    error: {
+      type: Boolean,
+      default: false
+    },
+    errorMessage: {
+      type: String,
+      default: ''
+    },
+    doingAsyncUpload: {
+      type: Boolean,
+      default: false,
+    },
+    paused: {
+      type: Boolean,
+      default: false,
+    },
+    remainingTime: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    size() {
+      return formatBytes(this.data.size);
+    },
+    uploadStatus() {
+      if (this.data) {
+        if (this.completed && !this.error) {
+          return this.$t('UPLOAD_BAR.DONE');
+        }
+        if (this.doingAsyncUpload && !this.error) {
+          return this.$t('UPLOAD_BAR.SERVER_PROCESSING');
+        }
+        if (this.paused && !this.completed && !this.error) {
+          return this.$t('UPLOAD_BAR.PAUSED');
+        }
+        if (this.error) {
+          return this.errorMessage;
+        }
+        
+        return convertSecToTimeDisplay(this.remainingTime);
+        
+      } else {
+        return '';
+      }
+    }
+  },
+  methods: {
+    removeItem() {
+      this.$emit('removeItem', this.data);
+    },
+    pause() {
+      this.$emit('pause', this.data);
+    },
+    resume() {
+      this.$emit('resume', this.data);
+    },
+    cancel() {
+      this.$emit('cancel', this.data);
+    },
+    retry() {
+      this.$emit('retry', this.data);
+    }
+  }
 };
 </script>
 
@@ -93,6 +204,26 @@ export default {
       &-view {
         &:hover {
           color: #0eb1ff;
+        }
+      }
+      &-retry {
+        &:hover {
+          color: #0eb1ff;
+        }
+      }
+      &-pause {
+        &:hover {
+          color: #ce9222;
+        }
+      }
+      &-resume {
+        &:hover {
+          color: #ce9222;
+        }
+      }
+      &-cancel {
+        &:hover {
+          color: #d60404;
         }
       }
     }

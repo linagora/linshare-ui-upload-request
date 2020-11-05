@@ -54,5 +54,12 @@
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "Невозможно передать более { length } файлов",
     "ERROR_FILE_SIZE_EXCEEDED": "Размер файла не может превышать { size }",
     "ERROR_NOT_ENOUGH_SPACE": "Недостаточно места в памяти для закачивания"
+  },
+  "UPLOAD_BAR": {
+    "EMPTY": "Нажмите кнопку {icon}, чтобы загрузить новый файл.",
+    "UPLOADS": "Загрузки",
+    "DONE": "сделанный",
+    "PAUSED": "приостановлено",
+    "SERVER_PROCESSING": "сервер обрабатывает"
   }
 }

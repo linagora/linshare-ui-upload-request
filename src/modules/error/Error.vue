@@ -1,21 +1,32 @@
 <template>
-  <div class="error-page">
-    <div>
-      <h1 class="error-page__big-title">
-        {{ statusCode }}
-      </h1>
-      <h3 class="error-page__sub-title">
-        {{ message }}
-      </h3>
+  <div>
+    <Header />
+    <div class="error-page">
+      <div>
+        <h1 class="error-page__big-title">
+          {{ statusCode }}
+        </h1>
+        <h3 class="error-page__sub-title">
+          {{ message }}
+        </h3>
+      </div>
     </div>
+    <Footer />
+    <AppAlert />
   </div>
 </template>
 
 <script>
 import { generateHttpErrorMessage, validHttpErrorStatusCode } from '@/common';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default {
   name: 'Error',
+  components: {
+    Header,
+    Footer
+  },
   computed: {
     statusCode() {
       return validHttpErrorStatusCode(Number(this.$route.params.status)) && Number(this.$route.params.status) || ''; 

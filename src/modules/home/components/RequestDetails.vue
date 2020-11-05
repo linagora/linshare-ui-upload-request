@@ -18,10 +18,16 @@
                 <p class="user-info-content-welcome">
                   {{ $t('HOME.HELLO') }} <span>{{ data.recipient && data.recipient.mail }}</span>,
                 </p>
-                <p
-                  class="user-info-content-text"
-                  v-html="$t('HOME.WELCOME_MESSAGE', {href: mailToOwner, ownerName, expiryDate})"
-                />
+                <p class="user-info-content-text">
+                  <i18n path="HOME.WELCOME_MESSAGE">
+                    <template v-slot:owner>
+                      <a :href="mailToOwner">{{ ownerName }}</a>
+                    </template>
+                    <template v-slot:expiryDate>
+                      {{ expiryDate }}
+                    </template>
+                  </i18n>
+                </p>
               </div>
             </div>
             <div class="request-details-message">

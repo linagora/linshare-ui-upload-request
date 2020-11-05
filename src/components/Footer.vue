@@ -1,6 +1,21 @@
 <template>
   <footer class="footer">
-    <div v-html="$t('FOOTER.CONTENT')" />
+    <div>
+      <i18n path="FOOTER.CONTENT">
+        <template v-slot:linshare>
+          <a
+            href="http://linshare.org"
+            target="_blank"
+          >LinShare™</a>
+        </template>
+        <template v-slot:linagora>
+          <a
+            href="http://linagora.com"
+            target="_blank"
+          >Linagora ©</a>
+        </template>
+      </i18n>
+    </div>
   </footer>
 </template>
 

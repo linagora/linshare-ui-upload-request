@@ -82,7 +82,6 @@ export default {
   data() {
     return {
       files: [],
-      data: {},
     };
   },
   created() {

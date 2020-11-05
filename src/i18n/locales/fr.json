@@ -4,7 +4,7 @@
     "LOGO_ALT": "Logo Linshare"
   },
   "FOOTER": {
-    "CONTENT": "Vous utilisez la version libre et gratuite de <a href='http://linshare.org' target='_blank'>LinShare™</a>, développé par : <a href='http://linagora.com' target='_blank'>Linagora ©</a> 2009–2020. Contribuez à la R&D du produit en souscrivant à une offre entreprise."
+    "CONTENT": "Vous utilisez la version libre et gratuite de {linshare}, développé par : {linagora} 2009–2020. Contribuez à la R&D du produit en souscrivant à une offre entreprise."
   },
   "HOME": {
     "ORDER_BY": "Ordonnée par",
@@ -17,7 +17,7 @@
     "DROP_YOUR_FILES_HERE": "Déposez vos fichiers ici",
     "DRAG_AND_DROP_MESSAGE": "Glissez vos fichiers dans l'interface pour les déposer",
     "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de fermer la Invitation de dépôt. Après la fermeture, vous ne pourrez pas télécharger les fichiers ou effectuer des actions sur les fichiers déposés.",
-    "WELCOME_MESSAGE": "Vous avez reçu une Invitation de dépôt de <a href='{href}'>{ ownerName }</a>. La Invitation de dépôt sera active jusqu'à { expiryDate } ou la fermeture de la demande. En outre, vous ne pouvez pas télécharger ni supprimer les fichiers.",
+    "WELCOME_MESSAGE": "Vous avez reçu une Invitation de dépôt de {owner}. L'invitation de dépôt sera active jusqu'à { expiryDate } ou la fermeture de la demande. En outre, vous ne pouvez pas télécharger ni supprimer les fichiers.",
     "REQUEST_DETAILS": "Détails de l'invitation de dépôt",
     "HELLO": "Bonjour",
     "MESSAGE": "Message",
@@ -56,10 +56,10 @@
     "ERROR_NOT_ENOUGH_SPACE": "Il n'y a pas suffisamment d'espace sur votre stockage de téléchargement"
   },
   "UPLOAD_BAR": {
-    "EMPTY": "Cliquez sur le bouton {icon} pour télécharger un nouveau fichier.",
+    "EMPTY": "Cliquez sur le bouton {icon} pour déposer un nouveau fichier.",
     "UPLOADS": "Téléchargements",
     "DONE": "terminé",
     "PAUSED": "mis en pause",
-    "SERVER_PROCESSING": "le serveur traite"
+    "SERVER_PROCESSING": "traitement du serveur"
   }
 }

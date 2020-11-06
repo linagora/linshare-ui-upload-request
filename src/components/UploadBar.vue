@@ -13,53 +13,49 @@
           color="red"
           overlap
         >
-          <v-icon 
+          <v-icon
             class="upload-icon"
             v-bind="attrs"
             v-on="on"
           >
-            mdi-cloud-upload
+            ls-icons-uploads
           </v-icon>
         </v-badge>
       </template>
       <div>
-        <v-tabs class="upload-bar-tabs">
-          <v-tab>
-            {{ $t('UPLOAD_BAR.UPLOADS') }}
-          </v-tab>
-          <v-tab-item>
-            <div v-if="files.length">
-              <UploadItem
-                v-for="file in files"
-                :key="file.uniqueIdentifier"
-                :data="file"
-                :completed="file.isCompleted"
-                :error="file.error"
-                :error-message="file.errorMessage"
-                :doing-async-upload="file.doingAsyncUpload"
-                :paused="file.paused"
-                :remaining-time="file.timeRemaining()"
-                @removeItem="removeItem"
-                @pause="pause"
-                @resume="resume"
-                @cancel="cancel"
-                @retry="retry"
-              />
-            </div>
-            <div
-              v-if="!files.length"
-              class="upload-bar-empty"
-            >
-              <i18n path="UPLOAD_BAR.EMPTY">
-                <template v-slot:icon>
-                  <v-icon class="upload-bar-add-icon">
-                    add
-                  </v-icon>
-                </template>
-              </i18n>
-            </div>
-          </v-tab-item>
-        </v-tabs>
+        <div class="upload-bar-header">
+          {{ $t("UPLOAD_BAR.UPLOADS") }}
+        </div>
+        <div v-if="files.length">
+          <UploadItem
+            v-for="file in files"
+            :key="file.uniqueIdentifier"
+            :data="file"
+            :completed="file.isCompleted"
+            :error="file.error"
+            :error-message="file.errorMessage"
+            :doing-async-upload="file.doingAsyncUpload"
+            :paused="file.paused"
+            :remaining-time="file.timeRemaining()"
+            @removeItem="removeItem"
+            @pause="pause"
+            @resume="resume"
+            @cancel="cancel"
+            @retry="retry"
+          />
+        </div>
+        <div
+          v-if="!files.length"
+          class="upload-bar-empty"
+        >
+          <i18n path="UPLOAD_BAR.EMPTY">
+            <template v-slot:icon>
+              <v-icon class="upload-bar-add-icon">
+                add
+              </v-icon>
+            </template>
+          </i18n>
+        </div>
       </div>
     </v-menu>
   </div>
@@ -71,13 +67,13 @@ import { FlowService } from '@/services';
 export default {
   name: 'UploadBar',
   components: {
-    UploadItem
+    UploadItem,
   },
   props: {
     validateFileBeforeUpload: {
       type: Function,
-      default: () => true
-    }
+      default: () => true,
+    },
   },
   data() {
     return {
@@ -88,7 +84,7 @@ export default {
     const flow = FlowService.getFlowObject();
 
     flow.on('filesSubmitted', (files) => {
-      this.files.push(...files);  
+      this.files.push(...files);
     });
 
     flow.on('fileSuccess', (file, response) => {
@@ -99,11 +95,11 @@ export default {
       }
 
       if (response.chunkUploadSuccess) {
-        this.files = this.files.map(f => {
+        this.files = this.files.map((f) => {
           if (f.uniqueIdentifier === file.uniqueIdentifier) {
             f.isCompleted = true;
           }
-          
+
           return f;
         });
       }
@@ -111,7 +107,9 @@ export default {
   },
   methods: {
     removeItem(item) {
-      this.files = this.files.filter(f => f.uniqueIdentifier !== item.uniqueIdentifier);
+      this.files = this.files.filter(
+        (f) => f.uniqueIdentifier !== item.uniqueIdentifier
+      );
     },
     pause(file) {
       file.pause();
@@ -121,10 +119,10 @@ export default {
 
       if (error) {
         this.$alert.open(error, { type: 'error' });
-        
+
         return;
       }
-      
+
       file.resume();
     },
     cancel(file) {
@@ -136,54 +134,60 @@ export default {
 
       if (error) {
         this.$alert.open(error, { type: 'error' });
-        
+
         return;
       }
 
       file.retry();
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss">
-  .upload-bar {
-    .upload-icon {
-      color: #fff;
-      cursor: pointer;
-      &:hover, &:focus {
-        color: #eee;
-      }
+.upload-bar {
+  .upload-icon {
+    color: #fff;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      color: #eee;
     }
   }
-  .upload-bar-menu {
-    background: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @media (min-width: 769px) {
-      width: 350px;
-    }
-    padding-bottom: 30px;
+}
+.upload-bar-menu {
+  background: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  @media (min-width: 769px) {
+    width: 350px;
   }
-  .upload-bar-tabs {
-    .v-tabs-slider-wrapper {
-      width: 100%;
-    }
-    .v-tab {
-      width: 100%;
-      max-width: auto;
-    }
+  padding-bottom: 20px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+.upload-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-bottom: 1px solid #bbb;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #5E5E5E;
+  line-height: 15px;
+  font-weight: 500;
+}
+.upload-bar-empty {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  .upload-bar-add-icon {
+    color: #05b1ff;
   }
-  .upload-bar-empty {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-top: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
-    .upload-bar-add-icon {
-      color: #05B1FF;
-    }
-  }
+}
 </style>

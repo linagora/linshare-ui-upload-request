@@ -4,13 +4,13 @@
       <i18n path="FOOTER.CONTENT">
         <template v-slot:linshare>
           <a
-            href="http://linshare.org"
+            href="https://linshare.org"
             target="_blank"
           >LinShare™</a>
         </template>
         <template v-slot:linagora>
           <a
-            href="http://linagora.com"
+            href="https://linagora.com"
             target="_blank"
           >Linagora ©</a>
         </template>

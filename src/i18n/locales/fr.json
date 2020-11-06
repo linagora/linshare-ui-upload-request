@@ -59,7 +59,7 @@
     "EMPTY": "Cliquez sur le bouton {icon} pour déposer un nouveau fichier.",
     "UPLOADS": "Téléchargements",
     "DONE": "terminé",
-    "PAUSED": "mis en pause",
+    "PAUSED": "en pause",
     "SERVER_PROCESSING": "traitement du serveur"
   }
 }

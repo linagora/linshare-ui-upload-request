@@ -5,60 +5,60 @@
         <div class="upload-item-info-name-container">
           <h5>{{ data.name }}</h5>
         </div>
-        <div class="upload-item-info-size-container">
-          <p>{{ size }}</p>
-        </div>
       </div>
       <div class="upload-item-info-progress-container">
-        <div>
+        <div class="upload-item-info-progress-flex">
           <span class="upload-item-info-progress-container-status">
             {{ uploadStatus }}
           </span>
+          <div class="upload-item-info-size-container">
+            <p>{{ size }}</p>
+          </div>
         </div>
         <div>
           <v-progress-linear
             background-color="#aaa"
-            color="#00bfa5"
+            :color="colorStatus"
             :value="data.progress() * 100"
           />
         </div>
       </div>
     </div>
-    <div class="upload-item-check-container">
+    <div class="upload-item-actions-container">
       <v-icon
         v-show="completed && error"
-        class="upload-item-check-container-icon upload-item-check-container-retry"
+        class="upload-item-actions-container-icon upload-item-actions-container-retry"
         @click="retry()"
       >
         mdi-restart
       </v-icon>
       <v-icon
         v-show="!completed && !paused"
-        class="upload-item-check-container-icon upload-item-check-container-pause"
+        class="upload-item-actions-container-icon upload-item-actions-container-pause"
         @click="pause()"
       >
         mdi-pause
       </v-icon>
       <v-icon
         v-show="!completed && paused"
-        class="upload-item-check-container-icon upload-item-check-container-resume"
+        class="upload-item-actions-container-icon upload-item-actions-container-resume"
         @click="resume()"
       >
-        mdi-play-circle
+        mdi-play
       </v-icon>
       <v-icon
         v-show="completed"
-        class="upload-item-check-container-icon upload-item-check-container-check"
+        class="upload-item-actions-container-icon upload-item-actions-container-check"
         @click="removeItem()"
       >
         mdi-check
       </v-icon>
       <v-icon
         v-show="!completed"
-        class="upload-item-check-container-icon upload-item-check-container-cancel"
+        class="upload-item-actions-container-icon upload-item-actions-container-cancel"
         @click="cancel()"
       >
-        mdi-cancel
+        mdi-close
       </v-icon>
     </div>
   </div>
@@ -124,6 +124,16 @@ export default {
       } else {
         return '';
       }
+    },
+    colorStatus() {
+      if (this.paused) {
+        return '#ce9222';
+      }
+      if (this.error) {
+        return '#d60404';
+      }
+      
+      return '#00bfa5';
     }
   },
   methods: {
@@ -170,6 +180,13 @@ export default {
             white-space: nowrap;
           }
         }
+      }
+      &-progress-container {
+        &-status {
+          font-size: 10px;
+          color: #888;
+          font-style: italic;
+        }
         .upload-item-info-size-container {
           margin-left: 10px;
           p {
@@ -178,20 +195,21 @@ export default {
             margin-bottom: 0;
           }
         }
-      }
-      &-progress-container {
-        &-status {
-          font-size: 10px;
-          color: #888;
-          font-style: italic;
+        .upload-item-info-progress-flex {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 5px;
         }
       }
     }
-    &-check-container {
+    &-actions-container {
       display: flex;
       align-items: center;
       margin-left: 5px;
       margin-right: 5px;
+      min-width: 68px;
+      justify-content: center;
       &-icon {
         cursor: pointer;
         margin: 0px 5px;

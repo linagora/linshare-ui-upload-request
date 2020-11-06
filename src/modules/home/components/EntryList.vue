@@ -474,11 +474,11 @@ export default {
           }
 
           .v-data-table__wrapper {
-            height: calc(100vh - 297px);
+            height: calc(100vh - 267px);
             overflow-y: visible;
             .v-data-table__empty-wrapper {
               background: #eeeeee;
-              height: calc(100vh - 345px);
+              height: calc(100vh - 315px);
             }
           }
         }
@@ -534,6 +534,10 @@ export default {
     }
   }
 
+  .ls-delete-btn {
+    margin-left: 10px;
+  }
+
   @media #{map-get($display-breakpoints, 'md-and-up')} {
     .home-page {
       .home-page-content {
@@ -549,9 +553,9 @@ export default {
           }
 
           .v-data-table__wrapper {
-            height: calc(100vh - 437px);
+            height: calc(100vh - 407px);
             .v-data-table__empty-wrapper {
-              height: calc(100vh - 485px);
+              height: calc(100vh - 455px);
             }
           }
         }

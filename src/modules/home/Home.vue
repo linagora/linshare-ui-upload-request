@@ -181,7 +181,9 @@ export default {
   .home-page {
     position: relative;
     background: url("../../assets/images/bandeau_accueil_linshare.svg");
-    padding-bottom: 20px;
+    padding-bottom: 0;
+    padding-top: 10px;
+    
 
     .home-page-first-background {
       background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
@@ -199,6 +201,8 @@ export default {
     .home-page {
       background: none;
       background-color: #E5E5E5;
+      padding-bottom: 20px;
+      padding-top: 0;
 
       .home-page-content {
         width: 60%;

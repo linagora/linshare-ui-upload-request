@@ -1,23 +1,4 @@
-.ls-popover {
-  max-width: 240px;
-  padding: 10px;
-  background-color: #ffffff;
-
-  &-title {
-    text-align: center;
-  }
-
-  &-btn-container {
-    float: right;
-
-    &-delete-btn {
-      margin-left: 10px;
-    }
-  }
-}
-
-$icomoon-font-family: "LinShare" !default;
-$icomoon-font-path: "fonts" !default;
+@import "variables";
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
@@ -30,9 +11,10 @@ $icomoon-font-path: "fonts" !default;
   font-display: block;
 }
 
-[class^="ls-icons"], [class*=" ls-icons"] {
+[class^="ls-"], [class*=" ls-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -44,9 +26,9 @@ $icomoon-font-path: "fonts" !default;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ls-icons-uploads {
+.ls-uploads {
   &:before {
-    content: "\e900"; 
+    content: $ls-uploads; 
   }
 }
 

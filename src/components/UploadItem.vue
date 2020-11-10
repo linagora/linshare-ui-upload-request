@@ -26,7 +26,7 @@
     </div>
     <div class="upload-item-actions-container">
       <v-icon
-        v-show="completed && error"
+        v-show="error"
         class="upload-item-actions-container-icon upload-item-actions-container-retry"
         @click="retry()"
       >
@@ -116,7 +116,7 @@ export default {
           return this.$t('UPLOAD_BAR.PAUSED');
         }
         if (this.error) {
-          return this.errorMessage;
+          return this.errorMessage || this.$t('UPLOAD_BAR.ERROR');
         }
         
         return convertSecToTimeDisplay(this.remainingTime);

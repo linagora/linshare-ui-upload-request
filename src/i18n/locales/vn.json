@@ -60,6 +60,7 @@
     "UPLOADS": "Tải lên",
     "DONE": "xong",
     "PAUSED": "tạm dừng",
+    "ERROR": "lỗi",
     "SERVER_PROCESSING": "đang xử lí"
   }
 }

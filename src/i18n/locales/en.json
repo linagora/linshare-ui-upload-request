@@ -60,6 +60,7 @@
     "UPLOADS": "Uploads",
     "DONE": "done",
     "PAUSED": "paused",
+    "ERROR": "error",
     "SERVER_PROCESSING": "server processing"
   }
 }

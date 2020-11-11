@@ -13,13 +13,14 @@
             @submit="submitPassword"
           >
             <v-card-title>{{ $t("PASSWORD.TITLE") }}</v-card-title>
-            <v-card-subtitle>{{ $t("PASSWORD.SUBTITLE") }}</v-card-subtitle>
             <div class="password-page__input-container">
               <v-text-field
                 v-model="password"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required]"
                 :type="showPassword ? 'text' : 'password'"
+                :error="!!errorMessage"
+                :error-messages="errorMessage"
                 name="input-password"
                 :label="$t('PASSWORD.ENTER_PASSWORD')"
                 @click:append="showPassword = !showPassword"
@@ -58,6 +59,7 @@ export default {
   data() {
     return {
       password: '',
+      errorMessage: '',
       showPassword: false,
       rules: {
         required: value => !!value || this.$t('MESSAGE.REQUIRED')
@@ -71,21 +73,12 @@ export default {
 
       if (this.$refs.form.validate()) {
         const errorAuthenticated = await ErrorService.checkPasswordError(requestId, this.password);
-        console.log('er', errorAuthenticated);
 
         if (!errorAuthenticated) {
           PasswordStore.assign(requestId, this.password);
           router.push({ name: 'home', params: { id: requestId }});
         } else {
-          if (errorAuthenticated === 1) {
-            this.$refs.form.reset();
-            this.$alert.open(this.$t('MESSAGE.INCORRECT_PASSWORD'), {
-              type: 'error'
-            });
-          } else if (errorAuthenticated === 2) {
-            PasswordStore.assign(requestId, this.password);
-            router.push({ name: 'update-password', params: { id: requestId }});
-          }
+          this.errorMessage = this.$t('MESSAGE.INCORRECT_PASSWORD');
         }
       }
     }

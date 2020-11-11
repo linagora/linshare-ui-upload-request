@@ -35,7 +35,7 @@ import { FlowService } from '@/services';
 import { formatBytes, validateUpload } from '@/common';
 import RequestDetails from './components/RequestDetails';
 import EntryList from './components/EntryList';
-import { UploadRequestStore } from '@/store';
+import { UploadRequestStore, PasswordStore } from '@/store';
 
 export default {
   name: 'Home',
@@ -147,6 +147,8 @@ export default {
           ...this.data,
           closed: true
         });
+        
+        window.localStorage.setItem(requestId, PasswordStore.get(requestId));
         window.location.reload();
       } catch (error) {
         this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {

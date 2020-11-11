@@ -43,7 +43,7 @@
               <v-text-field
                 v-model="confirmPassword"
                 :append-icon="showConfirm ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[rules.required, rules.valid, passwordConfirmationRule]"
+                :rules="[rules.required, passwordConfirmationRule]"
                 :type="showConfirm ? 'text' : 'password'"
                 name="confirm-password"
                 tabindex="3"
@@ -74,7 +74,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UploadRequestService } from '@/services';
 import { PasswordStore } from '@/store';
-import { isPasswordValid } from '@/common';
+import { isRequired, isPasswordValid } from '@/common';
 import router from '@/router';
 export default {
   name: 'Password',
@@ -92,9 +92,8 @@ export default {
       showConfirm: false,
       errorMessage: '',
       rules: {
-        required: value => !!value || this.$t('MESSAGE.REQUIRED'),
-        valid: value => isPasswordValid(value)
-          || this.$t('MESSAGE.VALIDATE_PASSWORD'),
+        required: value => isRequired(value) || this.$t('MESSAGE.REQUIRED'),
+        valid: value => isPasswordValid(value) || this.$t('MESSAGE.VALIDATE_PASSWORD'),
       }
     };
   },
@@ -127,13 +126,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~vuetify/src/styles/styles.sass';
+
   .update-password-page {
     position: relative;
-    min-height: 100vh;
+    @media #{map-get($display-breakpoints, 'sm-and-up')} {
+      min-height: 100vh;
+    }
     background-color: #E5E5E5;
     &__card-container {
       padding: 10px;
-      min-width: 600px;
     }
     &__input-container {
       padding: 20px;
@@ -147,12 +149,35 @@ export default {
       background-size: cover;
       width: 100%;
       height: 350px;
+      @media #{map-get($display-breakpoints, 'sm-and-down')} {
+        display: none;
+      }
     }
     &-content {
       margin-top: -150px;
       margin-left: auto;
       margin-right: auto;
-      width: 50%;
+      @media #{map-get($display-breakpoints, 'md-and-up')} {
+        width: 35%;
+      }
+      @media #{map-get($display-breakpoints, 'md-and-down')} {
+        width: 60%;
+      }
+      @media #{map-get($display-breakpoints, 'sm-and-down')} {
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-top: 40px;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
+        background-size: cover;
+        .update-password-page__card-container {
+          margin: 20px;
+        }
+      }
     }
   }
 </style>

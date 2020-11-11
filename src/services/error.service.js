@@ -1,5 +1,6 @@
 import { ApiService } from '@/services';
 import { UploadRequestStore, PasswordStore } from '@/store';
+import { ERRORS } from '@/constants';
 
 async function checkError(id, pw) {
   try {
@@ -25,14 +26,12 @@ async function checkPasswordError(id, password) {
   
   if ( error && error.response && error.response.status === 401 && error.response.data) {
     if (error.response.data.errCode === 32401) {
-      return 1;
+      return ERRORS.PASSWORD_INCORRECT;
     }
     if (error.response.data.errCode === 32402) {
-      return 2;
+      return ERRORS.PASSWORD_RESET_REQUIRED;
     }
   }
-
-  return 0;
 }
 
 export const ErrorService = {

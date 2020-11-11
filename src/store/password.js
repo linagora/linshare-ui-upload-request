@@ -2,11 +2,11 @@ let passwords = {};
 
 export const PasswordStore = {
   get: id => {
-    const cachedPassword = window.localStorage.getItem(id);
+    const cachedPassword = window.sessionStorage.getItem(id);
 
     if (cachedPassword) {
       passwords[id] = cachedPassword;
-      window.localStorage.removeItem(id);
+      window.sessionStorage.removeItem(id);
     }
 
     return passwords[id];

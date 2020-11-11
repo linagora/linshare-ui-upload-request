@@ -148,7 +148,7 @@ export default {
           closed: true
         });
         
-        window.localStorage.setItem(requestId, PasswordStore.get(requestId));
+        window.sessionStorage.setItem(requestId, PasswordStore.get(requestId));
         window.location.reload();
       } catch (error) {
         this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {

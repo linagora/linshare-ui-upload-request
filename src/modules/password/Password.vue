@@ -21,9 +21,12 @@
                 :type="showPassword ? 'text' : 'password'"
                 :error="!!errorMessage"
                 :error-messages="errorMessage"
+                autofocus
                 name="input-password"
                 :label="$t('PASSWORD.ENTER_PASSWORD')"
                 @click:append="showPassword = !showPassword"
+                @change="errorMessage = ''"
+                @click="errorMessage = ''"
               />
             </div>
             <v-card-actions class="password-page__action-container">
@@ -49,6 +52,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ErrorService } from '@/services';
 import { PasswordStore } from '@/store';
+import { isRequired } from '@/common';
 import router from '@/router';
 export default {
   name: 'Password',
@@ -62,7 +66,7 @@ export default {
       errorMessage: '',
       showPassword: false,
       rules: {
-        required: value => !!value || this.$t('MESSAGE.REQUIRED')
+        required: value => isRequired(value) || this.$t('MESSAGE.REQUIRED')
       }
     };
   },
@@ -87,13 +91,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~vuetify/src/styles/styles.sass';
+
   .password-page {
     position: relative;
-    min-height: 100vh;
+    @media #{map-get($display-breakpoints, 'sm-and-up')} {
+      min-height: 100vh;
+    }
     background-color: #E5E5E5;
     &__card-container {
       padding: 10px;
-      min-width: 600px;
     }
     &__input-container {
       padding: 20px;
@@ -107,12 +114,34 @@ export default {
       background-size: cover;
       width: 100%;
       height: 350px;
+      @media #{map-get($display-breakpoints, 'sm-and-down')} {
+        display: none;
+      }
     }
     &-content {
       margin-top: -150px;
       margin-left: auto;
       margin-right: auto;
-      width: 50%;
+      @media #{map-get($display-breakpoints, 'md-and-up')} {
+        width: 35%;
+      }
+      @media #{map-get($display-breakpoints, 'md-and-down')} {
+        width: 60%;
+      }
+      @media #{map-get($display-breakpoints, 'sm-and-down')} {
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-top: 40px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
+        background-size: cover;
+        .password-page__card-container {
+          margin: 20px;
+        }
+      }
     }
   }
 </style>

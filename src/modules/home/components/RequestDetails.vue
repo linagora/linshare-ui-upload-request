@@ -245,8 +245,14 @@ export default {
       padding-bottom: 30px;
       border-bottom: 1px solid #E2E2E2;
       .message-content {
+        white-space: break-spaces;
         font-size: 15px;
         color: #5E5E5E;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
       }
     }
     .request-details-recipients {

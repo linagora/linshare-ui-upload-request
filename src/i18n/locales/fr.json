@@ -38,7 +38,12 @@
     "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",
     "SUBTITLE": "Veuillez consulter l'e-mail d'invitation pour obtenir votre mot de passe.",
     "ENTER_PASSWORD": "Entrez votre mot de passe",
-    "CONFIRM": "Confirmer"
+    "CONFIRM": "Confirmer",
+    "CHANGE_PASSWORD_TITLE": "Cette invitation de dépôt est protégée par un mot de passe",
+    "CHANGE_PASSWORD_SUBTITLE": "Veuillez saisir le mot de passe fourni dans l'e-mail d'invitation et créer un nouveau mot de passe pour cette invitation de dépôt",
+    "PASSWORD_PROVIDED": "Mot de passe fourni",
+    "UPDATE_PASSWORD": "Entrez votre nouveau mot de passe",
+    "UPDATE_PASSWORD_CONFIRM": "Confirmer votre mot de passe"
   },
   "MESSAGE": {
     "SOMETHING_WENT_WRONG": "Quelque chose s'est mal passé ! Veuillez réessayer.",
@@ -53,7 +58,10 @@
     "NOT_FOUND": "La page que vous recherchez est introuvable.",
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "Vous ne pouvez pas télécharger plus de { length } fichiers",
     "ERROR_FILE_SIZE_EXCEEDED": "Votre fichier ne peut pas dépasser { size }",
-    "ERROR_NOT_ENOUGH_SPACE": "Il n'y a pas suffisamment d'espace sur votre stockage de téléchargement"
+    "ERROR_NOT_ENOUGH_SPACE": "Il n'y a pas suffisamment d'espace sur votre stockage de téléchargement",
+    "REQUIRED": "Obligatoire.",
+    "VALIDATE_PASSWORD": "Le mot de passe doit contenir 12 caractères ou plus, contenir au moins un caractère majuscule, un caractère minuscule et un caractère spécial.",
+    "PASSWORD_MUST_MATCH": "Merci de vérifier que vos mots de passe correspondent."
   },
   "UPLOAD_BAR": {
     "EMPTY": "Cliquez sur le bouton {icon} pour déposer un nouveau fichier.",

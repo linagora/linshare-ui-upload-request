@@ -38,7 +38,12 @@
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",
     "SUBTITLE": "Vui lòng kiểm tra email để lấy mật khẩu của bạn.",
     "ENTER_PASSWORD": "Nhập mật khẩu",
-    "CONFIRM": "Xác nhận"
+    "CONFIRM": "Xác nhận",
+    "CHANGE_PASSWORD_TITLE": "Yêu cầu tải lên này được bảo vệ bởi mật khẩu",
+    "CHANGE_PASSWORD_SUBTITLE": "Vui lòng nhập mật khẩu được cung cấp trong email và tạo một mật khẩu mới cho yêu cầu tải lên này",
+    "PASSWORD_PROVIDED": "Mật khẩu được cung cấp",
+    "UPDATE_PASSWORD": "Nhập mật khẩu mới",
+    "UPDATE_PASSWORD_CONFIRM": "Xác nhận mật khẩu"
   },
   "MESSAGE": {
     "SOMETHING_WENT_WRONG": "Đã có lỗi xảy ra! Vui lòng thử lại.",
@@ -53,7 +58,10 @@
     "NOT_FOUND": "Không thể tìm thấy trang mà bạn đang tìm.",
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "Bạn không thể tải lên quá {length} tập tin",
     "ERROR_FILE_SIZE_EXCEEDED": "Tập tin của bạn không thể vượt quá {size}",
-    "ERROR_NOT_ENOUGH_SPACE": "Bạn không còn đủ dung lượng lưu trữ"
+    "ERROR_NOT_ENOUGH_SPACE": "Bạn không còn đủ dung lượng lưu trữ",
+    "REQUIRED": "Bắt buộc.",
+    "VALIDATE_PASSWORD": "Mật khẩu phải có tối thiểu 12 kí tự, gồm một kí tự in hoa, một kí tự in thường và một kí tự đặc biệt.",
+    "PASSWORD_MUST_MATCH": "Mật khẩu không khớp."
   },
   "UPLOAD_BAR": {
     "EMPTY": "Nhấn vào nút {icon} để tải lên tập tin mới.",

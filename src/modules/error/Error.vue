@@ -47,7 +47,7 @@ export default {
     justify-content: center;
     padding: 20px;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 105px);
     &__big-title {
       text-align: center;
       color: #fff;

@@ -1,13 +1,13 @@
+let passwords = {};
+
 export const PasswordStore = {
   get: id => {
-    return window.localStorage.getItem(id);
+    return passwords[id];
   },
   assign: (id, password) => {
-    window.localStorage.setItem(id, password);
+    passwords[id] = password;
   },
   del: id => {
-    if (window.localStorage.getItem(id)) {
-      window.localStorage.removeItem(id);
-    }
+    delete passwords[id];
   }
 };

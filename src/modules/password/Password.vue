@@ -60,7 +60,7 @@ export default {
       password: '',
       showPassword: false,
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || this.$t('MESSAGE.REQUIRED')
       }
     };
   },
@@ -70,16 +70,22 @@ export default {
       const requestId = this.$route.params.id;
 
       if (this.$refs.form.validate()) {
-        const result = await ErrorService.checkPasswordError(requestId, this.password);
+        const errorAuthenticated = await ErrorService.checkPasswordError(requestId, this.password);
+        console.log('er', errorAuthenticated);
 
-        if (result) {
+        if (!errorAuthenticated) {
           PasswordStore.assign(requestId, this.password);
           router.push({ name: 'home', params: { id: requestId }});
         } else {
-          this.$refs.form.reset();
-          this.$alert.open(this.$t('MESSAGE.INCORRECT_PASSWORD'), {
-            type: 'error'
-          });
+          if (errorAuthenticated === 1) {
+            this.$refs.form.reset();
+            this.$alert.open(this.$t('MESSAGE.INCORRECT_PASSWORD'), {
+              type: 'error'
+            });
+          } else if (errorAuthenticated === 2) {
+            PasswordStore.assign(requestId, this.password);
+            router.push({ name: 'update-password', params: { id: requestId }});
+          }
         }
       }
     }

@@ -38,7 +38,13 @@
     "TITLE": "Enter your password for the upload request",
     "SUBTITLE": "Please check the invitation email to get your password.",
     "ENTER_PASSWORD": "Enter password",
-    "CONFIRM": "Confirm"
+    "CONFIRM": "Confirm",
+    "CHANGE_PASSWORD_TITLE": "This Upload Request is protected with a password",
+    "CHANGE_PASSWORD_SUBTITLE": "Please enter the password provided in the invitation email and create a new password for this upload request",
+    "PASSWORD_PROVIDED": "Provided password",
+    "UPDATE_PASSWORD": "Enter your new password",
+    "UPDATE_PASSWORD_CONFIRM": "Confirm your password"
+
   },
   "MESSAGE": {
     "SOMETHING_WENT_WRONG": "Something went wrong! Please try again.",
@@ -53,7 +59,10 @@
     "NOT_FOUND": "The page you are looking for cannot be found.",
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "You cannot upload more than {length} files",
     "ERROR_FILE_SIZE_EXCEEDED": "Your file cannot exceed {size}",
-    "ERROR_NOT_ENOUGH_SPACE": "There is not enough space on your upload storage"
+    "ERROR_NOT_ENOUGH_SPACE": "There is not enough space on your upload storage",
+    "REQUIRED": "Required.",
+    "VALIDATE_PASSWORD": "Password must be 12 or more characters in length, contain at least one uppercase character, one lowercase character and one special character.",
+    "PASSWORD_MUST_MATCH": "Please make sure your passwords match."
   },
   "UPLOAD_BAR": {
     "EMPTY": "Click the {icon} button to upload new file.",

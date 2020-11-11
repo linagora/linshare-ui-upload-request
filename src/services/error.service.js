@@ -23,8 +23,16 @@ async function checkError(id, pw) {
 async function checkPasswordError(id, password) {
   const error = await checkError(id, password);
   
-  return !(error && error.response && error.response.status === 401
-    && error.response.data && error.response.data.errCode === 32401);
+  if ( error && error.response && error.response.status === 401 && error.response.data) {
+    if (error.response.data.errCode === 32401) {
+      return 1;
+    }
+    if (error.response.data.errCode === 32402) {
+      return 2;
+    }
+  }
+
+  return 0;
 }
 
 export const ErrorService = {

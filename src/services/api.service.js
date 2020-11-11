@@ -45,5 +45,8 @@ export const UploadRequestService = {
   },
   updateRequest(requestId, data) {
     return ApiService.update('requests', requestId, data);
+  },
+  updatePassword(requestId, data) {
+    return ApiService.update('password', requestId, data); 
   }
 };

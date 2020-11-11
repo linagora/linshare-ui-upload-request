@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { checkGuestMw, initFlowObjectMw, handleErrorMw, setHeaderMw } from '@/router/middlewares';
+import { checkPasswordMw, initFlowObjectMw, handleErrorMw, setHeaderMw, checkUpdatePasswordMw } from '@/router/middlewares';
 import { middlewarePipeline } from './middleware.pipeline.js';
 
 Vue.use(Router);
@@ -30,7 +30,17 @@ const router = new Router({
       component: () => import('@/modules/password/Password'),
       meta: {
         middleware: [
-          checkGuestMw
+          checkPasswordMw,
+        ]
+      }
+    },
+    {
+      path: '/:id/update-password',
+      name: 'update-password',
+      component: () => import('@/modules/updatePassword/UpdatePassword'),
+      meta: {
+        middleware: [
+          checkUpdatePasswordMw
         ]
       }
     }

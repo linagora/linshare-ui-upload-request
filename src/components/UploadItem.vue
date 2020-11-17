@@ -118,9 +118,9 @@ export default {
         if (this.error) {
           return this.errorMessage || this.$t('UPLOAD_BAR.ERROR');
         }
-        
+
         return convertSecToTimeDisplay(this.remainingTime);
-        
+
       } else {
         return '';
       }
@@ -132,7 +132,7 @@ export default {
       if (this.error) {
         return '#d60404';
       }
-      
+
       return '#00bfa5';
     }
   },

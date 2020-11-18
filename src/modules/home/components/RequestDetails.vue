@@ -99,7 +99,7 @@
                     {{ expiryDate }}
                   </div>
                 </div>
-                <div class="metadata-content-item">
+                <div class="metadata-content-item" v-if="data.maxFileCount > 0">
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.FILE_COUNT') }}:
                   </div>
@@ -107,7 +107,7 @@
                     {{ entries.length }} / {{ data.maxFileCount }}
                   </div>
                 </div>
-                <div class="metadata-content-item">
+                <div class="metadata-content-item" v-if="data.maxFileSize > 0">
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.MAX_FILE_SIZE') }}:
                   </div>

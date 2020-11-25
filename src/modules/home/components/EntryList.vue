@@ -102,7 +102,17 @@
         :mobile-breakpoint="0"
         @page-count="pageCount = $event"
       >
-        <template #item.actions="{ item }">
+        <template #[`item.name`]="{ item }">
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.name }}</v-list-item-title>
+              <v-list-item-subtitle v-if="data.collective">
+                {{ item.recipient.mail }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+        <template #[`item.actions`]="{ item }">
           <v-menu
             top
             :close-on-content-click="true"
@@ -264,13 +274,13 @@ export default {
     headers() {
       const defaultHeaders = [
         {
-          text: this.name,
+          text: this.$t('HOME.NAME'),
           align: 'start',
           sortable: false,
           value: 'name',
         },
         {
-          text: this.size,
+          text: this.$t('HOME.SIZE'),
           align: 'end',
           sortable: false,
           value: 'size',
@@ -298,12 +308,6 @@ export default {
           value: 'size'
         }
       ];
-    },
-    name() {
-      return this.$t('HOME.NAME');
-    },
-    size() {
-      return this.$t('HOME.SIZE');
     }
   },
   methods: {
@@ -557,6 +561,10 @@ export default {
             .v-data-table__empty-wrapper {
               height: calc(100vh - 455px);
             }
+          }
+
+          .v-list-item {
+            padding: 0;
           }
         }
       }

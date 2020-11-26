@@ -1,7 +1,7 @@
 <template>
   <div class="home-page-upload home-page-card">
     <div class="home-page-upload-toolbar">
-      <div>
+      <div class="display-flex">
         <v-btn
           v-if="!data.closed"
           v-flow-browse
@@ -13,8 +13,8 @@
         >
           <v-icon>add</v-icon>
         </v-btn>
-        <div class="home-page-upload-toolbar-link-container">
-          <span class="home-page-upload-toolbar-subject">{{ data.subject }}</span>
+        <div class="home-page-upload-toolbar-link-container vertical-center">
+          <span class="home-page-upload-toolbar-subject text-ellipsis">{{ data.subject }}</span>
         </div>
       </div>
       <div class="hidden-sm-and-down home-page-upload-toolbar-util">
@@ -417,7 +417,6 @@ export default {
       }
 
       .home-page-upload {
-
         &-toolbar {
           display: flex;
           align-items: center;
@@ -432,8 +431,12 @@ export default {
             border-right: 1px solid #E2E2E2;
           }
           &-link-container {
-            display: inline-block;
+            width: 250px;
+            flex: 1;
             padding-left: 15px;
+            @media (max-width: 360px) {
+              width: 200px;
+            }
           }
           &-subject {
             text-transform: uppercase;

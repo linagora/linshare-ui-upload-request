@@ -46,7 +46,26 @@ $icomoon-font-path: "fonts" !default;
 
 .ls-icons-uploads {
   &:before {
-    content: "\e900"; 
+    content: "\e900";
   }
 }
 
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-center {
+  display: flex;
+  justify-content: center;
+}

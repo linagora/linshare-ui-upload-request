@@ -10,16 +10,20 @@ export function isRequired(item) {
   return !!item;
 }
 
-export function validateUpload(file, { usedSpace, maxFileCount, maxFileSize, maxDepositSize, currentFiles }) {
-  if (currentFiles.length >= maxFileCount) {
+export function validateUpload(files, { usedSpace, maxFileCount, maxFileSize, maxDepositSize, currentFiles }) {
+  if (currentFiles.length + files.length >= maxFileCount) {
     return i18n.t('MESSAGE.ERROR_MAX_FILE_COUNT_EXCEEDED', {length: maxFileCount});
   }
 
-  if (file.size > maxFileSize) {
-    return i18n.t('MESSAGE.ERROR_FILE_SIZE_EXCEEDED', {size: formatBytes(maxFileSize)});
+  let totalFileSize = 0;
+  for ( let i = 0; i < files.length; i++ ) {
+    totalFileSize += files[i].size;
+    if (files[i].size > maxFileSize) {
+      return i18n.t('MESSAGE.ERROR_FILE_SIZE_EXCEEDED', {size: formatBytes(maxFileSize)});
+    }
   }
 
-  if (maxDepositSize && file.size + usedSpace > maxDepositSize) {
+  if (maxDepositSize && totalFileSize + usedSpace > maxDepositSize) {
     return i18n.t('MESSAGE.ERROR_NOT_ENOUGH_SPACE');
   }
 }

@@ -115,7 +115,7 @@ export default {
       file.pause();
     },
     resume(file) {
-      const error = this.validateFileBeforeUpload(file);
+      const error = this.validateFileBeforeUpload([file]);
 
       if (error) {
         this.$alert.open(error, { type: 'error' });
@@ -130,7 +130,7 @@ export default {
       this.removeItem(file);
     },
     retry(file) {
-      const error = this.validateFileBeforeUpload(file);
+      const error = this.validateFileBeforeUpload([file]);
 
       if (error) {
         this.$alert.open(error, { type: 'error' });

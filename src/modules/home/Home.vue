@@ -76,8 +76,8 @@ export default {
         }
       });
 
-      flow.on('fileAdded', file => {
-        const error = this.validateFileBeforeUpload(file);
+      flow.on('filesAdded', files => {
+        const error = this.validateFileBeforeUpload(files);
 
         if (error) {
           this.$alert.open(error, { type: 'error' });
@@ -147,7 +147,7 @@ export default {
           ...this.data,
           closed: true
         });
-        
+
         window.sessionStorage.setItem(requestId, PasswordStore.get(requestId));
         window.location.reload();
       } catch (error) {
@@ -170,8 +170,8 @@ export default {
       });
     },
 
-    validateFileBeforeUpload(file) {
-      return validateUpload(file, { ...this.data, currentFiles: this.entries });
+    validateFileBeforeUpload(files) {
+      return validateUpload(files, { ...this.data, currentFiles: this.entries });
     }
   }
 };
@@ -185,7 +185,7 @@ export default {
     background: url("../../assets/images/bandeau_accueil_linshare.svg");
     padding-bottom: 0;
     padding-top: 10px;
-    
+
 
     .home-page-first-background {
       background-image: url("../../assets/images/bandeau_accueil_linshare.svg");

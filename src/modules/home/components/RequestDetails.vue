@@ -34,8 +34,18 @@
               <div class="section-title">
                 {{ $t('HOME.MESSAGE') }}
               </div>
-              <div class="message-content">
+              <div
+                ref="messageContent"
+                :class="longMessage && !shouldDisplayShowMore ? 'message-content message-content-full' : 'message-content'"
+              >
                 {{ data.body }}
+              </div>
+              <div
+                v-show="longMessage"
+                class="message-show-more"
+                @click="toggleAllMessageContent"
+              >
+                {{ shouldDisplayShowMore ? $t('HOME.SHOW_MORE') : $t('HOME.SHOW_LESS') }}
               </div>
             </div>
             <div class="request-details-recipients">
@@ -99,7 +109,10 @@
                     {{ expiryDate }}
                   </div>
                 </div>
-                <div class="metadata-content-item" v-if="data.maxFileCount > 0">
+                <div
+                  v-if="data.maxFileCount > 0"
+                  class="metadata-content-item"
+                >
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.FILE_COUNT') }}:
                   </div>
@@ -107,7 +120,10 @@
                     {{ entries.length }} / {{ data.maxFileCount }}
                   </div>
                 </div>
-                <div class="metadata-content-item" v-if="data.maxFileSize > 0">
+                <div
+                  v-if="data.maxFileSize > 0"
+                  class="metadata-content-item"
+                >
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.MAX_FILE_SIZE') }}:
                   </div>
@@ -146,6 +162,9 @@ export default {
   data() {
     return {
       panel: 0,
+      longMessage: false,
+      shouldDisplayShowMore: false,
+      updated: false
     };
   },
   computed: {
@@ -174,11 +193,33 @@ export default {
       }
 
       return '';
+    },
+  },
+  updated() {
+    if (this.updated) {
+      return;
     }
+    if (!this.$refs.messageContent) {
+      this.longMessage = false;
+      this.shouldDisplayShowMore = false;
+    }
+    if (this.$refs.messageContent.offsetHeight > 60 && this.$refs.messageContent.offsetHeight < 80) {
+      this.longMessage = true;
+      this.shouldDisplayShowMore = true;
+    }
+    if (this.$refs.messageContent.offsetHeight >= 80) {
+      this.longMessage = true;
+      this.shouldDisplayShowMore = false;
+    }
+
+    this.updated = true;
   },
   methods: {
     getColorByEmail(email) {
       return getColorByString(email);
+    },
+    toggleAllMessageContent() {
+      this.shouldDisplayShowMore = !this.shouldDisplayShowMore;
     }
   }
 };
@@ -250,9 +291,18 @@ export default {
         color: #5E5E5E;
         text-overflow: ellipsis;
         overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+        max-height: 66px;
+        &.message-content-full {
+          max-height: 100%;
+        }
+      }
+      .message-show-more {
+        color: #05B1FF;
+        font-size: 12px;
+        margin-top: 4px;
+        font-weight: 400;
+        float: right;
+        cursor: pointer;
       }
     }
     .request-details-recipients {

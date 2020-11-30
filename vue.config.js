@@ -17,8 +17,9 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = "LinShare Upload Request";
+        args[0].title = 'LinShare Upload Request';
+        
         return args;
-      })
+      });
   }
 };

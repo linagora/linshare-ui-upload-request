@@ -16,6 +16,7 @@ export function validateUpload(files, { usedSpace, maxFileCount, maxFileSize, ma
   }
 
   let totalFileSize = 0;
+
   for ( let i = 0; i < files.length; i++ ) {
     totalFileSize += files[i].size;
     if (maxFileSize > 0 && files[i].size > maxFileSize) {

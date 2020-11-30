@@ -36,16 +36,16 @@
               </div>
               <div
                 ref="messageContent"
-                :class="longMessage && !shouldDisplayShowMore ? 'message-content message-content-full' : 'message-content'"
+                :class="requireShowMore && !showMore ? 'message-content message-content-full' : 'message-content'"
               >
                 {{ data.body }}
               </div>
               <div
-                v-show="longMessage"
+                v-show="requireShowMore"
                 class="message-show-more"
                 @click="toggleAllMessageContent"
               >
-                {{ shouldDisplayShowMore ? $t('HOME.SHOW_MORE') : $t('HOME.SHOW_LESS') }}
+                {{ showMore ? $t('HOME.SHOW_MORE') : $t('HOME.SHOW_LESS') }}
               </div>
             </div>
             <div class="request-details-recipients">
@@ -162,8 +162,8 @@ export default {
   data() {
     return {
       panel: 0,
-      longMessage: false,
-      shouldDisplayShowMore: false,
+      requireShowMore: false,
+      showMore: false,
       updated: false
     };
   },
@@ -200,16 +200,16 @@ export default {
       return;
     }
     if (!this.$refs.messageContent) {
-      this.longMessage = false;
-      this.shouldDisplayShowMore = false;
+      this.requireShowMore = false;
+      this.showMore = false;
     }
     if (this.$refs.messageContent.offsetHeight > 60 && this.$refs.messageContent.offsetHeight < 80) {
-      this.longMessage = true;
-      this.shouldDisplayShowMore = true;
+      this.requireShowMore = true;
+      this.showMore = true;
     }
     if (this.$refs.messageContent.offsetHeight >= 80) {
-      this.longMessage = true;
-      this.shouldDisplayShowMore = false;
+      this.requireShowMore = true;
+      this.showMore = false;
     }
 
     this.updated = true;
@@ -219,7 +219,7 @@ export default {
       return getColorByString(email);
     },
     toggleAllMessageContent() {
-      this.shouldDisplayShowMore = !this.shouldDisplayShowMore;
+      this.showMore = !this.showMore;
     }
   }
 };

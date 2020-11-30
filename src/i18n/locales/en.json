@@ -32,7 +32,8 @@
     "SIZE": "Size",
     "ACTIONS": "Actions",
     "CLOSE": "Close",
-    "CLOSED": "Closed"
+    "CLOSED": "Closed",
+    "NO_RESULT_TEXT": "No matching records found"
   },
   "PASSWORD": {
     "TITLE": "Enter your password for the upload request",

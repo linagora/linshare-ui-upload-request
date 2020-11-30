@@ -32,7 +32,8 @@
     "SIZE": "Kích cỡ",
     "ACTIONS": "Hành động",
     "CLOSE": "Đóng",
-    "CLOSED": "Đã đóng"
+    "CLOSED": "Đã đóng",
+    "NO_RESULT_TEXT": "Không tìm thấy bản ghi phù hợp"
   },
   "PASSWORD": {
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",

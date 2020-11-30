@@ -32,7 +32,8 @@
     "SIZE": "Taille",
     "ACTIONS": "Actions",
     "CLOSE": "Fermer",
-    "CLOSED": "Fermée"
+    "CLOSED": "Fermée",
+    "NO_RESULT_TEXT": "Aucun enregistrement correspondant trouvé"
   },
   "PASSWORD": {
     "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",

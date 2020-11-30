@@ -90,6 +90,7 @@
         item-key="uuid"
         show-select
         hide-default-footer
+        :no-results-text="$t('HOME.NO_RESULT_TEXT')"
         :items-per-page="pageSize"
         :headers="headers"
         :items="entries"

@@ -33,7 +33,9 @@
     "ACTIONS": "Actions",
     "CLOSE": "Close",
     "CLOSED": "Closed",
-    "NO_RESULT_TEXT": "No matching records found"
+    "NO_RESULT_TEXT": "No matching records found",
+    "SHOW_MORE": "Show more",
+    "SHOW_LESS": "Show less"
   },
   "PASSWORD": {
     "TITLE": "Enter your password for the upload request",

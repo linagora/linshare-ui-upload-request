@@ -33,7 +33,9 @@
     "ACTIONS": "Hành động",
     "CLOSE": "Đóng",
     "CLOSED": "Đã đóng",
-    "NO_RESULT_TEXT": "Không tìm thấy bản ghi phù hợp"
+    "NO_RESULT_TEXT": "Không tìm thấy bản ghi phù hợp",
+    "SHOW_MORE": "Xem thêm",
+    "SHOW_LESS": "Thu nhỏ"
   },
   "PASSWORD": {
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",

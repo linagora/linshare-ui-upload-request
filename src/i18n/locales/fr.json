@@ -33,7 +33,9 @@
     "ACTIONS": "Actions",
     "CLOSE": "Fermer",
     "CLOSED": "Fermée",
-    "NO_RESULT_TEXT": "Aucun enregistrement correspondant trouvé"
+    "NO_RESULT_TEXT": "Aucun enregistrement correspondant trouvé",
+    "SHOW_MORE": "Montre plus",
+    "SHOW_LESS": "Montrer moins"
   },
   "PASSWORD": {
     "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",

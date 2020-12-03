@@ -19,7 +19,7 @@
                   {{ $t('HOME.HELLO') }} <span>{{ data.recipient && data.recipient.mail }}</span>,
                 </p>
                 <p class="user-info-content-text">
-                  <i18n path="HOME.WELCOME_MESSAGE">
+                  <i18n :path="expiryDate ? 'HOME.WELCOME_MESSAGE' : 'HOME.WELCOME_MESSAGE_WITHOUT_EXPIRY'">
                     <template v-slot:owner>
                       <a :href="mailToOwner">{{ ownerName }}</a>
                     </template>
@@ -101,7 +101,7 @@
                     {{ activationDate }}
                   </div>
                 </div>
-                <div class="metadata-content-item">
+                <div class="metadata-content-item" v-if="expiryDate">
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.EXPIRATION') }}:
                   </div>

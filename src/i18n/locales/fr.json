@@ -16,7 +16,7 @@
     "CLOSED_UPLOAD_REQUEST_MESSAGE": "Vous ne pouvez pas effectuer d'action sur cette Invitation de dépôt",
     "DROP_YOUR_FILES_HERE": "Déposez vos fichiers ici",
     "DRAG_AND_DROP_MESSAGE": "Glissez vos fichiers dans l'interface pour les déposer",
-    "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de fermer la Invitation de dépôt. Après la fermeture, vous ne pourrez pas télécharger les fichiers ou effectuer des actions sur les fichiers déposés.",
+    "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de fermer la Invitation de dépôt. Tous les fichiers téléchargés seront arrêtés et après la fermeture, vous ne pourrez pas télécharger les fichiers ou effectuer des actions sur les fichiers déposés.",
     "WELCOME_MESSAGE": "Vous avez reçu une Invitation de dépôt de {owner}. L'invitation de dépôt sera active jusqu'à { expiryDate } ou la fermeture de la demande. En outre, vous ne pouvez pas télécharger ni supprimer les fichiers.",
     "WELCOME_MESSAGE_WITHOUT_EXPIRY": "Vous avez reçu une Invitation de dépôt de la part de {owner}. L'invitation de dépôt sera active jusqu'à sa fermeture. Dès lors, vous ne pourriez plus télécharger ni supprimer des fichiers.",
     "REQUEST_DETAILS": "Détails de l'invitation de dépôt",

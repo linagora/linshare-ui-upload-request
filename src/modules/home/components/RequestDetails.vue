@@ -101,7 +101,10 @@
                     {{ activationDate }}
                   </div>
                 </div>
-                <div class="metadata-content-item" v-if="expiryDate">
+                <div
+                  v-if="expiryDate"
+                  class="metadata-content-item"
+                >
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.EXPIRATION') }}:
                   </div>

@@ -11,7 +11,7 @@ export function isRequired(item) {
 }
 
 export function validateUpload(files, { usedSpace, maxFileCount, maxFileSize, maxDepositSize, currentFiles }) {
-  if (maxFileCount > 0 && currentFiles.length + files.length >= maxFileCount) {
+  if (maxFileCount > 0 && currentFiles.length + files.length > maxFileCount) {
     return i18n.t('MESSAGE.ERROR_MAX_FILE_COUNT_EXCEEDED', {length: maxFileCount});
   }
 

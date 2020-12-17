@@ -64,7 +64,7 @@
     "ERROR_FILE_SIZE_EXCEEDED": "Votre fichier ne peut pas dépasser { size }",
     "ERROR_NOT_ENOUGH_SPACE": "Il n'y a pas suffisamment d'espace sur votre espace de dépôt",
     "REQUIRED": "Obligatoire.",
-    "VALIDATE_PASSWORD": "Le mot de passe doit contenir 12 caractères ou plus, contenir au moins un caractère majuscule, un caractère minuscule et un caractère spécial.",
+    "VALIDATE_PASSWORD": "Le mot de passe doit contenir 12 caractères ou plus, contenir au moins un caractère majuscule, un caractère minuscule, un chiffre et un caractère spécial.",
     "PASSWORD_MUST_MATCH": "Merci de vérifier que vos mots de passe correspondent."
   },
   "UPLOAD_BAR": {

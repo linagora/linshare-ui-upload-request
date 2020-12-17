@@ -65,7 +65,7 @@
     "ERROR_FILE_SIZE_EXCEEDED": "Your file cannot exceed {size}",
     "ERROR_NOT_ENOUGH_SPACE": "There is not enough space on your upload storage",
     "REQUIRED": "Required.",
-    "VALIDATE_PASSWORD": "Password must be 12 or more characters in length, contain at least one uppercase character, one lowercase character and one special character.",
+    "VALIDATE_PASSWORD": "Password must be 12 or more characters in length, contain at least one uppercase character, one lowercase character, one digit and one special character.",
     "PASSWORD_MUST_MATCH": "Please make sure your passwords match."
   },
   "UPLOAD_BAR": {

@@ -64,7 +64,7 @@
     "ERROR_FILE_SIZE_EXCEEDED": "Tập tin của bạn không thể vượt quá {size}",
     "ERROR_NOT_ENOUGH_SPACE": "Bạn không còn đủ dung lượng lưu trữ",
     "REQUIRED": "Bắt buộc.",
-    "VALIDATE_PASSWORD": "Mật khẩu phải có tối thiểu 12 kí tự, gồm một kí tự in hoa, một kí tự in thường và một kí tự đặc biệt.",
+    "VALIDATE_PASSWORD": "Mật khẩu phải có tối thiểu 12 kí tự, gồm một kí tự in hoa, một kí tự in thường, một chữ số và một kí tự đặc biệt.",
     "PASSWORD_MUST_MATCH": "Mật khẩu không khớp."
   },
   "UPLOAD_BAR": {

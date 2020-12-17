@@ -118,7 +118,11 @@ export default {
           router.push({ name: 'home', params: { id: requestId }});
         }
       } catch (error) {
-        this.errorMessage = this.$t('MESSAGE.INCORRECT_PASSWORD');
+        if (error.response && error.response.data && error.response.data.errCode === 32401) {
+          this.errorMessage = this.$t('MESSAGE.INCORRECT_PASSWORD');
+        } else {
+          this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {type: 'error'});
+        }
       }
     }
   }

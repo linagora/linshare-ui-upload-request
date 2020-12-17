@@ -3,7 +3,7 @@ import { formatBytes } from '@/common';
 
 export function isPasswordValid(str) {
   //eslint-disable-next-line
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{12,})/.test(str);
+  return /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{12,})/.test(str);
 }
 
 export function isRequired(item) {

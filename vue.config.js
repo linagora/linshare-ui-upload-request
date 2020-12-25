@@ -5,6 +5,7 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
+    port: 20083,
     proxy: {
       '/linshare/webservice/': {
         target: LINSHARE_BACKEND_URL,
@@ -18,7 +19,7 @@ module.exports = {
       .plugin('html')
       .tap(args => {
         args[0].title = 'LinShare Upload Request';
-        
+
         return args;
       });
   }

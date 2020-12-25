@@ -4,7 +4,6 @@
       offset-y
       content-class="upload-bar-menu"
       :close-on-content-click="false"
-      :close-on-click="false"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-badge

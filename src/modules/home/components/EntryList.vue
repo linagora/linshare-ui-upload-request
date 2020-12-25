@@ -182,7 +182,6 @@
       </div>
 
       <div
-        v-if="data.canClose"
         class="close-btn-container hidden-sm-and-down "
       >
         <CloseButton

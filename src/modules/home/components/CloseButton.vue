@@ -12,8 +12,8 @@
       <v-btn
         v-bind="attrs"
         :disabled="isClosed"
-        :color="'#E2E2E2'"
         :elevation="0"
+        :color="'#5E5E5E'"
         class="close-button"
         v-on="on"
       >
@@ -61,7 +61,7 @@ export default {
 
 <style lang="scss" scoped>
   .close-button {
-    color: #7E7E7E;
+    color: #FEFEFE;
     text-transform: none;
     padding: 0 24px !important;
   }

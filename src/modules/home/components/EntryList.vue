@@ -45,15 +45,15 @@
       <v-icon @click="toggleSelectAll()">
         {{ mobileCheckboxIcon }}
       </v-icon>
-      <v-icon @click="showSearchInput = !showSearchInput">
-        mdi-magnify
-      </v-icon>
       <SortButton
         :sort-desc="sortDesc"
         :sort-by="sortBy"
         :sort-fields="sortItems"
         @selectSort="selectSort"
       />
+      <v-icon @click="showSearchInput = !showSearchInput">
+        mdi-magnify
+      </v-icon>
     </div>
     <v-expand-transition>
       <div

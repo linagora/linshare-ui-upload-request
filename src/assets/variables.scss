@@ -1,3 +1,15 @@
+/*
+  TABLE OFFSET VALUES
+
+  Adjust following values so that on collapsed detail panel,
+  The page would fit the screen
+*/
+$table-offset-sm: 304px;
+$table-offset-md: 427px;
+
+$table-empty-offset-sm: 267px;
+$table-empty-offset-md: 475px;
+
 $icomoon-font-family: "LinShare" !default;
 $icomoon-font-path: "fonts" !default;
 

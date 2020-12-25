@@ -373,6 +373,7 @@ export default {
 
 <style lang="scss">
   @import '~vuetify/src/styles/styles.sass';
+  @import '@/assets/variables.scss';
 
   .mobile-search-input {
     transition: all 0.3s;
@@ -396,6 +397,9 @@ export default {
 
         &-footer {
           .table-pagination {
+            // Fixed height whether item contain a page item or not
+            // Update this value must come with an update of table offset variables
+            height: 64px !important;
             padding: 10px 0;
 
             .v-pagination__item.v-pagination__item--active.primary {
@@ -481,11 +485,12 @@ export default {
           }
 
           .v-data-table__wrapper {
-            height: calc(100vh - 267px);
+            height: calc(100vh - #{$table-offset-sm});
             overflow-y: visible;
+
             .v-data-table__empty-wrapper {
               background: #eeeeee;
-              height: calc(100vh - 315px);
+              height: calc(100vh - #{$table-empty-offset-sm});
             }
           }
         }
@@ -495,7 +500,6 @@ export default {
           align-items: center;
           justify-content: center;
           background: #eeeeee;
-          margin: 0px -16px;
 
 
           .drag-and-drop-content {
@@ -560,9 +564,10 @@ export default {
           }
 
           .v-data-table__wrapper {
-            height: calc(100vh - 407px);
+            height: calc(100vh - #{$table-offset-md});
+
             .v-data-table__empty-wrapper {
-              height: calc(100vh - 455px);
+              height: calc(100vh - #{$table-empty-offset-md});
             }
           }
 

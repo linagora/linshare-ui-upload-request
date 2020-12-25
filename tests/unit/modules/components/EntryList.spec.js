@@ -4,6 +4,7 @@ import { mount, createLocalVue, config } from '@vue/test-utils';
 import EntryList from '@/modules/home/components/EntryList.vue';
 
 config.mocks['$t'] = message => message;
+config.mocks['$tc'] = message => message;
 
 describe('Entrylist.vue', () => {
   const localVue = createLocalVue();

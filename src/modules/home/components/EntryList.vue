@@ -77,6 +77,13 @@
         </div>
       </div>
     </v-expand-transition>
+    <Toolbar
+      :selected="selected"
+      :show-selected-items="showSelectedItems"
+      :can-delete-document="data.canDeleteDocument"
+      @deleteEntry="deleteEntry"
+      @toggleShowSelectedItems="toggleShowSelectedItems"
+    />
     <div
       v-flow-droppable="!data.closed"
       class="home-page-upload-data-table"
@@ -89,7 +96,7 @@
         :no-results-text="$t('HOME.NO_RESULT_TEXT')"
         :items-per-page="pageSize"
         :headers="headers"
-        :items="entries"
+        :items="showSelectedItems ? selected : entries"
         :search="search"
         :custom-filter="customFilter"
         :custom-sort="customSort"
@@ -130,7 +137,7 @@
 
             <div>
               <p class="ls-popover-title">
-                {{ generateConfirmMessage(item) }}
+                {{ $t('MESSAGE.DELETE_ENTRY_WARNING') }}
               </p>
               <div class="ls-popover-btn-container">
                 <v-btn small>
@@ -207,12 +214,14 @@
 import CloseButton from './CloseButton';
 import SortButton from './SortButton';
 import { mapGetters } from 'vuex';
+import Toolbar from './Toolbar';
 
 export default {
   name: 'EntryList',
   components: {
     CloseButton,
-    SortButton
+    SortButton,
+    Toolbar
   },
   data() {
     return {
@@ -223,7 +232,9 @@ export default {
       showSearchInput: false,
       sortBy: ['name'],
       sortDesc: false,
-      selected: []
+      selected: [],
+      showSelectedItems: false,
+      temporaryPageIndex: 1
     };
   },
   computed: {
@@ -271,14 +282,36 @@ export default {
     sortItems(){
       return [
         {
-          text: this.name,
+          text: this.$t('HOME.NAME'),
           value: 'name'
         },
         {
-          text: this.size,
+          text: this.$t('HOME.SIZE'),
           value: 'size'
         }
       ];
+    }
+  },
+  watch: {
+    selected: function(newSelected) {
+      if (!newSelected || !newSelected.length) {
+        this.showSelectedItems = false;
+      }
+    },
+    showSelectedItems: function(newValue) {
+      if (newValue) {
+        this.search = '';
+        this.temporaryPageIndex = this.page;
+        this.page = 1;
+      } else {
+        this.page = this.temporaryPageIndex;
+        this.temporaryPageIndex = 1;
+      }
+    },
+    search: function(newSearch) {
+      if (newSearch) {
+        this.showSelectedItems = false;
+      }
     }
   },
   methods: {
@@ -286,7 +319,7 @@ export default {
       const requestId = this.$route.params.id;
 
       try {
-        if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
+        if (!item) {
           this.$store.dispatch('removeEntries', { requestId, entries: this.selected });
           this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length:  this.selected.length}), {
             type: 'success'
@@ -305,13 +338,7 @@ export default {
         });
       }
     },
-    generateConfirmMessage (item) {
-      if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
-        return this.$t('MESSAGE.DELETE_ENTRIES_WARNING', {length: this.selected.length});
-      } else {
-        return this.$t('MESSAGE.DELETE_ENTRY_WARNING');
-      }
-    },
+
     selectSort (sortBy) {
       this.sortDesc = !this.sortDesc;
       this.sortBy = sortBy;
@@ -350,8 +377,11 @@ export default {
           }
         });
       }
+    },
+    toggleShowSelectedItems() {
+      this.showSelectedItems = !this.showSelectedItems;
     }
-  },
+  }
 };
 </script>
 
@@ -405,6 +435,9 @@ export default {
       }
 
       .home-page-upload {
+        position: relative;
+        overflow: hidden;
+
         &-toolbar {
           display: flex;
           align-items: center;
@@ -448,6 +481,30 @@ export default {
           }
           &-close-button {
             padding-right: 15px;
+          }
+        }
+
+
+        &-toolbar-multiple {
+          position: absolute;
+          top: -48px;
+          left: 0;
+          right: 0;
+          height: 48px;
+          transition: 0.3s all ease-in-out;
+          display: flex;
+          overflow: hidden;
+
+          header {
+            height: inherit !important;
+            display: flex;
+            align-items: center;
+            background-color: #efefef;
+            border-bottom: 1px solid #e4e4e4;
+          }
+
+          &-visible {
+            top: 0px;
           }
         }
 
@@ -542,6 +599,29 @@ export default {
 
         .home-page-upload {
           margin-top: 30px;
+
+          .home-page-upload-toolbar-multiple {
+            position: absolute;
+            top: 0;
+            left: -400px;
+            right: auto;
+            height: 48px;
+            transition: 0.3s all ease-in-out;
+            display: flex;
+            overflow: hidden;
+            border-bottom: 1px solid #E2E2E2;
+
+            header {
+              height: inherit !important;
+              background-color: #fff;
+              display: flex;
+              align-items: center;
+            }
+
+            &-visible {
+              left: 0px;
+            }
+          }
 
           .v-data-table-header {
             display: table-header-group;

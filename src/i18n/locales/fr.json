@@ -73,5 +73,9 @@
     "PAUSED": "en pause",
     "ERROR": "erreur",
     "SERVER_PROCESSING": "traitement du serveur"
+  },
+  "TOOLBAR": {
+    "TITLE": "1 élément sélectionné | {count} articles sélectionnés",
+    "DELETE": "Effacer"
   }
 }

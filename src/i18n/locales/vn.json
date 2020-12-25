@@ -73,5 +73,9 @@
     "PAUSED": "tạm dừng",
     "ERROR": "lỗi",
     "SERVER_PROCESSING": "đang xử lí"
+  },
+  "TOOLBAR": {
+    "TITLE": "1 tập tin được chọn | {count} tập tin được chọn",
+    "DELETE": "Xóa"
   }
 }

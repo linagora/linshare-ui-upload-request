@@ -74,5 +74,9 @@
     "PAUSED": "paused",
     "ERROR": "error",
     "SERVER_PROCESSING": "server processing"
+  },
+  "TOOLBAR": {
+    "TITLE": "1 item selected | {count} items selected",
+    "DELETE": "Delete"
   }
 }

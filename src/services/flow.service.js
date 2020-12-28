@@ -28,9 +28,13 @@ function initDirectives() {
     }
   });
 
-  Vue.directive('flowDrop', {
-    bind(el) {
-      flow.assignDrop(el);
+  Vue.directive('flowDroppable', {
+    update(el, binding) {
+      if (!binding.value) {
+        flow.unAssignDrop(el);
+      } else {
+        flow.assignDrop(el);
+      }
     }
   });
 }

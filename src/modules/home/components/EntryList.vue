@@ -81,7 +81,7 @@
       </div>
     </v-expand-transition>
     <div
-      v-flow-drop
+      v-flow-droppable="!data.closed"
       class="home-page-upload-data-table"
     >
       <v-data-table

@@ -5,7 +5,7 @@
       content-class="upload-bar-menu"
       :close-on-content-click="false"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-badge
           :content="files.length"
           :value="files.length"
@@ -48,7 +48,7 @@
           class="upload-bar-empty"
         >
           <i18n path="UPLOAD_BAR.EMPTY">
-            <template v-slot:icon>
+            <template #icon>
               <v-icon class="upload-bar-add-icon">
                 add
               </v-icon>

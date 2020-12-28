@@ -8,7 +8,7 @@
     offset-x
     absolute
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         v-bind="attrs"
         :disabled="isClosed"

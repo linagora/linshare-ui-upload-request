@@ -20,7 +20,7 @@
                 </p>
                 <p class="user-info-content-text">
                   <i18n path="HOME.WELCOME_MESSAGE">
-                    <template v-slot:owner>
+                    <template #owner>
                       <a :href="mailToOwner">{{ ownerName }}</a>
                     </template>
                   </i18n>
@@ -50,7 +50,7 @@
                 <v-expansion-panel>
                   <v-expansion-panel-header class="mb-0 section-title">
                     {{ $t('HOME.RECIPIENT_LIST') }}
-                    <template v-slot:actions>
+                    <template #actions>
                       <span class="recipient-toggle-icon">{{ $t('HOME.VIEW') }}</span>
                       <v-icon color="#05B1FF">
                         mdi-chevron-down

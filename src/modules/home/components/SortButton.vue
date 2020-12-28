@@ -5,7 +5,7 @@
     :close-on-content-click="false"
     :offset-y="true"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-icon
         class="home-page-upload-toolbar-button"
         v-bind="attrs"

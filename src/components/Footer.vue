@@ -2,13 +2,13 @@
   <footer class="footer">
     <div>
       <i18n path="FOOTER.CONTENT">
-        <template v-slot:linshare>
+        <template #linshare>
           <a
             href="https://linshare.org"
             target="_blank"
           >LinShare™</a>
         </template>
-        <template v-slot:linagora>
+        <template #linagora>
           <a
             href="https://linagora.com"
             target="_blank"

@@ -3,7 +3,7 @@
     bottom
     :close-on-click="true"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         id="language-selector-button"
         offset-y
@@ -55,7 +55,7 @@ export default {
   methods: {
     changeLocale(language) {
       const selectedLanguage = LANGUAGE.SUPPORTED_LANGUAGE.find(item => item.language === language);
-      
+
       i18n.locale = language;
       LanguageStore.assign(language);
       this.key = selectedLanguage ? selectedLanguage.key.toLowerCase() : 'us';

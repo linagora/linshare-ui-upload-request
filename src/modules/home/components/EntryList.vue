@@ -83,7 +83,6 @@
     <div
       v-flow-drop
       class="home-page-upload-data-table"
-      :style="{'pointer-events': data.closed ? 'none': 'all'}"
     >
       <v-data-table
         v-model="selectedEntries"

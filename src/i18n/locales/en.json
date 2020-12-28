@@ -6,6 +6,11 @@
   "FOOTER": {
     "CONTENT": "You are using the Open Source and free version of {linshare}, powered by {linagora} 2009–2020. Contribute to LinShare R&D by subscribing to an Enterprise offer."
   },
+  "LANDING": {
+    "SHARE": "Share",
+    "EASILY_EFFICIENTLY_WITH_CONFIDENCE": "easily efficiently with confidence",
+    "DESCRIPTION": "Open Source secure file sharing for business"
+  },
   "HOME": {
     "ORDER_BY": "Order by",
     "CANCEL": "Cancel",

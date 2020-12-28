@@ -6,8 +6,13 @@
   "FOOTER": {
     "CONTENT": "Vous utilisez la version libre et gratuite de {linshare}, développé par : {linagora} 2009–2020. Contribuez à la R&D du produit en souscrivant à une offre entreprise."
   },
+  "LANDING": {
+    "SHARE": "Partagez",
+    "EASILY_EFFICIENTLY_WITH_CONFIDENCE": "facilement et efficacement en toute confiance",
+    "DESCRIPTION": "Partage de fichiers sécurisé Open Source pour les entreprises"
+  },
   "HOME": {
-    "ORDER_BY": "Ordonnée par",
+    "ORDER_BY": "Trier par",
     "CANCEL": "Annuler",
     "DELETE": "Supprimer",
     "PROCEED": "Procéder",

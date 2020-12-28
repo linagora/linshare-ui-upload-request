@@ -6,6 +6,11 @@
   "FOOTER": {
     "CONTENT": "Bạn đang sử dụng phiên bản miễn phí và mã nguồn mở của {linshare}, được cung cấp bởi {linagora} 2009-2019. Hãy đóng góp vào LinShare R&D bằng cách đăng ký gói Enterprise."
   },
+  "LANDING": {
+    "SHARE": "Chia sẻ",
+    "EASILY_EFFICIENTLY_WITH_CONFIDENCE": "dễ dàng hiệu quả và tự tin",
+    "DESCRIPTION": "Chia sẻ tệp an toàn mã nguồn mở dành cho doanh nghiệp"
+  },
   "HOME": {
     "ORDER_BY": "Sắp xếp theo",
     "CANCEL": "Hủy",

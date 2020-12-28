@@ -6,7 +6,13 @@ import { middlewarePipeline } from './middleware.pipeline.js';
 Vue.use(Router);
 
 const router = new Router({
+  mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'landing-page',
+      component: () => import('@/modules/landing/Landing')
+    },
     {
       path: '/error/:status?',
       name: 'error',

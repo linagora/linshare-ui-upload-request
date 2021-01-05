@@ -1,4 +1,4 @@
-export const LanguageStore = {
+export const LanguageService = {
   get: () => {
     return window.localStorage.getItem('lang');
   },

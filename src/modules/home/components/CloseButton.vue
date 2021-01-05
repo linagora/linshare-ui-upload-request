@@ -43,17 +43,28 @@
 </template>
 
 <script>
+import { FlowService } from '@/services';
+
 export default {
   name: 'CloseButton',
-  props: {
-    isClosed: {
-      type: Boolean,
-      default: false
+  computed: {
+    isClosed() {
+      return this.$store.getters.uploadRequest.closed;
     }
   },
   methods: {
     closeUploadRequest() {
-      this.$emit('closeUploadRequest');
+      const flow = FlowService.getFlowObject();
+
+      try {
+        this.$store.dispatch('closeUploadRequest');
+        flow.cancel();
+
+      } catch (error) {
+        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
+          type: 'error'
+        });
+      }
     }
   }
 };

@@ -36,7 +36,8 @@
 <script>
 import { LANGUAGE } from '@/constants';
 import { i18n } from '@/i18n';
-import { LanguageStore } from '@/store';
+import { LanguageService } from '@/services';
+
 export default {
   name: 'LanguageSelector',
   data() {
@@ -57,7 +58,9 @@ export default {
       const selectedLanguage = LANGUAGE.SUPPORTED_LANGUAGE.find(item => item.language === language);
 
       i18n.locale = language;
-      LanguageStore.assign(language);
+
+      LanguageService.assign(language);
+
       this.key = selectedLanguage ? selectedLanguage.key.toLowerCase() : 'us';
     }
   }

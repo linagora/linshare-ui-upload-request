@@ -1,21 +1,21 @@
 import { ApiService } from '@/services';
-import { UploadRequestStore, PasswordStore } from '@/store';
+import { store } from '@/store';
 import { ERRORS } from '@/constants';
 
 async function checkError(id, pw) {
   try {
-    const password = pw ? pw : PasswordStore.get(id);
+    const password = pw || store.getters.password;
     const uploadRequest = await ApiService.getById('requests', id, {
       headers: {
         'linshare-uploadrequest-password': password
       }
     });
 
-    UploadRequestStore.assign(id, uploadRequest.data);
-    
+    store.dispatch('setUploadRequest', uploadRequest.data);
+
     return;
   } catch (error) {
-    UploadRequestStore.assign(id, {});
+    store.dispatch('setUploadRequest', {});
 
     return error;
   }
@@ -23,7 +23,7 @@ async function checkError(id, pw) {
 
 async function checkPasswordError(id, password) {
   const error = await checkError(id, password);
-  
+
   if ( error && error.response && error.response.status === 401 && error.response.data) {
     if (error.response.data.errCode === 32401) {
       return ERRORS.PASSWORD_INCORRECT;

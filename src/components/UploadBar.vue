@@ -63,16 +63,12 @@
 <script>
 import UploadItem from './UploadItem';
 import { FlowService } from '@/services';
+import { validateUpload } from '@/common';
+
 export default {
   name: 'UploadBar',
   components: {
     UploadItem,
-  },
-  props: {
-    validateFileBeforeUpload: {
-      type: Function,
-      default: () => true,
-    },
   },
   data() {
     return {
@@ -103,8 +99,16 @@ export default {
         });
       }
     });
+
+    flow.on('fileRemoved', () => this.files = []);
   },
   methods: {
+    validateFileBeforeUpload(files) {
+      return validateUpload(files, {
+        ...this.$store.getters.uploadRequest,
+        currentFiles: this.$store.getters.entries
+      });
+    },
     removeItem(item) {
       this.files = this.files.filter(
         (f) => f.uniqueIdentifier !== item.uniqueIdentifier

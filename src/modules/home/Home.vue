@@ -1,24 +1,13 @@
 <template>
   <div>
     <Header>
-      <UploadBar :validate-file-before-upload="validateFileBeforeUpload" />
+      <UploadBar />
     </Header>
     <div class="home-page">
       <div class="hidden-sm-and-down home-page-first-background" />
       <div class="home-page-content">
-        <RequestDetails
-          :data="data"
-          :entries="entries"
-        />
-        <EntryList
-          :data="data"
-          :entries="entries"
-          :selected="selected"
-          @deleteMultipleEntries="deleteMultipleEntries"
-          @deleteSingleEntry="deleteSingleEntry"
-          @changeSelected="changeSelected"
-          @closeUploadRequest="closeUploadRequest"
-        />
+        <RequestDetails />
+        <EntryList />
       </div>
     </div>
     <Footer />
@@ -30,12 +19,11 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import UploadBar from '@/components/UploadBar';
-import { UploadRequestService } from '@/services';
 import { FlowService } from '@/services';
-import { formatBytes, validateUpload } from '@/common';
+import { validateUpload } from '@/common';
 import RequestDetails from './components/RequestDetails';
 import EntryList from './components/EntryList';
-import { UploadRequestStore, PasswordStore } from '@/store';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Home',
@@ -46,17 +34,16 @@ export default {
     Footer,
     UploadBar
   },
-  data() {
-    return {
-      data: {},
-      entries: [],
-      selected: []
-    };
+  computed: {
+    ...mapGetters([
+      'uploadRequest',
+      'entries'
+    ])
   },
   async created() {
     await this.fetchData();
 
-    if (!this.data.closed) {
+    if (!this.uploadRequest.closed) {
       const flow = FlowService.getFlowObject();
 
       flow.on('filesSubmitted', () => flow.upload());
@@ -88,90 +75,19 @@ export default {
     }
   },
   methods: {
-    async deleteMultipleEntries(entries) {
-      const requestId = this.$route.params.id;
-
-      try {
-        await Promise.all(entries.map(entry =>
-          UploadRequestService.deleteEntry(requestId, entry.uuid)
-        ));
-        this.entries = this.entries.filter(entry => entries.map(deletedEntry => deletedEntry.uuid).indexOf(entry.uuid) < 0);
-        this.selected = [];
-        this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length: entries.length}), {
-          type: 'success'
-        });
-      } catch (err) {
-        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
-          type: 'error'
-        });
-      }
-    },
-
-    async deleteSingleEntry(id) {
-      const requestId = this.$route.params.id;
-
-      try {
-        await UploadRequestService.deleteEntry(requestId, id);
-        this.entries = this.entries.filter(entry => entry.uuid !== id);
-        this.selected = this.selected.filter(entry => entry.uuid !== id);
-        this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
-          type: 'success'
-        });
-      } catch (err) {
-        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
-          type: 'error'
-        });
-      }
-    },
-
-    async fetchData(forceNewFetch) {
+    async fetchData() {
       try {
         const requestId = this.$route.params.id;
-        const uploadRequest = await UploadRequestStore.fetch(requestId, forceNewFetch);
-        const entriesResponse = await UploadRequestService.getRequestEntries(requestId);
 
-        this.data = uploadRequest;
-        this.entries = entriesResponse.data.length ? this.transformEntries(entriesResponse.data) : [];
+        await this.$store.dispatch('fetchEntries', requestId);
       } catch (err) {
         this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
           type: 'error'
         });
       }
     },
-
-    async closeUploadRequest() {
-      const requestId = this.$route.params.id;
-
-      try {
-        await UploadRequestService.updateRequest(requestId, {
-          ...this.data,
-          closed: true
-        });
-
-        window.sessionStorage.setItem(requestId, PasswordStore.get(requestId));
-        window.location.reload();
-      } catch (error) {
-        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
-          type: 'error'
-        });
-      }
-    },
-
-    changeSelected(newSelected) {
-      this.selected = newSelected;
-    },
-
-    transformEntries(data) {
-      return data.map(entry => {
-        entry.originalSize = entry.size;
-        entry.size = formatBytes(entry.size);
-
-        return entry;
-      });
-    },
-
     validateFileBeforeUpload(files) {
-      return validateUpload(files, { ...this.data, currentFiles: this.entries });
+      return validateUpload(files, { ...this.uploadRequest, currentFiles: this.entries });
     }
   }
 };

@@ -38,10 +38,7 @@
         </div>
       </div>
       <div class="hidden-md-and-up home-page-upload-toolbar-close-button">
-        <CloseButton
-          :is-closed="data.closed"
-          @closeUploadRequest="closeUploadRequest()"
-        />
+        <CloseButton />
       </div>
     </div>
     <div class="home-page-upload-mobile-header hidden-md-and-up">
@@ -85,7 +82,7 @@
       class="home-page-upload-data-table"
     >
       <v-data-table
-        v-model="selectedEntries"
+        v-model="selected"
         item-key="uuid"
         show-select
         hide-default-footer
@@ -184,10 +181,7 @@
       <div
         class="close-btn-container hidden-sm-and-down "
       >
-        <CloseButton
-          :is-closed="data.closed"
-          @closeUploadRequest="closeUploadRequest()"
-        />
+        <CloseButton />
       </div>
     </div>
 
@@ -212,32 +206,13 @@
 <script>
 import CloseButton from './CloseButton';
 import SortButton from './SortButton';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'EntryList',
   components: {
     CloseButton,
     SortButton
-  },
-  props: {
-    data: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    entries: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    },
-    selected: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
   },
   data() {
     return {
@@ -247,18 +222,15 @@ export default {
       search: '',
       showSearchInput: false,
       sortBy: ['name'],
-      sortDesc: false
+      sortDesc: false,
+      selected: []
     };
   },
   computed: {
-    selectedEntries: {
-      get() {
-        return this.selected;
-      },
-      set(value) {
-        this.$emit('changeSelected', value);
-      }
-    },
+    ...mapGetters({
+      entries: 'entries',
+      data: 'uploadRequest'
+    }),
     mobileCheckboxIcon() {
       return this.selectedEntriesInPage.length ? (this.selectedEntriesInPage.length === this.entriesInPage.length ? 'mdi-checkbox-marked' : 'mdi-minus-box') : 'mdi-checkbox-blank-outline';
     },
@@ -268,7 +240,7 @@ export default {
       return tableEntries.slice((this.page - 1) * this.pageSize, this.page * this.pageSize);
     },
     selectedEntriesInPage() {
-      return this.selectedEntries.filter(value => this.entriesInPage.find(entry => entry.uuid === value.uuid));
+      return this.selected.filter(value => this.entriesInPage.find(entry => entry.uuid === value.uuid));
     },
     headers() {
       const defaultHeaders = [
@@ -311,10 +283,26 @@ export default {
   },
   methods: {
     deleteEntry(item) {
-      if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
-        this.$emit('deleteMultipleEntries', this.selected);
-      } else {
-        this.$emit('deleteSingleEntry', item.uuid);
+      const requestId = this.$route.params.id;
+
+      try {
+        if (this.selected && this.selected.length && this.selected.map(entry => entry.uuid).indexOf(item.uuid) >= 0) {
+          this.$store.dispatch('removeEntries', { requestId, entries: this.selected });
+          this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length:  this.selected.length}), {
+            type: 'success'
+          });
+          this.selected = [];
+        } else {
+          this.$store.dispatch('removeEntries', { requestId, entries: [item] });
+          this.selected = this.selected.filter(entry => entry.uuid !== this.selected[0].id);
+          this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
+            type: 'success'
+          });
+        }
+      } catch (err) {
+        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
+          type: 'error'
+        });
       }
     },
     generateConfirmMessage (item) {
@@ -352,16 +340,13 @@ export default {
 
       return item.name.indexOf(query) >= 0;
     },
-    closeUploadRequest() {
-      this.$emit('closeUploadRequest');
-    },
     toggleSelectAll() {
       if (this.selectedEntriesInPage.length === this.entriesInPage.length) {
-        this.selectedEntries = this.selectedEntries.filter(entry => !this.selectedEntriesInPage.some(selected => selected.uuid === entry.uuid));
+        this.selected = this.selected.filter(entry => !this.selectedEntriesInPage.some(selected => selected.uuid === entry.uuid));
       } else {
         this.entriesInPage.forEach(entry => {
-          if (!this.selectedEntries.some(selected => selected.uuid === entry.uuid)) {
-            this.selectedEntries.push(entry);
+          if (!this.selected.some(selected => selected.uuid === entry.uuid)) {
+            this.selected.push(entry);
           }
         });
       }

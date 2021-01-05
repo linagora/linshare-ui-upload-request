@@ -73,7 +73,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UploadRequestService } from '@/services';
-import { PasswordStore } from '@/store';
 import { isRequired, isPasswordValid } from '@/common';
 import router from '@/router';
 export default {
@@ -114,7 +113,7 @@ export default {
             oldPassword: this.oldPassword
           });
 
-          PasswordStore.assign(requestId, this.newPassword);
+          this.$store.dispatch('setPassword', this.newPassword);
           router.push({ name: 'home', params: { id: requestId }});
         }
       } catch (error) {

@@ -143,22 +143,10 @@
 <script>
 import moment from 'moment';
 import { formatBytes, getColorByString } from '@/common';
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'RequestDetails',
-  props: {
-    data: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    entries: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  },
   data() {
     return {
       panel: 0,
@@ -168,6 +156,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      entries: 'entries',
+      data: 'uploadRequest'
+    }),
     expiryDate() {
       return this.data && this.data.expiryDate ? moment(this.data.expiryDate).format('MMM DD, YYYY') : '';
     },

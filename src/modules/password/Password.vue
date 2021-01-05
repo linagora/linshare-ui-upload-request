@@ -51,7 +51,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ErrorService } from '@/services';
-import { PasswordStore } from '@/store';
 import { isRequired } from '@/common';
 import router from '@/router';
 export default {
@@ -79,7 +78,7 @@ export default {
         const errorAuthenticated = await ErrorService.checkPasswordError(requestId, this.password);
 
         if (!errorAuthenticated) {
-          PasswordStore.assign(requestId, this.password);
+          this.$store.dispatch('setPassword', this.password);
           router.push({ name: 'home', params: { id: requestId }});
         } else {
           this.errorMessage = this.$t('MESSAGE.INCORRECT_PASSWORD');

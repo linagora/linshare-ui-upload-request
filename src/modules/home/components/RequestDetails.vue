@@ -12,7 +12,12 @@
           <div class="request-details-content">
             <div class="request-details-user-info">
               <div class="hidden-sm-and-down user-info-icon">
-                <img src="../../../assets/images/upload-request-2.svg">
+                <v-icon
+                  size="40"
+                  color="#7E7E7E"
+                >
+                  {{ uploadRequest.collective ? 'ls-icons-upload-request-collective' : 'ls-icons-upload-request-individual' }}
+                </v-icon>
               </div>
               <div class="user-info-content">
                 <p class="user-info-content-welcome">
@@ -249,11 +254,10 @@ export default {
       display: flex;
       align-items: flex-start;
       .user-info-icon {
-        width: 65px;
-        height: 65px;
         padding: 15px;
         margin-right: 25px;
         background-color: #F1F1F1;
+
         img {
           width: 35px;
           height: 35px;

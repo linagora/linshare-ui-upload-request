@@ -327,7 +327,7 @@ export default {
           this.selected = [];
         } else {
           this.$store.dispatch('removeEntries', { requestId, entries: [item] });
-          this.selected = this.selected.filter(entry => entry.uuid !== this.selected[0].id);
+          this.selected = this.selected.filter(entry => entry.uuid !== item.uuid);
           this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
             type: 'success'
           });

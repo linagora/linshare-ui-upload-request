@@ -415,6 +415,7 @@ export default {
             // Update this value must come with an update of table offset variables
             height: 64px !important;
             padding: 10px 0;
+            margin: 0 12px;
 
             .v-pagination__item.v-pagination__item--active.primary {
               &:hover,

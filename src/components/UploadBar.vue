@@ -110,7 +110,11 @@ export default {
       }
     });
 
-    flow.on('fileRemoved', () => this.files = []);
+    flow.on('fileRemoved', () => {
+      if (this.$store.getters.uploadRequest.closed) {
+        this.files = [];
+      }
+    });
   },
   methods: {
     validateFileBeforeUpload(files) {

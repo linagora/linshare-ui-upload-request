@@ -52,14 +52,17 @@ export default {
       return this.$store.getters.uploadRequest.closed;
     }
   },
-  methods: {
-    closeUploadRequest() {
+  watch: {
+    isClosed() {
       const flow = FlowService.getFlowObject();
 
+      flow.cancel();
+    }
+  },
+  methods: {
+    closeUploadRequest() {
       try {
         this.$store.dispatch('closeUploadRequest');
-        flow.cancel();
-
       } catch (error) {
         this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
           type: 'error'

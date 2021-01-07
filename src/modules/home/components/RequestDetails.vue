@@ -50,7 +50,10 @@
                 {{ showMore ? $t('HOME.SHOW_MORE') : $t('HOME.SHOW_LESS') }}
               </div>
             </div>
-            <div class="request-details-recipients">
+            <div
+              v-if="uploadRequest.collective"
+              class="request-details-recipients"
+            >
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header class="mb-0 section-title">

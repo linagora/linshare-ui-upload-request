@@ -16,7 +16,7 @@
               </div>
               <div class="user-info-content">
                 <p class="user-info-content-welcome">
-                  {{ $t('HOME.HELLO') }} <span>{{ data.recipient && data.recipient.mail }}</span>,
+                  {{ $t('HOME.HELLO') }} <span>{{ uploadRequest.recipient && uploadRequest.recipient.mail }}</span>,
                 </p>
                 <p class="user-info-content-text">
                   <i18n path="HOME.WELCOME_MESSAGE">
@@ -35,7 +35,7 @@
                 ref="messageContent"
                 :class="requireShowMore && !showMore ? 'message-content message-content-full' : 'message-content'"
               >
-                {{ data.body }}
+                {{ uploadRequest.body }}
               </div>
               <div
                 v-show="requireShowMore"
@@ -60,7 +60,7 @@
                   <v-expansion-panel-content>
                     <v-list class="pa-0">
                       <v-list-item
-                        v-for="recipient in data.recipients"
+                        v-for="recipient in uploadRequest.recipients"
                         :key="recipient.mail"
                         class="ml-0 pl-0"
                       >
@@ -110,18 +110,18 @@
                   </div>
                 </div>
                 <div
-                  v-if="data.maxFileCount > 0"
+                  v-if="uploadRequest.maxFileCount > 0"
                   class="metadata-content-item"
                 >
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.FILE_COUNT') }}:
                   </div>
                   <div class="metadata-content-item-content">
-                    {{ entries.length }} / {{ data.maxFileCount }}
+                    {{ entries.length }} / {{ uploadRequest.maxFileCount }}
                   </div>
                 </div>
                 <div
-                  v-if="data.maxFileSize > 0"
+                  v-if="uploadRequest.maxFileSize > 0"
                   class="metadata-content-item"
                 >
                   <div class="metadata-content-item-title">
@@ -158,30 +158,30 @@ export default {
   computed: {
     ...mapGetters({
       entries: 'entries',
-      data: 'uploadRequest'
+      uploadRequest: 'uploadRequest'
     }),
     expiryDate() {
-      return this.data && this.data.expiryDate ? moment(this.data.expiryDate).format('MMM DD, YYYY') : '';
+      return this.uploadRequest && this.uploadRequest.expiryDate ? moment(this.uploadRequest.expiryDate).format('MMM DD, YYYY') : '';
     },
     activationDate() {
-      return this.data && this.data.activationDate ? moment(this.data.activationDate).format('MMM DD, YYYY') : '';
+      return this.uploadRequest && this.uploadRequest.activationDate ? moment(this.uploadRequest.activationDate).format('MMM DD, YYYY') : '';
     },
     maxFileSize() {
-      return formatBytes(this.data.maxFileSize || 0);
+      return formatBytes(this.uploadRequest.maxFileSize || 0);
     },
     mailToOwner() {
-      const data = this.data;
+      const uploadRequest = this.uploadRequest;
 
-      return data.owner && data.owner.mail ? `mailto:${data.owner.mail}` : '';
+      return uploadRequest.owner && uploadRequest.owner.mail ? `mailto:${uploadRequest.owner.mail}` : '';
     },
     ownerName() {
-      const data = this.data;
+      const uploadRequest = this.uploadRequest;
 
-      if (data.owner) {
-        data.owner.firstName = data.owner.firstName || '';
-        data.owner.lastName = data.owner.lastName || '';
+      if (uploadRequest && uploadRequest.owner) {
+        uploadRequest.owner.firstName = uploadRequest.owner.firstName || '';
+        uploadRequest.owner.lastName = uploadRequest.owner.lastName || '';
 
-        return `${data.owner.firstName} ${data.owner.lastName}`;
+        return `${uploadRequest.owner.firstName} ${uploadRequest.owner.lastName}`;
       }
 
       return '';

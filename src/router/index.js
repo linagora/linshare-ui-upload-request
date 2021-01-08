@@ -6,7 +6,6 @@ import { middlewarePipeline } from './middleware.pipeline.js';
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',

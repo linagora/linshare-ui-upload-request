@@ -15,7 +15,8 @@ function initFlowObject(options) {
     target: `${location.origin}${API_URL}/flow/upload`,
     simultaneousUploads: 1,
     generateUniqueIdentifier: () => uuidv4(),
-    permanentErrors:[401, 404, 500, 501]
+    permanentErrors:[401, 404, 500, 501],
+    successStatuses: [200]
   });
 
   initDirectives();

@@ -77,7 +77,31 @@
     "DONE": "xong",
     "PAUSED": "tạm dừng",
     "ERROR": "lỗi",
-    "SERVER_PROCESSING": "đang xử lí"
+    "SERVER_PROCESSING": "đang xử lí",
+    "SERVER_RESPONSE": {
+      "NONE": "Đã xảy ra lỗi khi tải lên",
+      "200": "Tài liệu không chứa dữ liệu (kích thước = 0 byte)",
+      "3000": "Loại tệp này bị cấm (loại mime)",
+      "3002": "Loại tệp này bị cấm",
+      "3003": "Tệp bị từ chối vì tìm thấy vi-rút",
+      "3007": "Không thể quét tệp",
+      "26007": "Không thể tệp lên, thư mục không tồn tại hoặc đã bị xóa",
+      "26444": "Bạn không có quyền tải lên tệp",
+      "39001": "Các video tải lên hiện bị tắt vì chế độ bảo trì đã được kích hoạt",
+      "40403": "Không thể tìm thấy trạng thái tệp đã tải lên",
+      "40404": "Không thể tìm thấy trạng thái tệp đã tải lên",
+      "46001": "Lỗi cấu hình máy chủ, tải lên không thể",
+      "46002": "Lỗi cấu hình máy chủ, tải lên không thể",
+      "46003": "Lỗi cấu hình máy chủ, tải lên không thể",
+      "46004": "Lỗi cấu hình máy chủ, tải lên không thể",
+      "46010": "Kích thước tệp lớn hơn kích thước tệp tối đa được cho phép",
+      "46011": "Không còn dung lượng trống trên máy chủ, vui lòng thử lại sau",
+      "46012": "Không còn dung lượng trống trên máy chủ, vui lòng thử lại sau",
+      "46013": "Không còn dung lượng trống trên máy chủ, vui lòng thử lại sau",
+      "46014": "Không còn dung lượng trống trên máy chủ, kiểm tra và thử lại",
+      "46015": "Không còn dung lượng trống trên máy chủ, vui lòng thử lại sau",
+      "46403": "Lỗi cấu hình máy chủ, không thể tải lên"
+    }
   },
   "TOOLBAR": {
     "TITLE": "1 tập tin được chọn | {count} tập tin được chọn",

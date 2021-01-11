@@ -56,7 +56,9 @@ export default {
         }
 
         if (!response.chunkUploadSuccess) {
-          this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {type: 'error'});
+          const errorMessage = this.$t(`UPLOAD_BAR.SERVER_RESPONSE.${response.errCode || 'NONE'}`);
+
+          this.$alert.open(errorMessage, {type: 'error'});
         } else {
           this.$alert.open(this.$t('MESSAGE.UPLOAD_SUCCESS'), {type: 'success'});
           this.fetchData(true);

@@ -1,5 +1,8 @@
 <template>
-  <div class="upload-item">
+  <div
+    class="upload-item"
+    @click="toggleDisplayFullMessage"
+  >
     <div class="upload-item-info">
       <div class="upload-item-info-text-container">
         <div class="upload-item-info-name-container">
@@ -8,7 +11,9 @@
       </div>
       <div class="upload-item-info-progress-container">
         <div class="upload-item-info-progress-flex">
-          <span class="upload-item-info-progress-container-status">
+          <span
+            :class="['upload-item-info-progress-container-status', { 'display-full' : showFullMessage }]"
+          >
             {{ uploadStatus }}
           </span>
           <div class="upload-item-info-size-container">
@@ -28,35 +33,35 @@
       <v-icon
         v-show="error"
         class="upload-item-actions-container-icon upload-item-actions-container-retry"
-        @click="retry()"
+        @click="retry($event)"
       >
         mdi-restart
       </v-icon>
       <v-icon
         v-show="!completed && !paused"
         class="upload-item-actions-container-icon upload-item-actions-container-pause"
-        @click="pause()"
+        @click="pause($event)"
       >
         mdi-pause
       </v-icon>
       <v-icon
         v-show="!completed && paused"
         class="upload-item-actions-container-icon upload-item-actions-container-resume"
-        @click="resume()"
+        @click="resume($event)"
       >
         mdi-play
       </v-icon>
       <v-icon
-        v-show="completed"
+        v-show="completed && !error"
         class="upload-item-actions-container-icon upload-item-actions-container-check"
-        @click="removeItem()"
+        @click="removeItem($event)"
       >
         mdi-check
       </v-icon>
       <v-icon
-        v-show="!completed"
+        v-show="!completed || error"
         class="upload-item-actions-container-icon upload-item-actions-container-cancel"
-        @click="cancel()"
+        @click="cancel($event)"
       >
         mdi-close
       </v-icon>
@@ -100,6 +105,11 @@ export default {
       default: 0
     }
   },
+  data() {
+    return {
+      showFullMessage: false
+    };
+  },
   computed: {
     size() {
       return formatBytes(this.data.size);
@@ -116,7 +126,7 @@ export default {
           return this.$t('UPLOAD_BAR.PAUSED');
         }
         if (this.error) {
-          return this.errorMessage || this.$t('UPLOAD_BAR.ERROR');
+          return this.$t(this.errorMessage) || this.$t('UPLOAD_BAR.ERROR');
         }
 
         return convertSecToTimeDisplay(this.remainingTime);
@@ -137,20 +147,28 @@ export default {
     }
   },
   methods: {
-    removeItem() {
+    removeItem(event) {
+      event.stopPropagation();
       this.$emit('removeItem', this.data);
     },
-    pause() {
+    pause(event) {
+      event.stopPropagation();
       this.$emit('pause', this.data);
     },
-    resume() {
+    resume(event) {
+      event.stopPropagation();
       this.$emit('resume', this.data);
     },
-    cancel() {
+    cancel(event) {
+      event.stopPropagation();
       this.$emit('cancel', this.data);
     },
-    retry() {
+    retry(event) {
+      event.stopPropagation();
       this.$emit('retry', this.data);
+    },
+    toggleDisplayFullMessage() {
+      this.showFullMessage = !this.showFullMessage;
     }
   }
 };
@@ -186,6 +204,15 @@ export default {
           font-size: 10px;
           color: #888;
           font-style: italic;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          flex: 1;
+        }
+        .display-full {
+          text-overflow: initial;
+          overflow: visible;
+          white-space: inherit;
         }
         .upload-item-info-size-container {
           margin-left: 10px;

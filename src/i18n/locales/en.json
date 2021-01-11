@@ -78,7 +78,31 @@
     "DONE": "done",
     "PAUSED": "paused",
     "ERROR": "error",
-    "SERVER_PROCESSING": "server processing"
+    "SERVER_PROCESSING": "server processing",
+    "SERVER_RESPONSE": {
+      "NONE": "An error occurred during upload",
+      "200": "The document contains no data (size = 0 byte)",
+      "3000": "This filetype is forbidden (mime type)",
+      "3002": "This filetype is forbidden",
+      "3003": "The file was rejected because a virus was found",
+      "3007": "The file couldn't be scanned",
+      "26007": "Cannot upload the file, the folder doesn't exist or have been removed",
+      "26444": "You do not own the rights to upload file",
+      "39001": "The uploads are currently disabled since the maintenance mode has been activated",
+      "40403": "The uploaded file status can not be found",
+      "40404": "The uploaded file status can not be found",
+      "46001": "Server configuration error, upload impossible",
+      "46002": "Server configuration error, upload impossible",
+      "46003": "Server configuration error, upload impossible",
+      "46004": "Server configuration error, upload impossible",
+      "46010": "The file size is greater than the max file size authorized",
+      "46011": "There is no more space available on the server, please retry later",
+      "46012": "There is no more space available on the server, please retry later",
+      "46013": "There is no more space available on the server, please retry later",
+      "46014": "There is no more space available on the server, please retry later",
+      "46015": "There is no more space available on the server, please retry later",
+      "46403": "Server configuration error, upload impossible"
+    }
   },
   "TOOLBAR": {
     "TITLE": "1 item selected | {count} items selected",

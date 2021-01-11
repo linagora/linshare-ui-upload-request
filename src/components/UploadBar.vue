@@ -97,6 +97,16 @@ export default {
 
           return f;
         });
+      } else {
+        this.files = this.files.map((f) => {
+          if (f.uniqueIdentifier === file.uniqueIdentifier) {
+            f.isCompleted = true;
+            f.error = true;
+            f.errorMessage = `UPLOAD_BAR.SERVER_RESPONSE.${response.errCode || 'NONE'}`;
+          }
+
+          return f;
+        });
       }
     });
 

@@ -1,10 +1,16 @@
 <template>
   <nav class="ls-navbar">
     <ul class="header-inner">
-      <li class="hidden-sm-and-down logo">
-        <router-link :to="{ name: 'home' }">
+      <li class="logo">
+        <router-link :to="{ name: 'landing-page' }">
           <img
-            src="../assets/images/linshare-logo-white.png"
+            class="hidden-sm-and-down"
+            src="@/assets/images/linshare-logo-white.png"
+            :alt="$t('HEADER.LOGO_ALT')"
+          >
+          <img
+            class="hidden-md-and-up"
+            src="@/assets/images/linshare-logo-icon.png"
             :alt="$t('HEADER.LOGO_ALT')"
           >
         </router-link>
@@ -35,6 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~vuetify/src/styles/styles.sass';
+
   .ls-navbar {
     display: flex;
     justify-content: space-between;
@@ -51,12 +59,26 @@ export default {
       align-items: center;
       list-style: none;
       margin-bottom: 0;
+      padding-left: 12px;
 
       .logo {
         width: 115px;
         border-right: 1px solid #fff;
         margin-right: 10px;
         padding-right: 10px;
+
+        @media #{map-get($display-breakpoints, 'sm-and-down')} {
+          width: auto;
+
+          a {
+            display: flex;
+            align-items: center;
+
+            img {
+              width: 10px;
+            }
+          }
+        }
 
         img {
           width: 100%;

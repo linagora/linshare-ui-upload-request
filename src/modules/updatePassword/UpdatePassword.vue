@@ -21,7 +21,7 @@
                 :rules="[rules.required]"
                 :type="showOldPassword ? 'text' : 'password'"
                 :error="!!errorMessage"
-                :error-messages="errorMessage"
+                :error-messages="$t(errorMessage)"
                 autofocus
                 tabindex="1"
                 name="old-password"
@@ -29,7 +29,12 @@
                 @click:append="showOldPassword = !showOldPassword"
                 @change="errorMessage = ''"
                 @click="errorMessage = ''"
-              />
+              >
+                <template #message="{ message }">
+                  {{ $t(message) }}
+                </template>
+              </v-text-field>
+
               <v-text-field
                 v-model="newPassword"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -39,7 +44,12 @@
                 tabindex="2"
                 :label="$t('PASSWORD.UPDATE_PASSWORD')"
                 @click:append="showPassword = !showPassword"
-              />
+              >
+                <template #message="{ message }">
+                  {{ $t(message) }}
+                </template>
+              </v-text-field>
+
               <v-text-field
                 v-model="confirmPassword"
                 :append-icon="showConfirm ? 'mdi-eye' : 'mdi-eye-off'"
@@ -49,7 +59,11 @@
                 tabindex="3"
                 :label="$t('PASSWORD.UPDATE_PASSWORD_CONFIRM')"
                 @click:append="showConfirm = !showConfirm"
-              />
+              >
+                <template #message="{ message }">
+                  {{ $t(message) }}
+                </template>
+              </v-text-field>
             </div>
             <v-card-actions class="update-password-page__action-container">
               <v-btn
@@ -91,14 +105,14 @@ export default {
       showConfirm: false,
       errorMessage: '',
       rules: {
-        required: value => isRequired(value) || this.$t('MESSAGE.REQUIRED'),
-        valid: value => isPasswordValid(value) || this.$t('MESSAGE.VALIDATE_PASSWORD'),
+        required: value => isRequired(value) || 'MESSAGE.REQUIRED',
+        valid: value => isPasswordValid(value) || 'MESSAGE.VALIDATE_PASSWORD',
       }
     };
   },
   computed: {
     passwordConfirmationRule() {
-      return () => (this.newPassword === this.confirmPassword) || this.$t('MESSAGE.PASSWORD_MUST_MATCH');
+      return () => (this.newPassword === this.confirmPassword) || 'MESSAGE.PASSWORD_MUST_MATCH';
     }
   },
   methods: {
@@ -118,7 +132,7 @@ export default {
         }
       } catch (error) {
         if (error.response && error.response.data && error.response.data.errCode === 32401) {
-          this.errorMessage = this.$t('MESSAGE.INCORRECT_PASSWORD');
+          this.errorMessage = 'MESSAGE.INCORRECT_PASSWORD';
         } else {
           this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {type: 'error'});
         }

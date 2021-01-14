@@ -20,14 +20,18 @@
                 :rules="[rules.required]"
                 :type="showPassword ? 'text' : 'password'"
                 :error="!!errorMessage"
-                :error-messages="errorMessage"
+                :error-messages="$t(errorMessage)"
                 autofocus
                 name="input-password"
                 :label="$t('PASSWORD.ENTER_PASSWORD')"
                 @click:append="showPassword = !showPassword"
                 @change="errorMessage = ''"
                 @click="errorMessage = ''"
-              />
+              >
+                <template #message="{ message }">
+                  {{ $t(message) }}
+                </template>
+              </v-text-field>
             </div>
             <v-card-actions class="password-page__action-container">
               <v-btn
@@ -65,7 +69,7 @@ export default {
       errorMessage: '',
       showPassword: false,
       rules: {
-        required: value => isRequired(value) || this.$t('MESSAGE.REQUIRED')
+        required: value => isRequired(value) || 'MESSAGE.REQUIRED'
       }
     };
   },
@@ -81,7 +85,7 @@ export default {
           this.$store.dispatch('setPassword', this.password);
           router.push({ name: 'home', params: { id: requestId }});
         } else {
-          this.errorMessage = this.$t('MESSAGE.INCORRECT_PASSWORD');
+          this.errorMessage = 'MESSAGE.INCORRECT_PASSWORD';
         }
       }
     }

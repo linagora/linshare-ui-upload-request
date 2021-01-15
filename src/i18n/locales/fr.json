@@ -80,7 +80,7 @@
     "PAUSED": "en pause",
     "ERROR": "erreur",
     "SERVER_PROCESSING": "traitement du serveur",
-    "SERVER_ERRORS": {
+    "SERVER_RESPONSE": {
       "NONE": "Une erreur est survenue pendant l'envoi du fichier",
       "200": "Le document ne contiens aucune données (taille = 0 octect)",
       "3000": "Ce type de fichier est interdit (type mime)",

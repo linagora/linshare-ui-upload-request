@@ -58,6 +58,8 @@
     "UPLOAD_SUCCESS": "Le fichier a été téléchargé avec succès !",
     "DELETE_ENTRIES_SUCCESS": "{ length } entrées ont été supprimées avec succès !",
     "DELETE_ENTRY_SUCCESS": "L'entrée a été supprimée avec succès !",
+    "DELETE_ENTRIES_ERROR": "1 fichier téléchargé n'a pas été supprimé. | {length} fichiers téléchargés n'ont pas été supprimé.",
+    "ERROR_READ_ONLY": "Cette invitation de dépôt est en mode lecture",
     "DELETE_ENTRIES_WARNING": "Etes-vous sûr de vouloir supprimer { length } entrées?",
     "DELETE_ENTRY_WARNING": "Etes-vous sûr de vouloir supprimer cette entrée?",
     "INCORRECT_PASSWORD": "Le mot de passe actuel est incorrect!",

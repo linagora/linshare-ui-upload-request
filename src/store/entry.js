@@ -11,36 +11,36 @@ const getters = {
 
 const mutations = {
   addEntries: (state, newEntries) => state.entries.unshift(...newEntries),
-  
+
   setEntries: (state, entries) => state.entries = entries,
-  
+
   removeEntry: (state, uuid) => state.entries = state.entries.filter(entry => entry.uuid !== uuid)
 };
 
-const actions = { 
+const actions = {
   addEntries: ({ commit }, entries) => commit('addEntries', entries),
-  
+
   removeEntries: async ({ commit }, { requestId, entries }) => {
     const fulfilledEntries = [];
     const rejectedEntries = [];
 
     await Promise.allSettled(entries.map(entry =>
       UploadRequestService.deleteEntry(requestId, entry.uuid)
-    )).then(results => results.forEach(result => {
+    )).then(results => results.forEach((result, index) => {
       if (result.status === 'fulfilled') {
         fulfilledEntries.push(result);
       } else if (result.status === 'rejected') {
-        rejectedEntries.push(result);
+        rejectedEntries.push({...result, uuid: entries[index].uuid});
       }
     }));
 
     fulfilledEntries.forEach(entry => commit('removeEntry', entry.value.data.uuid));
 
-    return rejectedEntries.map(entry => entry.value.data);
+    return rejectedEntries.map(entry => ({uuid: entry.uuid, ...entry.reason.response.data}));
   },
 
   setEntries: ({ commit }, entries) => commit('setEntries', entries),
-  
+
   fetchEntries: async ({ commit }, requestId) => {
     const response = await UploadRequestService.getRequestEntries(requestId);
     const normalizedEntries = response.data.map(entry => {
@@ -62,4 +62,3 @@ export default {
   mutations,
   actions
 };
-     

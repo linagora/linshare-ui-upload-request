@@ -215,6 +215,7 @@ import CloseButton from './CloseButton';
 import SortButton from './SortButton';
 import { mapGetters } from 'vuex';
 import Toolbar from './Toolbar';
+import { ErrorService } from '@/services';
 
 export default {
   name: 'EntryList',
@@ -315,22 +316,37 @@ export default {
     }
   },
   methods: {
-    deleteEntry(item) {
+    async deleteEntry(item) {
       const requestId = this.$route.params.id;
 
       try {
         if (!item) {
-          this.$store.dispatch('removeEntries', { requestId, entries: this.selected });
-          this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length:  this.selected.length}), {
-            type: 'success'
-          });
-          this.selected = [];
+          const rejectedEntries = await this.$store.dispatch('removeEntries', { requestId, entries: this.selected });
+
+          if (!rejectedEntries || rejectedEntries.length === 0) {
+            this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length:  this.selected.length}), {
+              type: 'success'
+            });
+            this.selected = [];
+          } else {
+            this.$alert.open(this.$tc('MESSAGE.DELETE_ENTRIES_ERROR', rejectedEntries.length, {length:  rejectedEntries.length}), {
+              type: 'error'
+            });
+            this.selected = this.selected.filter(selected => rejectedEntries.map(rejectedEntry => rejectedEntry.uuid).includes(selected.uuid));
+          }
         } else {
-          this.$store.dispatch('removeEntries', { requestId, entries: [item] });
-          this.selected = this.selected.filter(entry => entry.uuid !== item.uuid);
-          this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
-            type: 'success'
-          });
+          const rejectedEntry = await this.$store.dispatch('removeEntries', { requestId, entries: [item] });
+
+          if (!rejectedEntry || rejectedEntry.length === 0) {
+            this.selected = this.selected.filter(entry => entry.uuid !== item.uuid);
+            this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
+              type: 'success'
+            });
+          } else {
+            this.$alert.open(this.$t(ErrorService.handleDeleteEntryError(rejectedEntry[0].errCode)), {
+              type: 'error'
+            });
+          }
         }
       } catch (err) {
         this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {

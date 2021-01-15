@@ -13,18 +13,16 @@ const getters = {
 const mutations = {
   setUploadRequest: (state, uploadRequest) => state.uploadRequest = uploadRequest,
 
-  closeUploadRequest: state => state.uploadRequest.closed = true,
-
   setPassword: (state, password) => state.password = password
 };
-    
+
 const actions = {
   setUploadRequest: ({ commit }, uploadRequest) => commit('setUploadRequest', uploadRequest),
 
   closeUploadRequest: async ({ commit }) => {
-    await UploadRequestService.updateRequest(state.uploadRequest.uuid, { closed: true });
+    const response = await UploadRequestService.updateRequest(state.uploadRequest.uuid, { closed: true });
 
-    commit('closeUploadRequest');
+    commit('setUploadRequest', response.data);
   },
 
   fetchUploadRequest: async ({ commit }) => {
@@ -39,11 +37,10 @@ const actions = {
 
   setPassword: ({ commit }, password) => commit('setPassword', password)
 };
-    
+
 export default {
   state,
   getters,
   mutations,
   actions
 };
-  

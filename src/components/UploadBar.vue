@@ -7,7 +7,7 @@
     >
       <template #activator="{ on, attrs }">
         <v-badge
-          :content="files.length"
+          :content="files.length <= 99 ? files.length : '99+'"
           :value="files.length"
           color="red"
           overlap

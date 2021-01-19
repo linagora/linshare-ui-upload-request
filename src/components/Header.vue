@@ -97,7 +97,7 @@ export default {
       display: flex;
       align-items: center;
       .upload-bar-container {
-        margin-right: 20px;
+        margin-right: 25px;
       }
       .header-right-side {
         padding-right: 10px;

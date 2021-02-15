@@ -21,8 +21,8 @@
     "CLOSED_UPLOAD_REQUEST_MESSAGE": "Vous ne pouvez pas effectuer d'action sur cette Invitation de dépôt",
     "DROP_YOUR_FILES_HERE": "Déposez vos fichiers ici",
     "DRAG_AND_DROP_MESSAGE": "Glissez vos fichiers dans l'interface pour les déposer",
-    "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de fermer l'invitation de dépôt. Tous les dépôts de fichiers en cours seront interrompus. Après la fermeture, vous ne pourrez plus déposer des fichiers ou effectuer des opérations sur les fichiers déposés.",
-    "WELCOME_MESSAGE": "Vous avez reçu une invitation de dépôt de la part de { owner }. L'invitation de dépôt sera active jusqu'à la date d'expiration ou sa clôture. Une fois clôturée,  vous ne pourrez plus télécharger ni supprimer de fichiers.",
+    "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de clôturer l'invitation de dépôt. Tous les dépôts de fichiers en cours seront interrompus. Après la clôture, vous ne pourrez plus déposer des fichiers ou effectuer des opérations sur les fichiers déposés.",
+    "WELCOME_MESSAGE": "Vous avez reçu une invitation de dépôt de la part de { owner }. L'invitation de dépôt sera active jusqu'à la date d'expiration ou sa clôture. Une fois clôturée,  vous ne pourrez plus téléverser ni supprimer de fichiers.",
     "REQUEST_DETAILS": "Détails de l'invitation de dépôt",
     "HELLO": "Bonjour",
     "MESSAGE": "Message",
@@ -32,7 +32,7 @@
     "ACTIVATED": "Activée",
     "EXPIRATION": "Date d'expiration",
     "FILE_COUNT": "Nombre de fichiers",
-    "MAX_FILE_SIZE": "Taille maximale du fichier",
+    "MAX_FILE_SIZE": "Taille maximale d'un fichier",
     "NAME": "Nom",
     "SIZE": "Taille",
     "ACTIONS": "Actions",
@@ -56,17 +56,17 @@
   "MESSAGE": {
     "SOMETHING_WENT_WRONG": "Quelque chose s'est mal passé ! Veuillez réessayer.",
     "UPLOAD_SUCCESS": "Le fichier a été téléchargé avec succès !",
-    "DELETE_ENTRIES_SUCCESS": "{ length } entrées ont été supprimées avec succès !",
-    "DELETE_ENTRY_SUCCESS": "L'entrée a été supprimée avec succès !",
-    "DELETE_ENTRIES_ERROR": "1 fichier téléchargé n'a pas été supprimé. | {length} fichiers téléchargés n'ont pas été supprimé.",
-    "ERROR_READ_ONLY": "Cette invitation de dépôt est en mode lecture",
-    "DELETE_ENTRIES_WARNING": "Etes-vous sûr de vouloir supprimer { length } entrées?",
-    "DELETE_ENTRY_WARNING": "Etes-vous sûr de vouloir supprimer cette entrée?",
-    "INCORRECT_PASSWORD": "Le mot de passe actuel est incorrect!",
+    "DELETE_ENTRIES_SUCCESS": "{ length } fichiers ont été supprimés avec succès !",
+    "DELETE_ENTRY_SUCCESS": "Le fichier a été supprimé avec succès !",
+    "DELETE_ENTRIES_ERROR": "1 fichier n'a pas été supprimé. | {length} fichiers n'ont pas été supprimés.",
+    "ERROR_READ_ONLY": "Cette invitation de dépôt est en mode lecture seul",
+    "DELETE_ENTRIES_WARNING": "Etes-vous sûr de vouloir supprimer { length } fichiers ?",
+    "DELETE_ENTRY_WARNING": "Etes-vous sûr de vouloir supprimer ce fichier ?",
+    "INCORRECT_PASSWORD": "Le mot de passe actuel est incorrect !",
     "BAD_REQUEST": "Requête incorrecte",
     "FORBIDDEN": "Vous n'êtes pas autorisé à accéder à cette ressource.",
     "NOT_FOUND": "La page que vous recherchez est introuvable.",
-    "ERROR_MAX_FILE_COUNT_EXCEEDED": "Vous ne pouvez pas télécharger plus de { length } fichiers",
+    "ERROR_MAX_FILE_COUNT_EXCEEDED": "Vous ne pouvez pas téléverser plus de { length } fichiers",
     "ERROR_FILE_SIZE_EXCEEDED": "Votre fichier ne peut pas dépasser { size }",
     "ERROR_NOT_ENOUGH_SPACE": "Il n'y a pas suffisamment d'espace sur votre espace de dépôt",
     "REQUIRED": "Obligatoire.",
@@ -107,6 +107,6 @@
   },
   "TOOLBAR": {
     "TITLE": "1 élément sélectionné | {count} articles sélectionnés",
-    "DELETE": "Effacer"
+    "DELETE": "Supprimer"
   }
 }

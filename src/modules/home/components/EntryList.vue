@@ -107,13 +107,24 @@
         @page-count="pageCount = $event"
       >
         <template #[`item.name`]="{ item }">
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.name }}</v-list-item-title>
-              <v-list-item-subtitle v-if="data.collective">
-                {{ item.recipient.mail }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
+          <v-list-item
+            two-line
+            class="table-ellipsis-td"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-list-item-content
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-list-item-title>{{ item.name }}</v-list-item-title>
+                  <v-list-item-subtitle v-if="data.collective">
+                    {{ item.recipient.mail }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </template>
+              <span>{{ item.name }}</span>
+            </v-tooltip>
           </v-list-item>
         </template>
         <template #[`item.actions`]="{ item }">
@@ -549,6 +560,18 @@ export default {
             .v-data-table__empty-wrapper {
               background: #eeeeee;
               height: calc(100vh - #{$table-empty-offset-sm});
+            }
+          }
+
+          .table-ellipsis-td {
+            max-width: 500px;
+
+            @media (max-width: 1400px) and (min-width: 769px) {
+              max-width: 370px;
+            }
+
+            @media (max-width: 500px) {
+              max-width: 200px;
             }
           }
         }

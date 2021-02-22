@@ -8,7 +8,7 @@
           <b>{{ $t('LANDING.EASILY_EFFICIENTLY_WITH_CONFIDENCE') }}</b>
         </h2>
         <h3 class="landing-page__sub-title">
-          {{ $t('LANDING.DESCRIPTION')}}
+          {{ $t('LANDING.DESCRIPTION') }}
         </h3>
       </div>
     </div>

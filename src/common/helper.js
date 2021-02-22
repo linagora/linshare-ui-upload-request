@@ -3,7 +3,7 @@ import { i18n } from '@/i18n';
 export function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) {return '0 Bytes';}
 
-  const exchange = 1024;
+  const exchange = 1000;
   const digits = decimals < 0 ? 0 : decimals;
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 

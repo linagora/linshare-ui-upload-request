@@ -3,6 +3,7 @@ import VueI18n from 'vue-i18n';
 import { LanguageService } from '@/services/language.service';
 import { LANGUAGE } from '@/constants';
 import { en, fr, ru, vn } from '@/i18n/locales';
+import dateTimeFormats from './dateTimeFormats';
 
 Vue.use(VueI18n);
 
@@ -18,5 +19,6 @@ if (!cachedLanguage) {
 export const i18n = new VueI18n({
   locale: cachedLanguage,
   fallbackLocale: LANGUAGE.DEFAULT,
+  dateTimeFormats,
   messages
 });

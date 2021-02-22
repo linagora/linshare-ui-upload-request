@@ -14,7 +14,6 @@
     "core-js": "3.6.5",
     "flag-icon-css": "2.8.0",
     "material-design-icons-iconfont": "5.0.1",
-    "moment": "2.27.0",
     "uuid": "8.3.0",
     "vue": "2.6.11",
     "vue-axios": "2.1.5",

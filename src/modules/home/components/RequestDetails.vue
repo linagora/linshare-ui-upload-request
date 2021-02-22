@@ -103,18 +103,18 @@
                     {{ $t('HOME.ACTIVATED') }}:
                   </div>
                   <div class="metadata-content-item-content">
-                    {{ activationDate }}
+                    {{ $d(uploadRequest.activationDate, 'mediumDate') }}
                   </div>
                 </div>
                 <div
-                  v-if="expiryDate"
+                  v-if="uploadRequest.expiryDate"
                   class="metadata-content-item"
                 >
                   <div class="metadata-content-item-title">
                     {{ $t('HOME.EXPIRATION') }}:
                   </div>
                   <div class="metadata-content-item-content">
-                    {{ expiryDate }}
+                    {{ $d(uploadRequest.expiryDate, 'mediumDate') }}
                   </div>
                 </div>
                 <div
@@ -149,7 +149,6 @@
 </template>
 
 <script>
-import moment from 'moment';
 import { formatBytes, getColorByString } from '@/common';
 import { mapGetters } from 'vuex';
 
@@ -168,12 +167,6 @@ export default {
       entries: 'entries',
       uploadRequest: 'uploadRequest'
     }),
-    expiryDate() {
-      return this.uploadRequest && this.uploadRequest.expiryDate ? moment(this.uploadRequest.expiryDate).format('MMM DD, YYYY') : '';
-    },
-    activationDate() {
-      return this.uploadRequest && this.uploadRequest.activationDate ? moment(this.uploadRequest.activationDate).format('MMM DD, YYYY') : '';
-    },
     maxFileSize() {
       return formatBytes(this.uploadRequest.maxFileSize || 0);
     },

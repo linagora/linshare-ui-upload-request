@@ -37,10 +37,17 @@
                 {{ $t('HOME.MESSAGE') }}
               </div>
               <div
+                v-if="uploadRequest.body"
                 ref="messageContent"
                 :class="requireShowMore && !showMore ? 'message-content message-content-full' : 'message-content'"
               >
                 {{ uploadRequest.body }}
+              </div>
+              <div
+                v-else
+                class="message-content message-content-no-message"
+              >
+                {{ $t('HOME.NO_MESSAGE') }}
               </div>
               <div
                 v-show="requireShowMore"
@@ -284,8 +291,13 @@ export default {
         text-overflow: ellipsis;
         overflow: hidden;
         max-height: 66px;
+
         &.message-content-full {
           max-height: 100%;
+        }
+
+        &-no-message {
+          color: #ccc;
         }
       }
       .message-show-more {

@@ -23,6 +23,7 @@
     "DRAG_AND_DROP_MESSAGE": "Glissez vos fichiers dans l'interface pour les déposer",
     "CLOSE_UPLOAD_REQUEST_WARNING": "Vous êtes sur le point de clôturer l'invitation de dépôt. Tous les dépôts de fichiers en cours seront interrompus. Après la clôture, vous ne pourrez plus déposer des fichiers ou effectuer des opérations sur les fichiers déposés.",
     "WELCOME_MESSAGE": "Vous avez reçu une invitation de dépôt de la part de { owner }. L'invitation de dépôt sera active jusqu'à la date d'expiration ou sa clôture. Une fois clôturée,  vous ne pourrez plus téléverser ni supprimer de fichiers.",
+    "WELCOME_MESSAGE_WHEN_CLOSED": "Votre invitation de dépôt de {owner} a été fermée. Vous ne pourrez ni téléverser ni supprimer des fichiers.",
     "REQUEST_DETAILS": "Détails de l'invitation de dépôt",
     "HELLO": "Bonjour",
     "MESSAGE": "Message",

@@ -23,6 +23,7 @@
     "DRAG_AND_DROP_MESSAGE": "Drag and drop your files here to upload them",
     "CLOSE_UPLOAD_REQUEST_WARNING": "You are about to close the upload request. All the uploading files will be stopped and after closing, you will not be able to upload files or perform any actions on uploaded files.",
     "WELCOME_MESSAGE": "You received an upload request from {owner}. The upload request will be active until its expiration date or until it is manually closed before. Once closed, you will not be able to upload nor delete files.",
+    "WELCOME_MESSAGE_WHEN_CLOSED": "Your upload request from {owner} has been closed. You will not be able to upload nor delete files.",
     "REQUEST_DETAILS": "Request details",
     "HELLO": "Hello",
     "MESSAGE": "Message",

@@ -23,6 +23,7 @@
     "DRAG_AND_DROP_MESSAGE": "Kéo và thả tập tin ở đây để tải lên",
     "CLOSE_UPLOAD_REQUEST_WARNING": "Bạn sắp đóng yêu cầu tải lên. Tất cả các tập tin đang được tải lên sẽ bị hủy và sau khi đóng, bạn sẽ không thể tải lên các tập tin hoặc thực hiện bất kỳ hành động nào trên các tập tin đã tải lên.",
     "WELCOME_MESSAGE": "Bạn nhận được yêu cầu tải lên từ {owner}. Yêu cầu tải lên sẽ hoạt động đến khi hết hạn hoặc tới khi bị đóng. Sau thời điểm trên, bạn sẽ không thể tải lên hoặc xóa tập tin.",
+    "WELCOME_MESSAGE_WHEN_CLOSED": "Yêu cầu tải lên của bạn từ {owner} đã bị đóng. Bạn sẽ không thể tải lên hoặc xóa tập tin.",
     "REQUEST_DETAILS": "Thông tin chi tiết",
     "HELLO": "Xin chào",
     "MESSAGE": "Tin nhắn",

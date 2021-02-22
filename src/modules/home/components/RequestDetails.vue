@@ -24,7 +24,7 @@
                   {{ $t('HOME.HELLO') }} <span>{{ uploadRequest.recipient && uploadRequest.recipient.mail }}</span>,
                 </p>
                 <p class="user-info-content-text">
-                  <i18n path="HOME.WELCOME_MESSAGE">
+                  <i18n :path="uploadRequest.closed ? 'HOME.WELCOME_MESSAGE_WHEN_CLOSED' : 'HOME.WELCOME_MESSAGE'">
                     <template #owner>
                       <a :href="mailToOwner">{{ ownerName }}</a>
                     </template>

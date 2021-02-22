@@ -13,7 +13,7 @@ export const LANGUAGE = {
     {
       name: 'Tiếng Việt',
       key: 'vn',
-      language: 'vn'
+      language: 'vi'
     },
     {
       name: 'Pусский',

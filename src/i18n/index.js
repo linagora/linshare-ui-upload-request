@@ -2,12 +2,12 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { LanguageService } from '@/services/language.service';
 import { LANGUAGE } from '@/constants';
-import { en, fr, ru, vn } from '@/i18n/locales';
+import { en, fr, ru, vi } from '@/i18n/locales';
 import dateTimeFormats from './dateTimeFormats';
 
 Vue.use(VueI18n);
 
-const messages = { en, fr, vn, ru };
+const messages = { en, fr, vi, ru };
 
 let cachedLanguage = LanguageService.get();
 

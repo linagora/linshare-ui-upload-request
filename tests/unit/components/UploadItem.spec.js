@@ -20,7 +20,7 @@ describe('UploadItem.vue', () => {
   it('should render formatted size', () => {
     const wrapper = mountFunction({
       data: {
-        size: 1024,
+        size: 1000,
         progress: () => 1
       }
     });

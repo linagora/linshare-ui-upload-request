@@ -196,7 +196,7 @@
     <!-- This profile is specific because it is used by maven-release-plugin to
          add an extra behaviour at pre commit phase.
          It can be trigger using mvn validate -Pprepare-release
-         This profile will update bower.json and package.json version field
+         This profile will update  package.json version field
          according to the pom project.version. The these files will be committed. -->
     <profile>
       <id>prepare-release</id>
@@ -223,22 +223,6 @@
                   </replacements>
                 </configuration>
               </execution>
-              <execution>
-                <id>bower.json</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>replace</goal>
-                </goals>
-                <configuration>
-                  <file>bower.json</file>
-                  <replacements>
-                    <replacement>
-                      <token>"version": ".*",</token>
-                      <value>"version": "${project.version}",</value>
-                    </replacement>
-                  </replacements>
-                </configuration>
-              </execution>
             </executions>
           </plugin>
           <plugin>
@@ -254,8 +238,8 @@
                   <goal>checkin</goal>
                 </goals>
                 <configuration>
-                  <includes>package.json,bower.json</includes>
-                  <message>[maven-release-plugin] prepare version for package.json and bower.json</message>
+                  <includes>package.json</includes>
+                  <message>[maven-release-plugin] prepare version for package.json </message>
                 </configuration>
               </execution>
             </executions>
@@ -317,9 +301,6 @@
                     </fileset>
                     <fileset>
                       <directory>node_modules</directory>
-                    </fileset>
-                    <fileset>
-                      <directory>bower_components</directory>
                     </fileset>
                   </filesets>
                 </configuration>

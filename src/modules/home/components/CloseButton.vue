@@ -10,6 +10,7 @@
   >
     <template #activator="{ on, attrs }">
       <v-btn
+        v-if="data.canClose"
         v-bind="attrs"
         :disabled="isClosed"
         :elevation="0"
@@ -44,10 +45,14 @@
 
 <script>
 import { FlowService } from '@/services';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CloseButton',
   computed: {
+    ...mapGetters({
+      data: 'uploadRequest'
+    }),
     isClosed() {
       return this.$store.getters.uploadRequest.closed;
     }

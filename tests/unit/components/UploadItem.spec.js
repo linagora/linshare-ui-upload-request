@@ -1,5 +1,7 @@
-import { mount } from '@vue/test-utils';
+import { mount, config } from '@vue/test-utils';
 import UploadItem from '@/components/UploadItem.vue';
+
+config.mocks['$t'] = message => message;
 
 describe('UploadItem.vue', () => {
   function mountFunction(propsData) {

@@ -129,7 +129,11 @@ export default {
           return this.$t(this.errorMessage) || this.$t('UPLOAD_BAR.ERROR');
         }
 
-        return convertSecToTimeDisplay(this.remainingTime);
+        if (this.remainingTime > 0) {
+          return convertSecToTimeDisplay(this.remainingTime);
+        }
+
+        return this.$t('UPLOAD_BAR.SERVER_PROCESSING');
 
       } else {
         return '';

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header>
-      <UploadBar />
+      <UploadBar v-if="!uploadRequest.closed" />
     </Header>
     <div class="home-page">
       <div class="hidden-sm-and-down home-page-first-background" />

@@ -203,11 +203,11 @@ export default {
       this.requireShowMore = false;
       this.showMore = false;
     }
-    if (this.$refs.messageContent.offsetHeight > 60 && this.$refs.messageContent.offsetHeight < 80) {
+    else if (this.$refs.messageContent.offsetHeight > 60 && this.$refs.messageContent.offsetHeight < 80) {
       this.requireShowMore = true;
       this.showMore = true;
     }
-    if (this.$refs.messageContent.offsetHeight >= 80) {
+    else if (this.$refs.messageContent.offsetHeight >= 80) {
       this.requireShowMore = true;
       this.showMore = false;
     }

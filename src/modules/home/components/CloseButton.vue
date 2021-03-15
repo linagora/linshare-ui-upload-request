@@ -10,7 +10,7 @@
   >
     <template #activator="{ on, attrs }">
       <v-btn
-        v-if="data.canClose"
+        v-if="data.canClose || !initiallyClosed"
         v-bind="attrs"
         :disabled="isClosed"
         :elevation="0"
@@ -49,6 +49,11 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'CloseButton',
+  data() {
+    return {
+      initiallyClosed: true
+    };
+  },
   computed: {
     ...mapGetters({
       data: 'uploadRequest'
@@ -63,6 +68,9 @@ export default {
 
       flow.cancel();
     }
+  },
+  created() {
+    this.initiallyClosed = this.data.closed;
   },
   methods: {
     closeUploadRequest() {

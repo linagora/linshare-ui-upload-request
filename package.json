@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@flowjs/flow.js": "2.14.1",
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "core-js": "3.6.5",
     "flag-icon-css": "2.8.0",
     "material-design-icons-iconfont": "5.0.1",

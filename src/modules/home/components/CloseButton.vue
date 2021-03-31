@@ -10,7 +10,7 @@
   >
     <template #activator="{ on, attrs }">
       <v-btn
-        v-if="data.canClose || !initiallyClosed"
+        v-if="data.canClose || initiallyCanClose"
         v-bind="attrs"
         :disabled="isClosed"
         :elevation="0"
@@ -51,7 +51,7 @@ export default {
   name: 'CloseButton',
   data() {
     return {
-      initiallyClosed: true
+      initiallyCanClose: true
     };
   },
   computed: {
@@ -70,7 +70,7 @@ export default {
     }
   },
   created() {
-    this.initiallyClosed = this.data.closed;
+    this.initiallyCanClose = this.data.canClose;
   },
   methods: {
     closeUploadRequest() {

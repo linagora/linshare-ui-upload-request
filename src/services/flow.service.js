@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Flow from '@flowjs/flow.js';
 import { v4 as uuidv4 } from 'uuid';
-import { API_URL } from '@/config';
+import { ConfigService } from '@/services';
 
 let flow;
 
@@ -11,12 +11,10 @@ function getFlowObject() {
 
 function initFlowObject(options) {
   flow = new Flow({
-    ...options,
-    target: `${location.origin}${API_URL}/flow/upload`,
-    simultaneousUploads: 1,
+    ...ConfigService.get().flowSettings,
     generateUniqueIdentifier: () => uuidv4(),
-    permanentErrors:[401, 404, 500, 501],
-    successStatuses: [200]
+    target: `${location.origin}${ConfigService.get().apiUrl}/flow/upload`,
+    ...options,
   });
 
   initDirectives();

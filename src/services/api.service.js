@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import { API_URL } from '@/config';
+import { ConfigService } from '@/services';
 
 class AppError extends Error {
   constructor (error) {
@@ -35,7 +35,7 @@ class AppError extends Error {
 export const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = API_URL;
+    Vue.axios.defaults.baseURL = ConfigService.get().apiUrl;
     Vue.axios.interceptors.response.use(response => response, error => {
       throw new AppError(error);
     });

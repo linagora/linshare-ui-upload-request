@@ -3,10 +3,42 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import { API_URL } from '@/config';
 
+class AppError extends Error {
+  constructor (error) {
+    super();
+    this.errCode = error && error.response && error.response.data && error.response.data.errCode || 0;
+
+    switch (this.errCode) {
+      case 30005:
+        this.message = 'MESSAGE.ERROR_READ_ONLY';
+        break;
+      case 30415:
+        this.message = 'MESSAGE.ERROR_CLOSE_RIGHT';
+        break;
+      case 31408:
+        this.message = 'MESSAGE.ERROR_DELETE_ENTRY_RIGHT';
+        break;
+      default:
+        this.message = 'MESSAGE.SOMETHING_WENT_WRONG';
+    }
+  }
+
+  getMessage () {
+    return this.message;
+  }
+
+  getErrorCode () {
+    return this.errCode;
+  }
+}
+
 export const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
+    Vue.axios.interceptors.response.use(response => response, error => {
+      throw new AppError(error);
+    });
   },
 
   getById(resource, id = '', params) {
@@ -47,6 +79,6 @@ export const UploadRequestService = {
     return ApiService.update('requests', requestId, data);
   },
   updatePassword(requestId, data) {
-    return ApiService.update('password', requestId, data); 
+    return ApiService.update('password', requestId, data);
   }
 };

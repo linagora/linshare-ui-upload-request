@@ -226,7 +226,6 @@ import CloseButton from './CloseButton';
 import SortButton from './SortButton';
 import { mapGetters } from 'vuex';
 import Toolbar from './Toolbar';
-import { ErrorService } from '@/services';
 
 export default {
   name: 'EntryList',
@@ -330,39 +329,33 @@ export default {
     async deleteEntry(item) {
       const requestId = this.$route.params.id;
 
-      try {
-        if (!item) {
-          const rejectedEntries = await this.$store.dispatch('removeEntries', { requestId, entries: this.selected });
+      if (!item) {
+        const rejectedEntries = await this.$store.dispatch('removeEntries', { requestId, entries: this.selected });
 
-          if (!rejectedEntries || rejectedEntries.length === 0) {
-            this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length:  this.selected.length}), {
-              type: 'success'
-            });
-            this.selected = [];
-          } else {
-            this.$alert.open(this.$tc('MESSAGE.DELETE_ENTRIES_ERROR', rejectedEntries.length, {length:  rejectedEntries.length}), {
-              type: 'error'
-            });
-            this.selected = this.selected.filter(selected => rejectedEntries.map(rejectedEntry => rejectedEntry.uuid).includes(selected.uuid));
-          }
+        if (!rejectedEntries || rejectedEntries.length === 0) {
+          this.$alert.open(this.$t('MESSAGE.DELETE_ENTRIES_SUCCESS', {length:  this.selected.length}), {
+            type: 'success'
+          });
+          this.selected = [];
         } else {
-          const rejectedEntry = await this.$store.dispatch('removeEntries', { requestId, entries: [item] });
-
-          if (!rejectedEntry || rejectedEntry.length === 0) {
-            this.selected = this.selected.filter(entry => entry.uuid !== item.uuid);
-            this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
-              type: 'success'
-            });
-          } else {
-            this.$alert.open(this.$t(ErrorService.handleDeleteEntryError(rejectedEntry[0].errCode)), {
-              type: 'error'
-            });
-          }
+          this.$alert.open(this.$tc('MESSAGE.DELETE_ENTRIES_ERROR', rejectedEntries.length, {length:  rejectedEntries.length}), {
+            type: 'error'
+          });
+          this.selected = this.selected.filter(selected => rejectedEntries.map(rejectedEntry => rejectedEntry.uuid).includes(selected.uuid));
         }
-      } catch (err) {
-        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
-          type: 'error'
-        });
+      } else {
+        const rejectedEntry = await this.$store.dispatch('removeEntries', { requestId, entries: [item] });
+
+        if (!rejectedEntry || rejectedEntry.length === 0) {
+          this.selected = this.selected.filter(entry => entry.uuid !== item.uuid);
+          this.$alert.open(this.$t('MESSAGE.DELETE_ENTRY_SUCCESS'), {
+            type: 'success'
+          });
+        } else {
+          this.$alert.open(this.$t(rejectedEntry[0].error.getMessage(), { errCode: rejectedEntry[0].error.getErrorCode() }), {
+            type: 'error'
+          });
+        }
       }
     },
 

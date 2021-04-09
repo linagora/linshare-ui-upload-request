@@ -36,7 +36,7 @@ const actions = {
 
     fulfilledEntries.forEach(entry => commit('removeEntry', entry.value.data.uuid));
 
-    return rejectedEntries.map(entry => ({uuid: entry.uuid, ...entry.reason.response.data}));
+    return rejectedEntries.map(entry => ({uuid: entry.uuid, error: entry.reason}));
   },
 
   setEntries: ({ commit }, entries) => commit('setEntries', entries),

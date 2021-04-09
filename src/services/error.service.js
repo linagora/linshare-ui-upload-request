@@ -34,17 +34,7 @@ async function checkPasswordError(id, password) {
   }
 }
 
-function handleDeleteEntryError(errCode) {
-  switch (errCode) {
-    case 30005:
-      return 'MESSAGE.ERROR_READ_ONLY';
-    default:
-      return 'MESSAGE.SOMETHING_WENT_WRONG';
-  }
-}
-
 export const ErrorService = {
   checkError,
-  checkPasswordError,
-  handleDeleteEntryError
+  checkPasswordError
 };

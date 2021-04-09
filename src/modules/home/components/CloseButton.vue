@@ -74,13 +74,11 @@ export default {
   },
   methods: {
     closeUploadRequest() {
-      try {
-        this.$store.dispatch('closeUploadRequest');
-      } catch (error) {
-        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
+      this.$store.dispatch('closeUploadRequest').catch(error => {
+        this.$alert.open(this.$t(error.getMessage(), { errCode: error.getErrorCode() }), {
           type: 'error'
         });
-      }
+      });
     }
   }
 };

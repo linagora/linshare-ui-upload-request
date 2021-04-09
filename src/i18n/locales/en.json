@@ -57,7 +57,7 @@
 
   },
   "MESSAGE": {
-    "SOMETHING_WENT_WRONG": "Something went wrong! Please try again.",
+    "SOMETHING_WENT_WRONG": "{errCode} Something went wrong! Please try again.",
     "UPLOAD_SUCCESS": "The file has been uploaded successfully!",
     "DELETE_ENTRIES_SUCCESS": "{length} entries have been deleted successfully!",
     "DELETE_ENTRY_SUCCESS": "The entry has been deleted successfully!",
@@ -68,10 +68,12 @@
     "BAD_REQUEST": "Bad request",
     "FORBIDDEN": "You do not have permission to access this resource.",
     "NOT_FOUND": "The page you are looking for cannot be found.",
-    "ERROR_READ_ONLY": "The upload request is in read-only mode",
+    "ERROR_READ_ONLY": "{errCode}: The upload request is in read-only mode",
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "You cannot upload more than {length} files",
     "ERROR_FILE_SIZE_EXCEEDED": "Your file cannot exceed {size}",
     "ERROR_NOT_ENOUGH_SPACE": "There is not enough space on your upload storage",
+    "ERROR_DELETE_ENTRY_RIGHT": "{errCode}: Entry cannot be deleted. Please check your deletion right.",
+    "ERROR_CLOSE_RIGHT": "{errCode}: Upload request cannot be closed. Please check your closure right.",
     "REQUIRED": "Required.",
     "VALIDATE_PASSWORD": "Password must be 12 or more characters in length, contain at least one uppercase character, one lowercase character, one digit and one special character.",
     "PASSWORD_MUST_MATCH": "Please make sure your passwords match."

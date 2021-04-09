@@ -56,7 +56,7 @@
     "UPDATE_PASSWORD_CONFIRM": "Xác nhận mật khẩu"
   },
   "MESSAGE": {
-    "SOMETHING_WENT_WRONG": "Đã có lỗi xảy ra! Vui lòng thử lại.",
+    "SOMETHING_WENT_WRONG": "{errCode} Đã có lỗi xảy ra! Vui lòng thử lại.",
     "UPLOAD_SUCCESS": "Tập tin đã được tải lên thành công!",
     "DELETE_ENTRIES_SUCCESS": "{length} tệp đã được xóa thành công!",
     "DELETE_ENTRY_SUCCESS": "Ðã xóa tệp thành công!",
@@ -67,10 +67,12 @@
     "BAD_REQUEST": "Yêu cầu không chính xác",
     "FORBIDDEN": "Bạn không có quyền truy cập tài nguyên này.",
     "NOT_FOUND": "Không thể tìm thấy trang mà bạn đang tìm.",
-    "ERROR_READ_ONLY": "Yêu cầu tải lên đang ở chế độ chỉ xem",
+    "ERROR_READ_ONLY": "{errCode}: Yêu cầu tải lên đang ở chế độ chỉ xem",
     "ERROR_MAX_FILE_COUNT_EXCEEDED": "Bạn không thể tải lên quá {length} tập tin",
     "ERROR_FILE_SIZE_EXCEEDED": "Tập tin của bạn không thể vượt quá {size}",
     "ERROR_NOT_ENOUGH_SPACE": "Bạn không còn đủ dung lượng lưu trữ",
+    "ERROR_DELETE_ENTRY_RIGHT": "{errCode}: Tập tin không thể xóa. Vui lòng kiểm tra quyền xóa tập tin của bạn.",
+    "ERROR_CLOSE_RIGHT": "{errCode}: Không thể đóng yêu cầu tải lên. Vui lòng kiểm tra quyền của bạn.",
     "REQUIRED": "Bắt buộc.",
     "VALIDATE_PASSWORD": "Mật khẩu phải có tối thiểu 12 kí tự, gồm một kí tự in hoa, một kí tự in thường, một chữ số và một kí tự đặc biệt.",
     "PASSWORD_MUST_MATCH": "Mật khẩu không khớp."

@@ -115,5 +115,6 @@
   "TOOLBAR": {
     "TITLE": "1 tập tin được chọn | {count} tập tin được chọn",
     "DELETE": "Xóa"
-  }
+  },
+  "LINSHARE_UPLOAD_REQUEST": "LinShare | Yêu cầu tải lên"
 }

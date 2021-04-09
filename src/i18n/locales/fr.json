@@ -115,5 +115,6 @@
   "TOOLBAR": {
     "TITLE": "1 élément sélectionné | {count} articles sélectionnés",
     "DELETE": "Supprimer"
-  }
+  },
+  "LINSHARE_UPLOAD_REQUEST": "LinShare | Invitation de dépôt"
 }

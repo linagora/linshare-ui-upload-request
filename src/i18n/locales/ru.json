@@ -115,5 +115,6 @@
   "TOOLBAR": {
     "TITLE": "Выбран 1 элемент | Выбрано {count} объекта",
     "DELETE": "удалять"
-  }
+  },
+  "LINSHARE_UPLOAD_REQUEST": "LinShare | Запрос на передачу"
 }

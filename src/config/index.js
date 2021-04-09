@@ -6,5 +6,12 @@ export default Object.freeze({
     simultaneousUploads: 1,
     permanentErrors:[401, 404, 500, 501],
     successStatuses: [200]
+  },
+  // Application's document title in different locale
+  title: {
+    en: 'LinShare | Upload Request',
+    fr: 'LinShare | Invitation de dépôt',
+    ru: 'LinShare | Запрос на передачу',
+    vi: 'LinShare | Yêu cầu tải lên'
   }
 });

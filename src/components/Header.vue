@@ -19,6 +19,12 @@
         <span>{{ $t('HEADER.UPLOAD_REQUEST') }}</span>
       </li>
     </ul>
+    <div
+      v-if="uploadRequest && uploadRequest.subject"
+      class="header-subject"
+    >
+      {{ uploadRequest.subject }}
+    </div>
     <div class="header-right-side-container">
       <div class="upload-bar-container">
         <slot />
@@ -31,11 +37,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import LanguageSelector from './LanguageSelector';
 export default {
   name: 'Header',
   components: {
     LanguageSelector
+  },
+  computed: {
+    ...mapGetters({
+      uploadRequest: 'uploadRequest'
+    }),
   }
 };
 </script>
@@ -61,6 +73,7 @@ export default {
       display: flex;
       align-items: center;
       list-style: none;
+      min-width: 30%;
       margin-bottom: 0;
       padding-left: 12px;
 
@@ -99,11 +112,26 @@ export default {
     .header-right-side-container {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
+      min-width: 30%;
       .upload-bar-container {
         margin-right: 25px;
       }
       .header-right-side {
         padding-right: 10px;
+      }
+    }
+    .header-subject {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 30%;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 16px;
+
+      @media #{map-get($display-breakpoints, 'xs-only')} {
+        display: none;
       }
     }
   }

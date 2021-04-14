@@ -14,7 +14,7 @@
           <v-icon>add</v-icon>
         </v-btn>
         <div class="home-page-upload-toolbar-link-container vertical-center">
-          <span class="home-page-upload-toolbar-subject text-ellipsis">{{ data.subject }}</span>
+          <span class="home-page-upload-toolbar-subject text-ellipsis">{{ $t('HOME.UPLOADED_FILES') }}</span>
         </div>
       </div>
       <div class="hidden-sm-and-down home-page-upload-toolbar-util">

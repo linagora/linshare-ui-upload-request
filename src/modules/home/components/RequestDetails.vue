@@ -34,6 +34,16 @@
             </div>
             <div class="request-details-message">
               <div class="section-title">
+                {{ $t('HOME.SUBJECT') }}
+              </div>
+              <div
+                class="message-content message-content-full"
+              >
+                {{ uploadRequest.subject }}
+              </div>
+            </div>
+            <div class="request-details-message">
+              <div class="section-title">
                 {{ $t('HOME.MESSAGE') }}
               </div>
               <div

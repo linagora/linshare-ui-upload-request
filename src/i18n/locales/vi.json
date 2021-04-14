@@ -26,6 +26,7 @@
     "WELCOME_MESSAGE_WHEN_CLOSED": "Yêu cầu tải lên của bạn từ {owner} đã bị đóng. Bạn sẽ không thể tải lên hoặc xóa tập tin.",
     "REQUEST_DETAILS": "Thông tin chi tiết",
     "HELLO": "Xin chào",
+    "SUBJECT": "Chủ đề",
     "MESSAGE": "Tin nhắn",
     "NO_MESSAGE": "Không có tin nhắn",
     "RECIPIENT_LIST": "Danh sách người nhận",
@@ -42,7 +43,8 @@
     "CLOSED": "Đã đóng",
     "NO_RESULT_TEXT": "Không tìm thấy bản ghi phù hợp",
     "SHOW_MORE": "Xem thêm",
-    "SHOW_LESS": "Thu nhỏ"
+    "SHOW_LESS": "Thu nhỏ",
+    "UPLOADED_FILES": "Tập tin tải lên"
   },
   "PASSWORD": {
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",

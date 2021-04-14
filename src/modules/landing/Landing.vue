@@ -33,14 +33,14 @@ export default {
   .landing-page {
     background-image: url('../../assets/images/img_home_linshare.jpg');
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-color: #05B1FF;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     width: 100%;
-    height: calc(100vh - 105px);
+    height: calc(100vh - 55px);
 
     &__big-title {
       text-align: center;

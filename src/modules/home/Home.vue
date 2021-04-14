@@ -120,8 +120,6 @@ export default {
 
   @media #{map-get($display-breakpoints, 'md-and-up')} {
     .home-page {
-      background: none;
-      background-color: #E5E5E5;
       padding-bottom: 20px;
       padding-top: 0;
 

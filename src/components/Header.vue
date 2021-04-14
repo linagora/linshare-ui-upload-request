@@ -44,6 +44,9 @@ export default {
   @import '~vuetify/src/styles/styles.sass';
 
   .ls-navbar {
+    position: fixed;
+    width: 100%;
+    top: 0px;
     display: flex;
     justify-content: space-between;
     z-index: 3;

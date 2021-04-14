@@ -1,6 +1,7 @@
 <template>
   <div class="upload-bar">
     <v-menu
+      v-model="visible"
       offset-y
       content-class="upload-bar-menu"
       :close-on-content-click="false"
@@ -73,6 +74,7 @@ export default {
   data() {
     return {
       files: [],
+      visible: false
     };
   },
   created() {
@@ -80,6 +82,7 @@ export default {
 
     flow.on('filesSubmitted', (files) => {
       this.files.push(...files);
+      this.visible = true;
     });
 
     flow.on('fileSuccess', (file, response) => {

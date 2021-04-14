@@ -114,6 +114,7 @@ export default {
     .home-page-content {
       margin-left: auto;
       margin-right: auto;
+      margin-top: 60px;
     }
   }
 
@@ -126,7 +127,7 @@ export default {
 
       .home-page-content {
         width: 60%;
-        margin-top: -300px;
+        margin-top: -275px;
       }
     }
   }

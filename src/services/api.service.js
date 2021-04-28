@@ -2,24 +2,32 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import { ConfigService } from '@/services';
+import { ERRORS } from '@/constants';
 
 class AppError extends Error {
   constructor (error) {
     super();
     this.errCode = error && error.response && error.response.data && error.response.data.errCode || 0;
+    this.status = error && error.response && error.response.status;
 
     switch (this.errCode) {
       case 30005:
-        this.message = 'MESSAGE.ERROR_READ_ONLY';
+        this.message = ERRORS.READONLY;
         break;
       case 30415:
-        this.message = 'MESSAGE.ERROR_CLOSE_RIGHT';
+        this.message = ERRORS.CLOSE_RIGHT;
         break;
       case 31408:
-        this.message = 'MESSAGE.ERROR_DELETE_ENTRY_RIGHT';
+        this.message = ERRORS.DELETE_ENTRY_RIGHT;
+        break;
+      case 32401:
+        this.message = ERRORS.PASSWORD_INCORRECT;
+        break;
+      case 32402:
+        this.message = ERRORS.PASSWORD_RESET_REQUIRED;
         break;
       default:
-        this.message = 'MESSAGE.SOMETHING_WENT_WRONG';
+        this.message = ERRORS.COMMON;
     }
   }
 
@@ -29,6 +37,10 @@ class AppError extends Error {
 
   getErrorCode () {
     return this.errCode;
+  }
+
+  getStatus () {
+    return this.status;
   }
 }
 

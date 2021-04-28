@@ -27,9 +27,9 @@ export function generateHttpErrorMessage(statusCode) {
     case 404:
       return i18n.t('MESSAGE.NOT_FOUND');
     case 500:
-      return i18n.t('MESSAGE.SOMETHING_WENT_WRONG');
+      return i18n.t('MESSAGE.SOMETHING_WENT_WRONG', {errCode: ''});
     default:
-      return i18n.t('MESSAGE.SOMETHING_WENT_WRONG');
+      return i18n.t('MESSAGE.SOMETHING_WENT_WRONG', {errCode: ''});
   }
 }
 

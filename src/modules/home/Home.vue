@@ -82,8 +82,8 @@ export default {
         const requestId = this.$route.params.id;
 
         await this.$store.dispatch('fetchEntries', requestId);
-      } catch (err) {
-        this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {
+      } catch (error) {
+        this.$alert.open(this.$t(error.getMessage(), { errCode: error.getErrorCode() }), {
           type: 'error'
         });
       }

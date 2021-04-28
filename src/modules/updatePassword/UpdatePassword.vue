@@ -21,14 +21,14 @@
                 :rules="[rules.required]"
                 :type="showOldPassword ? 'text' : 'password'"
                 :error="!!errorMessage"
-                :error-messages="$t(errorMessage)"
+                :error-messages="$t(errorMessage, errorCode)"
                 autofocus
                 tabindex="1"
                 name="old-password"
                 :label="$t('PASSWORD.PASSWORD_PROVIDED')"
                 @click:append="showOldPassword = !showOldPassword"
-                @change="errorMessage = ''"
-                @click="errorMessage = ''"
+                @change="errorMessage = '', errorCode = ''"
+                @click="errorMessage = '', errorCode = ''"
               >
                 <template #message="{ message }">
                   {{ $t(message) }}
@@ -104,6 +104,7 @@ export default {
       showOldPassword: false,
       showConfirm: false,
       errorMessage: '',
+      errorCode: '',
       rules: {
         required: value => isRequired(value) || 'MESSAGE.REQUIRED',
         valid: value => isPasswordValid(value) || 'MESSAGE.VALIDATE_PASSWORD',
@@ -131,11 +132,8 @@ export default {
           router.push({ name: 'home', params: { id: requestId }});
         }
       } catch (error) {
-        if (error.response && error.response.data && error.response.data.errCode === 32401) {
-          this.errorMessage = 'MESSAGE.INCORRECT_PASSWORD';
-        } else {
-          this.$alert.open(this.$t('MESSAGE.SOMETHING_WENT_WRONG'), {type: 'error'});
-        }
+        this.errorMessage = error.getMessage();
+        this.errorCode = error.getErrorCode();
       }
     }
   }

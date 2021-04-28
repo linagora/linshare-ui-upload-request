@@ -1,4 +1,5 @@
 import { ErrorService } from '@/services';
+import { ERRORS } from '@/constants';
 
 export const handleErrorMw = async function({ to, next, redirect }) {
   const requestId = to.params.id;
@@ -8,13 +9,11 @@ export const handleErrorMw = async function({ to, next, redirect }) {
     return next();
   }
 
-  if (error.response && error.response.status === 401 && error.response.data) {
-    if (error.response.data.errCode === 32401) {
-      return redirect({ name: 'password', params: { id: requestId }});
-    } else if (error.response.data.errCode === 32402) {
-      return redirect({ name: 'update-password', params: { id: requestId }});
-    }
+  if (error.getMessage() === ERRORS.PASSWORD_INCORRECT) {
+    return redirect({ name: 'password', params: { id: requestId }});
+  } else if (error.getMessage() === ERRORS.PASSWORD_RESET_REQUIRED) {
+    return redirect({ name: 'update-password', params: { id: requestId }});
   }
 
-  return redirect({ name: 'error', params: { status: error.response && error.response.status || 500}});
+  return redirect({ name: 'error', params: { status: error.getStatus() || 500, errCode: error.getErrorCode()}});
 };

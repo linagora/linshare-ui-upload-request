@@ -24,13 +24,8 @@ async function checkError(id, pw) {
 async function checkPasswordError(id, password) {
   const error = await checkError(id, password);
 
-  if ( error && error.response && error.response.status === 401 && error.response.data) {
-    if (error.response.data.errCode === 32401) {
-      return ERRORS.PASSWORD_INCORRECT;
-    }
-    if (error.response.data.errCode === 32402) {
-      return ERRORS.PASSWORD_RESET_REQUIRED;
-    }
+  if (error && (error.getMessage() === ERRORS.PASSWORD_INCORRECT || error.getMessage() === ERRORS.PASSWORD_RESET_REQUIRED)) {
+    return error.getMessage();
   }
 }
 

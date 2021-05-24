@@ -95,6 +95,7 @@
       "3007": "Không thể quét tệp",
       "26007": "Không thể tệp lên, thư mục không tồn tại hoặc đã bị xóa",
       "26444": "Bạn không có quyền tải lên tệp",
+      "30000": "Bạn đã tải lên vượt quá số lượng tệp cho phép.",
       "30003": "Bạn đã vượt quá dung lượng lưu trữ cho phép",
       "39001": "Các video tải lên hiện bị tắt vì chế độ bảo trì đã được kích hoạt",
       "40403": "Không thể tìm thấy trạng thái tệp đã tải lên",

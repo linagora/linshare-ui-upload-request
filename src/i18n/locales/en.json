@@ -96,6 +96,7 @@
       "3007": "The file couldn't be scanned",
       "26007": "Cannot upload the file, the folder doesn't exist or have been removed",
       "26444": "You do not own the rights to upload file",
+      "30000": "You already have reached the uploaded file limit.",
       "30003": "You have already reached the limit of your quota",
       "39001": "The uploads are currently disabled since the maintenance mode has been activated",
       "40403": "The uploaded file status can not be found",

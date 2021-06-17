@@ -128,6 +128,9 @@
           </v-list-item>
         </template>
         <template #[`item.actions`]="{ item }">
+          <v-icon @click="downloadEntry(item)">
+            mdi-download
+          </v-icon>
           <v-menu
             top
             :close-on-content-click="true"
@@ -226,6 +229,7 @@ import CloseButton from './CloseButton';
 import SortButton from './SortButton';
 import { mapGetters } from 'vuex';
 import Toolbar from './Toolbar';
+import { ConfigService } from '@/services';
 
 export default {
   name: 'EntryList',
@@ -400,6 +404,16 @@ export default {
     },
     toggleShowSelectedItems() {
       this.showSelectedItems = !this.showSelectedItems;
+    },
+    downloadEntry(entry) {
+      const url = `${window.origin}/${ConfigService.get().apiUrl}/requests/${entry.uuid}/download`;
+      const link = document.createElement('a');
+  
+      link.href = url;
+      link.setAttribute('download', entry.name);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     }
   }
 };

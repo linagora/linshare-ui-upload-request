@@ -128,6 +128,12 @@
           </v-list-item>
         </template>
         <template #[`item.actions`]="{ item }">
+          <v-icon
+            class="ls-preview-icon"
+            @click="previewFile(item)"
+          >
+            mdi-eye-outline
+          </v-icon>
           <v-icon @click="downloadEntry(item)">
             mdi-download
           </v-icon>
@@ -221,22 +227,31 @@
         add
       </v-icon>
     </v-btn>
+
+    <PreviewDialog
+      v-if="currentPreviewItem"
+      :item="currentPreviewItem"
+      @closeDialog="handleClosePreviewDialog"
+    />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CloseButton from './CloseButton';
 import SortButton from './SortButton';
-import { mapGetters } from 'vuex';
 import Toolbar from './Toolbar';
 import { ConfigService } from '@/services';
+import PreviewDialog from './PreviewDialog.vue';
+import { ThumbnailService } from '@/services';
 
 export default {
   name: 'EntryList',
   components: {
     CloseButton,
     SortButton,
-    Toolbar
+    Toolbar,
+    PreviewDialog
   },
   data() {
     return {
@@ -249,7 +264,8 @@ export default {
       sortDesc: false,
       selected: [],
       showSelectedItems: false,
-      temporaryPageIndex: 1
+      temporaryPageIndex: 1,
+      currentPreviewItem: undefined
     };
   },
   computed: {
@@ -408,12 +424,35 @@ export default {
     downloadEntry(entry) {
       const url = `${window.origin}/${ConfigService.get().apiUrl}/requests/${entry.uuid}/download`;
       const link = document.createElement('a');
-  
+
       link.href = url;
       link.setAttribute('download', entry.name);
       document.body.appendChild(link);
       link.click();
       link.remove();
+    },
+    async previewFile(item) {
+      try {
+        this.$alert.open(this.$t('HOME.LOADING_PREVIEW'), {type: 'info'});
+        const previewMode = ThumbnailService.getPreviewMode(item);
+        const thumbnail = await ThumbnailService.getPreview(item);
+
+        this.currentPreviewItem = {
+          ...item,
+          thumbnail,
+          previewMode
+        };
+
+        this.$alert.close();
+      } catch (err) {
+        this.currentPreviewItem = {
+          ...item,
+          thumbnail: undefined
+        };
+      }
+    },
+    handleClosePreviewDialog() {
+      this.currentPreviewItem = undefined;
     }
   }
 };
@@ -635,6 +674,11 @@ export default {
 
   .ls-delete-btn {
     margin-left: 10px;
+  }
+
+  .ls-preview-icon {
+    margin-right: 5px;
+    cursor: pointer;
   }
 
   @media #{map-get($display-breakpoints, 'md-and-up')} {

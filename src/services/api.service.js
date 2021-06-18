@@ -92,5 +92,19 @@ export const UploadRequestService = {
   },
   updatePassword(requestId, data) {
     return ApiService.update('password', requestId, data);
+  },
+  getThumbnail(entryId, { type = 'LARGE', base64 = true, options = {} }) {
+    return Vue.axios({
+      ...options,
+      method: 'GET',
+      url: `requests/${entryId}/thumbnail/${type}?base64=${base64}`
+    });
+  },
+  download (entryId, options = {}) {
+    return Vue.axios({
+      ...options,
+      method: 'GET',
+      url: `requests/${entryId}/download`
+    });
   }
 };

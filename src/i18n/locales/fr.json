@@ -44,7 +44,9 @@
     "NO_RESULT_TEXT": "Aucun enregistrement correspondant trouvé",
     "SHOW_MORE": "Montre plus",
     "SHOW_LESS": "Montrer moins",
-    "UPLOADED_FILES": "Fichiers déposés"
+    "UPLOADED_FILES": "Fichiers déposés",
+    "NO_PREVIEW_AVAILABLE": "Pas de prévisualisation disponible",
+    "LOADING_PREVIEW": "Chargement de l'aperçu"
   },
   "PASSWORD": {
     "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",

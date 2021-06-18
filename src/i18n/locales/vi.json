@@ -44,7 +44,9 @@
     "NO_RESULT_TEXT": "Không tìm thấy bản ghi phù hợp",
     "SHOW_MORE": "Xem thêm",
     "SHOW_LESS": "Thu nhỏ",
-    "UPLOADED_FILES": "Tập tin tải lên"
+    "UPLOADED_FILES": "Tập tin tải lên",
+    "NO_PREVIEW_AVAILABLE": "Xem trước không khả dụng",
+    "LOADING_PREVIEW": "Đang tải bản xem trước"
   },
   "PASSWORD": {
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",

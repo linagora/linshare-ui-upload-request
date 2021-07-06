@@ -22,21 +22,21 @@ export const ThumbnailService = {
     return PREVIEW_MODES.OTHER;
   },
 
-  getPreview(item) {
+  getPreview(requestId, item) {
     const mode = ThumbnailService.getPreviewMode(item);
 
     if (mode === PREVIEW_MODES.PDF) {
-      return UploadRequestService.download(item.uuid, {responseType: 'arraybuffer'})
+      return UploadRequestService.download(requestId, item.uuid, {responseType: 'arraybuffer'})
         .then(response => response.data);
     }
 
     if (mode === PREVIEW_MODES.IMAGE) {
-      return UploadRequestService.getThumbnail(item.uuid, { type: 'LARGE', base64: true })
+      return UploadRequestService.getThumbnail(requestId, item.uuid, { type: 'LARGE', base64: true })
         .then(response => response.data);
     }
 
     if (mode === PREVIEW_MODES.OTHER) {
-      return UploadRequestService.getThumbnail(item.uuid, { type: 'PDF', base64: false, options: { responseType: 'arraybuffer' }})
+      return UploadRequestService.getThumbnail(requestId, item.uuid, { type: 'PDF', base64: false, options: { responseType: 'arraybuffer' }})
         .then(response => response.data);
     }
   }

@@ -435,7 +435,7 @@ export default {
       try {
         this.$alert.open(this.$t('HOME.LOADING_PREVIEW'), {type: 'info'});
         const previewMode = ThumbnailService.getPreviewMode(item);
-        const thumbnail = await ThumbnailService.getPreview(item);
+        const thumbnail = await ThumbnailService.getPreview(this.data.uuid, item);
 
         this.currentPreviewItem = {
           ...item,

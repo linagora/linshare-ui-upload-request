@@ -422,7 +422,7 @@ export default {
       this.showSelectedItems = !this.showSelectedItems;
     },
     downloadEntry(entry) {
-      const url = `${window.origin}/${ConfigService.get().apiUrl}/requests/${entry.uuid}/download`;
+      const url = `${window.origin}${ConfigService.get().apiUrl}/requests/${this.data.uuid}/entries/${entry.uuid}/download`;
       const link = document.createElement('a');
 
       link.href = url;

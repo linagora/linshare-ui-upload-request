@@ -40,4 +40,4 @@ export const ThumbnailService = {
         .then(response => response.data);
     }
   }
-}
+};

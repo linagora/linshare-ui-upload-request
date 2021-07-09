@@ -148,6 +148,7 @@
           >
             <template #activator="{ on, attrs }">
               <v-icon
+                v-if="data.canDeleteDocument"
                 v-bind="attrs"
                 v-on="on"
               >
@@ -285,7 +286,7 @@ export default {
       return this.selected.filter(value => this.entriesInPage.find(entry => entry.uuid === value.uuid));
     },
     headers() {
-      const defaultHeaders = [
+      return [
         {
           text: this.$t('HOME.NAME'),
           align: 'start',
@@ -297,18 +298,14 @@ export default {
           align: 'end',
           sortable: false,
           value: 'size',
-        }
-      ];
-
-      return this.data.canDeleteDocument ? [
-        ...defaultHeaders,
+        },
         {
           text: this.$t('HOME.ACTIONS'),
           align: 'end',
           value: 'actions',
           sortable: false
         }
-      ] : defaultHeaders;
+      ];
     },
     sortItems(){
       return [

@@ -2,8 +2,12 @@
   <div class="preview-unavailable-container">
     <div class="square-box">
       <div class="square-box__content">
-        <v-icon class="preview-unavailable-icon">mdi-eye-off</v-icon>
-        <h1 class="preview-unavailable-text">{{ $t('HOME.NO_PREVIEW_AVAILABLE') }}</h1>
+        <v-icon class="preview-unavailable-icon">
+          mdi-eye-off
+        </v-icon>
+        <h1 class="preview-unavailable-text">
+          {{ $t('HOME.NO_PREVIEW_AVAILABLE') }}
+        </h1>
       </div>
     </div>
   </div>

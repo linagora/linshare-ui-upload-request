@@ -233,6 +233,7 @@
       v-if="currentPreviewItem"
       :item="currentPreviewItem"
       @closeDialog="handleClosePreviewDialog"
+      @downloadItem="downloadEntry"
     />
   </div>
 </template>

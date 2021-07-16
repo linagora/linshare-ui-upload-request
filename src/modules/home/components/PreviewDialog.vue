@@ -6,11 +6,28 @@
     >
       <v-card class="preview-card">
         <v-row class="preview-file-info black pa-3 text-center">
-          <v-col cols="6" offset="3">
+          <v-col
+            cols="6"
+            offset="3"
+          >
             <span class="white--text">{{ item.name }}</span>
           </v-col>
-          <v-col cols="3" class="dialog-actions-ctn">
-            <v-icon class="close-dialog-btn" @click="closeDialog">
+
+          <v-col
+            cols="3"
+            class="dialog-actions-ctn"
+          >
+            <v-icon
+              class="action-btn"
+              @click="downloadItem"
+            >
+              mdi-download
+            </v-icon>
+
+            <v-icon
+              class="action-btn"
+              @click="closeDialog"
+            >
               mdi-close
             </v-icon>
           </v-col>
@@ -33,7 +50,7 @@
               class="image-responsive"
               :src="`data:image/png;base64,${item.thumbnail}`"
               alt=""
-            />
+            >
             <PreviewUnavailable v-if="!item.thumbnail" />
           </v-col>
         </v-row>
@@ -65,7 +82,6 @@ export default {
     };
   },
   created() {
-    //
     if (this.dialog) {
       document.documentElement.style.overflowY = 'hidden';
       document.documentElement.style.height = '100%';
@@ -77,6 +93,9 @@ export default {
       document.documentElement.style.height = 'auto';
       this.dialog = false;
       this.$emit('closeDialog');
+    },
+    downloadItem() {
+      this.$emit('downloadItem', this.item);
     }
   }
 };
@@ -113,9 +132,10 @@ export default {
     align-items: center;
     justify-content: flex-end;
 
-    .close-dialog-btn {
+    .action-btn {
       color: #FFF;
       cursor: pointer;
+      margin: 0 10px;
     }
   }
 </style>

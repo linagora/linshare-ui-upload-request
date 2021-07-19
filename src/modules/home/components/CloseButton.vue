@@ -5,6 +5,7 @@
     content-class="ls-popover"
     min-width="300"
     min-height="80"
+    max-width="240"
     offset-x
     absolute
   >

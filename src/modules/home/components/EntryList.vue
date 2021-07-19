@@ -87,6 +87,7 @@
     <div
       v-flow-droppable="!data.closed"
       class="home-page-upload-data-table"
+      :class="data.closed && 'closed'"
     >
       <v-data-table
         v-model="selected"
@@ -692,7 +693,7 @@ export default {
         .home-page-upload {
           margin-top: 30px;
 
-          .home-page-upload-toolbar-multiple {
+          &-toolbar-multiple {
             position: absolute;
             top: 0;
             left: -400px;
@@ -715,15 +716,27 @@ export default {
             }
           }
 
-          .v-data-table-header {
-            display: table-header-group;
+          &-data-table {
+            .v-data-table__wrapper {
+              height: calc(100vh - #{$table-offset-md});
+
+              .v-data-table__empty-wrapper {
+                height: calc(100vh - #{$table-empty-offset-md});
+              }
+
+              .v-data-table-header {
+                display: table-header-group;
+              }
+            }
           }
 
-          .v-data-table__wrapper {
-            height: calc(100vh - #{$table-offset-md});
+          &-data-table.closed {
+            .v-data-table__wrapper {
+              height: calc(100vh - #{$table-offset-md-closed});
 
-            .v-data-table__empty-wrapper {
-              height: calc(100vh - #{$table-empty-offset-md});
+              .v-data-table__empty-wrapper {
+                height: calc(100vh - #{$table-empty-offset-md-closed});
+              }
             }
           }
 

@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     statusCode() {
-      return validHttpErrorStatusCode(Number(this.$route.params.status)) && Number(this.$route.params.status) || ''; 
+      return validHttpErrorStatusCode(Number(this.$route.params.status)) && Number(this.$route.params.status) || '';
     },
     message() {
       return generateHttpErrorMessage(this.statusCode);
@@ -47,12 +47,14 @@ export default {
     justify-content: center;
     padding: 20px;
     width: 100%;
-    height: calc(100vh - 105px);
+    height: calc(100vh - 55px);
+
     &__big-title {
       text-align: center;
       color: #fff;
       font-size: 65px;
     }
+
     &__sub-title {
       text-align: center;
       color: #fff;

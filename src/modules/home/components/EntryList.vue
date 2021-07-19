@@ -117,7 +117,9 @@
                   v-bind="attrs"
                   v-on="on"
                 >
-                  <v-list-item-title>{{ item.name }}</v-list-item-title>
+                  <v-list-item-title @click="previewFile(item)">
+                    {{ item.name }}
+                  </v-list-item-title>
                   <v-list-item-subtitle v-if="data.collective">
                     {{ item.recipient.mail }}
                   </v-list-item-subtitle>

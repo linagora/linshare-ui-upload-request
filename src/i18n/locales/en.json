@@ -100,6 +100,7 @@
       "26444": "You do not own the rights to upload file",
       "30000": "You already have reached the uploaded file limit.",
       "30003": "You have already reached the limit of your quota",
+      "30005": "The upload request has been closed",
       "39001": "The uploads are currently disabled since the maintenance mode has been activated",
       "40403": "The uploaded file status can not be found",
       "40404": "The uploaded file status can not be found",

@@ -99,6 +99,7 @@
       "26444": "Vous ne possédez pas les droits de dépôt de fichiers",
       "30000": "Vous avez déjà atteint la limite de fichiers téléchargés.",
       "30003": "Vous avez déjà atteint la limite de votre quota",
+      "30005": "L'invitation de dépôt a été fermée",
       "39001": "Les dépôts sont temporairement désactivés car le mode maintenance est activé",
       "40403": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",
       "40404": "Impossible de connaitre le statut du traitement de votre fichier sur le serveur",

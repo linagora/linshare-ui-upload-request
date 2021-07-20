@@ -68,6 +68,7 @@
     "DELETE_ENTRIES_ERROR": "1 uploaded file has not been deleted. | {length} uploaded files have not been deleted.",
     "DELETE_ENTRIES_WARNING": "Are you sure you want to delete {length} entries?",
     "DELETE_ENTRY_WARNING": "Are you sure you want to delete this entry?",
+    "DOWNLOAD_ENTRIES_WARNING": "You are going to download {length} files (total size : {size})",
     "INCORRECT_PASSWORD": "Your password is incorrect. Please try again!",
     "BAD_REQUEST": "Bad request",
     "FORBIDDEN": "You do not have permission to access this resource.",
@@ -119,7 +120,8 @@
   },
   "TOOLBAR": {
     "TITLE": "1 item selected | {count} items selected",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "DOWNLOAD": "Download"
   },
   "LINSHARE_UPLOAD_REQUEST": "LinShare | Upload Request"
 }

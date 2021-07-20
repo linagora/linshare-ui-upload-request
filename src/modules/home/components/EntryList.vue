@@ -81,7 +81,8 @@
       :selected="selected"
       :show-selected-items="showSelectedItems"
       :can-delete-document="data.canDeleteDocument"
-      @deleteEntry="deleteEntry"
+      @deleteSelected="deleteEntry"
+      @downloadSelected="downloadSelectedEntries"
       @toggleShowSelectedItems="toggleShowSelectedItems"
     />
     <div
@@ -380,7 +381,6 @@ export default {
         }
       }
     },
-
     selectSort (sortBy) {
       this.sortDesc = !this.sortDesc;
       this.sortBy = sortBy;
@@ -432,6 +432,9 @@ export default {
       document.body.appendChild(link);
       link.click();
       link.remove();
+    },
+    downloadSelectedEntries() {
+      this.selected.forEach(this.downloadEntry);
     },
     async previewFile(item) {
       try {

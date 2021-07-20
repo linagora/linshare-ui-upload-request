@@ -67,6 +67,7 @@
     "DELETE_ENTRIES_ERROR": "1 fichier n'a pas été supprimé. | {length} fichiers n'ont pas été supprimés.",
     "ERROR_READ_ONLY": "{errCode}: Cette invitation de dépôt est en mode lecture seul",
     "DELETE_ENTRIES_WARNING": "Etes-vous sûr de vouloir supprimer { length } fichiers ?",
+    "DOWNLOAD_ENTRIES_WARNING": "Vous êtes sur le point de télécharger {length} fichiers (taille total : {totalSize})",
     "DELETE_ENTRY_WARNING": "Etes-vous sûr de vouloir supprimer ce fichier ?",
     "INCORRECT_PASSWORD": "Le mot de passe actuel est incorrect !",
     "BAD_REQUEST": "Requête incorrecte",
@@ -118,7 +119,8 @@
   },
   "TOOLBAR": {
     "TITLE": "1 élément sélectionné | {count} articles sélectionnés",
-    "DELETE": "Supprimer"
+    "DELETE": "Supprimer",
+    "DOWNLOAD": "Télécharger"
   },
   "LINSHARE_UPLOAD_REQUEST": "LinShare | Invitation de dépôt"
 }

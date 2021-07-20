@@ -24,58 +24,96 @@
 
       <v-spacer />
 
-      <div class="toolbar-actions-container">
-        <v-menu
-          v-if="canDeleteDocument"
-          top
-          :close-on-content-click="true"
-          content-class="ls-popover"
-          min-width="200"
-          min-height="80"
-          offset-x
-          absolute
-        >
-          <template #activator="{ on, attrs }">
-            <div
-              v-bind="attrs"
-              class="toolbar-delete-container"
-              v-on="on"
-            >
-              <v-icon
-                small
-              >
-                mdi-delete
-              </v-icon>
-              <span>{{ $t('TOOLBAR.DELETE') }}</span>
-            </div>
-          </template>
+      <v-btn
+        plain
+        text
+        x-small
+        color="#656565"
+        :ripple="false"
+        @click="onDownloadButtonPress"
+      >
+        <v-icon small>
+          mdi-download
+        </v-icon>
+        {{ $t('TOOLBAR.DOWNLOAD') }}
+      </v-btn>
 
-          <div>
-            <p class="ls-popover-title">
-              {{ $t('MESSAGE.DELETE_ENTRIES_WARNING', {length: selected.length || 0}) }}
-            </p>
-            <div class="ls-popover-btn-container">
-              <v-btn small>
-                {{ $t('HOME.CANCEL') }}
-              </v-btn>
-              <v-btn
-                class="ls-delete-btn"
-                small
-                color="error"
-                @click="deleteSelectedEntries()"
-              >
-                {{ $t('HOME.DELETE') }}
-              </v-btn>
-            </div>
-          </div>
-        </v-menu>
-      </div>
+      <v-btn
+        v-if="canDeleteDocument"
+        plain
+        text
+        x-small
+        color="#656565"
+        :ripple="false"
+        @click="showDeleteWarning = true"
+      >
+        <v-icon small>
+          mdi-delete
+        </v-icon>
+        {{ $t('TOOLBAR.DELETE') }}
+      </v-btn>
     </v-toolbar>
+
+    <v-dialog
+      v-model="showDownloadWarning"
+      content-class="ls-popover"
+      max-width="290"
+    >
+      <div>
+        <p class="ls-popover-title">
+          {{ $t('MESSAGE.DOWNLOAD_ENTRIES_WARNING', { length: selected.length || 0, size: totalSizeOfSelectedEntries}) }}
+        </p>
+        <div class="ls-popover-btn-container">
+          <v-btn
+            small
+            @click="showDownloadWarning = false"
+          >
+            {{ $t('HOME.CANCEL') }}
+          </v-btn>
+          <v-btn
+            class="ls-delete-btn"
+            small
+            color="primary"
+            @click="downloadSelectedEntries()"
+          >
+            {{ $t('TOOLBAR.DOWNLOAD') }}
+          </v-btn>
+        </div>
+      </div>
+    </v-dialog>
+
+    <v-dialog
+      v-model="showDeleteWarning"
+      max-width="290"
+      content-class="ls-popover"
+    >
+      <div>
+        <p class="ls-popover-title">
+          {{ $t('MESSAGE.DELETE_ENTRIES_WARNING', {length: selected.length || 0}) }}
+        </p>
+        <div class="ls-popover-btn-container">
+          <v-btn
+            small
+            @click="showDeleteWarning = false"
+          >
+            {{ $t('HOME.CANCEL') }}
+          </v-btn>
+          <v-btn
+            class="ls-delete-btn"
+            small
+            color="error"
+            @click="deleteSelectedEntries()"
+          >
+            {{ $t('HOME.DELETE') }}
+          </v-btn>
+        </div>
+      </div>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-
+import { formatBytes } from '@/common';
 export default {
   name: 'Toolbar',
   props: {
@@ -94,9 +132,34 @@ export default {
       default: true
     }
   },
+  data: () => ({
+    showDownloadWarning: false,
+    showDeleteWarning: false
+  }),
+  computed: {
+    totalSizeOfSelectedEntries() {
+      return formatBytes(this.selected.reduce((size, entry) => size + (entry.originalSize || 0), 0));
+    }
+  },
   methods: {
+    onDownloadButtonPress() {
+      if (this.selected.length < 5) {
+        this.downloadSelectedEntries();
+
+        return;
+      }
+
+      this.showDownloadWarning = true;
+    },
+    downloadSelectedEntries() {
+      this.$emit('downloadSelected');
+
+      this.showDownloadWarning = false;
+    },
     deleteSelectedEntries() {
-      this.$emit('deleteEntry');
+      this.$emit('deleteSelected');
+
+      this.showDeleteWarning = false;
     },
     toggleShowSelectedItems() {
       this.$emit('toggleShowSelectedItems');
@@ -114,33 +177,4 @@ export default {
     min-width: 28px;
     width: 28px;
   }
-  .toolbar-actions-container {
-    margin-left: 20px;
-
-    .toolbar-delete-container {
-      display: flex;
-      align-items: center;
-
-      &:hover {
-
-        .v-icon {
-          color: #1976d2;
-        }
-
-        span {
-          color: #1976d2;
-        }
-      }
-
-      .v-icon {
-        font-size: 18px;
-      }
-
-      span {
-        color: #656565;
-        font-size: 15px;
-      }
-    }
-  }
-
 </style>

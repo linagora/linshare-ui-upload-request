@@ -67,6 +67,7 @@
     "DELETE_ENTRIES_ERROR": "1 загруженный файл не был удален. | {length} загруженных файла не был удален.",
     "DELETE_ENTRIES_WARNING": "Вы действительно хотите удалить записи { length }?",
     "DELETE_ENTRY_WARNING": "Вы действительно хотите удалить эту запись?",
+    "DOWNLOAD_ENTRIES_WARNING": "Вы собираетесь загрузить файлы {length} (общий размер: {totalSize})",
     "INCORRECT_PASSWORD": "Неправильный пароль. Повторите попытку!",
     "BAD_REQUEST": "Неверный запрос",
     "FORBIDDEN": "У вас нет прав доступа к этому ресурсу.",
@@ -118,7 +119,8 @@
   },
   "TOOLBAR": {
     "TITLE": "Выбран 1 элемент | Выбрано {count} объекта",
-    "DELETE": "удалять"
+    "DELETE": "удалять",
+    "DOWNLOAD": "Скачать"
   },
   "LINSHARE_UPLOAD_REQUEST": "LinShare | Запрос на передачу"
 }

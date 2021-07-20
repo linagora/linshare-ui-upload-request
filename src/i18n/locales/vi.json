@@ -67,6 +67,7 @@
     "DELETE_ENTRIES_ERROR": "{length} tệp tin không thể xóa.",
     "DELETE_ENTRIES_WARNING": "Bạn có chắc là muốn xóa {length} tệp không?",
     "DELETE_ENTRY_WARNING": "Bạn có chắc là muốn xóa tệp này không?",
+    "DOWNLOAD_ENTRIES_WARNING": "Bạn sẽ tải xuống {length} tệp (tổng kích thước: {size})",
     "INCORRECT_PASSWORD": "Mật khẩu của bạn không đúng. Xin hãy thử lại!",
     "BAD_REQUEST": "Yêu cầu không chính xác",
     "FORBIDDEN": "Bạn không có quyền truy cập tài nguyên này.",
@@ -118,7 +119,8 @@
   },
   "TOOLBAR": {
     "TITLE": "1 tập tin được chọn | {count} tập tin được chọn",
-    "DELETE": "Xóa"
+    "DELETE": "Xóa",
+    "DOWNLOAD": "Tải về"
   },
   "LINSHARE_UPLOAD_REQUEST": "LinShare | Yêu cầu tải lên"
 }

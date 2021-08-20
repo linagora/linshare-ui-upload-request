@@ -1,11 +1,11 @@
 import Vuetify from 'vuetify';
 import { mount, createLocalVue, config } from '@vue/test-utils';
-import Toolbar from '@/modules/home/components/Toolbar.vue';
+import SelectedItemsToolbar from '@/modules/home/components/SelectedItemsToolbar.vue';
 
 config.mocks['$t'] = message => message;
 config.mocks['$tc'] = (message, length) => `${length} ${message}`;
 
-describe('Toolbar.vue', () => {
+describe('SelectedItemsToolbar.vue', () => {
   const localVue = createLocalVue();
 
   let vuetify;
@@ -15,7 +15,7 @@ describe('Toolbar.vue', () => {
   });
 
   it('should show toolbar if select a file', () => {
-    const wrapper = mount(Toolbar, {
+    const wrapper = mount(SelectedItemsToolbar, {
       localVue,
       vuetify,
       propsData: {
@@ -29,11 +29,11 @@ describe('Toolbar.vue', () => {
       }
     });
 
-    expect(wrapper.find('.home-page-upload-toolbar-multiple-visible').exists()).toBe(true);
+    expect(wrapper.find('.selected-items-toolbar').exists()).toBe(true);
   });
 
   it('should show toolbar if select multiple files', () => {
-    const wrapper = mount(Toolbar, {
+    const wrapper = mount(SelectedItemsToolbar, {
       localVue,
       vuetify,
       propsData: {
@@ -55,11 +55,11 @@ describe('Toolbar.vue', () => {
       }
     });
 
-    expect(wrapper.find('.home-page-upload-toolbar-multiple-visible').exists()).toBe(true);
+    expect(wrapper.find('.selected-items-toolbar').exists()).toBe(true);
   });
 
-  it('should hide toolbar if no file was selected', () => {
-    const wrapper = mount(Toolbar, {
+  it.only('should hide toolbar if no file was selected', () => {
+    const wrapper = mount(SelectedItemsToolbar, {
       localVue,
       vuetify,
       propsData: {
@@ -68,11 +68,11 @@ describe('Toolbar.vue', () => {
       }
     });
 
-    expect(wrapper.find('.home-page-upload-toolbar-multiple-visible').exists()).toBe(false);
+    expect(wrapper.find('.selected-items-toolbar').element).not.toBeVisible();
   });
 
   it('should show number of files selected', () => {
-    const wrapper = mount(Toolbar, {
+    const wrapper = mount(SelectedItemsToolbar, {
       localVue,
       vuetify,
       propsData: {

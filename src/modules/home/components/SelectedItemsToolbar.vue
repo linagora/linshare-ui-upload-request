@@ -1,58 +1,67 @@
 <template>
-  <div :class="selected.length ? 'home-page-upload-toolbar-multiple home-page-upload-toolbar-multiple-visible' : 'home-page-upload-toolbar-multiple'">
-    <v-toolbar extended>
-      <v-btn
-        class="toolbar-title-button"
-        depressed
-        small
-        color="primary"
-        @click="toggleShowSelectedItems()"
+  <div>
+    <v-expand-transition>
+      <div
+        v-show="selected.length"
+        class="selected-items-toolbar"
       >
-        {{ $tc('TOOLBAR.TITLE', selected.length, { count: selected.length }) }}
-      </v-btn>
-      <v-btn
-        class="toolbar-show-selected-icon"
-        outlined
-        small
-        color="primary"
-        @click="toggleShowSelectedItems()"
-      >
-        <v-icon small>
-          {{ showSelectedItems ? 'mdi-eye-off' : 'mdi-eye' }}
-        </v-icon>
-      </v-btn>
+        <div class="selected-items-toolbar__items-indicator">
+          <v-btn
+            class="toolbar-title-button"
+            depressed
+            small
+            color="primary"
+            @click="toggleShowSelectedItems()"
+          >
+            {{ $tc('TOOLBAR.TITLE', selected.length, { count: selected.length }) }}
+          </v-btn>
+          <v-btn
+            class="toolbar-show-selected-icon"
+            outlined
+            small
+            color="primary"
+            @click="toggleShowSelectedItems()"
+          >
+            <v-icon small>
+              {{ showSelectedItems ? 'mdi-eye-off' : 'mdi-eye' }}
+            </v-icon>
+          </v-btn>
+        </div>
 
-      <v-spacer />
+        <div class="selected-items-toolbar__action">
+          <v-btn
+            v-if="canDeleteDocument"
+            plain
+            text
+            x-small
+            color="#656565"
+            :ripple="false"
+            @click="showDeleteWarning = true"
+          >
+            <v-icon small>
+              mdi-delete
+            </v-icon>
+            {{ $t('TOOLBAR.DELETE') }}
+          </v-btn>
+        </div>
 
-      <v-btn
-        plain
-        text
-        x-small
-        color="#656565"
-        :ripple="false"
-        @click="onDownloadButtonPress"
-      >
-        <v-icon small>
-          mdi-download
-        </v-icon>
-        {{ $t('TOOLBAR.DOWNLOAD') }}
-      </v-btn>
-
-      <v-btn
-        v-if="canDeleteDocument"
-        plain
-        text
-        x-small
-        color="#656565"
-        :ripple="false"
-        @click="showDeleteWarning = true"
-      >
-        <v-icon small>
-          mdi-delete
-        </v-icon>
-        {{ $t('TOOLBAR.DELETE') }}
-      </v-btn>
-    </v-toolbar>
+        <div class="selected-items-toolbar__action">
+          <v-btn
+            plain
+            text
+            x-small
+            color="#656565"
+            :ripple="false"
+            @click="onDownloadButtonPress"
+          >
+            <v-icon small>
+              mdi-download
+            </v-icon>
+            {{ $t('TOOLBAR.DOWNLOAD') }}
+          </v-btn>
+        </div>
+      </div>
+    </v-expand-transition>
 
     <v-dialog
       v-model="showDownloadWarning"
@@ -169,12 +178,29 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .toolbar-title-button {
-    border-radius: 4px 0px 0px 4px;
-  }
-  .toolbar-show-selected-icon.v-btn:not(.v-btn--round).v-size--small {
-    border-radius: 0px 4px 4px 0px;
-    min-width: 28px;
-    width: 28px;
+  .selected-items-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    border-bottom: 1px solid #E2E2E2;
+
+    &__items-indicator {
+      flex: 0 235px;
+    }
+
+    &__action {
+      margin: 10px;
+      flex: 0 1;
+    }
+
+    .toolbar-title-button {
+      border-radius: 4px 0px 0px 4px;
+    }
+    .toolbar-show-selected-icon.v-btn:not(.v-btn--round).v-size--small {
+      border-radius: 0px 4px 4px 0px;
+      min-width: 28px;
+      width: 28px;
+    }
   }
 </style>

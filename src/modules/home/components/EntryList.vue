@@ -41,6 +41,14 @@
         <CloseButton />
       </div>
     </div>
+    <SelectedItemsToolbar
+      :selected="selected"
+      :show-selected-items="showSelectedItems"
+      :can-delete-document="data.canDeleteDocument"
+      @deleteSelected="deleteEntry"
+      @downloadSelected="downloadSelectedEntries"
+      @toggleShowSelectedItems="toggleShowSelectedItems"
+    />
     <div class="home-page-upload-mobile-header hidden-md-and-up">
       <v-icon @click="toggleSelectAll()">
         {{ mobileCheckboxIcon }}
@@ -77,14 +85,6 @@
         </div>
       </div>
     </v-expand-transition>
-    <Toolbar
-      :selected="selected"
-      :show-selected-items="showSelectedItems"
-      :can-delete-document="data.canDeleteDocument"
-      @deleteSelected="deleteEntry"
-      @downloadSelected="downloadSelectedEntries"
-      @toggleShowSelectedItems="toggleShowSelectedItems"
-    />
     <div
       v-flow-droppable="!data.closed"
       class="home-page-upload-data-table"
@@ -247,7 +247,7 @@
 import { mapGetters } from 'vuex';
 import CloseButton from './CloseButton';
 import SortButton from './SortButton';
-import Toolbar from './Toolbar';
+import SelectedItemsToolbar from './SelectedItemsToolbar.vue';
 import { ConfigService } from '@/services';
 import PreviewDialog from './PreviewDialog.vue';
 import { ThumbnailService } from '@/services';
@@ -257,7 +257,7 @@ export default {
   components: {
     CloseButton,
     SortButton,
-    Toolbar,
+    SelectedItemsToolbar,
     PreviewDialog
   },
   data() {
@@ -563,30 +563,6 @@ export default {
           }
         }
 
-
-        &-toolbar-multiple {
-          position: absolute;
-          top: -48px;
-          left: 0;
-          right: 0;
-          height: 48px;
-          transition: 0.3s all ease-in-out;
-          display: flex;
-          overflow: hidden;
-
-          header {
-            height: inherit !important;
-            display: flex;
-            align-items: center;
-            background-color: #efefef;
-            border-bottom: 1px solid #e4e4e4;
-          }
-
-          &-visible {
-            top: 0px;
-          }
-        }
-
         &-mobile-header {
           display: flex;
           justify-content: space-between;
@@ -695,29 +671,6 @@ export default {
 
         .home-page-upload {
           margin-top: 30px;
-
-          &-toolbar-multiple {
-            position: absolute;
-            top: 0;
-            left: -400px;
-            right: auto;
-            height: 48px;
-            transition: 0.3s all ease-in-out;
-            display: flex;
-            overflow: hidden;
-            border-bottom: 1px solid #E2E2E2;
-
-            header {
-              height: inherit !important;
-              background-color: #fff;
-              display: flex;
-              align-items: center;
-            }
-
-            &-visible {
-              left: 0px;
-            }
-          }
 
           &-data-table {
             .v-data-table__wrapper {

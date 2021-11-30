@@ -26,7 +26,7 @@
     "WELCOME_MESSAGE_WHEN_CLOSED": "Votre invitation de dépôt de {owner} a été fermée. Vous ne pourrez ni téléverser ni supprimer des fichiers.",
     "REQUEST_DETAILS": "Détails de l'invitation de dépôt",
     "HELLO": "Bonjour",
-    "SUBJECT": "Matière",
+    "SUBJECT": "Sujet",
     "MESSAGE": "Message",
     "NO_MESSAGE": "Aucun message",
     "RECIPIENT_LIST": "Liste des destinataires",

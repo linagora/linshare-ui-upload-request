@@ -8,7 +8,7 @@
           icon
           depressed
           class="hidden-sm-and-down home-page-upload-toolbar-button home-page-upload-toolbar-add-button"
-          color="#05B1FF"
+          color="$primary-colory-colory-colory-color"
           large
         >
           <v-icon>add</v-icon>
@@ -541,7 +541,7 @@ export default {
           &-subject {
             text-transform: uppercase;
             font-weight: 500;
-            color: #05B1FF;
+            color: $primary-color;
             text-decoration: none;
             font-size: 14px;
           }

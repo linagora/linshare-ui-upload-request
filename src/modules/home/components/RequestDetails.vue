@@ -237,6 +237,8 @@ export default {
 
 <style lang="scss" scoped>
   @import '~vuetify/src/styles/styles.sass';
+  @import '@/assets/variables.scss';
+
 
   .home-page-request-details {
     margin: 20px;
@@ -311,7 +313,7 @@ export default {
         }
       }
       .message-show-more {
-        color: #05B1FF;
+        color: $primary-color;
         font-size: 12px;
         margin-top: 4px;
         font-weight: 400;
@@ -323,7 +325,7 @@ export default {
       padding-bottom: 10px;
       border-bottom: 1px solid #E2E2E2;
       .recipient-toggle-icon {
-        color: #05B1FF;
+        color: $primary-color;
         font-size: 12px;
         margin-top: 4px;
         font-weight: 400;

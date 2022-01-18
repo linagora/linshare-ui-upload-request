@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '@/assets/variables.scss';
   @import '~vuetify/src/styles/styles.sass';
 
   .password-page {
@@ -113,8 +114,9 @@ export default {
       justify-content: flex-end;
     }
     &-first-background {
-      background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
+      background-image: url("../../assets/images/banner_homepage_linshare.png");
       background-size: cover;
+      background-color: $primary-color;
       width: 100%;
       height: 350px;
       @media #{map-get($display-breakpoints, 'sm-and-down')} {
@@ -139,8 +141,9 @@ export default {
         display: flex;
         justify-content: center;
         width: 100%;
-        background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
+        background-image: url("../../assets/images/banner_homepage_linshare.png");
         background-size: cover;
+        background-color: $primary-color;
         .password-page__card-container {
           margin: 20px;
         }

@@ -165,49 +165,52 @@ export default {
 </script>
 
 <style lang="scss">
-.upload-bar {
-  .upload-icon {
-    color: #fff;
-    cursor: pointer;
-    &:hover,
-    &:focus {
-      color: #eee;
+  @import '@/assets/variables.scss';
+
+  .upload-bar {
+    .upload-icon {
+      color: #fff;
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        color: #eee;
+      }
     }
   }
-}
-.upload-bar-menu {
-  background: #fff;
-  overflow-x: hidden;
-  overflow-y: auto;
-  @media (min-width: 769px) {
-    width: 350px;
+  .upload-bar-menu {
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @media (min-width: 769px) {
+      width: 350px;
+    }
+    padding-bottom: 20px;
+    max-height: 360px;
+    overflow-y: auto;
   }
-  padding-bottom: 20px;
-  max-height: 360px;
-  overflow-y: auto;
-}
-.upload-bar-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  border-bottom: 1px solid #bbb;
-  font-size: 15px;
-  text-transform: uppercase;
-  color: #5E5E5E;
-  line-height: 15px;
-  font-weight: 500;
-}
-.upload-bar-empty {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
-  .upload-bar-add-icon {
-    color: #05b1ff;
+  .upload-bar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: 1px solid #bbb;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #5E5E5E;
+    line-height: 15px;
+    font-weight: 500;
   }
-}
+  .upload-bar-empty {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+
+    .upload-bar-add-icon {
+      color: $primary-color;
+    }
+  }
 </style>

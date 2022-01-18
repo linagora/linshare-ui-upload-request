@@ -4,7 +4,6 @@
       <UploadBar v-if="!uploadRequest.closed" />
     </Header>
     <div class="home-page">
-      <div class="hidden-sm-and-down home-page-first-background" />
       <div class="home-page-content">
         <RequestDetails />
         <EntryList />
@@ -97,19 +96,15 @@ export default {
 
 <style lang="scss" scoped>
   @import '~vuetify/src/styles/styles.sass';
+  @import '@/assets/variables.scss';
+
 
   .home-page {
     position: relative;
-    background: url("../../assets/images/bandeau_accueil_linshare.svg");
+    background: url("../../assets/images/banner_homepage_linshare.png");
+    background-color: $primary-color;
     padding-bottom: 0;
     padding-top: 10px;
-
-
-    .home-page-first-background {
-      background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
-      background-size: cover;
-      height: 350px;
-    }
 
     .home-page-content {
       margin-left: auto;
@@ -121,11 +116,9 @@ export default {
   @media #{map-get($display-breakpoints, 'md-and-up')} {
     .home-page {
       padding-bottom: 20px;
-      padding-top: 0;
 
       .home-page-content {
         width: 60%;
-        margin-top: -275px;
       }
     }
   }

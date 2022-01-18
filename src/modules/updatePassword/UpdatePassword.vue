@@ -142,6 +142,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '~vuetify/src/styles/styles.sass';
+  @import '@/assets/variables.scss';
 
   .update-password-page {
     position: relative;
@@ -160,8 +161,9 @@ export default {
       justify-content: flex-end;
     }
     &-first-background {
-      background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
+      background-image: url("../../assets/images/banner_homepage_linshare.png");
       background-size: cover;
+      background-color: $primary-color;
       width: 100%;
       height: 350px;
       @media #{map-get($display-breakpoints, 'sm-and-down')} {
@@ -187,8 +189,9 @@ export default {
         justify-content: center;
         height: 100%;
         width: 100%;
-        background-image: url("../../assets/images/bandeau_accueil_linshare.svg");
+        background-image: url("../../assets/images/banner_homepage_linshare.png");
         background-size: cover;
+        background-color: $primary-color;
         .update-password-page__card-container {
           margin: 20px;
         }

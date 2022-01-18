@@ -30,11 +30,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '@/assets/variables.scss';
+
   .landing-page {
-    background-image: url('../../assets/images/img_home_linshare.jpg');
+    background-image: url('../../assets/images/bg-linshare-desktop.png');
     background-position: center;
     background-size: cover;
-    background-color: #05B1FF;
+    background-color: $primary-color;
     display: flex;
     align-items: center;
     justify-content: center;

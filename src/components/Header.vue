@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'landing-page' }">
           <img
             class="hidden-sm-and-down"
-            src="@/assets/images/linshare-logo-white.png"
+            src="@/assets/images/linshare-logo-white.svg"
             :alt="$t('HEADER.LOGO_ALT')"
           >
           <img
@@ -54,6 +54,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '~vuetify/src/styles/styles.sass';
+  @import '@/assets/variables.scss';
 
   .ls-navbar {
     position: fixed;
@@ -65,7 +66,7 @@ export default {
     align-items: center;
     min-height: 50px;
     height: 50px;
-    background-color: #06B1FF;
+    background-color: $primary-color;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
     padding: 0px 7px;
 

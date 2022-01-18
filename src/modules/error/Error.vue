@@ -39,9 +39,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '@/assets/variables.scss';
+
   .error-page {
     background-image: url('../../assets/images/bg-linshare-desktop.png');
-    background-color: #05B1FF;
+    background-color: $primary-color;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -13,7 +13,7 @@
     "@mdi/font": "5.9.55",
     "axios": "0.21.1",
     "core-js": "3.6.5",
-    "flag-icon-css": "2.8.0",
+    "flag-icon-css": "2.9.0",
     "material-design-icons-iconfont": "5.0.1",
     "uuid": "8.3.0",
     "vue": "2.6.11",

@@ -251,6 +251,7 @@ import SelectedItemsToolbar from './SelectedItemsToolbar.vue';
 import { ConfigService } from '@/services';
 import PreviewDialog from './PreviewDialog.vue';
 import { ThumbnailService } from '@/services';
+import { OtpService } from '@/services';
 
 export default {
   name: 'EntryList',
@@ -423,8 +424,19 @@ export default {
     toggleShowSelectedItems() {
       this.showSelectedItems = !this.showSelectedItems;
     },
-    downloadEntry(entry) {
-      const url = `${window.origin}${ConfigService.get().apiUrl}/requests/${this.data.uuid}/entries/${entry.uuid}/download`;
+    async downloadEntry(entry) {
+      let url = `${window.origin}${ConfigService.get().apiUrl}/requests/${this.data.uuid}/entries/${entry.uuid}/download`;
+
+      if (this.data.protectedByPassword) {
+        try {
+          const otp = await OtpService.getOtp(this.data.uuid, entry);
+
+          url = `${url}?otp=${otp.otpPassword}`;
+        } catch (error) {
+          return error;
+        }
+      }
+
       const link = document.createElement('a');
 
       link.href = url;
@@ -440,7 +452,7 @@ export default {
       try {
         this.$alert.open(this.$t('HOME.LOADING_PREVIEW'), {type: 'info'});
         const previewMode = ThumbnailService.getPreviewMode(item);
-        const thumbnail = await ThumbnailService.getPreview(this.data.uuid, item);
+        const thumbnail = await ThumbnailService.getPreview(this.data, item);
 
         this.currentPreviewItem = {
           ...item,

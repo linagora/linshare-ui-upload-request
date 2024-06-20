@@ -100,11 +100,20 @@ export const UploadRequestService = {
       url: `requests/${requestId}/entries/${entryId}/thumbnail/${type}?base64=${base64}`
     });
   },
-  download (requestId, entryId, options = {}) {
+  download(requestId, entryId, otp, options = {}) {
+    let url = `requests/${requestId}/entries/${entryId}/download`;
+
+    if (otp) {
+      url = `${url}?otp=${otp}`;
+    }
+
     return Vue.axios({
       ...options,
       method: 'GET',
-      url: `requests/${requestId}/entries/${entryId}/download`
+      url: url
     });
-  }
+  },
+  getOtp(params) {
+    return Vue.axios.post('otp', params);
+  },
 };

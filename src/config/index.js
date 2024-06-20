@@ -1,5 +1,5 @@
 export default Object.freeze({
-  apiUrl: '/linshare/webservice/rest/uploadrequest/v4',
+  apiUrl: '/linshare/webservice/rest/uploadrequest/v5',
   flowSettings: {
     // Size of a chunk when uploading files, default value is 10Mb
     chunkSize: 10e6,

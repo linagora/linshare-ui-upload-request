@@ -1,6 +1,6 @@
 {
   "name": "linshare-ui-upload-request",
-  "version": "6.3.0",
+  "version": "6.3.1-SNAPSHOT",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

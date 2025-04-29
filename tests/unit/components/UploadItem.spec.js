@@ -1,11 +1,18 @@
+import Vuetify from 'vuetify';
 import { mount, config } from '@vue/test-utils';
 import UploadItem from '@/components/UploadItem.vue';
 
 config.mocks['$t'] = message => message;
 
 describe('UploadItem.vue', () => {
+  let vuetify;
+
+  beforeEach(() => {
+    vuetify = new Vuetify();
+  });
+
   function mountFunction(propsData) {
-    return mount(UploadItem, { propsData });
+    return mount(UploadItem, { vuetify, propsData });
   }
 
   it('should render file name', () => {

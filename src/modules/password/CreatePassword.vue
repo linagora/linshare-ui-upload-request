@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <theHeader />
     <div class="password-page">
       <div class="password-page-first-background" />
       <div class="password-page-content">
@@ -46,22 +46,22 @@
         </v-card>
       </div>
     </div>
-    <Footer />
+    <theFooter />
     <AppAlert />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import theHeader from '@/components/the-header';
+import theFooter from '@/components/the-footer';
 import { ErrorService } from '@/services';
 import { isRequired } from '@/common';
 import router from '@/router';
 export default {
-  name: 'Password',
+  name: 'CreatePassword',
   components: {
-    Header,
-    Footer,
+    theHeader,
+    theFooter,
   },
   data() {
     return {

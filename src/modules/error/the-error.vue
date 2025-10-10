@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <theHeader />
     <div class="error-page">
       <div>
         <h1 class="error-page__big-title">
@@ -11,21 +11,21 @@
         </h3>
       </div>
     </div>
-    <Footer />
+    <theFooter />
     <AppAlert />
   </div>
 </template>
 
 <script>
 import { generateHttpErrorMessage, validHttpErrorStatusCode } from '@/common';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import theHeader from '@/components/the-header';
+import theFooter from '@/components/the-footer';
 
 export default {
-  name: 'Error',
+  name: 'TheError',
   components: {
-    Header,
-    Footer
+    theHeader,
+    theFooter
   },
   computed: {
     statusCode() {

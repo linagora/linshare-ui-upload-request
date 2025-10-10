@@ -1,6 +1,6 @@
 {
   "parserOptions": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "sourceType": "module"
   },
   "extends": [
@@ -36,7 +36,9 @@
       2,
       {
         "SwitchCase": 1,
-        "ignoredNodes": ["TemplateLiteral"]
+        "ignoredNodes": [
+          "TemplateLiteral"
+        ]
       }
     ],
     "no-use-before-define": [

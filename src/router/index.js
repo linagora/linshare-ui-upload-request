@@ -10,17 +10,17 @@ const router = new Router({
     {
       path: '/',
       name: 'landing-page',
-      component: () => import('@/modules/landing/Landing')
+      component: () => import('@/modules/landing/the-landing')
     },
     {
       path: '/error/:status?',
       name: 'error',
-      component: () => import('@/modules/error/Error')
+      component: () => import('@/modules/error/the-error')
     },
     {
       path: '/:id',
       name: 'home',
-      component: () => import('@/modules/home/Home'),
+      component: () => import('@/modules/home/homePage'),
       meta: {
         middleware: [
           handleErrorMw,
@@ -32,7 +32,7 @@ const router = new Router({
     {
       path: '/:id/password',
       name: 'password',
-      component: () => import('@/modules/password/Password'),
+      component: () => import('@/modules/password/CreatePassword'),
       meta: {
         middleware: [
           checkPasswordMw,

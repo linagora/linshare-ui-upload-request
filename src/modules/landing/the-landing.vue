@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <theHeader />
     <div class="landing-page">
       <div>
         <h2 class="landing-page__big-title">
@@ -12,19 +12,19 @@
         </h3>
       </div>
     </div>
-    <Footer />
+    <theFooter />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import theHeader from '@/components/the-header';
+import theFooter from '@/components/the-footer';
 
 export default {
-  name: 'Landing',
+  name: 'TheLanding',
   components: {
-    Header,
-    Footer
+    theHeader,
+    theFooter
   }
 };
 </script>

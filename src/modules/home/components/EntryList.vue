@@ -114,7 +114,7 @@
             class="table-ellipsis-td"
           >
             <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }">
+              <template #activator="{ on, attrs }">
                 <v-list-item-content
                   v-bind="attrs"
                   v-on="on"

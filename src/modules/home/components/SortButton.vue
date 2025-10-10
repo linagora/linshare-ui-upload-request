@@ -33,7 +33,7 @@
             </v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="field.text" />
+            <v-list-item-title>{{ field.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

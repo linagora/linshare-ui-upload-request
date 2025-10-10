@@ -83,5 +83,5 @@ describe('CloseButton.vue', () => {
 
     expect(wrapper.find('.close-button').exists()).toBe(true);
     expect(wrapper.find('.close-button span').text()).toMatch('HOME.CLOSED');
-  })
+  });
 });

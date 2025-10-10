@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <theHeader />
     <div class="update-password-page">
       <div class="update-password-page-first-background" />
       <div class="update-password-page-content">
@@ -78,22 +78,22 @@
         </v-card>
       </div>
     </div>
-    <Footer />
+    <theFooter />
     <AppAlert />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import theHeader from '@/components/the-header';
+import theFooter from '@/components/the-footer';
 import { UploadRequestService } from '@/services';
 import { isRequired, isPasswordValid } from '@/common';
 import router from '@/router';
 export default {
-  name: 'Password',
+  name: 'UpdatePassword',
   components: {
-    Header,
-    Footer,
+    theHeader,
+    theFooter,
   },
   data() {
     return {

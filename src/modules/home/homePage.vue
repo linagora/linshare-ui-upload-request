@@ -1,22 +1,22 @@
 <template>
   <div>
-    <Header>
+    <theHeader>
       <UploadBar v-if="!uploadRequest.closed" />
-    </Header>
+    </theHeader>
     <div class="home-page">
       <div class="home-page-content">
         <RequestDetails />
         <EntryList />
       </div>
     </div>
-    <Footer />
+    <theFooter />
     <AppAlert />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import theHeader from '@/components/the-header';
+import theFooter from '@/components/the-footer';
 import UploadBar from '@/components/UploadBar';
 import { FlowService } from '@/services';
 import { validateUpload } from '@/common';
@@ -25,12 +25,12 @@ import EntryList from './components/EntryList';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Home',
+  name: 'TheHome',
   components: {
     RequestDetails,
     EntryList,
-    Header,
-    Footer,
+    theHeader,
+    theFooter,
     UploadBar
   },
   computed: {

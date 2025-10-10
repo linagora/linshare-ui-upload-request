@@ -124,7 +124,7 @@
 <script>
 import { formatBytes } from '@/common';
 export default {
-  name: 'Toolbar',
+  name: 'SelectedItemsToolbar',
   props: {
     selected: {
       type: Array,

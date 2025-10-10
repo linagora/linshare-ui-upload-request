@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { validateUpload } from '@/common';
 
 jest.mock('@/i18n', () => ({
@@ -89,7 +91,7 @@ describe('validation.js', () => {
         },
       };
 
-      expect(validateUpload(mockInput.files, mockInput.uploadRequest)).toBeUndefined;
+      expect(validateUpload(mockInput.files, mockInput.uploadRequest)).toBeUndefined();
     });
 
     it('should not return an error message if there is no limit for max size of a file and other criterias are met', () => {
@@ -112,7 +114,7 @@ describe('validation.js', () => {
         },
       };
 
-      expect(validateUpload(mockInput.files, mockInput.uploadRequest)).toBeUndefined;
+      expect(validateUpload(mockInput.files, mockInput.uploadRequest)).toBeUndefined();
     });
 
     it('should not return an error message if there is no limit for max deposit and other criterias are met', () => {
@@ -136,7 +138,7 @@ describe('validation.js', () => {
         },
       };
 
-      expect(validateUpload(mockInput.files, mockInput.uploadRequest)).toBeUndefined;
+      expect(validateUpload(mockInput.files, mockInput.uploadRequest)).toBeUndefined();
     });
   });
 });

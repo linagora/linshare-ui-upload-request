@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="the-footer">
     <div>
       <i18n path="FOOTER.CONTENT">
         <template #linshare>
@@ -21,12 +21,12 @@
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'TheFooter'
 };
 </script>
 
 <style lang="scss">
-  .footer {
+  .the-footer {
     background-color: #E5E5E5;
     display: flex;
     align-items: center;

@@ -40,7 +40,7 @@
 import { mapGetters } from 'vuex';
 import LanguageSelector from './LanguageSelector';
 export default {
-  name: 'Header',
+  name: 'TheHeader',
   components: {
     LanguageSelector
   },

@@ -37,6 +37,7 @@
 import { LANGUAGE } from '@/constants';
 import { i18n } from '@/i18n';
 import { LanguageService } from '@/services';
+import 'flag-icon-css/css/flag-icons.min.css';
 
 export default {
   name: 'LanguageSelector',
@@ -69,7 +70,6 @@ export default {
 };
 </script>
 
-<style src="flag-icon-css/css/flag-icon.css"></style>
 <style lang="scss" scoped>
   #language-selector-button {
     padding: 0px 7px;

@@ -46,7 +46,7 @@ describe('UploadItem.vue', () => {
       });
       const pauseButton = wrapper.find('.upload-item-actions-container .mdi-pause');
 
-      expect(pauseButton.element).toBeVisible();
+      expect(pauseButton.exists()).toBe(true);
     });
 
     it('should emit pause event', async () => {

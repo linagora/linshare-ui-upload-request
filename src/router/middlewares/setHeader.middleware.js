@@ -5,7 +5,7 @@ export const setHeaderMw = async function ({ next }) {
   const password = store.getters.password;
 
   ApiService.setHeaders({
-    'linshare-uploadrequest-password': password
+    'linshare-uploadrequest-password': encodeURIComponent(password)
   });
   
   next();

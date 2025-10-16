@@ -7,7 +7,7 @@ async function checkError(id, pw) {
     const password = pw || store.getters.password;
     const uploadRequest = await ApiService.getById('requests', id, {
       headers: {
-        'linshare-uploadrequest-password': password
+        'linshare-uploadrequest-password': encodeURIComponent(password)
       }
     });
 

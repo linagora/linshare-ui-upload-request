@@ -7,7 +7,7 @@ export const initFlowObjectMw = async function({ to, next }) {
   FlowService.initFlowObject({
     query: {
       requestUrlUuid: requestId,
-      password: store.getters.password
+      password: encodeURIComponent(store.getters.password)
     }
   });
 

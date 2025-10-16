@@ -124,7 +124,7 @@ export default {
       try {
         if (this.$refs.form.validate()) {
           await UploadRequestService.updatePassword(requestId, {
-            newPassword: this.newPassword,
+            newPassword: encodeURIComponent(this.newPassword),
             oldPassword: this.oldPassword
           });
 

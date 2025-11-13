@@ -298,7 +298,7 @@
                   <goal>checkin</goal>
                 </goals>
                 <configuration>
-                  <includes>package.json</includes>
+                  <includes>**/*</includes>
                   <message>[maven-release-plugin] prepare version for package.json </message>
                 </configuration>
               </execution>

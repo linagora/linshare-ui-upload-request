@@ -117,7 +117,7 @@
             <!-- Optional configuration which provides for running
                  any npm command -->
             <configuration>
-                <arguments>install --legacy-peer-deps</arguments>
+                <arguments>install @babel/core@^7.23.0 --save-dev --legacy-peer-deps</arguments>
             </configuration>
           </execution>
 

@@ -284,26 +284,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-scm-plugin</artifactId>
-            <version>1.9.4</version>
-            <executions>
-              <execution>
-                <id>package.json</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>add</goal>
-                  <goal>checkin</goal>
-                </goals>
-                <configuration>
-                  <includes>**/*</includes>
-                  <message>[maven-release-plugin] prepare version for package.json </message>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
+          </plugin>          
         </plugins>
       </build>
     </profile>

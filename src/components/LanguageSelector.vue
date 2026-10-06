@@ -59,6 +59,7 @@ export default {
       const selectedLanguage = LANGUAGE.SUPPORTED_LANGUAGE.find(item => item.language === language);
 
       i18n.locale = language;
+      this.$vuetify.lang.current = language;
 
       LanguageService.assign(language);
 

@@ -3,7 +3,7 @@ import VueI18n from 'vue-i18n';
 import { LanguageService } from '@/services/language.service';
 import { ConfigService } from '@/services/config.service';
 import { LANGUAGE } from '@/constants';
-import { en, fr, ru, vi } from '@/i18n/locales';
+import { en, fr, ru, vi, es, de, it } from '@/i18n/locales';
 import dateTimeFormats from './dateTimeFormats';
 
 const documentTitles = ConfigService.get().title;
@@ -21,7 +21,10 @@ const messages = {
   en: overrideDocumentTitleTranslation(en, 'en'),
   fr: overrideDocumentTitleTranslation(fr, 'fr'),
   vi: overrideDocumentTitleTranslation(vi, 'vi'),
-  ru: overrideDocumentTitleTranslation(ru, 'ru')
+  ru: overrideDocumentTitleTranslation(ru, 'ru'),
+  es: overrideDocumentTitleTranslation(es, 'es'),
+  de: overrideDocumentTitleTranslation(de, 'de'),
+  it: overrideDocumentTitleTranslation(it, 'it')
 };
 
 let cachedLanguage = LanguageService.get();

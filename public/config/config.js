@@ -11,6 +11,9 @@ window.APP_CONFIGS = Object.freeze({
     en: 'LinShare | Upload Request',
     fr: 'LinShare | Invitation de dépôt',
     ru: 'LinShare | Запрос на передачу',
-    vi: 'LinShare | Yêu cầu tải lên'
+    vi: 'LinShare | Yêu cầu tải lên',
+    es: 'LinShare | Solicitud de carga',
+    de: 'LinShare | Upload-Anfrage',
+    it: 'LinShare | Richiesta di caricamento'
   }
 });

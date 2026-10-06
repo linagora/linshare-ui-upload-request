@@ -26,5 +26,26 @@ export default {
       month: 'long',
       day: 'numeric'
     }
+  },
+  es: {
+    mediumDate: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }
+  },
+  de: {
+    mediumDate: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }
+  },
+  it: {
+    mediumDate: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }
   }
 };

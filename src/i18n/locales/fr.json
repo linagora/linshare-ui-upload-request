@@ -49,7 +49,7 @@
     "LOADING_PREVIEW": "Chargement de l'aperçu"
   },
   "PASSWORD": {
-    "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",
+    "TITLE": "Entrez votre mot de passe pour l'invitation de dépôt",
     "SUBTITLE": "Veuillez consulter l'e-mail d'invitation pour obtenir votre mot de passe.",
     "ENTER_PASSWORD": "Entrez votre mot de passe",
     "CONFIRM": "Confirmer",
@@ -62,12 +62,12 @@
   "MESSAGE": {
     "SOMETHING_WENT_WRONG": "{errCode} Quelque chose s'est mal passé ! Veuillez réessayer.",
     "UPLOAD_SUCCESS": "Le fichier a été téléchargé avec succès !",
-    "DELETE_ENTRIES_SUCCESS": "{ length } fichiers ont été supprimés avec succès !",
+    "DELETE_ENTRIES_SUCCESS": "{length} fichiers ont été supprimés avec succès !",
     "DELETE_ENTRY_SUCCESS": "Le fichier a été supprimé avec succès !",
     "DELETE_ENTRIES_ERROR": "1 fichier n'a pas été supprimé. | {length} fichiers n'ont pas été supprimés.",
     "ERROR_READ_ONLY": "{errCode}: Cette invitation de dépôt est en mode lecture seul",
     "DELETE_ENTRIES_WARNING": "Etes-vous sûr de vouloir supprimer {length} fichiers ?",
-    "DOWNLOAD_ENTRIES_WARNING": "Vous êtes sur le point de télécharger {length} fichiers (taille total : {totalSize})",
+    "DOWNLOAD_ENTRIES_WARNING": "Vous êtes sur le point de télécharger {length} fichiers (taille total : {size})",
     "DELETE_ENTRY_WARNING": "Etes-vous sûr de vouloir supprimer ce fichier ?",
     "INCORRECT_PASSWORD": "Le mot de passe actuel est incorrect !",
     "BAD_REQUEST": "Requête incorrecte",

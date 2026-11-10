@@ -11,11 +11,15 @@ async function checkError(id, pw) {
       }
     });
 
-    store.dispatch('setUploadRequest', uploadRequest.data);
+    if (store.getters.requestId === id) {
+      store.dispatch('setUploadRequest', uploadRequest.data);
+    }
 
     return;
   } catch (error) {
-    store.dispatch('setUploadRequest', {});
+    if (store.getters.requestId === id) {
+      store.dispatch('setUploadRequest', {});
+    }
 
     return error;
   }

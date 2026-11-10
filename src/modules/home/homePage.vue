@@ -40,11 +40,15 @@ export default {
     ])
   },
   async created() {
+    const flow = FlowService.getFlowObject();
+
     await this.fetchData();
 
-    if (!this.uploadRequest.closed) {
-      const flow = FlowService.getFlowObject();
+    if (flow !== FlowService.getFlowObject()) {
+      return;
+    }
 
+    if (!this.uploadRequest.closed) {
       flow.on('filesSubmitted', () => flow.upload());
 
       flow.on('fileSuccess', (file, response) => {

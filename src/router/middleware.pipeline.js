@@ -6,6 +6,10 @@ export const middlewarePipeline = function (context, middleware, index) {
   }
 
   return () => {
+    if (!context.isCurrentNavigation()) {
+      return;
+    }
+
     const nextPipeline = middlewarePipeline(
       context, middleware, index + 1
     );

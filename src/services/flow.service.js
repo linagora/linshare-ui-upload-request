@@ -10,6 +10,8 @@ function getFlowObject() {
 }
 
 function initFlowObject(options) {
+  resetFlowObject();
+
   flow = new Flow({
     ...ConfigService.get().flowSettings,
     generateUniqueIdentifier: () => uuidv4(),
@@ -17,10 +19,18 @@ function initFlowObject(options) {
     ...options,
   });
 
-  initDirectives();
+  initDirectives(flow);
 }
 
-function initDirectives() {
+function resetFlowObject() {
+  if (flow) {
+    flow.off();
+    flow.cancel();
+    flow = undefined;
+  }
+}
+
+function initDirectives(flow) {
   Vue.directive('flowBrowse', {
     bind(el) {
       flow.assignBrowse(el);
@@ -28,17 +38,30 @@ function initDirectives() {
   });
 
   Vue.directive('flowDroppable', {
+    bind(el, binding) {
+      if (binding.value) {
+        flow.assignDrop(el);
+      }
+    },
     update(el, binding) {
+      if (binding.value === binding.oldValue) {
+        return;
+      }
+
       if (!binding.value) {
         flow.unAssignDrop(el);
       } else {
         flow.assignDrop(el);
       }
+    },
+    unbind(el) {
+      flow.unAssignDrop(el);
     }
   });
 }
 
 export const FlowService = {
   initFlowObject,
+  resetFlowObject,
   getFlowObject
 };

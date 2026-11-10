@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import { checkPasswordMw, initFlowObjectMw, handleErrorMw, setHeaderMw, checkUpdatePasswordMw } from '@/router/middlewares';
 import { middlewarePipeline } from './middleware.pipeline.js';
+import { ApiService, FlowService } from '@/services';
+import { store } from '@/store';
 
 Vue.use(Router);
 
@@ -52,17 +54,36 @@ const router = new Router({
   ]
 });
 
+let navigationId = 0;
+
 router.beforeEach(async(to, from, next) => {
+  const currentNavigationId = ++navigationId;
+  const isCurrentNavigation = () => currentNavigationId === navigationId;
+  const requestId = to.params.id;
+
+  if (requestId !== store.getters.requestId) {
+    FlowService.resetFlowObject();
+    store.commit('resetUploadRequest', requestId);
+    store.commit('setEntries', []);
+    ApiService.setHeaders({ 'linshare-uploadrequest-password': '' });
+  }
+
   if (!to.meta.middleware || !to.meta.middleware.length) {
     return next();
   }
   const middleware = to.meta.middleware;
+  const nextIfCurrent = (...args) => {
+    if (isCurrentNavigation()) {
+      next(...args);
+    }
+  };
 
   const context = {
     to,
     from,
-    next,
-    redirect: next
+    isCurrentNavigation,
+    next: nextIfCurrent,
+    redirect: nextIfCurrent
   };
 
   return middleware[0]({

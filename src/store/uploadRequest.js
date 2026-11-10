@@ -1,16 +1,24 @@
 import { ApiService, UploadRequestService } from '@/services';
 
 const state = {
+  requestId: null,
   uploadRequest: {},
   password: ''
 };
 
 const getters = {
+  requestId: state => state.requestId,
   uploadRequest: state => state.uploadRequest,
   password: state => state.password
 };
 
 const mutations = {
+  resetUploadRequest: (state, requestId) => {
+    state.requestId = requestId;
+    state.uploadRequest = {};
+    state.password = '';
+  },
+
   setUploadRequest: (state, uploadRequest) => state.uploadRequest = uploadRequest,
 
   setPassword: (state, password) => state.password = password

@@ -67,7 +67,9 @@ export default {
     isClosed() {
       const flow = FlowService.getFlowObject();
 
-      flow.cancel();
+      if (flow) {
+        flow.cancel();
+      }
     }
   },
   created() {

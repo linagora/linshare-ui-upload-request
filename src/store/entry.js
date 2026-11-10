@@ -41,7 +41,7 @@ const actions = {
 
   setEntries: ({ commit }, entries) => commit('setEntries', entries),
 
-  fetchEntries: async ({ commit }, requestId) => {
+  fetchEntries: async ({ commit, rootGetters }, requestId) => {
     const response = await UploadRequestService.getRequestEntries(requestId);
     const normalizedEntries = response.data.map(entry => {
       entry.originalSize = entry.size;
@@ -50,7 +50,9 @@ const actions = {
       return entry;
     });
 
-    commit('setEntries', normalizedEntries);
+    if (rootGetters.requestId === requestId) {
+      commit('setEntries', normalizedEntries);
+    }
 
     return normalizedEntries;
   }

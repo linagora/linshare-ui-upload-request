@@ -112,14 +112,26 @@ export default {
   .preview-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     .preview-file-info {
-      flex: inherit;
+      flex: 0 0 auto;
+      margin: 0;
       border-bottom: 1px solid #6f6f6f !important;
     }
 
     .preview-content {
       flex: 1;
+      min-height: 0;
+    }
+
+    .row.preview-content {
+      margin: 0;
+      overflow: auto;
+    }
+
+    .col.preview-content {
+      height: 100%;
     }
 
     .image-responsive {

@@ -48,6 +48,21 @@
     "NO_PREVIEW_AVAILABLE": "Xem trước không khả dụng",
     "LOADING_PREVIEW": "Đang tải bản xem trước"
   },
+  "PDF": {
+    "CONTROLS": "Điều khiển PDF",
+    "PREVIOUS_PAGE": "Trang trước",
+    "NEXT_PAGE": "Trang sau",
+    "PAGE": "Trang",
+    "ZOOM_OUT": "Thu nhỏ",
+    "ZOOM_IN": "Phóng to",
+    "FIT_WIDTH": "Vừa chiều rộng",
+    "ROTATE": "Xoay phải",
+    "SEARCH": "Tìm trong tài liệu",
+    "PREVIOUS_MATCH": "Kết quả trước",
+    "NEXT_MATCH": "Kết quả tiếp theo",
+    "DOCUMENT": "Tài liệu PDF",
+    "PASSWORD": "Mật khẩu PDF"
+  },
   "PASSWORD": {
     "TITLE": "Nhập mật khẩu cho yêu cầu tải lên",
     "SUBTITLE": "Vui lòng kiểm tra email để lấy mật khẩu của bạn.",

@@ -37,7 +37,7 @@ export const ThumbnailService = {
     const mode = ThumbnailService.getPreviewMode(item);
 
     if (mode === PREVIEW_MODES.PDF) {
-      return UploadRequestService.download(request.uuid, item.uuid, otp.otpPassword, {responseType: 'arraybuffer'})
+      return UploadRequestService.download(request.uuid, item.uuid, otp ? otp.otpPassword : undefined, {responseType: 'arraybuffer'})
         .then(response => response.data);
     }
 

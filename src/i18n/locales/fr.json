@@ -48,6 +48,21 @@
     "NO_PREVIEW_AVAILABLE": "Pas de prévisualisation disponible",
     "LOADING_PREVIEW": "Chargement de l'aperçu"
   },
+  "PDF": {
+    "CONTROLS": "Commandes PDF",
+    "PREVIOUS_PAGE": "Page précédente",
+    "NEXT_PAGE": "Page suivante",
+    "PAGE": "Page",
+    "ZOOM_OUT": "Réduire",
+    "ZOOM_IN": "Agrandir",
+    "FIT_WIDTH": "Ajuster à la largeur",
+    "ROTATE": "Tourner vers la droite",
+    "SEARCH": "Rechercher dans le document",
+    "PREVIOUS_MATCH": "Résultat précédent",
+    "NEXT_MATCH": "Résultat suivant",
+    "DOCUMENT": "Document PDF",
+    "PASSWORD": "Mot de passe du PDF"
+  },
   "PASSWORD": {
     "TITLE": "Entrez votre mot de passe pour la Invitation de dépôt",
     "SUBTITLE": "Veuillez consulter l'e-mail d'invitation pour obtenir votre mot de passe.",

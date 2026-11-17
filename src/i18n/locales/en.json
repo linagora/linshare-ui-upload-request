@@ -48,6 +48,21 @@
     "NO_PREVIEW_AVAILABLE": "No preview available",
     "LOADING_PREVIEW": "Loading preview"
   },
+  "PDF": {
+    "CONTROLS": "PDF controls",
+    "PREVIOUS_PAGE": "Previous page",
+    "NEXT_PAGE": "Next page",
+    "PAGE": "Page",
+    "ZOOM_OUT": "Zoom out",
+    "ZOOM_IN": "Zoom in",
+    "FIT_WIDTH": "Fit to width",
+    "ROTATE": "Rotate clockwise",
+    "SEARCH": "Search in document",
+    "PREVIOUS_MATCH": "Previous match",
+    "NEXT_MATCH": "Next match",
+    "DOCUMENT": "PDF document",
+    "PASSWORD": "PDF password"
+  },
   "PASSWORD": {
     "TITLE": "Enter your password for the upload request",
     "SUBTITLE": "Please check the invitation email to get your password.",
